@@ -1,0 +1,8 @@
+<script>
+  webix.ready(function () {
+    //모든 페이지를 파싱하고 나서 이곳에서 한번에 랜더링 하도록 하는 것이 좋다. 
+    webix.ui(page_layout);
+    //webix 처리함수 호출 추가 by joygram 2023/05/11
+    PageLayout.callback();
+  });
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html> <%- include("partials/header") %>
+<!-- owner view -->
+
+<body>
+  <script>
+    let category_option = [{
+      id: "0", value: "standard"
+    }, {
+      id: "1", value: "tutor"
+    }, {
+      id: "99", value: "admin"
+    }];
+    let writing_list = {
+      id: "writing:list"
+      , view: "datatable"
+      , scroll: false
+      , select: "row"
+      , on: {
+        onAfterSelect: function (selection, preserve) {
+          //redirect to view 
+          console.log(selection);
+          window.location.href = `/writing/view/${selection.id}`
+        }
+      }
+      , columns: [
+      {id: "id", header: l("id")}, 
+      {id: "title", header: l("title"), width: 300}, 
+      {id: "category", header: l("category"), editor: "combo", options: category_option}, 
+      {id: "email", header: l("email")}, 
+      {id: "updatedAt", header: l("updatedAt")}
+      ]
+      , data: <%- writinglist %>
+    };
+    //writing_notice = {};
+    //writing_list //title read_cnt updateAt
+    writing_view = {}; // category / title / owner     url / stat
+    writing_menu = {}; //like, comment             edit, delete, config
+    PageLayout.main_content = {
+      rows: [
+        writing_list, writing_view, writing_menu
+      ]
+    };
+    //webix내 스크립트를 먹이려면 callback functioN을 정의한다. 
+    PageLayout.callback = function () {
+      //$$("writing:edit")
+      //.bind($$("writing:list"));
+      //form.save() apply data to data table 
+    }
+  </script> <%- include("partials/pagelayout") %> <%- include("partials/footer") %>
+</body>
+
+</html>

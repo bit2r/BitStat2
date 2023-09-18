@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html> <%- include("partials/header") %>
+
+<body>
+  <!-- editor view  -->
+  <!-- <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" /> -->
+  <!-- <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css" /> -->
+  <link rel="stylesheet" href="/stylesheets/toastui.css" />
+  <link rel="stylesheet" href="/stylesheets/toastui-viewer.css" />
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
+  <script src='/javascripts/writing_ui.js' type="text/javascript"></script>
+  <div id="writing_template">
+    <div id="viewer"></div>
+  </div>
+  <script>
+    var writing_info = <%- writing_info %>;
+    // custom contents by joygram 2023/05/16
+    PageLayout.main_content = {
+      rows: [
+        WritingUi.view(writing_info), WritingUi.viewMenu(writing_info)
+      ]
+    }
+    //webix내 스크립트를 먹이려면 callback function을 정의한다. 
+    PageLayout.callback = function () {
+      //form.save() apply data to data table 
+      const viewer = WritingUi.makeViewer(writing_info);
+    }
+  </script> <%- include("partials/pagelayout") %> <%- include("partials/footer") %>
+</body>
+
+</html>

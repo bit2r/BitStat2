@@ -1,23 +1,3 @@
-# BitStat2
-BitStat2
-
-## Setup 
-
-### `.env`
-
-add your `OPEN_API_KEY`
-
-```
-OPENAI_API_KEY=
-```
-
-
-
-### ChatGPT role 
-
-`config/config.json`
-
-```
 {
   "development": {
     "username": "",
@@ -28,21 +8,22 @@ OPENAI_API_KEY=
     "storage": "./dev.db",
     "dialectOptions": {}
   },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
   "gpt_role": {
     "role": "system",
     "content": "너는 광명 시청 보좌관이다.\n너의 이름은 광명이 이다.\n"
   }
 }
-```
-
-
-
-## How to Run 
-
-```
-npm install 
-npm run start
-```
-
-
-

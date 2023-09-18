@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html> <%- include("partials/header") %>
+
+<body>
+  <div id="PageLayout.main_content">
+    <script>
+      PageLayout.main_content = {
+        id: "login"
+        , scroll: "auto"
+        , view: "form"
+        , width: 300
+        , elements: [
+        {name: "email", view: "text", label: l("user_id")}, 
+        {name: "password", view: "text", type: "password", label: l("password")}, 
+        {
+          margin: 5
+          , cols: [{
+            view: "button", label: l("login")
+            , type: "form"
+            , click: function (id, event) {
+              var values = $$('login')
+              .getValues();
+              console.log(values);
+              webix.send("/login/auth", values);
+            }
+          }, 
+          {view: "button", label: l("cancel")}, 
+          { view: "button", label: l("signup"), click: function (id, event) {
+              window.location.href = '/user/signup';
+            }}
+          ]
+        }]
+      };
+    </script>
+  </div> <%- include("partials/pagelayout") %> <%- include("partials/footer") %>
+</body>
+
+</html>

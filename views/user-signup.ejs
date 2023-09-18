@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html> <%- include("partials/header") %>
+
+<body>
+  <!-- todo : validate check password -->
+  <!-- note: form은 id가 아닌 name을 써야 전달이 됨. by joygram 2023/04/26 -->
+  <script>
+    PageLayout.main_content = {
+      id: "signup"
+      , view: "form"
+      , scroll: "auto"
+      , width: 300
+      , elements: [{
+        name: "email"
+        , view: "text"
+        , label: l("email")
+      }, {
+        name: "password"
+        , view: "text"
+        , type: "password"
+        , label: l("password")
+      }, {
+        name: "password_confirm"
+        , view: "text"
+        , type: "password"
+        , label: l("password_confirm")
+      }, {
+        margin: 5
+        , cols: [{
+          view: "button"
+          , label: l("signup")
+          , type: "form"
+          , click: function (id, event) {
+            var values = $$('signup')
+            .getValues();
+            console.log(`formvalue ${values}`);
+            webix.send("/api/user/signup", values);
+          }
+        }, {
+          view: "button"
+          , label: l("cancel")
+        }]
+      }]
+    };
+  </script> <%- include("partials/pagelayout") %> <%- include("partials/footer") %>
+</body>
+
+</html>

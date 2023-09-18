@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html> <%- include("partials/header") %>
+
+<body>
+  <div id="PageLayout.main_content">
+    <h1> <%= title %> </h1>
+    <!-- <a href="/my_writing"><img src='/images/blog.png'>my writing</a>
+    <a href="/my_writing"><img src='/images/cafe.png'>community</a> -->
+    <a href="/chatgpt/chatgpt"><img src='/images/kwangmyung_ChatGPT.jpg' width='600'></a>
+    <!-- 선택적 표시  -->
+    <!--     
+    <% if (havePermission) { %> 
+      <a href="/logout">logout</a>
+    <% } else { %> 
+      <a href="/login">login</a> or <a href="/user/signup">signup</a>
+    <% } %> 
+  -->
+  </div> <%- include("partials/pagelayout") %> <%- include("partials/footer") %>
+</body>
+
+</html>

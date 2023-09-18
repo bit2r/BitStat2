@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html> <%- include("partials/header") %>
+
+<body>
+  <script>
+    let user_type_options = [{
+      id: "0"
+      , value: "standard"
+    }, {
+      id: "1"
+      , value: "tutor"
+    }, {
+      id: "99"
+      , value: "admin"
+    }];
+    let user_table = {
+      id: "admin:userlist"
+      , view: "datatable"
+      , scroll: false
+      , select: "row"
+      , columns: [{id: "id", header: l("id")}, 
+      {id: "email", header: l("email")}, 
+      {
+        id: "userType"
+        , header: l("userType")
+        , editor: "combo"
+        , options: user_type_options
+      }, {
+        id: "loginAt"
+        , header: l("loginAt")
+      }, {
+        id: "updatedAt"
+        , header: l("updatedAt")
+      }, {
+        id: "createdAt"
+        , header: l("createdAt")
+      }, ]
+      , data: <%- userlist %>
+    };
+    let edit_form = {
+      id: "admin:user_edit"
+      , view: "form"
+      , width: 400
+      , on: {
+        onChange: function (newValue, oldValue, config) {
+          this.save();
+          // config is {yourProperty: "yourValue"}
+        }
+      }
+      , elements: [{
+        view: "text"
+        , name: "id"
+        , label: "Id"
+        , disabled: true
+      }, {
+        view: "text"
+        , name: "email"
+        , label: "email"
+      }, {
+        view: "combo"
+        , name: "userType"
+        , label: "userType"
+        , options: user_type_options
+      }, {
+        view: "text"
+        , name: "loginAt"
+        , label: "loginAt"
+        , disabled: true
+      }, {
+        view: "text"
+        , name: "updatedAt"
+        , label: "updatedAt"
+        , disabled: true
+      }, {
+        view: "text"
+        , name: "createdAt"
+        , label: "createdAt"
+        , disabled: true
+      }, {
+        view: "button"
+        , label: "Save"
+        , type: "form"
+        , click: function () {
+          //save call ajax post request : server reply json data  
+        }
+      }, {
+        view: "button"
+        , label: "Clear"
+        , click: function () {
+          $$("admin:user_edit")
+          .clear();
+        }
+      }]
+    };
+    PageLayout.main_content = {
+      rows: [{
+        cols: [
+          user_table, edit_form
+        ]
+      }]
+    };
+    //webix내 스크립트를 먹이려면 callback functioN을 정의한다. 
+    PageLayout.callback = function () {
+      $$("admin:user_edit")
+      .bind($$("admin:userlist"));
+      //form.save() apply data to data table 
+    }
+  </script> <%- include("partials/pagelayout") %> <%- include("partials/footer") %>
+</body>
+
+</html>

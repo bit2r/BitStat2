@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html> <%- include("partials/header") %>
+
+<body>
+  <div id="PageLayout.main_content">
+    <script>
+      var is_gpt_requesting = false;
+      var req_gpt = function () {
+        if (is_gpt_requesting) {
+          console.log("gpt_requesting...");
+          return;
+        }
+        is_gpt_requesting = true;
+        let prompt = $$("prompt")
+        .getValue();
+        console.log(`prompt:${prompt}`);
+        $$("gpt_history")
+        .add({
+          user: "질문:"
+          , value: prompt
+        });
+        $$("progress")
+        .showProgress({
+          type: "bottom"
+          , delay: 60000,
+          //position: 0.5,
+          hide: true
+        });
+        //결과처리 핸들러 : timeout필요 
+        let requester = new Requester({
+          onOk: function (gplat_result) {
+            let res_data = JSON.parse(gplat_result.result_data);
+            //chat창에 추가
+            $$("gpt_history")
+            .add({
+              user: "광명이:"
+              , value: res_data.answer
+            });
+            $$("progress")
+            .hideProgress();
+            is_gpt_requesting = false;
+          }
+        });
+        //서버에 요청 
+        var form_data = {
+          prompt: prompt
+        };
+        requester.post("/chatgpt/ask", form_data);
+      };
+      var chatgpt_ui = {
+        rows: [{
+          cols: [{
+            view: "text"
+            , id: "prompt"
+            , clear: true
+            , placeholder: "무엇을 도와드릴까요?"
+            , gravity: 3
+          }, {
+            view: "button"
+            , value: "질문"
+            , width: 50
+            , click: req_gpt
+          }, {
+            view: "button"
+            , id: "mic"
+            , label: "<img id='web_speech_img' src='/images/mic.gif' width='32'>"
+            , width: 50
+            , value: "Voice"
+            , click: function () {
+              //webix.message({type:"info", text:"음성녹음 시작"});
+              if (is_gpt_requesting) {
+                console.log("gpt_requesting...");
+                return;
+              }
+              is_gpt_requesting = true;
+              var ws = new WebSpeech({
+                onComplete: function (web_speech) {
+                  console.log("onCompleteRecognition");
+                  //요청중 처리 : 응답 대기 시간까지 차단, 요청중 로딩 애니 출력  
+                  web_speech.stop();
+                  //중복 코드 제거 방법 고료 
+                  $$("prompt")
+                  .setValue(web_speech.final_transcript);
+                  let prompt = $$("prompt")
+                  .getValue();
+                  if (prompt == '') {
+                    console.log('empty prompt just skip.');
+                    return;
+                  }
+                  console.log(`prompt:[${prompt}]`);
+                  $$("gpt_history")
+                  .add({
+                    user: "질문:"
+                    , value: prompt
+                  });
+                  let requester = new Requester({
+                    onOk: function (gplat_result) {
+                      let res_data = JSON.parse(gplat_result.result_data);
+                      //chat창에 추가
+                      $$("gpt_history")
+                      .add({
+                        user: "광명이:"
+                        , value: res_data.answer
+                      });
+                      is_gpt_requesting = false;
+                    }
+                  });
+                  //서버에 요청 
+                  var form_data = {
+                    prompt: prompt
+                  };
+                  requester.post("/chatgpt/ask", form_data);
+                }
+              });
+              ws.start();
+            }
+          }]
+        }, {
+          id: "progress"
+          , height: "10"
+        }, {
+          view: "list"
+          , id: "gpt_history"
+          , type: {
+            height: "auto"
+          }
+          , template: function (obj) {
+            return `<span class='user'>${obj.user}</span> ${obj.value}`;
+          }
+        }]
+      }
+      PageLayout.main_content = {
+        rows: [
+          chatgpt_ui, {
+            view: "template"
+            , height: 50,
+            //template :"<img id='start_img' src='/images/mic.gif'>"
+          }, {
+            height: 100,
+            //template: "<span id='final_span'></span>"
+          }
+        , ]
+      };
+      PageLayout.callback = function () {
+        webix.extend($$("progress"), webix.ProgressBar);
+      };
+    </script>
+  </div> <%- include("partials/pagelayout") %> <%- include("partials/footer") %>
+</body>
+
+</html>
