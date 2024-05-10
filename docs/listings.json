@@ -1,0 +1,31 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/data/post-with-code/index.html",
+      "/data/start/index.html",
+      "/data/welcome/index.html",
+      "/infer/post-with-code/index.html",
+      "/infer/welcome/index.html",
+      "/eda/post-with-code/index.html",
+      "/eda/start/index.html",
+      "/eda/welcome/index.html",
+      "/theory/lln/index.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/post-with-code/index.html",
+      "/posts/welcome/index.html"
+    ]
+  },
+  {
+    "listing": "/eda.html",
+    "items": [
+      "/eda/post-with-code/index.html",
+      "/eda/start/index.html",
+      "/eda/welcome/index.html"
+    ]
+  }
+]

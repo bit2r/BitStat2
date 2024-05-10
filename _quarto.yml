@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - "images/*.png"
+    - "images/*.jp*g"
+
+lang: ko-KR
+
+website:
+  title: "BitStat2"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+format:
+  html:
+    theme: spacelab
+    linkcolor: "#0000A0"
+    css: styles.css
+    highlight-style: github
+    date-format: iso
+
+editor: source
+license: "CC BY-SA-NC"
+
+number-sections: true
+number-depth: 2
+
+# ---------------------------------- #
+filters:
+  - shinylive
+  - webr
+  # - pyodide
+
+# ---------------------------------- #
+webr:
+  packages:
+  - "stringr"
+  - "dplyr"
+  - "ggplot2"
+  - "tidyr"
+  - "gt"
+  - "gtExtras"
+  - "tibble"
+  - "readr"
+  - "curl"

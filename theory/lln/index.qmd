@@ -1,0 +1,78 @@
+---
+title: "대수의 법칙"
+date: today
+categories: [이론, 대수의 법칙]
+image: "image.jpg"
+editor_options: 
+  chunk_output_type: console
+---
+
+# WebR
+
+```{webr-r}
+webr::install("ggplot2")
+
+library("ggplot2")
+
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()
+```
+
+
+# shiny
+
+```{shinylive-r}
+#| label: shinylive-lln-coin
+#| viewerHeight: 600
+#| standalone: true
+
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Law of Large Numbers - Coin Toss"),
+
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("n_trials", "Number of Trials:", min = 1, max = 1000, value = 100),
+      sliderInput("n_coins", "Number of Coins:", min = 1, max = 100, value = 1),
+      actionButton("simulate", "Start Coin Toss")
+    ),
+
+    mainPanel(
+      plotOutput("coin_plot"),
+      br(),
+      p("This app demonstrates the law of large numbers through a coin toss example."),
+      p("When repeatedly tossing coins, as the number of trials increases, the probability of getting heads approaches 0.5."),
+      p("Adjust the number of trials and coins and start the simulation!")
+    )
+  )
+)
+
+server <- function(input, output) {
+
+  coin_flips <- reactiveValues(data = NULL)
+
+  observeEvent(input$simulate, {
+    coin_flips$data <- replicate(input$n_coins, {
+      cumsum(sample(c(0, 1), input$n_trials, replace = TRUE)) / (1:input$n_trials)
+    })
+  })
+
+  output$coin_plot <- renderPlot({
+    if (!is.null(coin_flips$data)) {
+      matplot(coin_flips$data, type = "l", lty = 1, col = rainbow(input$n_coins),
+              xlab = "Number of Trials", ylab = "Proportion of Heads", main = "Coin Toss Simulation",
+              ylim = c(0, 1))
+      abline(h = 0.5, lty = 2, col = "blue")
+      legend("topright", legend = c("Theoretical Probability (0.5)", paste0("Coin ", 1:input$n_coins)),
+             lty = c(2, rep(1, input$n_coins)), col = c("red", rainbow(input$n_coins)))
+    }
+  })
+}
+
+shinyApp(ui, server)
+
+
+```
+
+
