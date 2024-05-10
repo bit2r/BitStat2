@@ -53,35 +53,35 @@
     "href": "infer/post-with-code/index.html",
     "title": "Post With Code",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\nReuseCC BY-SA-NC"
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC"
   },
   {
     "objectID": "eda/start/index.html",
     "href": "eda/start/index.html",
     "title": "한글사랑",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\nReuseCC BY-SA-NC"
+    "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
   },
   {
     "objectID": "infer/welcome/index.html",
     "href": "infer/welcome/index.html",
     "title": "Welcome To My Blog",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\nReuseCC BY-SA-NC"
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
   },
   {
     "objectID": "eda.html",
     "href": "eda.html",
     "title": "EDA",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          First published - Oldest\n        \n         \n          First published - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nPost With Code\n\n\n\n2024-05-10\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n2024-05-09\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n2024-05-07\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\nNo matching items\n\nReuseCC BY-SA-NC"
+    "text": "정렬\n       디폴트\n         \n          제목\n        \n         \n          First published - 날짜(오름차순)\n        \n         \n          First published - 날짜(내림차순)\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nPost With Code\n\n\n\n2024-05-10\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n2024-05-09\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n2024-05-07\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n일치 없음\n\n라이센스CC BY-SA-NC"
   },
   {
     "objectID": "eda/post-with-code/index.html",
     "href": "eda/post-with-code/index.html",
     "title": "Post With Code",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\nReuseCC BY-SA-NC"
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC"
   },
   {
     "objectID": "theory/lln/index.html",
@@ -110,5 +110,12 @@
     "title": "한글사랑",
     "section": "",
     "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
+  },
+  {
+    "objectID": "eda/welcome/index.html",
+    "href": "eda/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
   }
 ]
