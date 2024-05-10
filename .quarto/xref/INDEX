@@ -1,0 +1,26 @@
+{
+  "eda/post-with-code/index.qmd": {
+    "index.html": "4938b5a7"
+  },
+  "eda/start/index.qmd": {
+    "index.html": "540d6471"
+  },
+  "eda/welcome/index.qmd": {
+    "index.html": "5fc8b7d3"
+  },
+  "eda.qmd": {
+    "eda.html": "10f3eb53"
+  },
+  "infer/post-with-code/index.qmd": {
+    "index.html": "1f19fc06"
+  },
+  "infer/welcome/index.qmd": {
+    "index.html": "b7b3d87d"
+  },
+  "theory/lln/index.qmd": {
+    "index.html": "340584f9"
+  },
+  "index.qmd": {
+    "index.html": "877a9dd4"
+  }
+}

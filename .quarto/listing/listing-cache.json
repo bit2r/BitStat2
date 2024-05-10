@@ -1,0 +1,13 @@
+{
+  "listingMap": {
+    "eda.qmd": [
+      "eda"
+    ],
+    "index.qmd": [
+      "data",
+      "infer",
+      "eda",
+      "theory"
+    ]
+  }
+}
