@@ -1,0 +1,115 @@
+---
+title: "그래프 문법"
+author: "이광춘"
+date: today
+image: "ggplot.png"
+categories: [ggplot, "그래프 문법", esquisse]
+---
+
+# Shiny 앱
+
+::: callout-note
+### 데이터셋
+
+팔머펭귄 데이터셋 영문 [csv 파일](https://gist.githubusercontent.com/slopp/ce3b90b9168f2f921784de84fa445651/raw/4ecf3041f0ed4913e7c230758733948bc561f434/penguins.csv) 혹은 한국 R 사용자회에서 한글로 번역한 [csv](https://raw.githubusercontent.com/bit2r/bitData/main/data-raw/penguins.csv) 다운로드 받아 사용한다.
+
+:::
+
+:::{.column-page}
+
+```{shinylive-r}
+#| label: shinylive-esquisse
+#| viewerWidth: 800
+#| viewerHeight: 700
+#| standalone: true
+
+library(esquisse)
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  titlePanel("Draw graph with esquisse"),
+  sidebarLayout(
+    sidebarPanel(
+      fileInput("file", "Choose CSV File",
+                accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv")),
+      radioButtons(
+        inputId = "data",
+        label = "Select data to use:",
+        choices = c("mpg", "diamonds", "economics", "Uploaded Data" = "uploaded_data")
+      )
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel(
+          title = "esquisse",
+          esquisse_ui(
+            id = "esquisse",
+            header = FALSE # dont display gadget title
+          )
+        ),
+        tabPanel(
+          title = "output",
+          tags$b("Code:"),
+          verbatimTextOutput("code"),
+          tags$b("Filters:"),
+          verbatimTextOutput("filters"),
+          tags$b("Data:"),
+          verbatimTextOutput("data")
+        )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  data_r <- reactiveValues(data = iris, name = "iris")
+
+  observeEvent(input$file, {
+    req(input$file)
+    data_r$data <- read.csv(input$file$datapath)
+    data_r$name <- "uploaded_data"
+  })
+
+  observe({
+    if (input$data != "uploaded_data") {
+      data_r$data <- get(input$data)
+      data_r$name <- input$data
+    }
+  })
+
+  results <- esquisse_server(
+    id = "esquisse",
+    data_rv = data_r
+  )
+
+  output$code <- renderPrint({
+    results$code_plot
+  })
+
+  output$filters <- renderPrint({
+    results$code_filters
+  })
+
+  output$data <- renderPrint({
+    str(results$data)
+  })
+}
+
+shinyApp(ui, server)
+```
+
+
+:::
+
+
+# 코딩
+
+```{webr-r}
+economics |> 
+  pivot_longer(-date, names_to = "variable", values_to = "value") |>
+  ggplot(aes(x = date, y = value)) +
+  geom_line(colour = "#112446") +
+  facet_wrap(~variable, scales = "free_y") +
+  theme_minimal()
+```
