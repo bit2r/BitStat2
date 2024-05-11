@@ -13,43 +13,74 @@ listing:
   - id: stat-data
     max-items: 3
     contents: 
-      - data
-    sort: "date-modified desc" 
-    type: grid
-    image-placeholder: images/BitStat.png
-  - id: stat-infer
-    max-items: 3
-    contents: 
-      - infer
+      - 01_data
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png
   - id: stat-eda
     max-items: 3
     contents: 
-      - eda
+      - 02_eda
+    sort: "date-modified desc" 
+    type: grid
+    image-placeholder: images/BitStat.png
+  - id: stat-viz
+    max-items: 3
+    contents: 
+      - 03_viz
+    sort: "date-modified desc" 
+    type: grid
+    image-placeholder: images/BitStat.png    
+  - id: stat-testing
+    max-items: 3
+    contents: 
+      - 04_testing
+    sort: "date-modified desc" 
+    type: grid
+    image-placeholder: images/BitStat.png    
+  - id: stat-infer
+    max-items: 3
+    contents: 
+      - 05_infer
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png
   - id: stat-theory
     max-items: 3
     contents: 
-      - theory
+      - 06_theory
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png    
 ---
 
+# 데이터
+
+::: {#stat-data}
+:::
+
+
+# EDA
+
+::: {#stat-eda}
+:::
+
+# 시각화
+
+::: {#stat-viz}
+:::
+
+
+# 통계검정
+
+::: {#stat-testing}
+:::
 
 # 추론
 
 ::: {#stat-infer}
 :::
 
-# EDA
-
-::: {#stat-eda}
-:::
 
 # 이론
 
@@ -57,7 +88,3 @@ listing:
 :::
 
 
-# 데이터
-
-::: {#stat-data}
-:::

@@ -10,15 +10,21 @@
   {
     "listing": "/index.html",
     "items": [
-      "/data/post-with-code/index.html",
-      "/data/start/index.html",
-      "/data/welcome/index.html",
-      "/infer/post-with-code/index.html",
-      "/infer/welcome/index.html",
-      "/eda/post-with-code/index.html",
-      "/eda/start/index.html",
-      "/eda/welcome/index.html",
-      "/theory/lln/index.html"
+      "/01_data/post-with-code/index.html",
+      "/01_data/start/index.html",
+      "/01_data/welcome/index.html",
+      "/02_eda/post-with-code/index.html",
+      "/02_eda/start/index.html",
+      "/02_eda/welcome/index.html",
+      "/03_viz/post-with-code/index.html",
+      "/03_viz/start/index.html",
+      "/03_viz/welcome/index.html",
+      "/04_testing/post-with-code/index.html",
+      "/04_testing/start/index.html",
+      "/04_testing/welcome/index.html",
+      "/05_infer/post-with-code/index.html",
+      "/05_infer/welcome/index.html",
+      "/06_theory/lln/index.html"
     ]
   }
 ]
