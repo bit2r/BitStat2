@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Blog from R for Photobiology</title>
+<link>https://r2bit.com/BitStat2/eda.html</link>
+<atom:link href="https://r2bit.com/BitStat2/eda.xml" rel="self" type="application/rss+xml"/>
+<description>BitStat2: 오픈 통계 패키지</description>
+<generator>quarto-1.4.552</generator>
+<lastBuildDate>Thu, 09 May 2024 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Post With Code</title>
+  <dc:creator>Harlow Malloc</dc:creator>
+  <link>https://r2bit.com/BitStat2/eda/post-with-code/</link>
+  <description><![CDATA[ This is a post with executable code. ]]></description>
+  <category>news</category>
+  <category>code</category>
+  <category>analysis</category>
+  <guid>https://r2bit.com/BitStat2/eda/post-with-code/</guid>
+  <pubDate>Thu, 09 May 2024 15:00:00 GMT</pubDate>
+  <media:content url="https://r2bit.com/BitStat2/eda/post-with-code/image.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>한글사랑</title>
+  <dc:creator>Tristan O&#39;Malley</dc:creator>
+  <link>https://r2bit.com/BitStat2/eda/start/</link>
+  <description><![CDATA[ This is the first post in a Quarto blog. Welcome! ]]></description>
+  <category>news</category>
+  <guid>https://r2bit.com/BitStat2/eda/start/</guid>
+  <pubDate>Wed, 08 May 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome To My Blog</title>
+  <dc:creator>Tristan O&#39;Malley</dc:creator>
+  <link>https://r2bit.com/BitStat2/eda/welcome/</link>
+  <description><![CDATA[ This is the first post in a Quarto blog. Welcome! ]]></description>
+  <category>news</category>
+  <guid>https://r2bit.com/BitStat2/eda/welcome/</guid>
+  <pubDate>Mon, 06 May 2024 15:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

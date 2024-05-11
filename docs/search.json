@@ -1,121 +1,86 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "오픈 통계 패키지",
+    "objectID": "theory/lln/index.html",
+    "href": "theory/lln/index.html",
+    "title": "대수의 법칙",
     "section": "",
-    "text": "1 추론\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\n2024-05-10\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-07\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n2 EDA\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\n2024-05-10\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-09\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-07\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n3 이론\n\n\n\n\n\n\n\n\n\n\n대수의 법칙\n\n\n\n\n\n\n\n\n\n2024-05-10\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n4 데이터\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\n2024-05-10\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-09\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-07\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n\n\n\n\n\n라이센스CC BY-SA-NC"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog\n\n\nReuseCC BY-SA-NC"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          First published - Oldest\n        \n         \n          First published - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nLast edited\n\n\nFirst published\n\n\nTitle\n\n\n\n\n\n\nInvalid Date\n\n\nMay 10, 2024\n\n\nPost With Code\n\n\n\n\nInvalid Date\n\n\nMay 7, 2024\n\n\nWelcome To My Blog\n\n\n\n\n\nNo matching items\n\nReuseCC BY-SA-NC"
-  },
-  {
-    "objectID": "EDA/post-with-code/index.html",
-    "href": "EDA/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\nReuseCC BY-SA-NC"
-  },
-  {
-    "objectID": "EDA/welcome/index.html",
-    "href": "EDA/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\nReuseCC BY-SA-NC"
+    "text": "1 WebR\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n2 shiny\n#| label: shinylive-lln-coin\n#| viewerHeight: 600\n#| standalone: true\n\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"Law of Large Numbers - Coin Toss\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"n_trials\", \"Number of Trials:\", min = 1, max = 1000, value = 100),\n      sliderInput(\"n_coins\", \"Number of Coins:\", min = 1, max = 100, value = 1),\n      actionButton(\"simulate\", \"Start Coin Toss\")\n    ),\n\n    mainPanel(\n      plotOutput(\"coin_plot\"),\n      br(),\n      p(\"This app demonstrates the law of large numbers through a coin toss example.\"),\n      p(\"When repeatedly tossing coins, as the number of trials increases, the probability of getting heads approaches 0.5.\"),\n      p(\"Adjust the number of trials and coins and start the simulation!\")\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n\n  coin_flips &lt;- reactiveValues(data = NULL)\n\n  observeEvent(input$simulate, {\n    coin_flips$data &lt;- replicate(input$n_coins, {\n      cumsum(sample(c(0, 1), input$n_trials, replace = TRUE)) / (1:input$n_trials)\n    })\n  })\n\n  output$coin_plot &lt;- renderPlot({\n    if (!is.null(coin_flips$data)) {\n      matplot(coin_flips$data, type = \"l\", lty = 1, col = rainbow(input$n_coins),\n              xlab = \"Number of Trials\", ylab = \"Proportion of Heads\", main = \"Coin Toss Simulation\",\n              ylim = c(0, 1))\n      abline(h = 0.5, lty = 2, col = \"blue\")\n      legend(\"topright\", legend = c(\"Theoretical Probability (0.5)\", paste0(\"Coin \", 1:input$n_coins)),\n             lty = c(2, rep(1, input$n_coins)), col = c(\"red\", rainbow(input$n_coins)))\n    }\n  })\n}\n\nshinyApp(ui, server)\n\n\n\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
   },
   {
     "objectID": "infer/post-with-code/index.html",
     "href": "infer/post-with-code/index.html",
     "title": "Post With Code",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC"
-  },
-  {
-    "objectID": "eda/start/index.html",
-    "href": "eda/start/index.html",
-    "title": "한글사랑",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
-  },
-  {
-    "objectID": "infer/welcome/index.html",
-    "href": "infer/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
   },
   {
     "objectID": "eda.html",
     "href": "eda.html",
     "title": "EDA",
     "section": "",
-    "text": "정렬\n       디폴트\n         \n          제목\n        \n         \n          First published - 날짜(오름차순)\n        \n         \n          First published - 날짜(내림차순)\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nPost With Code\n\n\n\n2024-05-10\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n2024-05-09\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n2024-05-07\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n일치 없음\n\n라이센스CC BY-SA-NC"
+    "text": "정렬\n       디폴트\n         \n          제목\n        \n         \n          First published - 날짜(오름차순)\n        \n         \n          First published - 날짜(내림차순)\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nPost With Code\n\n\n\n2024-05-10\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n2024-05-09\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n2024-05-07\n\n\n\n\n\nLast edited\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n일치 없음\n\n라이센스CC BY-SA-NC & GPL-3"
   },
   {
-    "objectID": "eda/post-with-code/index.html",
-    "href": "eda/post-with-code/index.html",
-    "title": "Post With Code",
+    "objectID": "eda/start/index.html",
+    "href": "eda/start/index.html",
+    "title": "한글사랑",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC"
-  },
-  {
-    "objectID": "theory/lln/index.html",
-    "href": "theory/lln/index.html",
-    "title": "대수의 법칙",
-    "section": "",
-    "text": "1 WebR\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n2 shiny\n#| label: shinylive-lln-coin\n#| viewerHeight: 600\n#| standalone: true\n\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"Law of Large Numbers - Coin Toss\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"n_trials\", \"Number of Trials:\", min = 1, max = 1000, value = 100),\n      sliderInput(\"n_coins\", \"Number of Coins:\", min = 1, max = 100, value = 1),\n      actionButton(\"simulate\", \"Start Coin Toss\")\n    ),\n\n    mainPanel(\n      plotOutput(\"coin_plot\"),\n      br(),\n      p(\"This app demonstrates the law of large numbers through a coin toss example.\"),\n      p(\"When repeatedly tossing coins, as the number of trials increases, the probability of getting heads approaches 0.5.\"),\n      p(\"Adjust the number of trials and coins and start the simulation!\")\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n\n  coin_flips &lt;- reactiveValues(data = NULL)\n\n  observeEvent(input$simulate, {\n    coin_flips$data &lt;- replicate(input$n_coins, {\n      cumsum(sample(c(0, 1), input$n_trials, replace = TRUE)) / (1:input$n_trials)\n    })\n  })\n\n  output$coin_plot &lt;- renderPlot({\n    if (!is.null(coin_flips$data)) {\n      matplot(coin_flips$data, type = \"l\", lty = 1, col = rainbow(input$n_coins),\n              xlab = \"Number of Trials\", ylab = \"Proportion of Heads\", main = \"Coin Toss Simulation\",\n              ylim = c(0, 1))\n      abline(h = 0.5, lty = 2, col = \"blue\")\n      legend(\"topright\", legend = c(\"Theoretical Probability (0.5)\", paste0(\"Coin \", 1:input$n_coins)),\n             lty = c(2, rep(1, input$n_coins)), col = c(\"red\", rainbow(input$n_coins)))\n    }\n  })\n}\n\nshinyApp(ui, server)\n\n\n\n\n\n\n라이센스CC BY-SA-NC"
+    "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
   },
   {
     "objectID": "data/welcome/index.html",
     "href": "data/welcome/index.html",
     "title": "Welcome To My Blog",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
   },
   {
     "objectID": "data/post-with-code/index.html",
     "href": "data/post-with-code/index.html",
     "title": "Post With Code",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC"
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "소개",
+    "section": "",
+    "text": "코로나19로 인해 심화된 디지털 불평등 해소와 데이터 리터러시 역량 강화를 위해 오픈 통계 패키지 ‘빛스탯(BitStat)’을 개발하였습니다. BitStat은 통계 비전공자와 일반인도 쉽게 데이터를 분석할 수 있도록 사용자 친화적으로 설계된 오픈소스 기반의 웹서버 통계 소프트웨어입니다.\nBitStat은 데이터 분석과 통계의 대중화를 통해 디지털 격차 해소와 포용적 데이터 경제 발전에 기여하고자 합니다. 특히 오픈소스 SW로 무료 제공됨으로써 중소기업과 스타트업의 데이터 기반 의사결정을 지원하고, 누구나 데이터 리터러시 역량을 함양할 수 있는 기회를 제공하여 사회 통합에 이바지할 것입니다.\nBitStat 프로젝트는 기술 혁신을 통한 공익 실현이라는 가치를 추구하며, 앞으로 데이터와 통계의 대중화를 선도하는 혁신적인 오픈소스 통계 패키지로 자리매김하고자 합니다.\n\n\n라이센스CC BY-SA-NC & GPL-3"
   },
   {
     "objectID": "data/start/index.html",
     "href": "data/start/index.html",
     "title": "한글사랑",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
+    "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
+  },
+  {
+    "objectID": "eda/post-with-code/index.html",
+    "href": "eda/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
   },
   {
     "objectID": "eda/welcome/index.html",
     "href": "eda/welcome/index.html",
     "title": "Welcome To My Blog",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC"
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "오픈 통계 패키지",
+    "section": "",
+    "text": "1 추론\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\n2024-05-10\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-07\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n2 EDA\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\n2024-05-10\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-09\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-07\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n3 이론\n\n\n\n\n\n\n\n\n\n\n대수의 법칙\n\n\n\n\n\n\n\n\n\n2024-05-11\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n4 데이터\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\n2024-05-10\n\n\n\n\n\n\n\n\n\n\n\n\n한글사랑\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-09\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\n2024-05-07\n\n\n\n\n\n\n\n\n일치 없음\n\n\n\n\n\n\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
+  },
+  {
+    "objectID": "infer/welcome/index.html",
+    "href": "infer/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\n라이센스CC BY-SA-NC & GPL-3"
   }
 ]

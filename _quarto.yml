@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  preview:
+    port: 7771
+    browser: false
   resources:
     - "images/*.png"
     - "images/*.jp*g"
@@ -8,14 +11,22 @@ project:
 lang: ko-KR
 
 website:
-  title: "BitStat2"
+  title: "빗스탯2"
+  site-url: https://r2bit.com/BitStat2/
+  google-analytics: "UA-229551680-1"
+  description: "BitStat2: 오픈 통계 패키지"
+  favicon: images/favicon.ico
+  search: true
   navbar:
+    logo: images/Korea_R_User_Group_kor.png
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/bit2r/BitStat2
+      - icon: facebook
+        href: https://www.facebook.com/groups/tidyverse
+      - icon: discord
+        href: https://discord.gg/wJbu4WQz
 format:
   html:
     theme: spacelab
@@ -25,7 +36,7 @@ format:
     date-format: iso
 
 editor: source
-license: "CC BY-SA-NC"
+license: "CC BY-SA-NC & GPL-3"
 
 number-sections: true
 number-depth: 2
