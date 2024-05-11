@@ -2,7 +2,7 @@
 title: "데이터 시각화"
 author: "이광춘"
 date: today
-image: "ggplot.png"
+image: "thumbnail.png"
 categories: [ggplot, "데이터 시각화"]
 ---
 

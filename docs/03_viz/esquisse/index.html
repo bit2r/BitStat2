@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"economics |> \n  pivot_longer(-date, names_to = \"variable\", values_to = \"value\") |>\n  ggplot(aes(x = date, y = value)) +\n  geom_line(colour = \"#112446\") +\n  facet_wrap(~variable, scales = \"free_y\") +\n  theme_minimal()","id":1,"options":{"comment":"","warning":"true","editor-quick-suggestions":"false","message":"true","classes":"","output":"true","fig-height":5,"results":"markup","fig-cap":"","editor-max-height":"","fig-width":7,"autorun":"false","dpi":72,"context":"interactive","read-only":"false","label":"unnamed-chunk-1","out-width":"700px","editor-font-scale":1,"out-height":""}}];
+globalThis.qwebrCellDetails = [{"code":"economics |> \n  pivot_longer(-date, names_to = \"variable\", values_to = \"value\") |>\n  ggplot(aes(x = date, y = value)) +\n  geom_line(colour = \"#112446\") +\n  facet_wrap(~variable, scales = \"free_y\") +\n  theme_minimal()","id":1,"options":{"output":"true","read-only":"false","fig-cap":"","out-height":"","editor-quick-suggestions":"false","label":"unnamed-chunk-1","results":"markup","context":"interactive","fig-height":5,"classes":"","editor-max-height":"","comment":"","dpi":72,"editor-font-scale":1,"warning":"true","message":"true","autorun":"false","out-width":"700px","fig-width":7}}];
 
 </script>
 <script type="module">
@@ -1478,7 +1478,7 @@ library(shiny)
 library(ggplot2)
 
 ui &lt;- fluidPage(
-  titlePanel("Draw graph with esquisse"),
+  titlePanel("Graph with esquisse"),
   sidebarLayout(
     sidebarPanel(
       fileInput("file", "Choose CSV File",

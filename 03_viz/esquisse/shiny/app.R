@@ -3,7 +3,7 @@ library(shiny)
 library(ggplot2)
 
 ui <- fluidPage(
-  titlePanel("Use esquisse as a Shiny module"),
+  titlePanel("Graph with esquisse"),
   sidebarLayout(
     sidebarPanel(
       fileInput("file", "Choose CSV File",

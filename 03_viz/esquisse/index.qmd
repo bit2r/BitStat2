@@ -2,7 +2,7 @@
 title: "그래프 문법"
 author: "이광춘"
 date: today
-image: "ggplot.png"
+image: "thumbnail.png"
 categories: [ggplot, "그래프 문법", esquisse]
 ---
 
@@ -28,7 +28,7 @@ library(shiny)
 library(ggplot2)
 
 ui <- fluidPage(
-  titlePanel("Draw graph with esquisse"),
+  titlePanel("Graph with esquisse"),
   sidebarLayout(
     sidebarPanel(
       fileInput("file", "Choose CSV File",
