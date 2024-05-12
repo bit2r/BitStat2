@@ -19,8 +19,24 @@ website:
   search: true
   navbar:
     logo: images/Korea_R_User_Group_kor.png
+    left:
+      - text: "빛스탯"
+        menu:
+        - href: 01_data.qmd
+          text: "01 데이터"
+        - href: 02_eda.qmd
+          text: "02 EDA"
+        - href: 03_viz.qmd
+          text: "03 시각화"
+        - href: 04_testing.qmd
+          text: "04 통계검정"
+        - href: 05_infer.qmd
+          text: "05 추론과 회귀모형"
+        - href: 06_theory.qmd
+          text: "06 통계이론"
     right:
       - about.qmd
+      - BitStat.qmd
       - icon: github
         href: https://github.com/bit2r/BitStat2
       - icon: facebook

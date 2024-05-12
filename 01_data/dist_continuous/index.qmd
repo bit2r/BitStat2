@@ -1,7 +1,7 @@
 ---
 title: "연속형 분포"
 author: "이광춘"
-date: today
+date: "2024-05-07"
 image: thumbnail.png
 categories: ["연속형 분포", "확률분포", "균등분포", "정규분포", "지수분포", "감마분포", "베타분포"]
 editor_options: 

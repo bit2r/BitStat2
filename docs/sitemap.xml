@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://r2bit.com/BitStat2/index.html</loc>
-    <lastmod>2024-05-11T02:15:05.838Z</lastmod>
+    <lastmod>2024-05-12T06:20:46.441Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/03_viz/ggplot/index.html</loc>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/01_data/dist_continuous/index.html</loc>
-    <lastmod>2024-05-12T03:01:28.316Z</lastmod>
+    <lastmod>2024-05-12T06:10:20.382Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/01_data/dist_fitting/index.html</loc>
@@ -35,5 +35,37 @@
   <url>
     <loc>https://r2bit.com/BitStat2/01_data/sampling_concept/index.html</loc>
     <lastmod>2024-05-12T03:23:05.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/01_data.html</loc>
+    <lastmod>2024-05-12T06:14:57.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/06_theory.html</loc>
+    <lastmod>2024-05-12T06:19:17.479Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/05_infer.html</loc>
+    <lastmod>2024-05-12T06:18:33.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/03_viz.html</loc>
+    <lastmod>2024-05-12T06:16:32.830Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/02_eda.html</loc>
+    <lastmod>2024-05-12T06:19:36.127Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/04_testing.html</loc>
+    <lastmod>2024-05-12T06:17:17.662Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/BitStat.html</loc>
+    <lastmod>2024-05-12T06:31:51.230Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/about.html</loc>
+    <lastmod>2024-05-11T01:24:11.120Z</lastmod>
   </url>
 </urlset>

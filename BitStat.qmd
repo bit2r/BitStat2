@@ -1,0 +1,23 @@
+---
+title: "BitStat"
+---
+
+
+```{mermaid}
+graph TD;
+    Index("오픈 통계 패키지<br>BitStat2")
+    Data("데이터")
+    EDA("탐색적 데이터 분석")
+    Visualization("데이터 시각화")
+    Testing("통계 검정")
+    Inference("통계적 추론")
+    Theory("통계 이론")
+
+    Index --> Data
+    Index --> EDA
+    Index --> Visualization
+    Index --> Testing
+    Index --> Inference
+    Index --> Theory
+```
+

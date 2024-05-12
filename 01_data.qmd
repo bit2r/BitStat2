@@ -1,0 +1,13 @@
+---
+title: "데이터"
+subtitle: "데이터 생성과 분포"
+listing:
+  contents: 01_data
+  sort: "date-modified desc"
+  type: grid
+  categories: true
+  sort-ui: true
+  filter-ui: true
+page-layout: full
+title-block-banner: true
+---

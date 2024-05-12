@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Blog from R for Photobiology</title>
+<link>https://r2bit.com/BitStat2/01_data.html</link>
+<atom:link href="https://r2bit.com/BitStat2/01_data.xml" rel="self" type="application/rss+xml"/>
+<description>BitStat2: 오픈 통계 패키지</description>
+<generator>quarto-1.4.552</generator>
+<lastBuildDate>Sat, 11 May 2024 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>이산형 분포</title>
+  <dc:creator>이광춘 </dc:creator>
+  <link>https://r2bit.com/BitStat2/01_data/dist_discrete/</link>
+  <description><![CDATA[ 이산확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다. ]]></description>
+  <category>확률분포</category>
+  <category>이산형 분포</category>
+  <category>베르누이 분포</category>
+  <category>이항 분포</category>
+  <category>포아송 분포</category>
+  <guid>https://r2bit.com/BitStat2/01_data/dist_discrete/</guid>
+  <pubDate>Sat, 11 May 2024 15:00:00 GMT</pubDate>
+  <media:content url="https://r2bit.com/BitStat2/01_data/dist_discrete/thumbnail.png" medium="image" type="image/png" height="97" width="144"/>
+</item>
+<item>
+  <title>연속형 분포 적합</title>
+  <dc:creator>이광춘 </dc:creator>
+  <link>https://r2bit.com/BitStat2/01_data/dist_fitting/</link>
+  <description><![CDATA[ 사용자가 선택한 데이터에 대해 연속확률분포의 적합도를 분석하고 시각화할 수 있는 도구입니다. 이 애플리케이션을 통해 통계학적 분석을 수행하고 결과를 실시간으로 탐색할 수 있습니다. ]]></description>
+  <category>news</category>
+  <guid>https://r2bit.com/BitStat2/01_data/dist_fitting/</guid>
+  <pubDate>Sat, 11 May 2024 15:00:00 GMT</pubDate>
+  <media:content url="https://r2bit.com/BitStat2/01_data/dist_fitting/thumbnail.png" medium="image" type="image/png" height="100" width="144"/>
+</item>
+<item>
+  <title>표본추출 개념 시각화</title>
+  <dc:creator>이광춘 </dc:creator>
+  <link>https://r2bit.com/BitStat2/01_data/sampling_concept/</link>
+  <description><![CDATA[ 
+
+  // Configure the Monaco Editor's loader
+  require.config({
+    paths: {
+      'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs'
+    }
+  });
+ ]]></description>
+  <category>표본</category>
+  <category>표본추출</category>
+  <category>단순임의추출</category>
+  <category>층화추출</category>
+  <category>군집추출</category>
+  <category>다단계추출</category>
+  <category>시각화</category>
+  <guid>https://r2bit.com/BitStat2/01_data/sampling_concept/</guid>
+  <pubDate>Sat, 11 May 2024 15:00:00 GMT</pubDate>
+  <media:content url="https://r2bit.com/BitStat2/01_data/sampling_concept/thumbnail.png" medium="image" type="image/png" height="64" width="144"/>
+</item>
+<item>
+  <title>연속형 분포</title>
+  <dc:creator>이광춘 </dc:creator>
+  <link>https://r2bit.com/BitStat2/01_data/dist_continuous/</link>
+  <description><![CDATA[ 연속확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다. ]]></description>
+  <category>연속형 분포</category>
+  <category>확률분포</category>
+  <category>균등분포</category>
+  <category>정규분포</category>
+  <category>지수분포</category>
+  <category>감마분포</category>
+  <category>베타분포</category>
+  <guid>https://r2bit.com/BitStat2/01_data/dist_continuous/</guid>
+  <pubDate>Mon, 06 May 2024 15:00:00 GMT</pubDate>
+  <media:content url="https://r2bit.com/BitStat2/01_data/dist_continuous/thumbnail.png" medium="image" type="image/png" height="94" width="144"/>
+</item>
+</channel>
+</rss>

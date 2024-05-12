@@ -1,0 +1,13 @@
+---
+title: "추론"
+subtitle: "추론과 회귀모형"
+listing:
+  contents: 05_infer
+  sort: "date-modified desc"
+  type: grid
+  categories: true
+  sort-ui: true
+  filter-ui: true
+page-layout: full
+title-block-banner: true
+---

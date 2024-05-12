@@ -18,5 +18,70 @@
       "/05_infer/welcome/index.html",
       "/06_theory/lln/index.html"
     ]
+  },
+  {
+    "listing": "/01_data.html",
+    "items": [
+      "/01_data/dist_continuous/index.html",
+      "/01_data/dist_discrete/index.html",
+      "/01_data/dist_fitting/index.html",
+      "/01_data/sampling_concept/index.html"
+    ]
+  },
+  {
+    "listing": "/06_theory.html",
+    "items": [
+      "/06_theory/lln/index.html"
+    ]
+  },
+  {
+    "listing": "/05_infer.html",
+    "items": [
+      "/05_infer/post-with-code/index.html",
+      "/05_infer/welcome/index.html"
+    ]
+  },
+  {
+    "listing": "/03_viz.html",
+    "items": [
+      "/03_viz/esquisse/index.html",
+      "/03_viz/viz/index.html"
+    ]
+  },
+  {
+    "listing": "/02_eda.html",
+    "items": [
+      "/02_eda/post-with-code/index.html",
+      "/02_eda/start/index.html",
+      "/02_eda/welcome/index.html"
+    ]
+  },
+  {
+    "listing": "/04_testing.html",
+    "items": [
+      "/04_testing/post-with-code/index.html",
+      "/04_testing/start/index.html",
+      "/04_testing/welcome/index.html"
+    ]
+  },
+  {
+    "listing": "/BitStat.html",
+    "items": [
+      "/01_data/dist_continuous/index.html",
+      "/01_data/dist_discrete/index.html",
+      "/01_data/dist_fitting/index.html",
+      "/01_data/sampling_concept/index.html",
+      "/02_eda/post-with-code/index.html",
+      "/02_eda/start/index.html",
+      "/02_eda/welcome/index.html",
+      "/03_viz/esquisse/index.html",
+      "/03_viz/viz/index.html",
+      "/04_testing/post-with-code/index.html",
+      "/04_testing/start/index.html",
+      "/04_testing/welcome/index.html",
+      "/05_infer/post-with-code/index.html",
+      "/05_infer/welcome/index.html",
+      "/06_theory/lln/index.html"
+    ]
   }
 ]

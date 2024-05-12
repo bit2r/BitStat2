@@ -54,35 +54,35 @@ listing:
     image-placeholder: images/BitStat.png    
 ---
 
-# 데이터
+# [데이터](01_data.qmd)
 
 ::: {#stat-data}
 :::
 
 
-# EDA
+# [EDA](02_eda.qmd)
 
 ::: {#stat-eda}
 :::
 
-# 시각화
+# [시각화](03_viz.qmd)
 
 ::: {#stat-viz}
 :::
 
 
-# 통계검정
+# [통계검정](04_testing.qmd)
 
 ::: {#stat-testing}
 :::
 
-# 추론
+# [추론](05_infer.qmd)
 
 ::: {#stat-infer}
 :::
 
 
-# 이론
+# [이론](06_theory.qmd)
 
 ::: {#stat-theory}
 :::
