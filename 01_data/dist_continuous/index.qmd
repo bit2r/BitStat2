@@ -1,0 +1,202 @@
+---
+title: "연속형 분포"
+author: "이광춘"
+date: today
+image: thumbnail.png
+categories: [news]
+editor_options: 
+  chunk_output_type: console
+---
+
+연속확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다.
+
+1. **Shiny 앱**: 사용자가 주요 연속확률분포(균등, 정규, 지수, 감마, 베타 분포) 중 하나를 선택하고 해당 분포의 매개변수를 조정할 수 있는 웹 기반 인터페이스를 제공합니다. 사용자는 선택한 분포에 따라 확률밀도함수(PDF)와 누적밀도함수(CDF)를 그래프로 시각화할 수 있습니다.
+
+2. **코딩**: 분석 대상 데이터가 어떤 분포를 따르는지를 이해하고, 이를 그래픽으로 표현하여 데이터의 분포 형태와 경향을 확인할 수 있습니다. `continuous_dist_summary` 함수는 주어진 분포와 매개변수를 기반으로 요약통계량과 검정통계량, 히스토그램, 확률밀도함수(PDF)와 누적분포함수(CDF)를 계산하고 시각화합니다.
+
+### 주요 기능:
+- **분포의 PDF 계산**: 함수는 입력받은 분포 타입과 매개변수를 사용하여 해당 분포의 확률밀도함수를 계산합니다.
+- **분포의 CDF 계산**: 동일한 매개변수를 사용하여 누적분포함수도 계산됩니다.
+- **시각화**: 계산된 PDF와 CDF를 그래프로 그려, 분석 결과를 시각적으로 표현합니다. 이를 통해 데이터의 전반적인 분포와 변화를 쉽게 파악할 수 있습니다.
+
+이러한 기능들을 통해 `continuous_dist_summary` 함수는 데이터 과학자나 연구자가 이론적 분포를 실제 데이터에 적용해보고, 그 적합성을 평가하는 데 매우 유용합니다.
+
+
+# Shiny 앱
+
+:::{.column-page}
+
+```{shinylive-r}
+#| label: shinylive-discrete-distribution
+#| viewerWidth: 800
+#| viewerHeight: 700
+#| standalone: true
+
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  titlePanel("Continuous Distributions"),
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons("dist", "Select Distribution:",
+                   choices = c("Uniform", "Normal", "Exponential", "Gamma", "Beta"),
+                   inline = TRUE),
+      conditionalPanel(
+        condition = "input.dist == 'Uniform'",
+        sliderInput("unif_min", "Minimum (a):", min = -10, max = 0, value = -1, step = 0.1),
+        sliderInput("unif_max", "Maximum (b):", min = 0, max = 10, value = 1, step = 0.1)
+      ),
+      conditionalPanel(
+        condition = "input.dist == 'Normal'",
+        sliderInput("norm_mean", "Mean (μ):", min = -10, max = 10, value = 0, step = 0.1),
+        sliderInput("norm_sd", "Standard Deviation (σ):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_norm", "Range of x:", min = -10, max = 10, value = c(-5, 5), step = 0.1)
+      ),
+      conditionalPanel(
+        condition = "input.dist == 'Exponential'",
+        sliderInput("exp_rate", "Rate (λ):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_exp", "Range of x:", min = 0, max = 10, value = c(0, 5), step = 0.1)
+      ),
+      conditionalPanel(
+        condition = "input.dist == 'Gamma'",
+        sliderInput("gamma_shape", "Shape (α):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("gamma_rate", "Rate (β):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_gamma", "Range of x:", min = 0, max = 10, value = c(0, 5), step = 0.1)
+      ),
+      conditionalPanel(
+        condition = "input.dist == 'Beta'",
+        sliderInput("beta_shape1", "Shape 1 (α):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("beta_shape2", "Shape 2 (β):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_beta", "Range of x:", min = 0, max = 1, value = c(0, 1), step = 0.01)
+      )
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("PDF Plot", plotOutput("pdf_plot")),
+        tabPanel("CDF Plot", plotOutput("cdf_plot"))
+      ),
+      h4("Usage Instructions:"),
+      tags$ol(
+        tags$li("Select a distribution type using the radio buttons."),
+        tags$li("Adjust the parameters of the selected distribution using the sliders."),
+        tags$li("Use the 'Range of x' slider to control the range of the x-axis."),
+        tags$li("Explore the PDF and CDF plots in their respective tabs.")
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+
+  dist_data <- reactive({
+    if (input$dist == "Uniform") {
+      x <- seq(input$unif_min-1, input$unif_max+1, length.out = 500)
+      data.frame(x = x, pdf = dunif(x, min = input$unif_min, max = input$unif_max),
+                 cdf = punif(x, min = input$unif_min, max = input$unif_max))
+    } else if (input$dist == "Normal") {
+      x <- seq(input$x_range_norm[1], input$x_range_norm[2], length.out = 500)
+      data.frame(x = x, pdf = dnorm(x, mean = input$norm_mean, sd = input$norm_sd),
+                 cdf = pnorm(x, mean = input$norm_mean, sd = input$norm_sd))
+    } else if (input$dist == "Exponential") {
+      x <- seq(input$x_range_exp[1], input$x_range_exp[2], length.out = 500)
+      data.frame(x = x, pdf = dexp(x, rate = input$exp_rate),
+                 cdf = pexp(x, rate = input$exp_rate))
+    } else if (input$dist == "Gamma") {
+      x <- seq(input$x_range_gamma[1], input$x_range_gamma[2], length.out = 500)
+      data.frame(x = x, pdf = dgamma(x, shape = input$gamma_shape, rate = input$gamma_rate),
+                 cdf = pgamma(x, shape = input$gamma_shape, rate = input$gamma_rate))
+    } else if (input$dist == "Beta") {
+      x <- seq(input$x_range_beta[1], input$x_range_beta[2], length.out = 500)
+      data.frame(x = x, pdf = dbeta(x, shape1 = input$beta_shape1, shape2 = input$beta_shape2),
+                 cdf = pbeta(x, shape1 = input$beta_shape1, shape2 = input$beta_shape2))
+    }
+  })
+
+  output$pdf_plot <- renderPlot({
+    ggplot(dist_data(), aes(x = x, y = pdf)) +
+      geom_line(color = "steelblue") +
+      labs(title = paste(input$dist, "Distribution - PDF"),
+           x = "x", y = "Density")
+  })
+
+  output$cdf_plot <- renderPlot({
+    ggplot(dist_data(), aes(x = x, y = cdf)) +
+      geom_line(color = "steelblue") +
+      labs(title = paste(input$dist, "Distribution - CDF"),
+           x = "x", y = "Cumulative Probability")
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+:::
+
+# 코딩
+
+```{webr-r}
+library(ggplot2)
+
+continuous_dist_summary <- function(dist, params, x_range) {
+  if (dist == "normal") {
+    x <- seq(x_range[1], x_range[2], length.out = 500)
+    pdf_values <- dnorm(x, mean = params$mean, sd = params$sd)
+    cdf_values <- pnorm(x, mean = params$mean, sd = params$sd)
+  } else if (dist == "exponential") {
+    x <- seq(x_range[1], x_range[2], length.out = 500)
+    pdf_values <- dexp(x, rate = params$rate)
+    cdf_values <- pexp(x, rate = params$rate)
+  } else if (dist == "gamma") {
+    x <- seq(x_range[1], x_range[2], length.out = 500)
+    pdf_values <- dgamma(x, shape = params$shape, rate = params$rate)
+    cdf_values <- pgamma(x, shape = params$shape, rate = params$rate)
+  } else if (dist == "beta") {
+    x <- seq(x_range[1], x_range[2], length.out = 500)
+    pdf_values <- dbeta(x, shape1 = params$shape1, shape2 = params$shape2)
+    cdf_values <- pbeta(x, shape1 = params$shape1, shape2 = params$shape2)
+  } else if (dist == "uniform") {
+    x <- seq(x_range[1], x_range[2], length.out = 500)
+    pdf_values <- dunif(x, min = params$min, max = params$max)
+    cdf_values <- punif(x, min = params$min, max = params$max)
+  } else {
+    stop("Invalid distribution specified.")
+  }
+  
+  dist_data <- data.frame(x = x, pdf = pdf_values, cdf = cdf_values)
+  
+  pdf_plot <- ggplot(dist_data, aes(x = x, y = pdf)) +
+    geom_line(color = "steelblue") +
+    labs(title = paste("PDF of", dist, "Distribution"),
+         x = "x", y = "Density")
+  
+  cdf_plot <- ggplot(dist_data, aes(x = x, y = cdf)) +
+    geom_line(color = "steelblue") +
+    labs(title = paste("CDF of", dist, "Distribution"),
+         x = "x", y = "Cumulative Probability")
+  
+  cat("Distribution:", dist, "\n")
+  cat("Parameters:\n")
+  print(params)
+  cat("\n")
+  print(pdf_plot)
+  cat("\n")
+  print(cdf_plot)
+}
+
+# 정규분포 (Normal Distribution)
+continuous_dist_summary("normal", params = list(mean = 0, sd = 1), x_range = c(-5, 5))
+
+# # 지수분포 (Exponential Distribution)
+# continuous_dist_summary("exponential", params = list(rate = 1), x_range = c(0, 5))
+# 
+# # 감마분포 (Gamma Distribution)
+# continuous_dist_summary("gamma", params = list(shape = 2, rate = 1), x_range = c(0, 10))
+# 
+# # 베타분포 (Beta Distribution)
+# continuous_dist_summary("beta", params = list(shape1 = 2, shape2 = 5), x_range = c(0, 1))
+# 
+# # 균등분포 (Uniform Distribution)
+# continuous_dist_summary("uniform", params = list(min = -1, max = 1), x_range = c(-2, 2))
+```

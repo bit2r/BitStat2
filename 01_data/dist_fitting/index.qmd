@@ -1,0 +1,276 @@
+---
+title: "연속형 분포 적합"
+author: "이광춘"
+date: today
+image: thumbnail.png
+categories: [news]
+editor_options: 
+  chunk_output_type: console
+---
+
+사용자가 선택한 데이터에 대해 연속확률분포의 적합도를 분석하고 시각화할 수 있는 도구입니다. 이 애플리케이션을 통해 통계학적 분석을 수행하고 결과를 실시간으로 탐색할 수 있습니다.
+
+1. **Shiny 앱**: 데이터가 어떤 이론적 분포를 따르는지 확인하기 위해 히스토그램과 이론적 확률밀도함수를 비교합니다. Q-Q 플롯을 통해 데이터의 분위수가 이론적 분위수와 얼마나 일치하는지 시각적으로 평가합니다. 또한, 데이터의 누적분포함수와 이론적 누적분포함수를 비교하여 데이터의 적합도를 평가합니다. 균일분포는 Kolmogorov-Smirnov 검정을 통해, 정규분포는 Shapiro-Wilk 검정을 통해, 지수분포는 Kolmogorov-Smirnov 검정을 통해 데이터의 적합도를 평가하고 검정 결과의 p-값 통해 분포의 적합성 여부를 결정합니다.
+
+2. **코딩**: 
+
+# Shiny 앱
+
+:::{.column-page}
+
+```{shinylive-r}
+#| label: shinylive-continous-distribution-fitting
+#| viewerWidth: 800
+#| viewerHeight: 700
+#| standalone: true
+
+library(ggplot2)
+library(moments)
+library(palmerpenguins)
+
+ui <- fluidPage(
+  titlePanel("Continuous Distribution Fitting"),
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons("data_source", "Select Data Source",
+                   choices = c("Upload CSV", "penguins", "mtcars"),
+                   inline = TRUE),
+      conditionalPanel(
+        condition = "input.data_source == 'Upload CSV'",
+        fileInput("file", "Choose CSV File",
+                  accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv"))
+      ),
+      selectInput("variable", "Select Variable", choices = NULL),
+      radioButtons("distribution", "Select Distribution",
+                   choices = c("Uniform", "Normal", "Exponential"))
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Summary", verbatimTextOutput("summary")),
+        tabPanel("Histogram", plotOutput("histogram")),
+        tabPanel("Q-Q Plot", plotOutput("qqplot")),
+        tabPanel("CDF Plot", plotOutput("cdfplot"))
+      ),
+      h4("Usage Instructions:"),
+      tags$ol(
+        tags$li("Select a data source (Upload CSV, penguins, or mtcars)."),
+        tags$li("If 'Upload CSV' is selected, choose a CSV file to upload."),
+        tags$li("Select a continuous variable from the dropdown menu."),
+        tags$li("Choose a distribution to fit (Uniform, Normal, or Exponential)."),
+        tags$li("The fitting results will be automatically updated based on your selection."),
+        tags$li("Explore the summary statistics, histogram, Q-Q plot, and CDF plot in the respective tabs.")
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  data <- reactive({
+    if (input$data_source == "Upload CSV") {
+      req(input$file)
+      read.csv(input$file$datapath)
+    } else if (input$data_source == "penguins") {
+      penguins[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")]
+    } else if (input$data_source == "mtcars") {
+      mtcars[, c("mpg", "disp", "hp", "drat", "wt", "qsec")]
+    }
+  })
+
+  observe({
+    req(data())
+    updateSelectInput(session, "variable", choices = names(data()))
+  })
+
+  variable <- reactive({
+    req(input$variable)
+    data()[[input$variable]]
+  })
+
+  fit_result <- reactive({
+    req(input$distribution, variable())
+    distribution <- tolower(input$distribution)
+
+    if (distribution == "uniform") {
+      min_val <- min(variable(), na.rm = TRUE)
+      max_val <- max(variable(), na.rm = TRUE)
+      test_result <- ks.test(variable(), "punif", min = min_val, max = max_val)
+    } else if (distribution == "normal") {
+      test_result <- shapiro.test(variable())
+    } else if (distribution == "exponential") {
+      rate_val <- 1/mean(variable(), na.rm = TRUE)
+      test_result <- ks.test(variable(), "pexp", rate = rate_val)
+    }
+
+    list(
+      distribution = distribution,
+      test_result = test_result,
+      params = switch(distribution,
+                      "uniform" = list(min = min_val, max = max_val),
+                      "normal" = list(mean = mean(variable(), na.rm = TRUE), sd = sd(variable(), na.rm = TRUE)),
+                      "exponential" = list(rate = rate_val))
+    )
+  })
+
+  output$summary <- renderPrint({
+    req(fit_result())
+    cat("Selected Distribution:", fit_result()$distribution, "\n\n")
+    cat("Descriptive Statistics:\n")
+    print(summary(variable()))
+    cat("\nSkewness:", skewness(variable()), "\n")
+    cat("Kurtosis:", kurtosis(variable()), "\n\n")
+
+    if (fit_result()$distribution == "uniform") {
+      cat("Kolmogorov-Smirnov Test for Uniform Distribution\n")
+    } else if (fit_result()$distribution == "normal") {
+      cat("Shapiro-Wilk Normality Test\n")
+    } else if (fit_result()$distribution == "exponential") {
+      cat("Kolmogorov-Smirnov Test for Exponential Distribution\n")
+    }
+
+    cat("p-value:", fit_result()$test_result$p.value, "\n")
+  })
+
+  output$histogram <- renderPlot({
+    req(fit_result())
+    distribution <- fit_result()$distribution
+    params <- fit_result()$params
+    ggplot(data.frame(x = variable()), aes(x)) +
+      geom_histogram(aes(y = ..density..), bins = 30, color = "black", fill = "lightblue") +
+      stat_function(fun = switch(distribution,
+                                 "uniform" = dunif,
+                                 "normal" = dnorm,
+                                 "exponential" = dexp),
+                    args = params,
+                    color = "red", size = 1) +
+      labs(title = "Histogram with Fitted Distribution",
+           x = input$variable, y = "Density")
+  })
+
+  output$qqplot <- renderPlot({
+    req(fit_result())
+    distribution <- fit_result()$distribution
+    params <- fit_result()$params
+    ggplot(data.frame(x = variable()), aes(sample = x)) +
+      stat_qq(distribution = switch(distribution,
+                                    "uniform" = qunif,
+                                    "normal" = qnorm,
+                                    "exponential" = qexp),
+              dparams = unlist(params),
+              color = "blue") +
+      stat_qq_line(distribution = switch(distribution,
+                                         "uniform" = qunif,
+                                         "normal" = qnorm,
+                                         "exponential" = qexp),
+                   dparams = unlist(params),
+                   color = "red") +
+      labs(title = paste("Q-Q Plot for", distribution),
+           x = "Theoretical Quantiles", y = "Sample Quantiles")
+  })
+
+  output$cdfplot <- renderPlot({
+    req(fit_result())
+    distribution <- fit_result()$distribution
+    params <- fit_result()$params
+    ggplot(data.frame(x = variable()), aes(x)) +
+      stat_ecdf(geom = "step", color = "blue", size = 1) +
+      stat_function(fun = switch(distribution,
+                                 "uniform" = punif,
+                                 "normal" = pnorm,
+                                 "exponential" = pexp),
+                    args = unlist(params),
+                    color = "red", size = 1) +
+      labs(title = paste("Empirical and Theoretical CDF for", distribution),
+           x = input$variable, y = "Cumulative Probability")
+  })
+
+
+}
+
+shinyApp(ui, server)
+
+
+```
+
+:::
+
+# 코딩
+
+```{webr-r}
+library(palmerpenguins)
+library(moments)
+
+get_distribution_function <- function(type, prefix) {
+  distribution_map <- c(
+    uniform = "unif",
+    normal = "norm",
+    exponential = "exp"
+  )
+  distribution_name <- distribution_map[tolower(type)]
+  if (is.null(distribution_name)) {
+    stop("Unsupported distribution type")
+  }
+  get(paste(prefix, distribution_name, sep = ""), envir = asNamespace("stats"))
+}
+
+# 수정된 analyze_distribution 함수
+analyze_distribution <- function(data, variable, distribution_type) {
+  if (!variable %in% names(data)) {
+    stop("변수가 데이터셋에 존재하지 않습니다.")
+  }
+  variable_data <- na.omit(data[[variable]])
+
+  distribution_fit <- list()
+  params <- NULL
+  
+  # 매핑을 사용하여 함수를 가져옵니다
+  d_function <- get_distribution_function(distribution_type, "d")
+  q_function <- get_distribution_function(distribution_type, "q")
+  p_function <- get_distribution_function(distribution_type, "p")
+  
+  # 분포에 따른 파라미터 설정
+  if (tolower(distribution_type) == "uniform") {
+    params <- list(min = min(variable_data), max = max(variable_data))
+    distribution_fit$test_result <- ks.test(variable_data, "punif", min = params$min, max = params$max)
+  } else if (tolower(distribution_type) == "normal") {
+    params <- list(mean = mean(variable_data), sd = sd(variable_data))
+    distribution_fit$test_result <- shapiro.test(variable_data)
+  } else if (tolower(distribution_type) == "exponential") {
+    params <- list(rate = 1 / mean(variable_data))
+    distribution_fit$test_result <- ks.test(variable_data, "pexp", rate = params$rate)
+  }
+
+  # 출력 및 플롯 생성
+  print(paste(variable, "의 기술 통계:"))
+  print(summary(variable_data))
+  cat("\n왜도:", skewness(variable_data), "\n")
+  cat("첨도:", kurtosis(variable_data), "\n")
+  print(paste(distribution_type, "분포에 대한 적합도 검정 결과:"))
+  print(distribution_fit$test_result)
+
+  # 히스토그램, Q-Q 플롯, CDF 플롯
+  hist_plot <- ggplot(data.frame(x = variable_data), aes(x = x)) +
+    geom_histogram(aes(y = ..density..), bins = 30, fill = "skyblue", color = "black") +
+    stat_function(fun = d_function, args = params, color = "red") +
+    labs(title = paste(variable, "의 히스토그램 및", distribution_type, "분포 적합"), x = variable, y = "밀도")
+  print(hist_plot)
+
+  qq_plot <- ggplot(data.frame(x = variable_data), aes(sample = x)) +
+    stat_qq(distribution = q_function, dparams = params, color = "blue") +
+    stat_qq_line(distribution = q_function, dparams = params, color = "red") +
+    labs(title = paste(variable, "의 Q-Q 플롯 (", distribution_type, "분포)"), x = "이론적 분위수", y = "표본 분위수")
+  print(qq_plot)
+
+  cdf_plot <- ggplot(data.frame(x = variable_data), aes(x = x)) +
+    stat_ecdf(geom = "step", color = "blue") +
+    stat_function(fun = p_function, args = params, color = "red") +
+    labs(title = paste(variable, "의 경험적 및 이론적 CDF (", distribution_type, "분포)"), x = variable, y = "누적 확률")
+  print(cdf_plot)
+}
+
+# 예시 사용법:
+# analyze_distribution(mtcars, "mpg", "normal")
+analyze_distribution(penguins, "bill_length_mm", "normal")
+# analyze_distribution(penguins, "bill_length_mm", "uniform")
+# analyze_distribution(penguins, "bill_length_mm", "exponential")
+
+```

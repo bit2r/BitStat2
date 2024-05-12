@@ -2,9 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
-      "/01_data/post-with-code/index.html",
-      "/01_data/start/index.html",
-      "/01_data/welcome/index.html",
+      "/01_data/dist_continuous/index.html",
+      "/01_data/dist_discrete/index.html",
+      "/01_data/dist_fitting/index.html",
       "/02_eda/post-with-code/index.html",
       "/02_eda/start/index.html",
       "/02_eda/welcome/index.html",

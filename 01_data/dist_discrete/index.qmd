@@ -1,0 +1,189 @@
+---
+title: "이산형 분포"
+author: "이광춘"
+date: today
+image: thumbnail.png
+categories: [news]
+editor_options: 
+  chunk_output_type: console
+---
+
+
+이산확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다.
+
+1. **Shiny 앱**: 사용자가 대표적인 이산확률분포(베르누이, 이항, 포아송, 기하 분포) 중 하나를 선택하고 해당 분포의 매개변수를 조정할 수 있는 웹 기반 인터페이스를 제공합니다. 사용자는 선택한 분포에 따라 확률질량함수(PMF)와 누적질량함수(CMF)를 그래프로 시각화할 수 있습니다. 추가적으로, 선택한 매개변수에 따른 분포의 수치를 테이블 형태로 확인할 수 있습니다.
+
+2. **코딩**: 분포의 PMF와 CMF를 계산하고 시각화하는 R 코드가 제공됩니다. 여기서 `discrete_dist_summary` 함수는 주어진 분포와 매개변수에 따라 PMF와 CMF를 계산하고, 이 결과를 테이블과 그래프로 출력합니다. 이 부분은 Shiny 앱보다는 코드 수준에서 분포를 다루고 싶은 사용자에게 유용합니다.
+
+
+# Shiny 앱
+
+:::{.column-page}
+
+```{shinylive-r}
+#| label: shinylive-discrete-distribution
+#| viewerWidth: 800
+#| viewerHeight: 700
+#| standalone: true
+
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  titlePanel("Discrete Distributions"),
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons("dist", "Select Distribution:",
+                   choices = c("Bernoulli", "Binomial", "Poisson", "Geometric"),
+                   inline = TRUE),
+      conditionalPanel(
+        condition = "input.dist == 'Bernoulli'",
+        sliderInput("bern_p", "Probability of Success (p):", min = 0, max = 1, value = 0.5, step = 0.01)
+      ),
+      conditionalPanel(
+        condition = "input.dist == 'Binomial'",
+        sliderInput("bin_n", "Number of Trials (n):", min = 1, max = 50, value = 10),
+        sliderInput("bin_p", "Probability of Success (p):", min = 0, max = 1, value = 0.5, step = 0.01)
+      ),
+      conditionalPanel(
+        condition = "input.dist == 'Poisson'",
+        sliderInput("pois_lambda", "Lambda (λ):", min = 0, max = 10, value = 2, step = 0.1)
+      ),
+      conditionalPanel(
+        condition = "input.dist == 'Geometric'",
+        sliderInput("geom_p", "Probability of Success (p):", min = 0, max = 1, value = 0.2, step = 0.01)
+      ),
+      uiOutput("x_range_slider")
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("PMF Plot", plotOutput("pmf_plot")),
+        tabPanel("CMF Plot", plotOutput("cmf_plot")),
+        tabPanel("Table", tableOutput("table"))
+      ),
+      h4("Usage Instructions:"),
+      tags$ol(
+        tags$li("Select a distribution type using the radio buttons."),
+        tags$li("Adjust the parameters of the selected distribution using the sliders."),
+        tags$li("Use the 'Range of x' slider to control the range of the x-axis."),
+        tags$li("Explore the PMF and CMF plots in their respective tabs."),
+        tags$li("View the numerical values of the PMF and CMF in the 'Table' tab.")
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  x_range_values <- reactive({
+    if (input$dist == "Bernoulli") {
+      list(min = 0, max = 1, value = 1)
+    } else {
+      list(min = 0, max = 50, value = 10)
+    }
+  })
+
+  output$x_range_slider <- renderUI({
+    sliderInput("x_range", "Range of x:", min = x_range_values()$min, max = x_range_values()$max, value = x_range_values()$value)
+  })
+
+  dist_data <- reactive({
+    x <- 0:input$x_range
+    if (input$dist == "Bernoulli") {
+      data.frame(x = x,
+                 pmf = dbinom(x, 1, input$bern_p),
+                 cmf = pbinom(x, 1, input$bern_p))
+    } else if (input$dist == "Binomial") {
+      data.frame(x = x,
+                 pmf = dbinom(x, input$bin_n, input$bin_p),
+                 cmf = pbinom(x, input$bin_n, input$bin_p))
+    } else if (input$dist == "Poisson") {
+      data.frame(x = x,
+                 pmf = dpois(x, input$pois_lambda),
+                 cmf = ppois(x, input$pois_lambda))
+    } else if (input$dist == "Geometric") {
+      data.frame(x = x,
+                 pmf = dgeom(x, input$geom_p),
+                 cmf = pgeom(x, input$geom_p))
+    }
+  })
+
+  output$pmf_plot <- renderPlot({
+    ggplot(dist_data(), aes(x = x, y = pmf)) +
+      geom_bar(stat = "identity", fill = "steelblue") +
+      labs(title = paste(input$dist, "Distribution - PMF"),
+           x = "x", y = "Probability")
+  })
+
+  output$cmf_plot <- renderPlot({
+    ggplot(dist_data(), aes(x = x, y = cmf)) +
+      geom_step(color = "steelblue") +
+      labs(title = paste(input$dist, "Distribution - CMF"),
+           x = "x", y = "Cumulative Probability")
+  })
+
+  output$table <- renderTable({
+    dist_data()
+  })
+}
+
+shinyApp(ui, server)
+```
+
+:::
+
+# 코딩
+
+```{webr-r}
+discrete_dist_summary <- function(dist, params, x_range) {
+  if (dist == "bernoulli") {
+    prob <- params$prob
+    x <- 0:x_range
+    pmf <- dbinom(x, size = 1, prob)
+    cdf <- pbinom(x, size = 1, prob)
+  } else if (dist == "binomial") {
+    size <- params$size
+    prob <- params$prob
+    x <- 0:x_range
+    pmf <- dbinom(x, size, prob)
+    cdf <- pbinom(x, size, prob)
+  } else if (dist == "geometric") {
+    prob <- params$prob
+    x <- 0:x_range
+    pmf <- dgeom(x, prob)
+    cdf <- pgeom(x, prob)
+  } else if (dist == "poisson") {
+    lambda <- params$lambda
+    x <- 0:x_range
+    pmf <- dpois(x, lambda)
+    cdf <- ppois(x, lambda)
+  } else {
+    stop("Invalid distribution specified.")
+  }
+  
+  table_data <- data.frame(x = x, PMF = pmf, CDF = cdf)
+  
+  cat("Distribution:", dist, "\n\n")
+  cat("Parameters:\n")
+  print(params)
+  cat("\nPMF and CDF Table:\n")
+  print(table_data)
+  
+  pmf_plot <- barplot(pmf, names.arg = x, xlab = "x", ylab = "Probability", 
+                      main = paste(dist, "Distribution - PMF"), col = "steelblue")
+  
+  cdf_plot <- plot(x, cdf, type = "s", xlab = "x", ylab = "Cumulative Probability",
+                   main = paste(dist, "Distribution - CDF"), col = "steelblue")
+}
+
+# # 베르누이 분포
+# discrete_dist_summary("bernoulli", params = list(prob = 0.7), x_range = 1)
+
+# 이항 분포
+discrete_dist_summary("binomial", params = list(size = 10, prob = 0.4), x_range = 10)
+
+# # 기하 분포
+# discrete_dist_summary("geometric", params = list(prob = 0.2), x_range = 20)
+
+# # 포아송 분포
+# discrete_dist_summary("poisson", params = list(lambda = 3), x_range = 15)
+```
