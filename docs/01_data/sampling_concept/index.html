@@ -9,7 +9,7 @@
 <meta name="author" content="이광춘">
 <meta name="dcterms.date" content="2024-05-12">
 
-<title>빗스탯2 - 이산형 분포</title>
+<title>빗스탯2 - 표본추출 개념 시각화</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"fig-cap":"","comment":"","out-height":"","autorun":"false","context":"interactive","read-only":"false","message":"true","editor-font-scale":1,"editor-quick-suggestions":"false","fig-height":5,"warning":"true","dpi":72,"results":"markup","out-width":"700px","classes":"","editor-max-height":"","output":"true","label":"unnamed-chunk-1","fig-width":7},"code":"discrete_dist_summary <- function(dist, params, x_range) {\n  if (dist == \"bernoulli\") {\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dbinom(x, size = 1, prob)\n    cdf <- pbinom(x, size = 1, prob)\n  } else if (dist == \"binomial\") {\n    size <- params$size\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dbinom(x, size, prob)\n    cdf <- pbinom(x, size, prob)\n  } else if (dist == \"geometric\") {\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dgeom(x, prob)\n    cdf <- pgeom(x, prob)\n  } else if (dist == \"poisson\") {\n    lambda <- params$lambda\n    x <- 0:x_range\n    pmf <- dpois(x, lambda)\n    cdf <- ppois(x, lambda)\n  } else {\n    stop(\"Invalid distribution specified.\")\n  }\n  \n  table_data <- data.frame(x = x, PMF = pmf, CDF = cdf)\n  \n  cat(\"Distribution:\", dist, \"\\n\\n\")\n  cat(\"Parameters:\\n\")\n  print(params)\n  cat(\"\\nPMF and CDF Table:\\n\")\n  print(table_data)\n  \n  pmf_plot <- barplot(pmf, names.arg = x, xlab = \"x\", ylab = \"Probability\", \n                      main = paste(dist, \"Distribution - PMF\"), col = \"steelblue\")\n  \n  cdf_plot <- plot(x, cdf, type = \"s\", xlab = \"x\", ylab = \"Cumulative Probability\",\n                   main = paste(dist, \"Distribution - CDF\"), col = \"steelblue\")\n}\n\n# # 베르누이 분포\n# discrete_dist_summary(\"bernoulli\", params = list(prob = 0.7), x_range = 1)\n\n# 이항 분포\ndiscrete_dist_summary(\"binomial\", params = list(size = 10, prob = 0.4), x_range = 10)\n\n# # 기하 분포\n# discrete_dist_summary(\"geometric\", params = list(prob = 0.2), x_range = 20)\n\n# # 포아송 분포\n# discrete_dist_summary(\"poisson\", params = list(lambda = 3), x_range = 15)","id":1}];
+globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"context":"interactive","message":"true","read-only":"false","editor-quick-suggestions":"false","fig-height":5,"editor-max-height":"","fig-width":7,"out-width":"700px","label":"unnamed-chunk-1","dpi":72,"output":"true","fig-cap":"","editor-font-scale":1,"warning":"true","autorun":"false","comment":"","classes":"","out-height":"","results":"markup"}}];
 
 </script>
 <script type="module">
@@ -1184,13 +1184,15 @@ globalThis.qwebrExecuteCode = async function (
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">이산형 분포</h1>
+      <h1 class="title">표본추출 개념 시각화</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">확률분포</div>
-                <div class="quarto-category">이산형 분포</div>
-                <div class="quarto-category">베르누이 분포</div>
-                <div class="quarto-category">이항 분포</div>
-                <div class="quarto-category">포아송 분포</div>
+                <div class="quarto-category">표본</div>
+                <div class="quarto-category">표본추출</div>
+                <div class="quarto-category">단순임의추출</div>
+                <div class="quarto-category">층화추출</div>
+                <div class="quarto-category">군집추출</div>
+                <div class="quarto-category">다단계추출</div>
+                <div class="quarto-category">시각화</div>
               </div>
                   </div>
   </div>
@@ -1454,120 +1456,247 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 
-<p>이산확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다.</p>
-<ol type="1">
-<li><p><strong>Shiny 앱</strong>: 사용자가 대표적인 이산확률분포(베르누이, 이항, 포아송, 기하 분포) 중 하나를 선택하고 해당 분포의 매개변수를 조정할 수 있는 웹 기반 인터페이스를 제공합니다. 사용자는 선택한 분포에 따라 확률질량함수(PMF)와 누적질량함수(CMF)를 그래프로 시각화할 수 있습니다. 추가적으로, 선택한 매개변수에 따른 분포의 수치를 테이블 형태로 확인할 수 있습니다.</p></li>
-<li><p><strong>코딩</strong>: 분포의 PMF와 CMF를 계산하고 시각화하는 R 코드가 제공됩니다. 여기서 <code>discrete_dist_summary</code> 함수는 주어진 분포와 매개변수에 따라 PMF와 CMF를 계산하고, 이 결과를 테이블과 그래프로 출력합니다. 이 부분은 Shiny 앱보다는 코드 수준에서 분포를 다루고 싶은 사용자에게 유용합니다.</p></li>
-</ol>
 <section id="shiny-앱" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Shiny 앱</h1>
 <div class="column-page">
-<pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-discrete-distribution
+<pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-sampling
 #| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 
 library(shiny)
-library(ggplot2)
+library(openintro)
+data(COL)
 
+# _____ Simple Random _____ #
+build_srs &lt;- function(n, N) {
+
+  colSamp &lt;- COL[4]
+  PCH &lt;- rep(c(1, 3, 20)[3], 3)
+  col &lt;- rep(COL[1], N)
+  pch &lt;- PCH[match(col, COL)]
+
+  plot(0, xlim = c(0,2), ylim = 0:1, type = 'n', axes = FALSE, xlab = "", ylab = "")
+  box()
+  x   &lt;- runif(N, 0, 2)
+  y   &lt;- runif(N)
+  inc &lt;- n
+  points(x, y, col = col, pch = pch)
+
+  these &lt;- sample(N, n)
+  points(x[these], y[these], pch = 20, cex = 0.8, col = colSamp)
+  points(x[these], y[these], cex = 1.4, col = colSamp)
+}
+
+
+# _____ Stratified _____ #
+build_stratified &lt;- function(N, numStrata, sampleSizePerStratum) {
+  colSamp &lt;- COL[4]
+  col &lt;- rep(COL[1], N)
+  PCH &lt;- rep(c(1, 3, 20)[3], 3)
+  plot(0, xlim = c(0, 2), ylim = 0:1 + 0.01,
+       type = 'n', axes = FALSE, xlab = "", ylab = "")
+  box()
+  X &lt;- seq(0.1, 1.9, length.out = numStrata)
+  Y &lt;- rep(0.5, numStrata)
+
+  # 각 계층의 크기를 무작위로 생성
+  strataSizes &lt;- sample(ceiling(N/numStrata) * 0.5 + c(-1, 1) * ceiling(N/numStrata) * 0.25, numStrata, replace = TRUE)
+  strataSizes &lt;- round(strataSizes / sum(strataSizes) * N)
+
+  R &lt;- sqrt(strataSizes / 500)
+  above &lt;- rep(1, numStrata)
+  currentIndex &lt;- 1
+  for (i in 1:numStrata) {
+    hold &lt;- seq(0, 2 * pi, length.out = 99)
+    x &lt;- X[i] + (R[i] + 0.01) * cos(hold)
+    y &lt;- Y[i] + (R[i] + 0.01) * sin(hold)
+    polygon(x, y, border = COL[5, 4])
+    x &lt;- rep(NA, strataSizes[i])
+    y &lt;- rep(NA, strataSizes[i])
+    for (j in 1:strataSizes[i]) {
+      inside &lt;- FALSE
+      while (!inside) {
+        xx &lt;- runif(1, -R[i], R[i])
+        yy &lt;- runif(1, -R[i], R[i])
+        if (sqrt(xx^2 + yy^2) &lt; R[i]) {
+          inside &lt;- TRUE
+          x[j] &lt;- xx
+          y[j] &lt;- yy
+        }
+      }
+    }
+    type &lt;- sample(1, strataSizes[i], TRUE)
+    pch &lt;- PCH[type]
+    col &lt;- COL[type]
+    x &lt;- X[i] + x
+    y &lt;- Y[i] + y
+    points(x, y, pch = pch, col = col)
+    these &lt;- sample(strataSizes[i], min(sampleSizePerStratum, strataSizes[i]))
+    points(x[these], y[these],
+           pch = 20, cex = 0.8, col = colSamp)
+    points(x[these], y[these], cex = 1.4, col = colSamp)
+    currentIndex &lt;- currentIndex + strataSizes[i]
+  }
+  text(X, Y + above * (R),
+       paste("계층", 1:numStrata),
+       pos = 2 + above,
+       cex = 1.3)
+}
+
+# _____ Cluster _____ #
+build_cluster &lt;- function(numClusters, clusterSizes, selectedClusters) {
+  colSamp &lt;- COL[4]
+  PCH &lt;- rep(c(1, 3, 20)[3], 3)
+  plot(0, xlim = c(0, 2), ylim = c(0.01, 1.04), type = 'n', axes = FALSE, xlab = "", ylab = "")
+  box()
+  X &lt;- seq(0.1, 1.9, length.out = numClusters)
+  Y &lt;- runif(numClusters, 0.2, 0.8)
+  R &lt;- sqrt(clusterSizes / 500)
+  above &lt;- ifelse(Y &gt; 0.5, 1, -1)
+  for (i in 1:numClusters) {
+    hold &lt;- seq(0, 2 * pi, length.out = 99)
+    x &lt;- X[i] + (R[i] + 0.02) * cos(hold)
+    y &lt;- Y[i] + (R[i] + 0.02) * sin(hold)
+    polygon(x, y, border = COL[5, 4])
+    if (i %in% selectedClusters) {
+      polygon(x, y, border = COL[4], lty = 2, lwd = 1.5)
+    }
+    x &lt;- rep(NA, clusterSizes[i])
+    y &lt;- rep(NA, clusterSizes[i])
+    for (j in 1:clusterSizes[i]) {
+      inside &lt;- FALSE
+      while (!inside) {
+        xx &lt;- runif(1, -R[i], R[i])
+        yy &lt;- runif(1, -R[i], R[i])
+        if (sqrt(xx^2 + yy^2) &lt; R[i]) {
+          inside &lt;- TRUE
+          x[j] &lt;- xx
+          y[j] &lt;- yy
+        }
+      }
+    }
+    type &lt;- sample(1, clusterSizes[i], TRUE)
+    pch &lt;- PCH[type]
+    col &lt;- COL[type]
+    x &lt;- X[i] + x
+    y &lt;- Y[i] + y
+    points(x, y, pch = pch, col = col)
+    if (i %in% selectedClusters) {
+      points(x, y, pch = 20, cex = 0.8, col = colSamp)
+      points(x, y, cex = 1.4, col = colSamp)
+    }
+  }
+  text(X, Y + above * (R + 0.01),
+       paste("군집", 1:numClusters),
+       pos = 2 + above,
+       cex = 1.3)
+}
+
+# _____ Multistage Sampling _____ #
+build_multistage &lt;- function(numClusters, sampleSizePerCluster, clusterSizes) {
+  colSamp &lt;- COL[4]
+  PCH &lt;- rep(c(1, 3, 20)[3], 3)
+  plot(0, xlim = c(0, 2), ylim = c(0.01, 1.04), type = 'n', axes = FALSE, xlab = "", ylab = "")
+  box()
+  X &lt;- seq(0.1, 1.9, length.out = numClusters)
+  Y &lt;- runif(numClusters, 0.2, 0.8)
+  R &lt;- sqrt(clusterSizes / 500)
+  above &lt;- ifelse(Y &gt; 0.5, 1, -1)
+  for (i in 1:numClusters) {
+    hold &lt;- seq(0, 2 * pi, length.out = 99)
+    x &lt;- X[i] + (R[i] + 0.02) * cos(hold)
+    y &lt;- Y[i] + (R[i] + 0.02) * sin(hold)
+    polygon(x, y, border = COL[5, 4])
+    x &lt;- rep(NA, clusterSizes[i])
+    y &lt;- rep(NA, clusterSizes[i])
+    for (j in 1:clusterSizes[i]) {
+      inside &lt;- FALSE
+      while (!inside) {
+        xx &lt;- runif(1, -R[i], R[i])
+        yy &lt;- runif(1, -R[i], R[i])
+        if (sqrt(xx^2 + yy^2) &lt; R[i]) {
+          inside &lt;- TRUE
+          x[j] &lt;- xx
+          y[j] &lt;- yy
+        }
+      }
+    }
+    type &lt;- sample(1, clusterSizes[i], TRUE)
+    pch &lt;- PCH[type]
+    col &lt;- COL[type]
+    x &lt;- X[i] + x
+    y &lt;- Y[i] + y
+    points(x, y, pch = pch, col = col)
+    these &lt;- sample(clusterSizes[i], min(sampleSizePerCluster, clusterSizes[i]))
+    points(x[these], y[these], pch = 20, cex = 0.8, col = colSamp)
+    points(x[these], y[these], cex = 1.4, col = colSamp)
+  }
+  text(X, Y + above * (R + 0.01),
+       paste("군집", 1:numClusters),
+       pos = 2 + above, cex = 1.3)
+}
+
+# ui -----
 ui &lt;- fluidPage(
-  titlePanel("Discrete Distributions"),
+  titlePanel("표본 추출 방법 시각화"),
   sidebarLayout(
     sidebarPanel(
-      radioButtons("dist", "Select Distribution:",
-                   choices = c("Bernoulli", "Binomial", "Poisson", "Geometric"),
+      radioButtons("method", "표본 추출 방법 선택:",
+                   c("단순 무작위 표본 추출" = "srs",
+                     "층화 표본 추출" = "stratified",
+                     "군집 표본 추출" = "cluster",
+                     "다단계 표본 추출" = "multistage"),
                    inline = TRUE),
       conditionalPanel(
-        condition = "input.dist == 'Bernoulli'",
-        sliderInput("bern_p", "Probability of Success (p):", min = 0, max = 1, value = 0.5, step = 0.01)
+        condition = "input.method == 'srs'",
+        sliderInput("sampleSize", "표본 크기:", min = 1, max = 100, value = 10)
       ),
       conditionalPanel(
-        condition = "input.dist == 'Binomial'",
-        sliderInput("bin_n", "Number of Trials (n):", min = 1, max = 50, value = 10),
-        sliderInput("bin_p", "Probability of Success (p):", min = 0, max = 1, value = 0.5, step = 0.01)
+        condition = "input.method == 'stratified'",
+        sliderInput("numStrata", "층(Stratum) 수:", min = 1, max = 5, value = 3),
+        sliderInput("sampleSizePerStratum", "층 내부 표본 크기:", min = 1, max = 10, value = 3)
       ),
       conditionalPanel(
-        condition = "input.dist == 'Poisson'",
-        sliderInput("pois_lambda", "Lambda (λ):", min = 0, max = 10, value = 2, step = 0.1)
+        condition = "input.method == 'cluster'",
+        sliderInput("numClusters", "군집 수:", min = 1, max = 9, value = 3)
       ),
       conditionalPanel(
-        condition = "input.dist == 'Geometric'",
-        sliderInput("geom_p", "Probability of Success (p):", min = 0, max = 1, value = 0.2, step = 0.01)
-      ),
-      uiOutput("x_range_slider")
+        condition = "input.method == 'multistage'",
+        sliderInput("numClustersMultistage", "군집 수:", min = 1, max = 9, value = 3),
+        sliderInput("sampleSizePerClusterMultistage", "군집 내부 표본 크기:", min = 1, max = 10, value = 3)
+      )
     ),
     mainPanel(
-      tabsetPanel(
-        tabPanel("PMF Plot", plotOutput("pmf_plot")),
-        tabPanel("CMF Plot", plotOutput("cmf_plot")),
-        tabPanel("Table", tableOutput("table"))
-      ),
-      h4("Usage Instructions:"),
-      tags$ol(
-        tags$li("Select a distribution type using the radio buttons."),
-        tags$li("Adjust the parameters of the selected distribution using the sliders."),
-        tags$li("Use the 'Range of x' slider to control the range of the x-axis."),
-        tags$li("Explore the PMF and CMF plots in their respective tabs."),
-        tags$li("View the numerical values of the PMF and CMF in the 'Table' tab.")
-      )
+      plotOutput("samplingPlot")
     )
   )
 )
 
 server &lt;- function(input, output) {
-  x_range_values &lt;- reactive({
-    if (input$dist == "Bernoulli") {
-      list(min = 0, max = 1, value = 1)
-    } else {
-      list(min = 0, max = 50, value = 10)
+  output$samplingPlot &lt;- renderPlot({
+    if (input$method == "srs") {
+      build_srs(n = input$sampleSize, N = 100)
+    } else if (input$method == "stratified") {
+      build_stratified(N = 100, numStrata = input$numStrata, sampleSizePerStratum = input$sampleSizePerStratum)
+    } else if (input$method == "cluster") {
+      clusterSizeMin &lt;- sample(5:30, 1)
+      clusterSizeMax &lt;- sample((clusterSizeMin+5):50, 1)
+      clusterSizes &lt;- sample(clusterSizeMin:clusterSizeMax, input$numClusters, replace = TRUE)
+      selectedClusters &lt;- sample(1:input$numClusters, round(input$numClusters/3))
+      build_cluster(numClusters = input$numClusters, clusterSizes = clusterSizes, selectedClusters = selectedClusters)
+    } else if (input$method == "multistage") {
+      clusterSizeMin &lt;- sample(5:30, 1)
+      clusterSizeMax &lt;- sample((clusterSizeMin+5):50, 1)
+      clusterSizes &lt;- sample(clusterSizeMin:clusterSizeMax, input$numClustersMultistage, replace = TRUE)
+      build_multistage(numClusters = input$numClustersMultistage, sampleSizePerCluster = input$sampleSizePerClusterMultistage, clusterSizes = clusterSizes)
     }
-  })
-
-  output$x_range_slider &lt;- renderUI({
-    sliderInput("x_range", "Range of x:", min = x_range_values()$min, max = x_range_values()$max, value = x_range_values()$value)
-  })
-
-  dist_data &lt;- reactive({
-    x &lt;- 0:input$x_range
-    if (input$dist == "Bernoulli") {
-      data.frame(x = x,
-                 pmf = dbinom(x, 1, input$bern_p),
-                 cmf = pbinom(x, 1, input$bern_p))
-    } else if (input$dist == "Binomial") {
-      data.frame(x = x,
-                 pmf = dbinom(x, input$bin_n, input$bin_p),
-                 cmf = pbinom(x, input$bin_n, input$bin_p))
-    } else if (input$dist == "Poisson") {
-      data.frame(x = x,
-                 pmf = dpois(x, input$pois_lambda),
-                 cmf = ppois(x, input$pois_lambda))
-    } else if (input$dist == "Geometric") {
-      data.frame(x = x,
-                 pmf = dgeom(x, input$geom_p),
-                 cmf = pgeom(x, input$geom_p))
-    }
-  })
-
-  output$pmf_plot &lt;- renderPlot({
-    ggplot(dist_data(), aes(x = x, y = pmf)) +
-      geom_bar(stat = "identity", fill = "steelblue") +
-      labs(title = paste(input$dist, "Distribution - PMF"),
-           x = "x", y = "Probability")
-  })
-
-  output$cmf_plot &lt;- renderPlot({
-    ggplot(dist_data(), aes(x = x, y = cmf)) +
-      geom_step(color = "steelblue") +
-      labs(title = paste(input$dist, "Distribution - CMF"),
-           x = "x", y = "Cumulative Probability")
-  })
-
-  output$table &lt;- renderTable({
-    dist_data()
   })
 }
 
-shinyApp(ui, server)</code></pre>
+shinyApp(ui, server)
+
+</code></pre>
 </div>
 </section>
 <section id="코딩" class="level1" data-number="2">

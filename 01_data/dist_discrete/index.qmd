@@ -3,7 +3,7 @@ title: "이산형 분포"
 author: "이광춘"
 date: today
 image: thumbnail.png
-categories: [news]
+categories: ["확률분포", "이산형 분포", "베르누이 분포", "이항 분포", "포아송 분포"]
 editor_options: 
   chunk_output_type: console
 ---

@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(ggplot2)\n\ncontinuous_dist_summary <- function(dist, params, x_range) {\n  if (dist == \"normal\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dnorm(x, mean = params$mean, sd = params$sd)\n    cdf_values <- pnorm(x, mean = params$mean, sd = params$sd)\n  } else if (dist == \"exponential\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dexp(x, rate = params$rate)\n    cdf_values <- pexp(x, rate = params$rate)\n  } else if (dist == \"gamma\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dgamma(x, shape = params$shape, rate = params$rate)\n    cdf_values <- pgamma(x, shape = params$shape, rate = params$rate)\n  } else if (dist == \"beta\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dbeta(x, shape1 = params$shape1, shape2 = params$shape2)\n    cdf_values <- pbeta(x, shape1 = params$shape1, shape2 = params$shape2)\n  } else if (dist == \"uniform\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dunif(x, min = params$min, max = params$max)\n    cdf_values <- punif(x, min = params$min, max = params$max)\n  } else {\n    stop(\"Invalid distribution specified.\")\n  }\n  \n  dist_data <- data.frame(x = x, pdf = pdf_values, cdf = cdf_values)\n  \n  pdf_plot <- ggplot(dist_data, aes(x = x, y = pdf)) +\n    geom_line(color = \"steelblue\") +\n    labs(title = paste(\"PDF of\", dist, \"Distribution\"),\n         x = \"x\", y = \"Density\")\n  \n  cdf_plot <- ggplot(dist_data, aes(x = x, y = cdf)) +\n    geom_line(color = \"steelblue\") +\n    labs(title = paste(\"CDF of\", dist, \"Distribution\"),\n         x = \"x\", y = \"Cumulative Probability\")\n  \n  cat(\"Distribution:\", dist, \"\\n\")\n  cat(\"Parameters:\\n\")\n  print(params)\n  cat(\"\\n\")\n  print(pdf_plot)\n  cat(\"\\n\")\n  print(cdf_plot)\n}\n\n# 정규분포 (Normal Distribution)\ncontinuous_dist_summary(\"normal\", params = list(mean = 0, sd = 1), x_range = c(-5, 5))\n\n# # 지수분포 (Exponential Distribution)\n# continuous_dist_summary(\"exponential\", params = list(rate = 1), x_range = c(0, 5))\n# \n# # 감마분포 (Gamma Distribution)\n# continuous_dist_summary(\"gamma\", params = list(shape = 2, rate = 1), x_range = c(0, 10))\n# \n# # 베타분포 (Beta Distribution)\n# continuous_dist_summary(\"beta\", params = list(shape1 = 2, shape2 = 5), x_range = c(0, 1))\n# \n# # 균등분포 (Uniform Distribution)\n# continuous_dist_summary(\"uniform\", params = list(min = -1, max = 1), x_range = c(-2, 2))","options":{"message":"true","label":"unnamed-chunk-1","warning":"true","results":"markup","context":"interactive","output":"true","fig-height":5,"classes":"","editor-font-scale":1,"read-only":"false","fig-cap":"","autorun":"false","dpi":72,"editor-max-height":"","out-width":"700px","fig-width":7,"editor-quick-suggestions":"false","out-height":"","comment":""},"id":1}];
+globalThis.qwebrCellDetails = [{"id":1,"options":{"fig-height":5,"autorun":"false","dpi":72,"editor-max-height":"","read-only":"false","label":"unnamed-chunk-1","editor-font-scale":1,"results":"markup","output":"true","fig-cap":"","message":"true","editor-quick-suggestions":"false","out-height":"","context":"interactive","out-width":"700px","comment":"","warning":"true","fig-width":7,"classes":""},"code":"library(ggplot2)\n\ncontinuous_dist_summary <- function(dist, params, x_range) {\n  if (dist == \"normal\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dnorm(x, mean = params$mean, sd = params$sd)\n    cdf_values <- pnorm(x, mean = params$mean, sd = params$sd)\n  } else if (dist == \"exponential\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dexp(x, rate = params$rate)\n    cdf_values <- pexp(x, rate = params$rate)\n  } else if (dist == \"gamma\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dgamma(x, shape = params$shape, rate = params$rate)\n    cdf_values <- pgamma(x, shape = params$shape, rate = params$rate)\n  } else if (dist == \"beta\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dbeta(x, shape1 = params$shape1, shape2 = params$shape2)\n    cdf_values <- pbeta(x, shape1 = params$shape1, shape2 = params$shape2)\n  } else if (dist == \"uniform\") {\n    x <- seq(x_range[1], x_range[2], length.out = 500)\n    pdf_values <- dunif(x, min = params$min, max = params$max)\n    cdf_values <- punif(x, min = params$min, max = params$max)\n  } else {\n    stop(\"Invalid distribution specified.\")\n  }\n  \n  dist_data <- data.frame(x = x, pdf = pdf_values, cdf = cdf_values)\n  \n  pdf_plot <- ggplot(dist_data, aes(x = x, y = pdf)) +\n    geom_line(color = \"steelblue\") +\n    labs(title = paste(\"PDF of\", dist, \"Distribution\"),\n         x = \"x\", y = \"Density\")\n  \n  cdf_plot <- ggplot(dist_data, aes(x = x, y = cdf)) +\n    geom_line(color = \"steelblue\") +\n    labs(title = paste(\"CDF of\", dist, \"Distribution\"),\n         x = \"x\", y = \"Cumulative Probability\")\n  \n  cat(\"Distribution:\", dist, \"\\n\")\n  cat(\"Parameters:\\n\")\n  print(params)\n  cat(\"\\n\")\n  print(pdf_plot)\n  cat(\"\\n\")\n  print(cdf_plot)\n}\n\n# 정규분포 (Normal Distribution)\ncontinuous_dist_summary(\"normal\", params = list(mean = 0, sd = 1), x_range = c(-5, 5))\n\n# # 지수분포 (Exponential Distribution)\n# continuous_dist_summary(\"exponential\", params = list(rate = 1), x_range = c(0, 5))\n# \n# # 감마분포 (Gamma Distribution)\n# continuous_dist_summary(\"gamma\", params = list(shape = 2, rate = 1), x_range = c(0, 10))\n# \n# # 베타분포 (Beta Distribution)\n# continuous_dist_summary(\"beta\", params = list(shape1 = 2, shape2 = 5), x_range = c(0, 1))\n# \n# # 균등분포 (Uniform Distribution)\n# continuous_dist_summary(\"uniform\", params = list(min = -1, max = 1), x_range = c(-2, 2))"}];
 
 </script>
 <script type="module">
@@ -1186,7 +1186,13 @@ globalThis.qwebrExecuteCode = async function (
     <div class="quarto-title column-body">
       <h1 class="title">연속형 분포</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+                <div class="quarto-category">연속형 분포</div>
+                <div class="quarto-category">확률분포</div>
+                <div class="quarto-category">균등분포</div>
+                <div class="quarto-category">정규분포</div>
+                <div class="quarto-category">지수분포</div>
+                <div class="quarto-category">감마분포</div>
+                <div class="quarto-category">베타분포</div>
               </div>
                   </div>
   </div>
@@ -1455,15 +1461,6 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><p><strong>Shiny 앱</strong>: 사용자가 주요 연속확률분포(균등, 정규, 지수, 감마, 베타 분포) 중 하나를 선택하고 해당 분포의 매개변수를 조정할 수 있는 웹 기반 인터페이스를 제공합니다. 사용자는 선택한 분포에 따라 확률밀도함수(PDF)와 누적밀도함수(CDF)를 그래프로 시각화할 수 있습니다.</p></li>
 <li><p><strong>코딩</strong>: 분석 대상 데이터가 어떤 분포를 따르는지를 이해하고, 이를 그래픽으로 표현하여 데이터의 분포 형태와 경향을 확인할 수 있습니다. <code>continuous_dist_summary</code> 함수는 주어진 분포와 매개변수를 기반으로 요약통계량과 검정통계량, 히스토그램, 확률밀도함수(PDF)와 누적분포함수(CDF)를 계산하고 시각화합니다.</p></li>
 </ol>
-<section id="주요-기능" class="level3">
-<h3 class="anchored" data-anchor-id="주요-기능">주요 기능:</h3>
-<ul>
-<li><strong>분포의 PDF 계산</strong>: 함수는 입력받은 분포 타입과 매개변수를 사용하여 해당 분포의 확률밀도함수를 계산합니다.</li>
-<li><strong>분포의 CDF 계산</strong>: 동일한 매개변수를 사용하여 누적분포함수도 계산됩니다.</li>
-<li><strong>시각화</strong>: 계산된 PDF와 CDF를 그래프로 그려, 분석 결과를 시각적으로 표현합니다. 이를 통해 데이터의 전반적인 분포와 변화를 쉽게 파악할 수 있습니다.</li>
-</ul>
-<p>이러한 기능들을 통해 <code>continuous_dist_summary</code> 함수는 데이터 과학자나 연구자가 이론적 분포를 실제 데이터에 적용해보고, 그 적합성을 평가하는 데 매우 유용합니다.</p>
-</section>
 <section id="shiny-앱" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Shiny 앱</h1>
 <div class="column-page">
