@@ -661,29 +661,18 @@ Tristan O’Malley
 <h1 data-number="4"><span class="header-section-number">4</span> <a href="./04_testing.html">통계검정</a></h1>
 <div id="listing-stat-testing" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="평균 검정,단일 표본 t-검정,대응 표본 t-검정,독립 표본 t-검정" data-listing-date-sort="1715526000000" data-listing-file-modified-sort="1715511030327" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="386">
-<a href="./04_testing/means/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="평균 검정,단일 평균 z-검정,단일 평균 t-검정" data-listing-date-sort="1715526000000" data-listing-file-modified-sort="1715559982476" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4453">
+<a href="./04_testing/one_mean/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./04_testing/means/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img src="./04_testing/one_mean/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="통계검정">
-평균 검정
+단일 평균 가설 검정
 </h5>
 <div class="card-text listing-description">
-
-
-<section id="단일-표본-t-검정" class="level2" data-number="1.1">
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu">library</span>(broom)</span>
-<span id="cb1-2"></span>
-<span id="cb1-3"><span class="co"># 맥아에서 추출된 당의 양 데이터 (가상)</span></span>
-<span id="cb1-4">malt_sugar <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.0</span>, <span class="fl">3.0</span>, <span class="fl">2.9</span>, <span class="fl">2.8</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.1</span>, <span class="fl">2.9</span>, <span class="fl">3.0</span>, <span class="fl">3.1</span>)</span>
-<span id="cb1-5"></span>
-<span id="cb1-6"><span class="co"># One-Sample t-test 수행</span></span>
-<span id="cb1-7">t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(malt_sugar, <span class="at">mu…</span><span class="dv"></span><span class="co"></span></span><span id="cb1-8"></span><span id="cb1-9"><span class="ot"></span><span class="sc"></span><span class="fu"></span></span></code></pre></div></div></section><section id="단일-표본-t-검정-시각화" class="level2" data-number="1.2"><div class="cell"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co"></span></span><span id="cb2-2"><span class="ot"></span><span class="cf"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span><span id="cb2-3"><span class="co"></span></span><span id="cb2-4"><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span><span id="cb2-5"></span><span id="cb2-6"><span class="co"></span></span><span id="cb2-7"><span class="ot"></span><span class="fu"></span></span><span id="cb2-8"></span><span id="cb2-9"><span class="co"></span></span><span id="cb2-10"><span class="ot"></span><span class="fu"></span></span><span id="cb2-11"></span><span id="cb2-12"><span class="co"></span></span><span id="cb2-13"><span class="cf"></span><span class="sc"></span><span class="st"></span></span><span id="cb2-14"><span class="ot"></span><span class="fu"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span><span class="dv"></span><span class="sc"></span><span class="sc"></span><span class="dv"></span></span><span id="cb2-15"><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span></span><span id="cb2-16"><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span></span><span id="cb2-17"><span class="ot"></span><span class="st"></span></span><span id="cb2-18"><span class="cf"></span><span class="cf"></span><span class="sc"></span><span class="st"></span></span><span id="cb2-19"><span class="ot"></span><span class="fu"></span><span class="dv"></span><span class="sc"></span></span><span id="cb2-20"><span class="ot"></span><span class="cn"></span></span><span id="cb2-21"><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb2-22"><span class="ot"></span><span class="st"></span></span><span id="cb2-23"><span class="cf"></span><span class="cf"></span><span class="sc"></span><span class="st"></span></span><span id="cb2-24"><span class="ot"></span><span class="fu"></span></span><span id="cb2-25"><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb2-26"><span class="ot"></span><span class="cn"></span></span><span id="cb2-27"><span class="ot"></span><span class="st"></span></span><span id="cb2-28"></span><span id="cb2-29"></span><span id="cb2-30"><span class="co"></span></span><span id="cb2-31"><span class="ot"></span><span class="fu"></span><span class="fu"></span><span class="sc"></span></span><span id="cb2-32"><span class="fu"></span><span class="sc"></span></span><span id="cb2-33"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="st"></span><span class="st"></span><span class="st"></span><span class="st"></span></span><span id="cb2-34"><span class="at"></span><span class="st"></span></span><span id="cb2-35"><span class="at"></span><span class="st"></span><span class="sc"></span></span><span id="cb2-36"><span class="fu"></span></span><span id="cb2-37"></span><span id="cb2-38"><span class="co"></span></span><span id="cb2-39"><span class="cf"></span><span class="sc"></span><span class="fu"></span></span><span id="cb2-40"><span class="ot"></span><span class="sc"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="fl"></span></span><span id="cb2-41"></span><span id="cb2-42"><span class="cf"></span><span class="sc"></span><span class="fu"></span></span><span id="cb2-43"><span class="ot"></span><span class="sc"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="fl"></span></span><span id="cb2-44"></span><span id="cb2-45"></span><span id="cb2-46"><span class="fu"></span></span><span id="cb2-47"></span><span id="cb2-48"></span><span id="cb2-49"><span class="co"></span></span><span id="cb2-50"><span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu"></span></span></code></pre></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="sc"></span><span class="sc"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div></div></section>
+모평균(<span class="math inline">\(\mu\)</span>)에 대한 가설검정은 모집단 분산을 알고 있는 경우와 그렇지 않는 경우로 나눠진다. 만약, 모집단 분산을 알고 있는 경우에는 z-검정을 사용하고, 모집단 분산을 모르는 경우에는 t-검정을 사용한다. 단, 모집단 분산을 알지 못하더라도 표본크기(<span class="math inline">\(n\)</span>)가 30 이상이면 z-검정을 사용할…
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -697,18 +686,18 @@ Tristan O’Malley
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="평균 검정,단일 평균 z-검정,단일 평균 t-검정" data-listing-date-sort="1715526000000" data-listing-file-modified-sort="1715559982476" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4453">
-<a href="./04_testing/one_mean/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="평균 검정,단일 표본 t-검정,대응 표본 t-검정,독립 표본 t-검정" data-listing-date-sort="1715526000000" data-listing-file-modified-sort="1715564751567" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6195">
+<a href="./04_testing/two_means/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./04_testing/one_mean/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img src="./04_testing/two_means/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
-단일 평균 가설 검정
+이표본 평균차이 검정
 </h5>
 <div class="card-text listing-description">
-모평균(<span class="math inline">\(\mu\)</span>)에 대한 가설검정은 모집단 분산을 알고 있는 경우와 그렇지 않는 경우로 나눠진다. 만약, 모집단 분산을 알고 있는 경우에는 z-검정을 사용하고, 모집단 분산을 모르는 경우에는 t-검정을 사용한다. 단, 모집단 분산을 알지 못하더라도 표본크기(<span class="math inline">\(n\)</span>)가 30 이상이면 z-검정을 사용할…
+2표본 t-검정은 두 독립적인 그룹의 평균 차이가 통계적으로 유의미한지를 판단하기 위한 통계적 검정 방법이다. 이 검정은 두 집단이 정규분포를 따르고, 데이터가 독립적인 경우에 사용할 수 있다.
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
