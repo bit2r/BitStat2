@@ -14,6 +14,7 @@
       "/04_testing/one_mean/index.html",
       "/04_testing/one_prop/index.html",
       "/04_testing/two_means/index.html",
+      "/04_testing/two_prop/index.html",
       "/05_infer/post-with-code/index.html",
       "/05_infer/welcome/index.html",
       "/06_theory/lln/index.html"
@@ -61,7 +62,8 @@
     "items": [
       "/04_testing/one_mean/index.html",
       "/04_testing/one_prop/index.html",
-      "/04_testing/two_means/index.html"
+      "/04_testing/two_means/index.html",
+      "/04_testing/two_prop/index.html"
     ]
   },
   {
