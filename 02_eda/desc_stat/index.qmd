@@ -1,0 +1,150 @@
+---
+title: "기술통계 개념 이해"
+author: "이광춘"
+date: today
+image: thumbnail.png
+categories: [난수, 모의실험, 기술통계, 평균, 표준편차, 최소값, 최대값]
+editor_options: 
+  chunk_output_type: console
+---
+
+1~100 사이 난수를 뽑아 기술통계를 구하고 시각화를 통해 개념을 확실히 이해할 수 있다.
+
+# Shiny 앱
+
+:::{.column-page}
+
+```{shinylive-r}
+#| label: shinylive-desc-stat-concept
+#| viewerWidth: 800
+#| viewerHeight: 600
+#| standalone: true
+
+library(shiny)
+library(ggplot2)
+library(showtext)
+showtext_auto()    
+
+# UI 정의
+ui <- fluidPage(
+  titlePanel("기술통계"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("numSelect",
+                  "1~100 사이 무작위 추출할 데이터수:",
+                  min = 1,
+                  max = 100,
+                  value = 10),
+      checkboxInput("replace", "복원추출", value = FALSE)
+    ),
+    mainPanel(
+      plotOutput("numberPlot"),
+      uiOutput("stats")
+    )
+  )
+)
+
+# 서버 로직
+server <- function(input, output) {
+  selectedNumbers <- reactive({
+    sample(1:100, input$numSelect, replace = input$replace)
+  })
+
+  output$numberPlot <- renderPlot({
+    data <- data.frame(value = selectedNumbers())
+    mean_val <- mean(data$value)
+    std_dev <- sd(data$value)
+
+    ggplot(data, aes(x = factor(1), y = value)) +
+      geom_point(stat = "identity", position = position_dodge(width = 0.2), size = 4) +
+      annotate("segment", x = 0.8, xend = 1.2, y = mean_val, yend = mean_val, color = "blue", linewidth = 1.5) +
+      geom_errorbar(aes(ymin = mean_val - std_dev, ymax = mean_val + std_dev, x = factor(1)), width = 0.2, color = "red") +
+      labs(title = paste0("추출된", length(selectedNumbers()), "개 데이터와 통계"), y = "", x = "") +
+      theme_minimal() +
+      coord_flip() +
+      theme(
+        aspect.ratio = 1/5,
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()
+      )
+  })
+
+  output$stats <- renderUI({
+    data <- selectedNumbers()
+    if (length(data) > 0) {
+      mean_val <- mean(data)
+      sd_val <- sd(data)
+      max_val <- max(data)
+      min_val <- min(data)
+
+      tags$ul(
+        tags$li(HTML(paste("<b>추출된 숫자:</b> ", paste(data, collapse = ", ")))),
+        tags$li(HTML(paste("<b>평균:</b> ", round(mean_val, 2)))),
+        tags$li(HTML(paste("<b>표준편차:</b> ", round(sd_val, 2)))),
+        tags$li(HTML(paste("<b>최대값:</b> ", max_val))),
+        tags$li(HTML(paste("<b>최소값:</b> ", min_val)))
+      )
+    } else {
+      "숫자를 선택하세요."
+    }
+  })
+}
+
+# 앱 실행
+shinyApp(ui, server)
+
+```
+
+:::
+
+
+# 코딩
+
+```{webr-r}
+#| label: desc-stat-concept-webr
+
+do_descriptive_stat <- function(n, replace = FALSE) {
+  # 1부터 100까지의 숫자 중에서 n개의 난수 추출
+  data <- data.frame(value = sample(1:100, n, replace = replace))
+  
+  # 요약통계 계산
+  summary_stats <- list(
+    추출된숫자 = paste(data$value, collapse = ", "),
+    평균 = mean(data$value),
+    표준편차 = sd(data$value),
+    최대값 = max(data$value),
+    최소값 = min(data$value)
+  )
+  
+  # 시각화
+  mean_val <- mean(data$value)
+  std_dev <- sd(data$value)
+  
+  plot <- ggplot(data, aes(x = factor(1), y = value)) +
+    geom_point(stat = "identity", position = position_dodge(width = 0.2), size = 2) +
+    annotate("segment", x = 0.8, xend = 1.2, y = mean_val, yend = mean_val, color = "blue", linewidth = 1.5) +
+    geom_errorbar(aes(ymin = mean_val - std_dev, ymax = mean_val + std_dev, x = factor(1)), width = 0.2, color = "red") +
+    labs(title = paste0("추출된 ", n, "개 데이터와 통계"), y = "", x = "") +
+    theme_minimal() +
+    coord_flip() +
+    theme(
+      aspect.ratio = 1/5,
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank()
+    )
+  
+  # 요약통계와 시각화 결과 반환
+  list(stats = summary_stats, plot = plot)
+}
+
+# 함수 호출
+result <- do_descriptive_stat(30)
+
+# 요약통계 출력
+print(result$stats)
+
+# 시각화 결과 출력
+print(result$plot)
+
+```
+
