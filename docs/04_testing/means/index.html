@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="이광춘">
+<meta name="dcterms.date" content="2024-05-13">
 
-<title>빗스탯2 - 통계 검정</title>
+<title>빗스탯2 - 평균 검정</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +22,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +103,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "검색"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
 <script type="text/javascript">
 
@@ -113,50 +118,21 @@ ga('send', {
 });
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/Korea_R_User_Group_kor.png" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/Korea_R_User_Group_kor.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">빗스탯2</span>
     </a>
   </div>
@@ -172,27 +148,27 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="./01_data.html">
+    <a class="dropdown-item" href="../../01_data.html">
  <span class="dropdown-text">01 데이터</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./02_eda.html">
+    <a class="dropdown-item" href="../../02_eda.html">
  <span class="dropdown-text">02 EDA</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./03_viz.html">
+    <a class="dropdown-item" href="../../03_viz.html">
  <span class="dropdown-text">03 시각화</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./04_testing.html">
+    <a class="dropdown-item" href="../../04_testing.html">
  <span class="dropdown-text">04 통계검정</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./05_infer.html">
+    <a class="dropdown-item" href="../../05_infer.html">
  <span class="dropdown-text">05 추론과 회귀모형</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./06_theory.html">
+    <a class="dropdown-item" href="../../06_theory.html">
  <span class="dropdown-text">06 통계이론</span></a>
   </li>  
     </ul>
@@ -200,11 +176,11 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">소개</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./BitStat.html"> 
+    <a class="nav-link" href="../../BitStat.html"> 
 <span class="menu-text">BitStat</span></a>
   </li>  
   <li class="nav-item compact">
@@ -232,156 +208,160 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">통계 검정</h1>
-            <p class="subtitle lead">평균과 비율 검정</p>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">평균 검정</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">평균 검정</div>
+                <div class="quarto-category">단일 표본 t-검정</div>
+                <div class="quarto-category">대응 표본 t-검정</div>
+                <div class="quarto-category">독립 표본 t-검정</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">저자</div>
+      <div class="quarto-title-meta-contents">
+               <p>이광춘 </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">공개</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2024-05-13</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">분류</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">전체 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="단일 평균 t-검정">단일 평균 t-검정 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="단일 평균 z-검정">단일 평균 z-검정 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="단일 표본 t-검정">단일 표본 t-검정 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="대응 표본 t-검정">대응 표본 t-검정 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="독립 표본 t-검정">독립 표본 t-검정 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="평균 검정">평균 검정 <span class="quarto-category-count">(2)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="정렬" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">정렬</option>
-       <option value="index" data-direction="asc">디폴트</option>
-         <option value="listing-title" data-direction="asc">
-          제목
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          날짜 - 날짜(오름차순)
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          날짜 - 날짜(내림차순)
-        </option>
-         <option value="listing-author" data-direction="asc">
-          저자
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="평균 검정,단일 표본 t-검정,대응 표본 t-검정,독립 표본 t-검정" data-listing-date-sort="1715526000000" data-listing-file-modified-sort="1715511030327" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="386">
-<a href="./04_testing/means/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img src="./04_testing/means/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-평균 검정
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('평균 검정'); return false;">
-평균 검정
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('단일 표본 t-검정'); return false;">
-단일 표본 t-검정
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('대응 표본 t-검정'); return false;">
-대응 표본 t-검정
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('독립 표본 t-검정'); return false;">
-독립 표본 t-검정
-</div>
-</div>
-<div class="card-text listing-description">
-
-
+<section id="코딩" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 코딩</h1>
 <section id="단일-표본-t-검정" class="level2" data-number="1.1">
-
+<h2 data-number="1.1" class="anchored" data-anchor-id="단일-표본-t-검정"><span class="header-section-number">1.1</span> 단일 표본 t-검정</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu">library</span>(broom)</span>
-<span id="cb1-2"></span>
-<span id="cb1-3"><span class="co"># 맥아에서 추출된 당의 양 데이터 (가상)</span></span>
-<span id="cb1-4">malt_sugar <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.0</span>, <span class="fl">3.0</span>, <span class="fl">2.9</span>, <span class="fl">2.8</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.1</span>, <span class="fl">2.9</span>, <span class="fl">3.0</span>, <span class="fl">3.1</span>)</span>
-<span id="cb1-5"></span>
-<span id="cb1-6"><span class="co"># One-Sample t-test 수행</span></span>
-<span id="cb1-7">t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(malt_sugar, <span class="at">mu…</span><span class="dv"></span><span class="co"></span></span><span id="cb1-8"></span><span id="cb1-9"><span class="ot"></span><span class="sc"></span><span class="fu"></span></span></code></pre></div></div></section><section id="단일-표본-t-검정-시각화" class="level2" data-number="1.2"><div class="cell"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co"></span></span><span id="cb2-2"><span class="ot"></span><span class="cf"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span><span id="cb2-3"><span class="co"></span></span><span id="cb2-4"><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span><span id="cb2-5"></span><span id="cb2-6"><span class="co"></span></span><span id="cb2-7"><span class="ot"></span><span class="fu"></span></span><span id="cb2-8"></span><span id="cb2-9"><span class="co"></span></span><span id="cb2-10"><span class="ot"></span><span class="fu"></span></span><span id="cb2-11"></span><span id="cb2-12"><span class="co"></span></span><span id="cb2-13"><span class="cf"></span><span class="sc"></span><span class="st"></span></span><span id="cb2-14"><span class="ot"></span><span class="fu"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span><span class="dv"></span><span class="sc"></span><span class="sc"></span><span class="dv"></span></span><span id="cb2-15"><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span></span><span id="cb2-16"><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span></span><span id="cb2-17"><span class="ot"></span><span class="st"></span></span><span id="cb2-18"><span class="cf"></span><span class="cf"></span><span class="sc"></span><span class="st"></span></span><span id="cb2-19"><span class="ot"></span><span class="fu"></span><span class="dv"></span><span class="sc"></span></span><span id="cb2-20"><span class="ot"></span><span class="cn"></span></span><span id="cb2-21"><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb2-22"><span class="ot"></span><span class="st"></span></span><span id="cb2-23"><span class="cf"></span><span class="cf"></span><span class="sc"></span><span class="st"></span></span><span id="cb2-24"><span class="ot"></span><span class="fu"></span></span><span id="cb2-25"><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb2-26"><span class="ot"></span><span class="cn"></span></span><span id="cb2-27"><span class="ot"></span><span class="st"></span></span><span id="cb2-28"></span><span id="cb2-29"></span><span id="cb2-30"><span class="co"></span></span><span id="cb2-31"><span class="ot"></span><span class="fu"></span><span class="fu"></span><span class="sc"></span></span><span id="cb2-32"><span class="fu"></span><span class="sc"></span></span><span id="cb2-33"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="st"></span><span class="st"></span><span class="st"></span><span class="st"></span></span><span id="cb2-34"><span class="at"></span><span class="st"></span></span><span id="cb2-35"><span class="at"></span><span class="st"></span><span class="sc"></span></span><span id="cb2-36"><span class="fu"></span></span><span id="cb2-37"></span><span id="cb2-38"><span class="co"></span></span><span id="cb2-39"><span class="cf"></span><span class="sc"></span><span class="fu"></span></span><span id="cb2-40"><span class="ot"></span><span class="sc"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="fl"></span></span><span id="cb2-41"></span><span id="cb2-42"><span class="cf"></span><span class="sc"></span><span class="fu"></span></span><span id="cb2-43"><span class="ot"></span><span class="sc"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="fl"></span></span><span id="cb2-44"></span><span id="cb2-45"></span><span id="cb2-46"><span class="fu"></span></span><span id="cb2-47"></span><span id="cb2-48"></span><span id="cb2-49"><span class="co"></span></span><span id="cb2-50"><span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="fl"></span><span class="at"></span><span class="st"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu"></span></span></code></pre></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="sc"></span><span class="sc"></span></span></code></pre></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div></div></section>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 맥아에서 추출된 당의 양 데이터 (가상)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>malt_sugar <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.0</span>, <span class="fl">3.0</span>, <span class="fl">2.9</span>, <span class="fl">2.8</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.1</span>, <span class="fl">2.9</span>, <span class="fl">3.0</span>, <span class="fl">3.1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># One-Sample t-test 수행</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(malt_sugar, <span class="at">mu =</span> <span class="dv">3</span>)  <span class="co"># 데이터의 평균이 3 그램인지 검정</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>tidy_t_test <span class="ot">&lt;-</span>  broom<span class="sc">::</span><span class="fu">tidy</span>(t_test_result)</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-이광춘
+</section>
+<section id="단일-표본-t-검정-시각화" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="단일-표본-t-검정-시각화"><span class="header-section-number">1.2</span> 단일 표본 t-검정 시각화</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t 분포 기각역 시각화 함수</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plot_t_dist_region <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">test_type =</span> <span class="st">"two-sided"</span>) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x 값 범위 설정</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># t 분포의 확률 밀도 계산</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">dt</span>(x, df)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 데이터 프레임 생성</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  t_dist_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 유의수준에서 t 분포의 임계값을 계산하고 그래프 준비</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"two-sided"</span>) {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fu">c</span>(alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>), df)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    area_data1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(t_dist_data, x <span class="sc">&lt;</span> t_critical[<span class="dv">1</span>])</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    area_data2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(t_dist_data, x <span class="sc">&gt;</span> t_critical[<span class="dv">2</span>])</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    title_suffix <span class="ot">&lt;-</span> <span class="st">"(양측 검정)"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, df)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    area_data1 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    area_data2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(t_dist_data, x <span class="sc">&gt;</span> t_critical)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    title_suffix <span class="ot">&lt;-</span> <span class="st">"(오른쪽 기각역)"</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"less"</span>) {</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    t_critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(alpha, df)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    area_data1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(t_dist_data, x <span class="sc">&lt;</span> t_critical)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    area_data2 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    title_suffix <span class="ot">&lt;-</span> <span class="st">"(왼쪽 기각역)"</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># t 분포 시각화</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(t_dist_data, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"t-분포("</span>, title_suffix, <span class="st">"): df = "</span>, df, <span class="st">", "</span>, <span class="st">"α ="</span>, alpha),</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"t value"</span>,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 기각역 강조</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(area_data1)) {</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> area_data1, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(area_data2)) {</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> area_data2, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(p)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 함수 사용 예시</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>p_two <span class="ot">&lt;-</span> <span class="fu">plot_t_dist_region</span>(<span class="at">df =</span> <span class="dv">29</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">test_type =</span> <span class="st">"two-sided"</span>)</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<div class="listing-date">
-2024-05-13
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_greater <span class="ot">&lt;-</span> <span class="fu">plot_t_dist_region</span>(<span class="at">df =</span> <span class="dv">29</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">test_type =</span> <span class="st">"greater"</span>)</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p_less <span class="ot">&lt;-</span> <span class="fu">plot_t_dist_region</span>(<span class="at">df =</span> <span class="dv">29</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">test_type =</span> <span class="st">"less"</span>)</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'patchwork' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p_two <span class="sc">/</span> (p_greater <span class="sc">+</span> p_less)</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="평균 검정,단일 평균 z-검정,단일 평균 t-검정" data-listing-date-sort="1715526000000" data-listing-file-modified-sort="1715559982476" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4453">
-<a href="./04_testing/one_mean/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img src="./04_testing/one_mean/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-단일 평균 가설 검정
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('평균 검정'); return false;">
-평균 검정
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('단일 평균 z-검정'); return false;">
-단일 평균 z-검정
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('단일 평균 t-검정'); return false;">
-단일 평균 t-검정
-</div>
-</div>
-<div class="card-text listing-description">
-모평균(<span class="math inline">\(\mu\)</span>)에 대한 가설검정은 모집단 분산을 알고 있는 경우와 그렇지 않는 경우로 나눠진다. 만약, 모집단 분산을 알고 있는 경우에는 z-검정을 사용하고, 모집단 분산을 모르는 경우에는 t-검정을 사용한다. 단, 모집단 분산을 알지 못하더라도 표본크기(<span class="math inline">\(n\)</span>)가 30 이상이면 z-검정을 사용할…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-이광춘
-</div>
-<div class="listing-date">
-2024-05-13
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">라이센스</h2><div class="quarto-appendix-contents"><div>CC BY-SA-NC &amp; GPL-3</div></div></section></div></main> <!-- /main -->
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">라이센스</h2><div class="quarto-appendix-contents"><div>CC BY-SA-NC &amp; GPL-3</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
