@@ -12,6 +12,7 @@
       "/03_viz/esquisse/index.html",
       "/03_viz/viz/index.html",
       "/04_testing/one_mean/index.html",
+      "/04_testing/one_prop/index.html",
       "/04_testing/two_means/index.html",
       "/05_infer/post-with-code/index.html",
       "/05_infer/welcome/index.html",
@@ -59,6 +60,7 @@
     "listing": "/04_testing.html",
     "items": [
       "/04_testing/one_mean/index.html",
+      "/04_testing/one_prop/index.html",
       "/04_testing/two_means/index.html"
     ]
   },
