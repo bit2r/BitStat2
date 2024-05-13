@@ -1,5 +1,5 @@
 ---
-title: "표본추출 개념 시각화"
+title: "대표적 표본추출 방법"
 author: "이광춘"
 date: today
 image: thumbnail.png
@@ -8,6 +8,7 @@ editor_options:
   chunk_output_type: console
 ---
 
+모집단에서 표본을 추출하는 대표적인 단순임의추출, 층화추출, 군집추출, 다단계추출 4가지 방법에 대한 개념을 시각적으로 확인해보자.
 
 # Shiny 앱
 
@@ -22,6 +23,8 @@ editor_options:
 library(shiny)
 library(openintro)
 data(COL)
+library(showtext)
+showtext_auto()
 
 # _____ Simple Random _____ #
 build_srs <- function(n, N) {
@@ -260,7 +263,40 @@ shinyApp(ui, server)
 
 
 ```{webr-r}
+library(dplyr)
 
+sampling_frame <- tibble(
+  ID = 1:1000,
+  나이 = sample(18:70, 1000, replace = TRUE),
+  소득 = sample(30000:100000, 1000, replace = TRUE),
+  지역 = sample(c("북부", "남부", "동부", "서부"), 1000, replace = TRUE),
+  군집 = sample(1:10, 1000, replace = TRUE)
+)
+
+### 1. 단순임의추출 (Simple Random Sampling)
+# 단순임의추출: 100개의 관측치 무작위 선택
+sample_n(sampling_frame, 100)
+
+### 2. 층화추출 (Stratified Sampling)
+# 층화추출: 각 지역별로 25개씩 추출 
+sampling_frame %>%
+  group_by(지역) %>%
+  sample_n(25) %>%
+  ungroup()
+
+### 3. 군집추출 (Cluster Sampling)  
+# 군집추출: 군집 3개 임의 추출 후 모든 관측치 선택
+clusters <- sample(unique(sampling_frame$군집), 3)
+sampling_frame %>%
+  filter(군집 %in% clusters)
+
+### 4. 다단계추출 (Multistage Sampling)
+# 다단계추출: 먼저 군집을 선택하고, 각 군집에서 무작위로 10개씩 추출
+sampling_frame %>%
+  filter(군집 %in% clusters) %>%
+  group_by(군집) %>%  
+  sample_n(10) %>%
+  ungroup()
 ```
 
 
