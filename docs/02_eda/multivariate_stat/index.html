@@ -9,7 +9,7 @@
 <meta name="author" content="이광춘">
 <meta name="dcterms.date" content="2024-05-15">
 
-<title>빗스탯2 - 단변량 기술통계</title>
+<title>빗스탯2 - 다변량 기술통계</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"autorun":"false","out-height":"","editor-font-scale":1,"read-only":"false","out-width":"700px","dpi":72,"label":"desc-stat-multivariate-webr","fig-width":7,"editor-quick-suggestions":"false","editor-max-height":"","context":"interactive","classes":"","results":"markup","comment":"","fig-height":5,"message":"true","warning":"true","fig-cap":"","output":"true"},"id":1,"code":"\n# 필요한 라이브러리 로드\nlibrary(ggplot2)\nlibrary(GGally)\nlibrary(vcd)\nlibrary(dplyr)\nlibrary(purrr)\n\n# 데이터 로드 (예시로 mtcars 데이터셋 사용)\ndata <- mtcars\n\n# 변수 선택\ncategorical_vars <- c(\"vs\", \"am\", \"gear\", \"carb\")\nnumeric_vars <- c(\"mpg\", \"disp\", \"hp\", \"drat\", \"wt\", \"qsec\")\n\n# 범주형 변수를 팩터로 변환\ndata[, categorical_vars] <- map(data[, categorical_vars], as.factor)\n\n# 시각화 함수\nvisualize_data <- function(data, categorical_vars, numeric_vars) {\n  if (length(numeric_vars) == 1 && length(categorical_vars) == 0) {\n    # 연속형 변수 1개 선택 시\n    ggplot(data, aes_string(x = numeric_vars[1])) +\n      geom_histogram(aes(y = ..density..), fill = \"lightblue\", color = \"black\", bins = 30) +\n      geom_density(color = \"red\") +\n      labs(title = \"히스토그램과 밀도 그래프\", x = numeric_vars[1], y = \"밀도\") +\n      theme_minimal()\n  } else if (length(numeric_vars) == 2 && length(categorical_vars) == 0) {\n    # 연속형 변수 2개 선택 시\n    ggplot(data, aes_string(x = numeric_vars[1], y = numeric_vars[2])) +\n      geom_point() +\n      labs(title = \"산점도\", x = numeric_vars[1], y = numeric_vars[2]) +\n      theme_minimal()\n  } else if (length(numeric_vars) == 1 && length(categorical_vars) == 1) {\n    # 연속형 변수 1개 + 범주형 변수 1개 선택 시\n    ggplot(data, aes_string(x = categorical_vars[1], y = numeric_vars[1])) +\n      geom_boxplot() +\n      labs(title = \"상자 그림\", x = categorical_vars[1], y = numeric_vars[1]) +\n      theme_minimal()\n  } else if (length(numeric_vars) == 2 && length(categorical_vars) == 1) {\n    # 연속형 변수 2개 + 범주형 변수 1개 선택 시\n    ggplot(data, aes_string(x = numeric_vars[1], y = numeric_vars[2], color = categorical_vars[1])) +\n      geom_point() +\n      labs(title = \"그룹별 색상이 적용된 산점도\", x = numeric_vars[1], y = numeric_vars[2], color = categorical_vars[1]) +\n      theme_minimal()\n  } else if (length(categorical_vars) == 2) {\n    # 범주형 변수 2개 선택 시\n    if (nrow(table(data[, categorical_vars])) == 0) {\n      plot(1, type = \"n\", axes = FALSE, xlab = \"\", ylab = \"\")\n      text(1, 1, \"선택한 범주형 변수의 조합에 해당하는 데이터가 없습니다.\")\n    } else {\n      mosaic(table(data[, categorical_vars]), shade = TRUE, legend = TRUE)\n    }\n  } else if (length(categorical_vars) == 1) {\n    # 범주형 변수 1개 선택 시\n    p1 <- ggplot(data, aes_string(x = categorical_vars[1])) +\n      geom_bar(fill = \"lightblue\", color = \"black\") +\n      labs(title = \"막대 그래프\", x = categorical_vars[1], y = \"개수\") +\n      theme_minimal()\n    \n    p2 <- ggplot(data, aes_string(x = factor(1), fill = categorical_vars[1])) +\n      geom_bar(width = 1) +\n      coord_polar(\"y\", start = 0) +\n      labs(title = \"원 그래프\", fill = categorical_vars[1]) +\n      theme_void() +\n      theme(legend.position = \"right\")\n    \n    gridExtra::grid.arrange(p1, p2, ncol = 2)\n  } else if (length(numeric_vars) >= 3) {\n    # 3개 이상의 연속형 변수 선택 시\n    ggpairs(data[, numeric_vars, drop = FALSE], title = \"변수 간 관계 그래프\")\n  } else {\n    plot(1, type = \"n\", axes = FALSE, xlab = \"\", ylab = \"\")\n    text(1, 1, \"1개 이상의 변수를 선택해주세요.\")\n  }\n}\n\n# 요약 통계량 함수\nsummarize_data <- function(data, categorical_vars, numeric_vars) {\n  if (length(categorical_vars) == 1 && length(numeric_vars) == 1) {\n    # 범주형 변수 1개와 연속형 변수 1개 선택 시\n    grouped_summary <- data %>%\n      group_by(across(all_of(categorical_vars))) %>%\n      summarise(\n        평균 = mean(get(numeric_vars), na.rm = TRUE),\n        중앙값 = median(get(numeric_vars), na.rm = TRUE),\n        표준편차 = sd(get(numeric_vars), na.rm = TRUE),\n        분산 = var(get(numeric_vars), na.rm = TRUE),\n        최소값 = min(get(numeric_vars), na.rm = TRUE),\n        최대값 = max(get(numeric_vars), na.rm = TRUE),\n        `1사분위수` = quantile(get(numeric_vars), 0.25, na.rm = TRUE),\n        `3사분위수` = quantile(get(numeric_vars), 0.75, na.rm = TRUE)\n      )\n    \n    print(grouped_summary)\n  } else if (length(categorical_vars) == 2) {\n    # 범주형 변수 2개 선택 시\n    contingency_table <- table(data[, categorical_vars], useNA = \"ifany\")\n    chisq_test <- chisq.test(contingency_table)\n    \n    cat(\"분할표:\\n\")\n    print(contingency_table)\n    cat(\"\\n카이제곱 검정:\\n\")\n    print(chisq_test)\n  } else if (length(numeric_vars) >= 2) {\n    # 연속형 변수 2개 이상 선택 시\n    cor_matrix <- cor(data[, numeric_vars, drop = FALSE], use = \"pairwise.complete.obs\")\n    print(cor_matrix)\n  } else {\n    cat(\"요약 통계량을 계산할 수 없습니다.\\n\")\n    cat(\"범주형 변수 1개와 연속형 변수 1개, 범주형 변수 2개, 또는 연속형 변수 2개 이상을 선택해주세요.\\n\")\n  }\n}\n\n# 시각화 수행\nvisualize_data(data, categorical_vars, numeric_vars)\n\n# 요약 통계량 계산\nsummarize_data(data, categorical_vars, numeric_vars)"}];
+globalThis.qwebrCellDetails = [{"id":1,"options":{"results":"markup","comment":"","fig-cap":"","autorun":"false","dpi":72,"classes":"","fig-width":7,"read-only":"false","label":"desc-stat-multivariate-webr","warning":"true","context":"interactive","fig-height":5,"editor-quick-suggestions":"false","out-width":"700px","output":"true","message":"true","out-height":"","editor-max-height":"","editor-font-scale":1},"code":"\n# 필요한 라이브러리 로드\nlibrary(ggplot2)\nlibrary(GGally)\nlibrary(vcd)\nlibrary(dplyr)\nlibrary(purrr)\n\n# 데이터 로드 (예시로 mtcars 데이터셋 사용)\ndata <- mtcars\n\n# 변수 선택\ncategorical_vars <- c(\"vs\", \"am\", \"gear\", \"carb\")\nnumeric_vars <- c(\"mpg\", \"disp\", \"hp\", \"drat\", \"wt\", \"qsec\")\n\n# 범주형 변수를 팩터로 변환\ndata[, categorical_vars] <- map(data[, categorical_vars], as.factor)\n\n# 시각화 함수\nvisualize_data <- function(data, categorical_vars, numeric_vars) {\n  if (length(numeric_vars) == 1 && length(categorical_vars) == 0) {\n    # 연속형 변수 1개 선택 시\n    ggplot(data, aes_string(x = numeric_vars[1])) +\n      geom_histogram(aes(y = ..density..), fill = \"lightblue\", color = \"black\", bins = 30) +\n      geom_density(color = \"red\") +\n      labs(title = \"히스토그램과 밀도 그래프\", x = numeric_vars[1], y = \"밀도\") +\n      theme_minimal()\n  } else if (length(numeric_vars) == 2 && length(categorical_vars) == 0) {\n    # 연속형 변수 2개 선택 시\n    ggplot(data, aes_string(x = numeric_vars[1], y = numeric_vars[2])) +\n      geom_point() +\n      labs(title = \"산점도\", x = numeric_vars[1], y = numeric_vars[2]) +\n      theme_minimal()\n  } else if (length(numeric_vars) == 1 && length(categorical_vars) == 1) {\n    # 연속형 변수 1개 + 범주형 변수 1개 선택 시\n    ggplot(data, aes_string(x = categorical_vars[1], y = numeric_vars[1])) +\n      geom_boxplot() +\n      labs(title = \"상자 그림\", x = categorical_vars[1], y = numeric_vars[1]) +\n      theme_minimal()\n  } else if (length(numeric_vars) == 2 && length(categorical_vars) == 1) {\n    # 연속형 변수 2개 + 범주형 변수 1개 선택 시\n    ggplot(data, aes_string(x = numeric_vars[1], y = numeric_vars[2], color = categorical_vars[1])) +\n      geom_point() +\n      labs(title = \"그룹별 색상이 적용된 산점도\", x = numeric_vars[1], y = numeric_vars[2], color = categorical_vars[1]) +\n      theme_minimal()\n  } else if (length(categorical_vars) == 2) {\n    # 범주형 변수 2개 선택 시\n    if (nrow(table(data[, categorical_vars])) == 0) {\n      plot(1, type = \"n\", axes = FALSE, xlab = \"\", ylab = \"\")\n      text(1, 1, \"선택한 범주형 변수의 조합에 해당하는 데이터가 없습니다.\")\n    } else {\n      mosaic(table(data[, categorical_vars]), shade = TRUE, legend = TRUE)\n    }\n  } else if (length(categorical_vars) == 1) {\n    # 범주형 변수 1개 선택 시\n    p1 <- ggplot(data, aes_string(x = categorical_vars[1])) +\n      geom_bar(fill = \"lightblue\", color = \"black\") +\n      labs(title = \"막대 그래프\", x = categorical_vars[1], y = \"개수\") +\n      theme_minimal()\n    \n    p2 <- ggplot(data, aes_string(x = factor(1), fill = categorical_vars[1])) +\n      geom_bar(width = 1) +\n      coord_polar(\"y\", start = 0) +\n      labs(title = \"원 그래프\", fill = categorical_vars[1]) +\n      theme_void() +\n      theme(legend.position = \"right\")\n    \n    gridExtra::grid.arrange(p1, p2, ncol = 2)\n  } else if (length(numeric_vars) >= 3) {\n    # 3개 이상의 연속형 변수 선택 시\n    ggpairs(data[, numeric_vars, drop = FALSE], title = \"변수 간 관계 그래프\")\n  } else {\n    plot(1, type = \"n\", axes = FALSE, xlab = \"\", ylab = \"\")\n    text(1, 1, \"1개 이상의 변수를 선택해주세요.\")\n  }\n}\n\n# 요약 통계량 함수\nsummarize_data <- function(data, categorical_vars, numeric_vars) {\n  if (length(categorical_vars) == 1 && length(numeric_vars) == 1) {\n    # 범주형 변수 1개와 연속형 변수 1개 선택 시\n    grouped_summary <- data %>%\n      group_by(across(all_of(categorical_vars))) %>%\n      summarise(\n        평균 = mean(get(numeric_vars), na.rm = TRUE),\n        중앙값 = median(get(numeric_vars), na.rm = TRUE),\n        표준편차 = sd(get(numeric_vars), na.rm = TRUE),\n        분산 = var(get(numeric_vars), na.rm = TRUE),\n        최소값 = min(get(numeric_vars), na.rm = TRUE),\n        최대값 = max(get(numeric_vars), na.rm = TRUE),\n        `1사분위수` = quantile(get(numeric_vars), 0.25, na.rm = TRUE),\n        `3사분위수` = quantile(get(numeric_vars), 0.75, na.rm = TRUE)\n      )\n    \n    print(grouped_summary)\n  } else if (length(categorical_vars) == 2) {\n    # 범주형 변수 2개 선택 시\n    contingency_table <- table(data[, categorical_vars], useNA = \"ifany\")\n    chisq_test <- chisq.test(contingency_table)\n    \n    cat(\"분할표:\\n\")\n    print(contingency_table)\n    cat(\"\\n카이제곱 검정:\\n\")\n    print(chisq_test)\n  } else if (length(numeric_vars) >= 2) {\n    # 연속형 변수 2개 이상 선택 시\n    cor_matrix <- cor(data[, numeric_vars, drop = FALSE], use = \"pairwise.complete.obs\")\n    print(cor_matrix)\n  } else {\n    cat(\"요약 통계량을 계산할 수 없습니다.\\n\")\n    cat(\"범주형 변수 1개와 연속형 변수 1개, 범주형 변수 2개, 또는 연속형 변수 2개 이상을 선택해주세요.\\n\")\n  }\n}\n\n# 시각화 수행\nvisualize_data(data, categorical_vars, numeric_vars)\n\n# 요약 통계량 계산\nsummarize_data(data, categorical_vars, numeric_vars)"}];
 
 </script>
 <script type="module">
@@ -1221,16 +1221,22 @@ globalThis.qwebrExecuteCode = async function (
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">단변량 기술통계</h1>
+      <h1 class="title">다변량 기술통계</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">단변량</div>
+                <div class="quarto-category">다변량</div>
                 <div class="quarto-category">기술통계</div>
+                <div class="quarto-category">분위수</div>
+                <div class="quarto-category">평균</div>
+                <div class="quarto-category">표준편차</div>
                 <div class="quarto-category">범주형</div>
                 <div class="quarto-category">연속형</div>
                 <div class="quarto-category">막대그래프</div>
                 <div class="quarto-category">원그래프</div>
                 <div class="quarto-category">히스토그램</div>
                 <div class="quarto-category">상자그림</div>
+                <div class="quarto-category">산점도</div>
+                <div class="quarto-category">상관계수</div>
+                <div class="quarto-category">그룹별 기술통계</div>
                 <div class="quarto-category">시각화</div>
               </div>
                   </div>
@@ -1495,7 +1501,25 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 
-<p>내장 데이터셋과 외부 CSV 파일에서 단변량 변수를 선택하면 범주형, 숫자형을 인식하고 변수에 따라 적절한 기술통계를 계산하고 시각화할 수 있다.</p>
+<p>내장 데이터셋과 외부 CSV 파일에서 범주형, 숫자형을 인식하고 변수 유형에 맞춰 적절한 기술통계를 계산하고 시각화할 수 있다.</p>
+<ol type="1">
+<li>선택한 변수에 따른 시각화 기능
+<ul>
+<li>연속형 변수 1개: 히스토그램과 밀도 그래프</li>
+<li>연속형 변수 2개: 산점도</li>
+<li>연속형 변수 1개 + 범주형 변수 1개: 상자 그림</li>
+<li>연속형 변수 2개 + 범주형 변수 1개: 그룹별 색상이 적용된 산점도</li>
+<li>범주형 변수 2개: 모자이크 플롯</li>
+<li>범주형 변수 1개: 막대 그래프와 파이 차트</li>
+<li>3개 이상의 변수: 페어 플롯 (연속형 변수가 2개 이상인 경우)</li>
+</ul></li>
+<li>선택한 변수에 따른 요약 통계 기능
+<ul>
+<li>범주형 변수 1개와 연속형 변수 1개: 그룹별 요약 통계량 (평균, 중앙값, 표준편차, 분산, 최소값, 최대값, 사분위수)</li>
+<li>범주형 변수 2개: 분할표와 카이제곱 검정 결과</li>
+<li>연속형 변수 2개 이상: 상관계수 행렬</li>
+</ul></li>
+</ol>
 <section id="shiny-앱" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Shiny 앱</h1>
 <div class="column-page">
