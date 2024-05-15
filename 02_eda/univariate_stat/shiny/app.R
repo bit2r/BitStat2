@@ -1,12 +1,13 @@
 library(shiny)
 library(ggplot2)
+library(GGally)
 
 # 내장 데이터셋 리스트 (iris 제외)
 datasets <- c("mtcars", "faithful", "ChickWeight")
 
 # UI 정의
 ui <- fluidPage(
-  titlePanel("단변량 기술통계"),
+  titlePanel("2변량 이상 기술통계 분석"),
   sidebarLayout(
     sidebarPanel(
       fileInput("file", "CSV 파일 업로드", accept = ".csv"),
@@ -16,13 +17,12 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("시각화",
-                 fluidRow(
-                   column(6, plotOutput("plot1")),
-                   column(6, plotOutput("plot2"))
-                 )
-        ),
-        tabPanel("요약 통계", verbatimTextOutput("summary"))
+        tabPanel("시각화", plotOutput("plot")),
+        tabPanel("요약 통계",
+                 verbatimTextOutput("summary"),
+                 verbatimTextOutput("correlation"),
+                 plotOutput("correlationPlot")
+        )
       )
     )
   )
@@ -41,103 +41,115 @@ server <- function(input, output, session) {
     if (input$dataset == "Uploaded Dataset") {
       req(input$file)
       uploaded_data()
-    } else {
+    } else if (input$dataset != "") {
       get(input$dataset)
+    } else {
+      NULL
     }
-  })
-
-  # 선택된 변수
-  selected_variable <- reactive({
-    req(input$variable)
-    input$variable
   })
 
   # 변수 선택 UI 생성
   output$variableInput <- renderUI({
-    selectInput("variable", "변수 선택", choices = names(selected_data()))
+    data <- selected_data()
+    if (!is.null(data)) {
+      vars <- names(data)
+      checkboxGroupInput("variables", "변수 선택", choices = vars)
+    }
   })
 
-  # 변수 유형 출력
-  output$variableType <- renderPrint({
-    variable <- selected_variable()
-    data <- selected_data()
+  # 선택된 변수
+  selected_vars <- reactive({
+    input$variables
+  })
 
-    if (is.numeric(data[[variable]])) {
-      "선택된 변수는 연속형 변수입니다."
-    } else {
-      "선택된 변수는 범주형 변수입니다."
+  # 선택된 변수들의 타입 출력
+  output$variableType <- renderPrint({
+    data <- selected_data()
+    if (!is.null(data) && !is.null(selected_vars())) {
+      sapply(data[, selected_vars(), drop = FALSE], class)
     }
+  })
+
+  # 선택된 변수가 수치형 변수인지 확인
+  is_numeric <- reactive({
+    data <- selected_data()
+    sapply(data[, selected_vars(), drop = FALSE], is.numeric)
   })
 
   # 요약 통계 출력
   output$summary <- renderPrint({
+    req(selected_vars())
     data <- selected_data()
-    variable <- selected_variable()
+    vars <- selected_vars()
+    num_vars <- is_numeric()
 
-    if (is.numeric(data[[variable]])) {
-      # 연속형 변수의 경우
-      summary_stats <- summary(data[[variable]])
-      names(summary_stats) <- c("최솟값", "1분위수", "중앙값", "평균", "3분위수", "최댓값")
-      cat("요약 통계:\n")
-      print(summary_stats)
-      cat("\n")
-      cat("결측값 개수:", sum(is.na(data[[variable]])), "\n")
+    if (length(vars) >= 2 && all(num_vars)) {
+      summary(data[, vars, drop = FALSE])
+    } else if (length(vars) == 2 && sum(num_vars) == 1) {
+      summary(data[, vars, drop = FALSE])
     } else {
-      # 범주형 변수의 경우
-      freq_table <- table(data[[variable]])
-      prop_table <- prop.table(freq_table)
-      cat("범주별 빈도와 비율:\n")
-      print(cbind(freq_table, round(prop_table, 4)))
-      cat("\n")
-      cat("결측값 개수:", sum(is.na(data[[variable]])), "\n")
+      "2개 이상의 변수를 선택해주세요."
     }
   })
 
-  # 시각화 출력 - 연속형 변수
-  output$plot1 <- renderPlot({
+  # 상관관계 출력
+  output$correlation <- renderPrint({
+    req(selected_vars())
     data <- selected_data()
-    variable <- selected_variable()
-
-    if (is.numeric(data[[variable]])) {
-      # Boxplot + Dot
-      ggplot(data, aes(x = factor(0), y = .data[[variable]])) +
-        geom_boxplot(fill = "lightblue", color = "black", outlier.shape = 16, outlier.size = 2) +
-        geom_point(position = position_jitter(width = 0.1), size = 2, alpha = 0.6) +
-        labs(title = "Boxplot + Dot", x = "", y = variable) +
-        theme_minimal()
+    vars <- selected_vars()
+    num_vars <- is_numeric()
+    if (length(vars) >= 2 && all(num_vars)) {
+      cor_matrix <- cor(data[, vars, drop = FALSE], use = "pairwise.complete.obs")
+      print(cor_matrix)
     } else {
-      # 범주형 변수의 경우 - 막대 그래프
-      ggplot(data, aes(x = .data[[variable]])) +
-        geom_bar(fill = "lightblue", color = "black") +
-        labs(title = "Bar Plot", x = variable, y = "Count") +
+      "2개 이상의 수치형 변수를 선택해주세요."
+    }
+  })
+
+  # 상관관계 히트맵 출력
+  output$correlationPlot <- renderPlot({
+    req(selected_vars())
+    data <- selected_data()
+    vars <- selected_vars()
+    num_vars <- is_numeric()
+    if (length(vars) >= 2 && all(num_vars)) {
+      cor_matrix <- cor(data[, vars, drop = FALSE], use = "pairwise.complete.obs")
+      ggplot(data = as.data.frame(as.table(cor_matrix)), aes(Var1, Var2, fill = Freq)) +
+        geom_tile() +
+        scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0) +
         theme_minimal() +
-        theme(axis.text.x = element_text(angle = 45, hjust = 1))
-    }
-  })
-
-  output$plot2 <- renderPlot({
-    data <- selected_data()
-    variable <- selected_variable()
-
-    if (is.numeric(data[[variable]])) {
-      # Density Plot + Histogram
-      ggplot(data, aes(x = .data[[variable]])) +
-        geom_density(fill = "lightblue", alpha = 0.6) +
-        geom_histogram(aes(y = ..density..), color = "black", fill = "white", alpha = 0.6, bins = 30) +
-        labs(title = "Density Plot + Histogram", x = variable, y = "Density") +
-        theme_minimal()
+        labs(title = "Correlation Heatmap", x = "", y = "")
     } else {
-      # 범주형 변수의 경우 - 원 그래프
-      ggplot(data, aes(x = "", fill = .data[[variable]])) +
-        geom_bar(width = 1) +
-        coord_polar("y", start = 0) +
-        labs(title = "Pie Chart", fill = variable) +
-        theme_void() +
-        theme(legend.position = "bottom")
+      plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")
+      text(1, 1, "2개 이상의 수치형 변수를 선택해주세요.")
     }
   })
 
-
+  # 시각화 출력
+  output$plot <- renderPlot({
+    req(selected_vars())
+    data <- selected_data()
+    vars <- selected_vars()
+    num_vars <- is_numeric()
+    if (length(vars) == 2 && sum(num_vars) == 2) {
+      ggplot(data, aes_string(x = vars[1], y = vars[2])) +
+        geom_point() +
+        labs(title = "Scatter Plot", x = vars[1], y = vars[2]) +
+        theme_minimal()
+    } else if (length(vars) == 2 && sum(num_vars) == 1) {
+      numeric_var <- vars[num_vars]
+      factor_var <- vars[!num_vars]
+      ggplot(data, aes_string(x = factor_var, y = numeric_var)) +
+        geom_boxplot() +
+        labs(title = "Box Plot", x = factor_var, y = numeric_var) +
+        theme_minimal()
+    } else if (length(vars) > 2 && all(num_vars)) {
+      ggpairs(data[, vars, drop = FALSE], title = "Pair Plot")
+    } else {
+      plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")
+      text(1, 1, "2개 이상의 변수를 선택해주세요.")
+    }
+  })
 }
 
 # 앱 실행

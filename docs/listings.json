@@ -7,6 +7,7 @@
       "/01_data/dist_fitting/index.html",
       "/01_data/sampling_method/index.html",
       "/02_eda/desc_stat/index.html",
+      "/02_eda/multivariate_stat/index.html",
       "/02_eda/univariate_stat/index.html",
       "/03_viz/esquisse/index.html",
       "/03_viz/viz/index.html",
@@ -52,6 +53,7 @@
     "listing": "/02_eda.html",
     "items": [
       "/02_eda/desc_stat/index.html",
+      "/02_eda/multivariate_stat/index.html",
       "/02_eda/univariate_stat/index.html"
     ]
   },
