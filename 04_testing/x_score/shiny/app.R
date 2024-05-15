@@ -1,4 +1,5 @@
 library(shiny)
+library(ggplot2)
 library(showtext)
 showtext_auto()
 

@@ -45,10 +45,17 @@ listing:
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png
+  - id: stat-reg
+    max-items: 3
+    contents: 
+      - 06_reg
+    sort: "date-modified desc" 
+    type: grid
+    image-placeholder: images/BitStat.png
   - id: stat-theory
     max-items: 3
     contents: 
-      - 06_theory
+      - 07_theory
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png    
@@ -81,8 +88,13 @@ listing:
 ::: {#stat-infer}
 :::
 
+# [회귀분석](06_reg.qmd)
 
-# [이론](06_theory.qmd)
+::: {#stat-reg}
+:::
+
+
+# [이론](07_theory.qmd)
 
 ::: {#stat-theory}
 :::

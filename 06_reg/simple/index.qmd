@@ -1,0 +1,109 @@
+---
+title: "대수의 법칙"
+date: today
+categories: [이론, "대수의 법칙", "동전 던지기"]
+image: thumbnail.png
+editor_options: 
+  chunk_output_type: console
+---
+
+대수의 법칙을 이해하고 시각적으로 관찰할 수 있습니다.
+Shiny 앱으로 동전 던지기를 통한 대수의 법칙을 시각화하는 인터페이스를 제공하며, 사용자는 시행 횟수와 동전의 수를 조정하여 시뮬레이션을 시작할 수 있습니다. 
+또한, R 코드로 동전 던지기 시뮬레이션 함수를 정의하고 이를 통해 동전 던지기 결과의 누적 비율을 계산하여 그래프로 표현하는 예시가 제공됩니다.
+
+# Shiny 앱
+
+:::{.column-page}
+
+```{shinylive-r}
+#| label: shinylive-lln-coin
+#| viewerWidth: 800
+#| viewerHeight: 700
+#| standalone: true
+
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Law of Large Numbers - Coin Toss"),
+
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("n_trials", "Number of Trials:", min = 1, max = 1000, value = 100),
+      sliderInput("n_coins", "Number of Coins:", min = 1, max = 100, value = 1),
+      actionButton("simulate", "Start Coin Toss")
+    ),
+
+    mainPanel(
+      plotOutput("coin_plot"),
+      br(),
+      p("This app demonstrates the law of large numbers through a coin toss example."),
+      p("When repeatedly tossing coins, as the number of trials increases, the probability of getting heads approaches 0.5."),
+      p("Adjust the number of trials and coins and start the simulation!")
+    )
+  )
+)
+
+server <- function(input, output) {
+
+  coin_flips <- reactiveValues(data = NULL)
+
+  observeEvent(input$simulate, {
+    coin_flips$data <- replicate(input$n_coins, {
+      cumsum(sample(c(0, 1), input$n_trials, replace = TRUE)) / (1:input$n_trials)
+    })
+  })
+
+  output$coin_plot <- renderPlot({
+    if (!is.null(coin_flips$data)) {
+      matplot(coin_flips$data, type = "l", lty = 1, col = rainbow(input$n_coins),
+              xlab = "Number of Trials", ylab = "Proportion of Heads", main = "Coin Toss Simulation",
+              ylim = c(0, 1))
+      abline(h = 0.5, lty = 2, col = "blue")
+      legend("topright", legend = c("Theoretical Probability (0.5)", paste0("Coin ", 1:input$n_coins)),
+             lty = c(2, rep(1, input$n_coins)), col = c("red", rainbow(input$n_coins)))
+    }
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+:::
+
+
+# 코드
+
+```{webr-r}
+
+# 동전 던지기 시뮬레이션 함수 정의
+coin_toss_simulation <- function(n_trials, n_coins) {
+  results <- matrix(nrow = n_trials, ncol = n_coins)
+  
+  for (i in 1:n_coins) {
+    # n_trials 회 동안 동전 던지기 시뮬레이션 (0은 뒷면, 1은 앞면)
+    tosses <- sample(c(0, 1), n_trials, replace = TRUE)
+    # 앞면이 나온 비율의 누적 계산
+    results[, i] <- cumsum(tosses) / (1:n_trials)
+  }
+  
+  return(results)
+}
+
+# 함수 사용 예시
+# 5개의 동전을 100회 던지기 시뮬레이션
+simulation_results <- coin_toss_simulation(n_trials = 100, n_coins = 5)
+
+# 결과를 그래프로 표현
+if (interactive()) {
+  matplot(simulation_results, type = "l", lty = 1, col = rainbow(5),
+          xlab = "시행 횟수", ylab = "앞면 비율", main = "동전 던지기 시뮬레이션",
+          ylim = c(0, 1))
+  abline(h = 0.5, lty = 2, col = "blue")
+  legend("topright", legend = c("이론적 확률 (0.5)", paste0("동전 ", 1:5)),
+         lty = c(2, rep(1, 5)), col = c("red", rainbow(5)))
+}
+
+```
+
+

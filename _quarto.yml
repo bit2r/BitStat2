@@ -31,9 +31,11 @@ website:
         - href: 04_testing.qmd
           text: "04 통계검정"
         - href: 05_infer.qmd
-          text: "05 추론과 회귀모형"
-        - href: 06_theory.qmd
-          text: "06 통계이론"
+          text: "05 추론"
+        - href: 06_reg.qmd
+          text: "06 회귀분석"
+        - href: 07_theory.qmd
+          text: "07 통계이론"
     right:
       - about.qmd
       - BitStat.qmd

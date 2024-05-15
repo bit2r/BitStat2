@@ -18,7 +18,8 @@
       "/04_testing/x_score/index.html",
       "/05_infer/ci/index.html",
       "/05_infer/clt/index.html",
-      "/06_theory/lln/index.html"
+      "/06_reg/lln/index.html",
+      "/07_theory/lln/index.html"
     ]
   },
   {
@@ -87,5 +88,15 @@
       "/05_infer/welcome/index.html",
       "/06_theory/lln/index.html"
     ]
+  },
+  {
+    "listing": "/06_reg.html",
+    "items": [
+      "/06_reg/lln/index.html"
+    ]
+  },
+  {
+    "listing": "/07_theory.html",
+    "items": []
   }
 ]

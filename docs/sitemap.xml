@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://r2bit.com/BitStat2/index.html</loc>
-    <lastmod>2024-05-12T06:20:46.441Z</lastmod>
+    <lastmod>2024-05-15T12:55:06.306Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/03_viz/ggplot/index.html</loc>
@@ -119,5 +119,21 @@
   <url>
     <loc>https://r2bit.com/BitStat2/04_testing/x_score/index.html</loc>
     <lastmod>2024-05-15T12:47:18.640Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/07_theory/lln/index.html</loc>
+    <lastmod>2024-05-12T02:56:37.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/06_reg/lln/index.html</loc>
+    <lastmod>2024-05-12T02:56:37.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/06_reg.html</loc>
+    <lastmod>2024-05-15T12:52:56.134Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/07_theory.html</loc>
+    <lastmod>2024-05-12T06:19:17.479Z</lastmod>
   </url>
 </urlset>
