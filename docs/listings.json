@@ -15,6 +15,7 @@
       "/04_testing/one_prop/index.html",
       "/04_testing/two_means/index.html",
       "/04_testing/two_prop/index.html",
+      "/04_testing/x_score/index.html",
       "/05_infer/ci/index.html",
       "/05_infer/clt/index.html",
       "/06_theory/lln/index.html"
@@ -63,7 +64,8 @@
       "/04_testing/one_mean/index.html",
       "/04_testing/one_prop/index.html",
       "/04_testing/two_means/index.html",
-      "/04_testing/two_prop/index.html"
+      "/04_testing/two_prop/index.html",
+      "/04_testing/x_score/index.html"
     ]
   },
   {

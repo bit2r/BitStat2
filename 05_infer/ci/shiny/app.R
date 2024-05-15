@@ -1,6 +1,8 @@
 library(shiny)
 library(ggplot2)
 library(tidyverse)
+library(showtext)
+showtext_auto()
 
 ui <- fluidPage(
   title = "신뢰구간 모의실험",
