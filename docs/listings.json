@@ -15,8 +15,7 @@
       "/04_testing/one_prop/index.html",
       "/04_testing/two_means/index.html",
       "/04_testing/two_prop/index.html",
-      "/05_infer/post-with-code/index.html",
-      "/05_infer/welcome/index.html",
+      "/05_infer/clt/index.html",
       "/06_theory/lln/index.html"
     ]
   },
@@ -38,8 +37,7 @@
   {
     "listing": "/05_infer.html",
     "items": [
-      "/05_infer/post-with-code/index.html",
-      "/05_infer/welcome/index.html"
+      "/05_infer/clt/index.html"
     ]
   },
   {

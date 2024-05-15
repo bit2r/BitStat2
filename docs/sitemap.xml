@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/05_infer.html</loc>
-    <lastmod>2024-05-12T06:18:33.751Z</lastmod>
+    <lastmod>2024-05-15T05:44:19.013Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/03_viz.html</loc>
@@ -107,5 +107,9 @@
   <url>
     <loc>https://r2bit.com/BitStat2/02_eda/multivariate_stat/index.html</loc>
     <lastmod>2024-05-15T02:53:01.915Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/05_infer/clt/index.html</loc>
+    <lastmod>2024-05-15T05:51:00.512Z</lastmod>
   </url>
 </urlset>

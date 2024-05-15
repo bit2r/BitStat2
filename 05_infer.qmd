@@ -1,6 +1,6 @@
 ---
 title: "추론"
-subtitle: "추론과 회귀모형"
+subtitle: "중심극한정리, 신뢰구간, 최대우도추정"
 listing:
   contents: 05_infer
   sort: "date-modified desc"
@@ -11,3 +11,4 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
+
