@@ -18,7 +18,8 @@
       "/04_testing/x_score/index.html",
       "/05_infer/ci/index.html",
       "/05_infer/clt/index.html",
-      "/06_reg/simple/index.html",
+      "/06_reg/corr_reg/index.html",
+      "/06_reg/reg/index.html",
       "/07_theory/lln/index.html"
     ]
   },
@@ -92,7 +93,8 @@
   {
     "listing": "/06_reg.html",
     "items": [
-      "/06_reg/simple/index.html"
+      "/06_reg/corr_reg/index.html",
+      "/06_reg/reg/index.html"
     ]
   },
   {
