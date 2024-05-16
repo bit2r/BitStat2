@@ -1,0 +1,203 @@
+---
+title: "군집분석"
+date: today
+categories: [다변량 분석, "군집분석", "Clustering", "K-평균", "PCA"]
+image: thumbnail.png
+editor_options: 
+  chunk_output_type: console
+---
+
+군집분석(Clustering Analysis)은 데이터를 유사한 그룹으로 나누는 비지도 학습 기법입니다. 데이터의 숨겨진 구조를 발견하고, 각 군집 내의 데이터 관측점들이 최대한 유사하도록 합니다. 대표적인 기법으로는 k-평균(K-means) 클러스터링이 있으며,  사전에 정해진 k개의 중심을 기준으로 데이터를 반복적으로 군집화합니다.
+
+# Shiny 앱
+
+:::{.column-page}
+
+```{shinylive-r}
+#| label: shinylive-lln-coin
+#| viewerWidth: 800
+#| viewerHeight: 700
+#| standalone: true
+
+library(shiny)
+library(ggplot2)
+library(dplyr)
+library(DT)
+library(RColorBrewer)
+library(showtext)
+showtext_auto()
+
+ui <- fluidPage(
+  titlePanel('K-평균 군집분석과 PCA 시각화'),
+
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons('dataset', '데이터셋 선택',
+                   choices = c('USArrests', 'iris', '업로드된 데이터셋')),
+      conditionalPanel(
+        condition = "input.dataset == '업로드된 데이터셋'",
+        fileInput('file1', 'CSV 파일 선택',
+                  accept = c('text/csv',
+                             'text/comma-separated-values,text/plain',
+                             '.csv'))
+      ),
+      uiOutput("varselect_ui"),
+      sliderInput('clusters', '군집 개수', 3, min = 1, max = 10)
+    ),
+
+    mainPanel(
+      tabsetPanel(
+        tabPanel("그래프", plotOutput('plot')),
+        tabPanel("군집별 관측점수", tableOutput('table1')),
+        tabPanel("군집별 요약통계", tableOutput('table2'))
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+
+  dataInput <- reactive({
+    switch(input$dataset,
+           'iris' = iris,
+           'USArrests' = USArrests,
+           '업로드된 데이터셋' = {
+             req(input$file1)
+             read.csv(input$file1$datapath)
+           })
+  })
+
+  observe({
+    req(dataInput())
+    num_vars <- names(dataInput())[sapply(dataInput(), is.numeric)]
+    updateSelectInput(session, 'xcol', choices = num_vars)
+    updateSelectInput(session, 'ycol', choices = num_vars, selected = num_vars[2])
+  })
+
+  output$varselect_ui <- renderUI({
+    req(dataInput())
+    num_vars <- names(dataInput())[sapply(dataInput(), is.numeric)]
+    list(
+      selectInput('xcol', 'X 변수', num_vars),
+      selectInput('ycol', 'Y 변수', num_vars, selected = num_vars[2])
+    )
+  })
+
+  selectedData <- reactive({
+    req(input$xcol, input$ycol)
+    dataInput()[, c(input$xcol, input$ycol)]
+  })
+
+  pca <- reactive({
+    req(selectedData())
+    prcomp(selectedData(), scale. = TRUE)
+  })
+
+  cluster_results <- reactive({
+    req(pca())
+    kmeans(pca()$x[, 1:2], input$clusters)
+  })
+
+  output$plot <- renderPlot({
+    req(cluster_results(), pca())
+
+    df <- data.frame(pca()$x[, 1:2])
+
+    ggplot(df, aes(x = PC1, y = PC2, color = factor(cluster_results()$cluster))) +
+      geom_point(size = 3, show.legend = TRUE) +
+      geom_text(data = data.frame(cluster_results()$centers),
+                aes(label = "X"), size = 8, color = "black") +
+      scale_color_brewer(type = "qual", palette = "Set2") +
+      scale_shape_manual("클러스터", values = c(1:input$clusters)) +
+      theme_bw() +
+      labs(title = paste("K =", input$clusters, "인 K-평균 군집분석"),
+           color = "군집")
+  })
+
+  output$table1 <- renderTable({
+    req(cluster_results(), dataInput())
+    df_res <- dataInput()
+    df_res$cluster <- cluster_results()$cluster
+    df_res %>%
+      group_by(cluster) %>%
+      tally(name = "개수") # 각 클러스터의 샘플 수 계산
+  })
+
+  output$table2 <- renderTable({
+    req(cluster_results(), dataInput())
+    df_res <- dataInput()
+    df_res$cluster <- cluster_results()$cluster
+    df_res %>% group_by(cluster) %>%
+      summarise(관측점수 = n(),
+                X_평균 = mean(get(input$xcol)),
+                Y_평균 = mean(get(input$ycol)))
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+
+:::
+
+
+# 코딩
+
+```{webr-r}
+# 필요한 라이브러리 로드
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+library(palmerpenguins)
+
+penguins <- palmerpenguins::penguins |> drop_na()
+
+# 숫자형 변수 선택
+numeric_vars <- names(penguins)[sapply(penguins, is.numeric)]
+
+# 선택된 데이터 (예: 첫 번째와 두 번째 숫자형 변수 선택)
+selected_data <- penguins[, setdiff(numeric_vars, "year")]
+
+# PCA 수행
+pca_result <- prcomp(selected_data, scale. = TRUE)
+
+# K-means 클러스터링 수행
+set.seed(567) # 재현성을 위해 설정
+k <- 3 # 클러스터 수 설정
+kmeans_result <- kmeans(pca_result$x[, 1:2], centers = k)
+
+# 클러스터 결과 추가
+clustered_data <- data.frame(pca_result$x[, 1:2])
+clustered_data$cluster <- factor(kmeans_result$cluster)
+
+# 클러스터 중심 가져오기
+centers <- data.frame(kmeans_result$centers)
+centers$cluster <- factor(1:k)
+
+# 클러스터링 결과 시각화
+ggplot(clustered_data, aes(x = PC1, y = PC2, color = cluster)) +
+  geom_point(size = 3) +
+  scale_color_brewer(palette = "Set2") +
+  geom_text(data = centers, aes(x = PC1, y = PC2, label = "X"), size = 8, color = "black") +
+  labs(title = paste("K-means 클러스터링 (k =", k, ")"),
+       x = "PC1",
+       y = "PC2",
+       color = "클러스터") +
+  theme_bw()
+
+# 군집별 관측 수 출력
+cat("군집별 관측 수:\n")
+print(table(kmeans_result$cluster))
+
+# 군집별 요약 통계 계산 및 출력
+cluster_summary <- penguins
+cluster_summary$cluster <- factor(kmeans_result$cluster)
+summary_stats <- cluster_summary %>%
+  group_by(cluster) %>%
+  summarise(across(where(is.numeric), list(mean = ~mean(.), n = ~length(.))))
+
+# 요약 통계 출력
+cat("\n군집별 요약 통계:\n")
+print(summary_stats)
+```
+
