@@ -1,68 +1,101 @@
 ---
-title: "대수의 법칙"
+title: "상관분석과 단순 회귀분석"
 date: today
-categories: [이론, "대수의 법칙", "동전 던지기"]
+categories: [상관분석, "단순 회귀분석", "상관계수", "결정계수"]
 image: thumbnail.png
 editor_options: 
   chunk_output_type: console
 ---
 
-대수의 법칙을 이해하고 시각적으로 관찰할 수 있습니다.
-Shiny 앱으로 동전 던지기를 통한 대수의 법칙을 시각화하는 인터페이스를 제공하며, 사용자는 시행 횟수와 동전의 수를 조정하여 시뮬레이션을 시작할 수 있습니다. 
-또한, R 코드로 동전 던지기 시뮬레이션 함수를 정의하고 이를 통해 동전 던지기 결과의 누적 비율을 계산하여 그래프로 표현하는 예시가 제공됩니다.
+상관분석은 두 변수 간의 관계 강도와 방향을 측정하고, 단순 회귀분석은 한 변수(독립 변수)를 사용해 다른 변수(종속 변수)를 예측하는 모형으로 상관분석은 두 변수 간의 관계 강도와 방향을 측정하는 데 중점을 두고, 회귀분석은 한 변수를 사용해 다른 변수를 예측하는 데 중점을 둔다. 특히 상관계수의 제곱은 회귀 분석에서 결정계수로 해석된다.
 
 # Shiny 앱
 
 :::{.column-page}
 
 ```{shinylive-r}
-#| label: shinylive-lln-coin
+#| label: shinylive-reg-simple
 #| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 
 library(shiny)
+library(showtext)
+showtext_auto()
 
 ui <- fluidPage(
-  titlePanel("Law of Large Numbers - Coin Toss"),
+  titlePanel("상관분석과 단순 회귀분석"),
 
   sidebarLayout(
     sidebarPanel(
-      sliderInput("n_trials", "Number of Trials:", min = 1, max = 1000, value = 100),
-      sliderInput("n_coins", "Number of Coins:", min = 1, max = 100, value = 1),
-      actionButton("simulate", "Start Coin Toss")
+      fileInput("file", "CSV 파일 업로드", accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv")),
+      radioButtons("dataset", "데이터셋 선택:",
+                   choices = c("mtcars", "USArrests", "업로드 데이터셋"),
+                   selected = "mtcars"),
+      selectInput("y_var", "Y 변수 (종속변수):", ""),
+      selectInput("x_var", "X 변수 (독립변수):", "")
     ),
 
     mainPanel(
-      plotOutput("coin_plot"),
-      br(),
-      p("This app demonstrates the law of large numbers through a coin toss example."),
-      p("When repeatedly tossing coins, as the number of trials increases, the probability of getting heads approaches 0.5."),
-      p("Adjust the number of trials and coins and start the simulation!")
+      tabsetPanel(
+        tabPanel("산점도", plotOutput("scatterplot")),
+        tabPanel("상관계수",
+                 verbatimTextOutput("correlation"),
+                 verbatimTextOutput("cor_test")),
+        tabPanel("회귀분석", verbatimTextOutput("regression"))
+      )
     )
   )
 )
 
-server <- function(input, output) {
+server <- function(input, output, session) {
 
-  coin_flips <- reactiveValues(data = NULL)
-
-  observeEvent(input$simulate, {
-    coin_flips$data <- replicate(input$n_coins, {
-      cumsum(sample(c(0, 1), input$n_trials, replace = TRUE)) / (1:input$n_trials)
-    })
-  })
-
-  output$coin_plot <- renderPlot({
-    if (!is.null(coin_flips$data)) {
-      matplot(coin_flips$data, type = "l", lty = 1, col = rainbow(input$n_coins),
-              xlab = "Number of Trials", ylab = "Proportion of Heads", main = "Coin Toss Simulation",
-              ylim = c(0, 1))
-      abline(h = 0.5, lty = 2, col = "blue")
-      legend("topright", legend = c("Theoretical Probability (0.5)", paste0("Coin ", 1:input$n_coins)),
-             lty = c(2, rep(1, input$n_coins)), col = c("red", rainbow(input$n_coins)))
+  data <- reactive({
+    if (input$dataset == "업로드 데이터셋") {
+      req(input$file)
+      read.csv(input$file$datapath, header = TRUE)
+    } else {
+      switch(input$dataset,
+             "mtcars" = mtcars,
+             "USArrests" = USArrests)
     }
   })
+
+  observe({
+    choices <- names(data())[sapply(data(), is.numeric)]
+    updateSelectInput(session, "y_var", choices = choices)
+    updateSelectInput(session, "x_var", choices = choices)
+  })
+
+  output$scatterplot <- renderPlot({
+    req(input$y_var, input$x_var)
+    plot(data()[[input$x_var]], data()[[input$y_var]],
+         xlab = input$x_var, ylab = input$y_var,
+         main = "회귀선이 포함된 산점도")
+    abline(lm(data()[[input$y_var]] ~ data()[[input$x_var]]), col = "red", lwd = 2)
+    legend("topleft", legend = "회귀선", col = "red", lwd = 2, bty = "n")
+  })
+
+  output$correlation <- renderPrint({
+    req(input$y_var, input$x_var)
+    cor_val <- cor(data()[[input$x_var]], data()[[input$y_var]])
+    det_coef <- cor_val^2
+    cat("상관계수:", round(cor_val, 3), "\n")
+    cat("결정계수 (R-squared):", round(det_coef, 3))
+  })
+
+  output$cor_test <- renderPrint({
+    req(input$y_var, input$x_var)
+    cor.test(data()[[input$x_var]], data()[[input$y_var]])
+  })
+
+  output$regression <- renderPrint({
+    req(input$y_var, input$x_var)
+    lm_model <- lm(data()[[input$y_var]] ~ data()[[input$x_var]])
+    names(lm_model$coefficients) <- c("절편", input$x_var)
+    summary(lm_model)
+  })
+
 }
 
 shinyApp(ui, server)
@@ -75,34 +108,38 @@ shinyApp(ui, server)
 # 코드
 
 ```{webr-r}
-
-# 동전 던지기 시뮬레이션 함수 정의
-coin_toss_simulation <- function(n_trials, n_coins) {
-  results <- matrix(nrow = n_trials, ncol = n_coins)
+library(palmerpenguins)
+# 상관분석 함수
+perform_correlation <- function(data, var1, var2) {
+  cor_val <- cor(data[[var1]], data[[var2]])
+  det_coef <- cor_val^2
+  cat("상관계수:", round(cor_val, 3), "\n")
+  cat("결정계수 (R-squared):", round(det_coef, 3), "\n")
   
-  for (i in 1:n_coins) {
-    # n_trials 회 동안 동전 던지기 시뮬레이션 (0은 뒷면, 1은 앞면)
-    tosses <- sample(c(0, 1), n_trials, replace = TRUE)
-    # 앞면이 나온 비율의 누적 계산
-    results[, i] <- cumsum(tosses) / (1:n_trials)
-  }
-  
-  return(results)
+  cat("\n상관계수 검정 결과:\n")
+  print(cor.test(data[[var1]], data[[var2]]))
 }
 
-# 함수 사용 예시
-# 5개의 동전을 100회 던지기 시뮬레이션
-simulation_results <- coin_toss_simulation(n_trials = 100, n_coins = 5)
-
-# 결과를 그래프로 표현
-if (interactive()) {
-  matplot(simulation_results, type = "l", lty = 1, col = rainbow(5),
-          xlab = "시행 횟수", ylab = "앞면 비율", main = "동전 던지기 시뮬레이션",
-          ylim = c(0, 1))
-  abline(h = 0.5, lty = 2, col = "blue")
-  legend("topright", legend = c("이론적 확률 (0.5)", paste0("동전 ", 1:5)),
-         lty = c(2, rep(1, 5)), col = c("red", rainbow(5)))
+# 단순 회귀분석 함수
+perform_regression <- function(data, var1, var2) {
+  lm_model <- lm(data[[var2]] ~ data[[var1]])
+  names(lm_model$coefficients) <- c("절편", var1)
+  
+  cat("단순 회귀분석 결과:\n")
+  print(summary(lm_model))
 }
+
+penguins <- palmerpenguins::penguins |> 
+  na.omit()
+
+
+# 상관분석 수행
+cat("\n상관분석 결과:\n")
+perform_correlation(penguins, "body_mass_g", "bill_length_mm")
+
+# 단순 회귀분석 수행
+cat("\n단순 회귀분석 결과:\n")
+perform_regression(penguins, "body_mass_g", "bill_length_mm")
 
 ```
 
