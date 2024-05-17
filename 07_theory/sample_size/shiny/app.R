@@ -6,64 +6,79 @@ library(tidyverse)
 library(greekLetters)
 library(shinyhelper)
 library(shinyBS)
+library(showtext)
+showtext_auto()
 
 ui <- fluidPage(
   theme = bslib::bs_theme(bootswatch = "flatly"),
+  titlePanel(
+    title = "평균과 비율 표본크기 계산기",
+    windowTitle = "평균과 비율 표본크기 계산기"
+  ),
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons("sample_type", "표본크기 유형:",
+                   c("평균" = "mean",
+                     "비율" = "proportion"),
+                   inline = TRUE),
+      tags$hr(),
+      conditionalPanel(
+        condition = "input.sample_type == 'mean'",
+        fluidRow(
+          column(6,
+                 numericInput("mu1", "평균 1", value = 132, min = 0, step = 1),
+                 numericInput("s1", "표준편차 1", value = 15, min = 0, step = 1)),
+          column(6,
+                 numericInput("mu2", "평균 2", value = 127, min = 0, step = 1),
+                 numericInput("s2", "표준편차 2", value = 18, min = 0, step = 1))
+        ),
+        sliderInput("alpha", label = paste(greeks("alpha"), " (유의수준)"), min = 0.01, max = 0.20, value = 0.05, step = 0.01),
+        sliderInput("power", label = paste("1-", greeks("beta"), " (검정력)"), min = 0.01, max = 0.99, value = 0.8, step = 0.01),
+        actionButton('calculate', "계산")
+      ),
 
-  tabsetPanel(
-    tabPanel("평균에 대한 표본크기",
-             titlePanel("평균에 대한 쌍대 검정을 위한 표본크기"),
-             fluidRow(
-               column(10,
-                      textOutput("mean_description")
-               )),
-             br(),
-             fluidRow(
-               column(4,
-                      fluidRow(
-                        column(6,
-                               numericInput("mu1", "평균 1", value = 132.85, min = 0, step = 0.001),
-                               numericInput("s1", "표준편차 1", value = 15.34, min = 0, step = 0.001)),
-                        column(6,
-                               numericInput("mu2", "평균 2", value = 127.44, min = 0, step = 0.001),
-                               numericInput("s2", "표준편차 2", value = 18.23, min = 0, step = 0.001))),
-                      numericInput("alpha", label = paste(greeks("alpha"), " (유의수준)"), value = 0.05, min = 0.001, max = 0.05, step = 0.001),
-                      numericInput("power", label = paste("1-", greeks("beta"), " (검정력)"), value = 0.8, min = 0.001, max = .999, step = 0.001),
-                      helper(actionButton('calculate', "계산"), title = '', icon = "question-circle", type = "inline",
-                             content = "입력된 값은 0보다 크고 지정된 범위 내에 있어야 합니다."
-                      )
-               ),
-
-               column(8,
-                      plotOutput("plotnorm"),
-                      textOutput("n_norm"))
-             )
+      conditionalPanel(
+        condition = "input.sample_type == 'proportion'",
+        fluidRow(
+          column(6,
+                 numericInput("p1", label = "비율 1", value = 0.15, min = 0, max = 1, step = 0.01)),
+          column(6,
+                 numericInput("p2", label = "비율 2", value = 0.12, min = 0, max = 1, step = 0.01))
+        ),
+        numericInput("k", label = "k", value = 1, min = 1, step = 0.25),
+        sliderInput("alpha_bin", label = paste(greeks("alpha"), " (유의수준)"), min = 0.01, max = 0.20, value = 0.05, step = 0.01),
+        sliderInput("power_bin", label = paste("1-", greeks("beta"), " (검정력)"), min = 0.01, max = 0.99, value = 0.8, step = 0.01),
+        helper(actionButton('calculate_bin', "계산"), title = '', icon = "question-circle", type = "inline",
+               content = "입력된 값은 0보다 크고 지정된 범위 내에 있어야 합니다."
+        )
+      ),
+      hr(),
+      tags$div(
+        tags$span(property = "cc:attributionName", "Solis-Lemus Lab"), " 코드를 참조하여 개발되었습니다.",
+        tags$a(href = "http://creativecommons.org/licenses/by/2.0/be/", target = "_blank", "Creative Commons Attribution license"),
+        tags$img(alt = "Licence Creative Commons", style = "border-width:0", src = "http://i.creativecommons.org/l/by/2.0/be/80x15.png")
+      )
     ),
 
-    tabPanel("비율에 대한 표본크기",
-             titlePanel("두 이항 비율의 쌍대 검정을 위한 표본크기"),
-             fluidRow(
-               column(10,
-                      textOutput("bin_description")
-               )),
-             br(),
-             fluidRow(
-               column(4,
-                      numericInput("p1", label = "비율 1", value = 0.15, min = 0, max = 1, step = 0.001),
-                      numericInput("p2", label = "비율 2", value = 0.12, min = 0, max = 1, step = 0.001),
-                      numericInput("k", label = "k", value = 1, min = 1, step = 0.25),
-                      numericInput("alpha_bin", label = paste(greeks("alpha"), " (유의수준)"), value = 0.05, min = 0.001, max = 0.05, step = 0.001),
-                      numericInput("power_bin", label = paste("1-", greeks("beta"), " (검정력)"), value = 0.8, min = 0.001, max = 0.999, step = 0.001),
-                      helper(actionButton('calculate_bin', "계산"), title = '', icon = "question-circle", type = "inline",
-                             content = "입력된 값은 0보다 크고 지정된 범위 내에 있어야 합니다."
-                      )
-               ),
-               column(8,
-                      plotOutput("plotbin"),
-                      textOutput("n_bin"),
-                      textOutput("kn_bin")
-               )
-             )
+    mainPanel(
+      conditionalPanel(
+        condition = "input.sample_type == 'mean'",
+        tags$h4("평균에 대한 쌍대 검정을 위한 표본크기"),
+        textOutput("mean_description"),
+        br(),
+        plotOutput("plotnorm"),
+        textOutput("n_norm")
+      ),
+
+      conditionalPanel(
+        condition = "input.sample_type == 'proportion'",
+        tags$h4("두 이항 비율의 쌍대 검정을 위한 표본크기"),
+        textOutput("bin_description"),
+        br(),
+        plotOutput("plotbin"),
+        textOutput("n_bin"),
+        textOutput("kn_bin")
+      )
     )
   )
 )
@@ -79,7 +94,7 @@ server <- function(input, output, session) {
                          text = NULL)
 
   output$mean_description = renderText({
-    "여기서는 두 정규 분포에 대한 평균의 쌍대 검정을 위한 표본크기를 계산합니다. 두 표본의 크기는 동일하다고 가정합니다. 사용자는 각 분포의 평균과 표준편차, 검정의 유의수준, 원하는 검정력을 입력해야 합니다. 이 웹 앱은 각 그룹의 표본크기를 계산하고 시각적 비교를 위해 정규 밀도를 겹쳐 그린 히스토그램 플롯을 제공합니다."
+    "두 정규 분포에 대한 평균의 쌍대 검정을 위한 표본크기를 계산합니다. 두 표본의 크기는 동일하다고 가정합니다. 사용자는 각 분포의 평균과 표준편차, 검정의 유의수준, 원하는 검정력을 입력해야 합니다. 이 웹 앱은 각 그룹의 표본크기를 계산하고 시각적 비교를 위해 정규 밀도를 겹쳐 그린 히스토그램을 제공합니다."
   })
 
   output$n_norm = renderText({
@@ -116,7 +131,7 @@ server <- function(input, output, session) {
   })
 
   output$bin_description = renderText({
-    "여기서는 표본 2의 크기가 표본 1의 크기의 k배인 두 이항 분포의 비율에 대한 쌍대 검정의 표본크기를 계산합니다. 사용자는 각 분포의 예상 비율, k, 유의수준, 원하는 검정력을 입력해야 합니다. 이 웹 앱은 각 그룹의 표본크기를 계산하고 시각적 비교를 위해 이항 분포를 근사하는 정규 밀도를 겹쳐 그린 히스토그램 플롯을 제공합니다."
+    "표본 2의 크기가 표본 1의 크기의 k배인 두 이항 분포의 비율에 대한 쌍대 검정의 표본크기를 계산합니다. 사용자는 각 분포의 예상 비율, k, 유의수준, 원하는 검정력을 입력해야 합니다. 각 그룹의 표본크기를 계산하고 시각적 비교를 위해 이항 분포를 근사하는 정규 밀도를 겹쳐 그린 히스토그램을 제공합니다."
   })
 
   output$n_bin = renderText({
