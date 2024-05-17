@@ -79,9 +79,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -189,11 +189,15 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="./05_infer.html">
- <span class="dropdown-text">05 추론과 회귀모형</span></a>
+ <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./06_theory.qmd">
- <span class="dropdown-text">06 통계이론</span></a>
+    <a class="dropdown-item" href="./06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
   </li>
@@ -252,7 +256,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">분류</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">전체 <span class="quarto-category-count">(0)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">분류</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">전체 <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Clustering">Clustering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="K-평균">K-평균 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="MLE">MLE <span class="quarto-category-count">(1)</span></div><div class="category" data-category="PCA">PCA <span class="quarto-category-count">(1)</span></div><div class="category" data-category="군집분석">군집분석 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="다변량 분석">다변량 분석 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="대수의 법칙">대수의 법칙 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="동전 던지기">동전 던지기 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="비율">비율 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="이론">이론 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="이항분포">이항분포 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="정규분포">정규분포 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="최대우도추정">최대우도추정 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="평균">평균 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="포아송분포">포아송분포 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="표본크기">표본크기 <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -266,13 +270,190 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="정렬" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">정렬</option>
+       <option value="index" data-direction="asc">디폴트</option>
+         <option value="listing-title" data-direction="asc">
+          제목
+        </option>
+         <option value="listing-date-sort" data-direction="asc">
+          날짜 - 날짜(오름차순)
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          날짜 - 날짜(내림차순)
+        </option>
+         <option value="listing-author" data-direction="asc">
+          저자
+        </option>
+     </select>
+  </div>
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
 <div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="다변량 분석,군집분석,Clustering,K-평균,PCA" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715854440793" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="946">
+<a href="./07_theory/clustering/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./07_theory/clustering/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+군집분석
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('다변량 분석'); return false;">
+다변량 분석
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('군집분석'); return false;">
+군집분석
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Clustering'); return false;">
+Clustering
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('K-평균'); return false;">
+K-평균
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('PCA'); return false;">
+PCA
+</div>
+</div>
+<div class="card-text listing-description">
+군집분석(Clustering Analysis)은 데이터를 유사한 그룹으로 나누는 비지도 학습 기법입니다. 데이터의 숨겨진 구조를 발견하고, 각 군집 내의 데이터 관측점들이 최대한 유사하도록 합니다. 대표적인 기법으로는 k-평균(K-means) 클러스터링이 있으며, 사전에 정해진 k개의 중심을 기준으로 데이터를…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
 
+</div>
+<div class="listing-date">
+2024-05-17
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="이론,대수의 법칙,동전 던지기" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715482597124" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="541">
+<a href="./07_theory/lln/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./07_theory/lln/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+대수의 법칙
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('이론'); return false;">
+이론
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('대수의 법칙'); return false;">
+대수의 법칙
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('동전 던지기'); return false;">
+동전 던지기
+</div>
+</div>
+<div class="card-text listing-description">
+대수의 법칙을 이해하고 시각적으로 관찰할 수 있습니다. Shiny 앱으로 동전 던지기를 통한 대수의 법칙을 시각화하는 인터페이스를 제공하며, 사용자는 시행 횟수와 동전의 수를 조정하여 시뮬레이션을 시작할 수 있습니다. 또한, R 코드로 동전 던지기 시뮬레이션 함수를 정의하고 이를 통해 동전 던지기 결과의 누적…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+
+</div>
+<div class="listing-date">
+2024-05-17
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="이론,최대우도추정,MLE,정규분포,포아송분포,이항분포" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715841175421" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2045">
+<a href="./07_theory/mle/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./07_theory/mle/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+최대우도추정
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('이론'); return false;">
+이론
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('최대우도추정'); return false;">
+최대우도추정
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('MLE'); return false;">
+MLE
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('정규분포'); return false;">
+정규분포
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('포아송분포'); return false;">
+포아송분포
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('이항분포'); return false;">
+이항분포
+</div>
+</div>
+<div class="card-text listing-description">
+최대우도추정법(Maximum Likelihood Estimation, MLE)은 주어진 데이터로부터 모수(parameter)를 추정하는 통계적 방법입니다. MLE는 모수를 추정하기 위해, 관측된 데이터가 가장 일어날 가능성이 높도록 만드는 모수 값을 찾습니다. 우도함수(likelihood function)를…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+
+</div>
+<div class="listing-date">
+2024-05-17
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="평균,비율,표본크기" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715907969172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2091">
+<a href="./07_theory/sample_size/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./07_theory/sample_size/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+표본 크기
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('평균'); return false;">
+평균
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('비율'); return false;">
+비율
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('표본크기'); return false;">
+표본크기
+</div>
+</div>
+<div class="card-text listing-description">
+표본크기 계산은 통계적 분석에서 매우 중요한 역할을 합니다. 적절한 표본크기를 결정하는 것은 연구의 유효성과 신뢰성을 보장하는 데 필수적입니다. 표본크기가 너무 작으면 연구 결과의 통계적 유의성이 부족하여, 실제로 존재하는 효과를 감지하지 못할 수 있습니다. 반대로 표본크기가 너무 크면 시간과 자원이…<sup></sup>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+
+</div>
+<div class="listing-date">
+2024-05-17
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 일치 없음

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-05-16">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 상관분석과 단순 회귀분석</title>
 <style>
@@ -292,7 +292,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"output":"true","label":"unnamed-chunk-1","results":"markup","message":"true","editor-max-height":"","editor-quick-suggestions":"false","warning":"true","out-height":"","classes":"","comment":"","out-width":"700px","autorun":"false","fig-width":7,"fig-cap":"","context":"interactive","dpi":72,"read-only":"false","editor-font-scale":1,"fig-height":5},"code":"library(palmerpenguins)\n# 상관분석 함수\nperform_correlation <- function(data, var1, var2) {\n  cor_val <- cor(data[[var1]], data[[var2]])\n  det_coef <- cor_val^2\n  cat(\"상관계수:\", round(cor_val, 3), \"\\n\")\n  cat(\"결정계수 (R-squared):\", round(det_coef, 3), \"\\n\")\n  \n  cat(\"\\n상관계수 검정 결과:\\n\")\n  print(cor.test(data[[var1]], data[[var2]]))\n}\n\n# 단순 회귀분석 함수\nperform_regression <- function(data, var1, var2) {\n  lm_model <- lm(data[[var2]] ~ data[[var1]])\n  names(lm_model$coefficients) <- c(\"절편\", var1)\n  \n  cat(\"단순 회귀분석 결과:\\n\")\n  print(summary(lm_model))\n}\n\npenguins <- palmerpenguins::penguins |> \n  na.omit()\n\n\n# 상관분석 수행\ncat(\"\\n상관분석 결과:\\n\")\nperform_correlation(penguins, \"body_mass_g\", \"bill_length_mm\")\n\n# 단순 회귀분석 수행\ncat(\"\\n단순 회귀분석 결과:\\n\")\nperform_regression(penguins, \"body_mass_g\", \"bill_length_mm\")","id":1}];
+globalThis.qwebrCellDetails = [{"options":{"classes":"","editor-max-height":"","context":"interactive","label":"unnamed-chunk-1","fig-height":5,"editor-quick-suggestions":"false","out-width":"700px","dpi":72,"output":"true","comment":"","warning":"true","message":"true","read-only":"false","fig-width":7,"fig-cap":"","autorun":"false","editor-font-scale":1,"results":"markup","out-height":""},"id":1,"code":"library(palmerpenguins)\n# 상관분석 함수\nperform_correlation <- function(data, var1, var2) {\n  cor_val <- cor(data[[var1]], data[[var2]])\n  det_coef <- cor_val^2\n  cat(\"상관계수:\", round(cor_val, 3), \"\\n\")\n  cat(\"결정계수 (R-squared):\", round(det_coef, 3), \"\\n\")\n  \n  cat(\"\\n상관계수 검정 결과:\\n\")\n  print(cor.test(data[[var1]], data[[var2]]))\n}\n\n# 단순 회귀분석 함수\nperform_regression <- function(data, var1, var2) {\n  lm_model <- lm(data[[var2]] ~ data[[var1]])\n  names(lm_model$coefficients) <- c(\"절편\", var1)\n  \n  cat(\"단순 회귀분석 결과:\\n\")\n  print(summary(lm_model))\n}\n\npenguins <- palmerpenguins::penguins |> \n  na.omit()\n\n\n# 상관분석 수행\ncat(\"\\n상관분석 결과:\\n\")\nperform_correlation(penguins, \"body_mass_g\", \"bill_length_mm\")\n\n# 단순 회귀분석 수행\ncat(\"\\n단순 회귀분석 결과:\\n\")\nperform_regression(penguins, \"body_mass_g\", \"bill_length_mm\")"}];
 
 </script>
 <script type="module">
@@ -1241,7 +1241,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-16</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="이광춘">
-<meta name="dcterms.date" content="2024-05-12">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 이산형 분포</title>
 <style>
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"fig-cap":"","comment":"","out-height":"","autorun":"false","context":"interactive","read-only":"false","message":"true","editor-font-scale":1,"editor-quick-suggestions":"false","fig-height":5,"warning":"true","dpi":72,"results":"markup","out-width":"700px","classes":"","editor-max-height":"","output":"true","label":"unnamed-chunk-1","fig-width":7},"code":"discrete_dist_summary <- function(dist, params, x_range) {\n  if (dist == \"bernoulli\") {\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dbinom(x, size = 1, prob)\n    cdf <- pbinom(x, size = 1, prob)\n  } else if (dist == \"binomial\") {\n    size <- params$size\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dbinom(x, size, prob)\n    cdf <- pbinom(x, size, prob)\n  } else if (dist == \"geometric\") {\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dgeom(x, prob)\n    cdf <- pgeom(x, prob)\n  } else if (dist == \"poisson\") {\n    lambda <- params$lambda\n    x <- 0:x_range\n    pmf <- dpois(x, lambda)\n    cdf <- ppois(x, lambda)\n  } else {\n    stop(\"Invalid distribution specified.\")\n  }\n  \n  table_data <- data.frame(x = x, PMF = pmf, CDF = cdf)\n  \n  cat(\"Distribution:\", dist, \"\\n\\n\")\n  cat(\"Parameters:\\n\")\n  print(params)\n  cat(\"\\nPMF and CDF Table:\\n\")\n  print(table_data)\n  \n  pmf_plot <- barplot(pmf, names.arg = x, xlab = \"x\", ylab = \"Probability\", \n                      main = paste(dist, \"Distribution - PMF\"), col = \"steelblue\")\n  \n  cdf_plot <- plot(x, cdf, type = \"s\", xlab = \"x\", ylab = \"Cumulative Probability\",\n                   main = paste(dist, \"Distribution - CDF\"), col = \"steelblue\")\n}\n\n# # 베르누이 분포\n# discrete_dist_summary(\"bernoulli\", params = list(prob = 0.7), x_range = 1)\n\n# 이항 분포\ndiscrete_dist_summary(\"binomial\", params = list(size = 10, prob = 0.4), x_range = 10)\n\n# # 기하 분포\n# discrete_dist_summary(\"geometric\", params = list(prob = 0.2), x_range = 20)\n\n# # 포아송 분포\n# discrete_dist_summary(\"poisson\", params = list(lambda = 3), x_range = 15)","id":1}];
+globalThis.qwebrCellDetails = [{"code":"discrete_dist_summary <- function(dist, params, x_range) {\n  if (dist == \"bernoulli\") {\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dbinom(x, size = 1, prob)\n    cdf <- pbinom(x, size = 1, prob)\n  } else if (dist == \"binomial\") {\n    size <- params$size\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dbinom(x, size, prob)\n    cdf <- pbinom(x, size, prob)\n  } else if (dist == \"geometric\") {\n    prob <- params$prob\n    x <- 0:x_range\n    pmf <- dgeom(x, prob)\n    cdf <- pgeom(x, prob)\n  } else if (dist == \"poisson\") {\n    lambda <- params$lambda\n    x <- 0:x_range\n    pmf <- dpois(x, lambda)\n    cdf <- ppois(x, lambda)\n  } else {\n    stop(\"Invalid distribution specified.\")\n  }\n  \n  table_data <- data.frame(x = x, PMF = pmf, CDF = cdf)\n  \n  cat(\"Distribution:\", dist, \"\\n\\n\")\n  cat(\"Parameters:\\n\")\n  print(params)\n  cat(\"\\nPMF and CDF Table:\\n\")\n  print(table_data)\n  \n  pmf_plot <- barplot(pmf, names.arg = x, xlab = \"x\", ylab = \"Probability\", \n                      main = paste(dist, \"Distribution - PMF\"), col = \"steelblue\")\n  \n  cdf_plot <- plot(x, cdf, type = \"s\", xlab = \"x\", ylab = \"Cumulative Probability\",\n                   main = paste(dist, \"Distribution - CDF\"), col = \"steelblue\")\n}\n\n# # 베르누이 분포\n# discrete_dist_summary(\"bernoulli\", params = list(prob = 0.7), x_range = 1)\n\n# 이항 분포\ndiscrete_dist_summary(\"binomial\", params = list(size = 10, prob = 0.4), x_range = 10)\n\n# # 기하 분포\n# discrete_dist_summary(\"geometric\", params = list(prob = 0.2), x_range = 20)\n\n# # 포아송 분포\n# discrete_dist_summary(\"poisson\", params = list(lambda = 3), x_range = 15)","id":1,"options":{"message":"true","editor-quick-suggestions":"false","read-only":"false","autorun":"false","context":"interactive","results":"markup","editor-font-scale":1,"label":"unnamed-chunk-1","out-width":"700px","warning":"true","fig-height":5,"classes":"","dpi":72,"output":"true","editor-max-height":"","fig-width":7,"fig-cap":"","out-height":"","comment":""}}];
 
 </script>
 <script type="module">
@@ -1153,10 +1153,51 @@ globalThis.qwebrExecuteCode = async function (
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">빛스탯</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../../01_data.html">
+ <span class="dropdown-text">01 데이터</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../02_eda.html">
+ <span class="dropdown-text">02 EDA</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../03_viz.html">
+ <span class="dropdown-text">03 시각화</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../04_testing.html">
+ <span class="dropdown-text">04 통계검정</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../05_infer.html">
+ <span class="dropdown-text">05 추론</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">소개</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../BitStat.html"> 
+<span class="menu-text">BitStat</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/bit2r/BitStat2"> <i class="bi bi-github" role="img">
@@ -1208,7 +1249,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-12</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

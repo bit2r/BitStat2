@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="이광춘">
-<meta name="dcterms.date" content="2024-05-13">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 2-비율 가설 검정</title>
 <style>
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"classes":"","fig-height":5,"context":"interactive","read-only":"false","out-width":"700px","editor-quick-suggestions":"false","label":"unnamed-chunk-1","results":"markup","comment":"","fig-cap":"","message":"true","out-height":"","warning":"true","output":"true","autorun":"false","editor-max-height":"","dpi":72,"fig-width":7,"editor-font-scale":1},"code":"# 정당 A의 데이터: 500명 중 250명이 지지\nsupporters_A <- 250\ntotal_A <- 500\n\n# 정당 B의 데이터: 500명 중 200명이 지지\nsupporters_B <- 230\ntotal_B <- 500\n\n# 2-비율 z-검정 수행\ntest_result <- prop.test(x = c(supporters_A, supporters_B), \n                         n = c(total_A, total_B),\n                         correct = FALSE)  # 연속성 보정을 하지 않음\n\n# 결과 출력\nprint(test_result)"}];
+globalThis.qwebrCellDetails = [{"code":"# 정당 A의 데이터: 500명 중 250명이 지지\nsupporters_A <- 250\ntotal_A <- 500\n\n# 정당 B의 데이터: 500명 중 200명이 지지\nsupporters_B <- 230\ntotal_B <- 500\n\n# 2-비율 z-검정 수행\ntest_result <- prop.test(x = c(supporters_A, supporters_B), \n                         n = c(total_A, total_B),\n                         correct = FALSE)  # 연속성 보정을 하지 않음\n\n# 결과 출력\nprint(test_result)","options":{"fig-width":7,"message":"true","out-width":"700px","out-height":"","context":"interactive","autorun":"false","editor-max-height":"","results":"markup","output":"true","fig-height":5,"editor-font-scale":1,"warning":"true","read-only":"false","editor-quick-suggestions":"false","classes":"","fig-cap":"","dpi":72,"label":"unnamed-chunk-1","comment":""},"id":1}];
 
 </script>
 <script type="module">
@@ -1177,11 +1177,15 @@ globalThis.qwebrExecuteCode = async function (
   </li>  
         <li>
     <a class="dropdown-item" href="../../05_infer.html">
- <span class="dropdown-text">05 추론과 회귀모형</span></a>
+ <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../06_theory.html">
- <span class="dropdown-text">06 통계이론</span></a>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
   </li>
@@ -1242,7 +1246,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-13</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

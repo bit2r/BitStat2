@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="이광춘">
-<meta name="dcterms.date" content="2024-05-12">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 연속형 분포 적합</title>
 <style>
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"editor-quick-suggestions":"false","results":"markup","out-height":"","fig-height":5,"out-width":"700px","warning":"true","fig-width":7,"context":"interactive","classes":"","dpi":72,"editor-max-height":"","output":"true","autorun":"false","message":"true","read-only":"false","label":"unnamed-chunk-1","comment":"","fig-cap":"","editor-font-scale":1},"code":"library(palmerpenguins)\nlibrary(moments)\n\nget_distribution_function <- function(type, prefix) {\n  distribution_map <- c(\n    uniform = \"unif\",\n    normal = \"norm\",\n    exponential = \"exp\"\n  )\n  distribution_name <- distribution_map[tolower(type)]\n  if (is.null(distribution_name)) {\n    stop(\"Unsupported distribution type\")\n  }\n  get(paste(prefix, distribution_name, sep = \"\"), envir = asNamespace(\"stats\"))\n}\n\n# 수정된 analyze_distribution 함수\nanalyze_distribution <- function(data, variable, distribution_type) {\n  if (!variable %in% names(data)) {\n    stop(\"변수가 데이터셋에 존재하지 않습니다.\")\n  }\n  variable_data <- na.omit(data[[variable]])\n\n  distribution_fit <- list()\n  params <- NULL\n  \n  # 매핑을 사용하여 함수를 가져옵니다\n  d_function <- get_distribution_function(distribution_type, \"d\")\n  q_function <- get_distribution_function(distribution_type, \"q\")\n  p_function <- get_distribution_function(distribution_type, \"p\")\n  \n  # 분포에 따른 파라미터 설정\n  if (tolower(distribution_type) == \"uniform\") {\n    params <- list(min = min(variable_data), max = max(variable_data))\n    distribution_fit$test_result <- ks.test(variable_data, \"punif\", min = params$min, max = params$max)\n  } else if (tolower(distribution_type) == \"normal\") {\n    params <- list(mean = mean(variable_data), sd = sd(variable_data))\n    distribution_fit$test_result <- shapiro.test(variable_data)\n  } else if (tolower(distribution_type) == \"exponential\") {\n    params <- list(rate = 1 / mean(variable_data))\n    distribution_fit$test_result <- ks.test(variable_data, \"pexp\", rate = params$rate)\n  }\n\n  # 출력 및 플롯 생성\n  print(paste(variable, \"의 기술 통계:\"))\n  print(summary(variable_data))\n  cat(\"\\n왜도:\", skewness(variable_data), \"\\n\")\n  cat(\"첨도:\", kurtosis(variable_data), \"\\n\")\n  print(paste(distribution_type, \"분포에 대한 적합도 검정 결과:\"))\n  print(distribution_fit$test_result)\n\n  # 히스토그램, Q-Q 플롯, CDF 플롯\n  hist_plot <- ggplot(data.frame(x = variable_data), aes(x = x)) +\n    geom_histogram(aes(y = ..density..), bins = 30, fill = \"skyblue\", color = \"black\") +\n    stat_function(fun = d_function, args = params, color = \"red\") +\n    labs(title = paste(variable, \"의 히스토그램 및\", distribution_type, \"분포 적합\"), x = variable, y = \"밀도\")\n  print(hist_plot)\n\n  qq_plot <- ggplot(data.frame(x = variable_data), aes(sample = x)) +\n    stat_qq(distribution = q_function, dparams = params, color = \"blue\") +\n    stat_qq_line(distribution = q_function, dparams = params, color = \"red\") +\n    labs(title = paste(variable, \"의 Q-Q 플롯 (\", distribution_type, \"분포)\"), x = \"이론적 분위수\", y = \"표본 분위수\")\n  print(qq_plot)\n\n  cdf_plot <- ggplot(data.frame(x = variable_data), aes(x = x)) +\n    stat_ecdf(geom = \"step\", color = \"blue\") +\n    stat_function(fun = p_function, args = params, color = \"red\") +\n    labs(title = paste(variable, \"의 경험적 및 이론적 CDF (\", distribution_type, \"분포)\"), x = variable, y = \"누적 확률\")\n  print(cdf_plot)\n}\n\n# 예시 사용법:\n# analyze_distribution(mtcars, \"mpg\", \"normal\")\nanalyze_distribution(penguins, \"bill_length_mm\", \"normal\")\n# analyze_distribution(penguins, \"bill_length_mm\", \"uniform\")\n# analyze_distribution(penguins, \"bill_length_mm\", \"exponential\")"}];
+globalThis.qwebrCellDetails = [{"code":"library(palmerpenguins)\nlibrary(moments)\n\nget_distribution_function <- function(type, prefix) {\n  distribution_map <- c(\n    uniform = \"unif\",\n    normal = \"norm\",\n    exponential = \"exp\"\n  )\n  distribution_name <- distribution_map[tolower(type)]\n  if (is.null(distribution_name)) {\n    stop(\"Unsupported distribution type\")\n  }\n  get(paste(prefix, distribution_name, sep = \"\"), envir = asNamespace(\"stats\"))\n}\n\n# 수정된 analyze_distribution 함수\nanalyze_distribution <- function(data, variable, distribution_type) {\n  if (!variable %in% names(data)) {\n    stop(\"변수가 데이터셋에 존재하지 않습니다.\")\n  }\n  variable_data <- na.omit(data[[variable]])\n\n  distribution_fit <- list()\n  params <- NULL\n  \n  # 매핑을 사용하여 함수를 가져옵니다\n  d_function <- get_distribution_function(distribution_type, \"d\")\n  q_function <- get_distribution_function(distribution_type, \"q\")\n  p_function <- get_distribution_function(distribution_type, \"p\")\n  \n  # 분포에 따른 파라미터 설정\n  if (tolower(distribution_type) == \"uniform\") {\n    params <- list(min = min(variable_data), max = max(variable_data))\n    distribution_fit$test_result <- ks.test(variable_data, \"punif\", min = params$min, max = params$max)\n  } else if (tolower(distribution_type) == \"normal\") {\n    params <- list(mean = mean(variable_data), sd = sd(variable_data))\n    distribution_fit$test_result <- shapiro.test(variable_data)\n  } else if (tolower(distribution_type) == \"exponential\") {\n    params <- list(rate = 1 / mean(variable_data))\n    distribution_fit$test_result <- ks.test(variable_data, \"pexp\", rate = params$rate)\n  }\n\n  # 출력 및 플롯 생성\n  print(paste(variable, \"의 기술 통계:\"))\n  print(summary(variable_data))\n  cat(\"\\n왜도:\", skewness(variable_data), \"\\n\")\n  cat(\"첨도:\", kurtosis(variable_data), \"\\n\")\n  print(paste(distribution_type, \"분포에 대한 적합도 검정 결과:\"))\n  print(distribution_fit$test_result)\n\n  # 히스토그램, Q-Q 플롯, CDF 플롯\n  hist_plot <- ggplot(data.frame(x = variable_data), aes(x = x)) +\n    geom_histogram(aes(y = ..density..), bins = 30, fill = \"skyblue\", color = \"black\") +\n    stat_function(fun = d_function, args = params, color = \"red\") +\n    labs(title = paste(variable, \"의 히스토그램 및\", distribution_type, \"분포 적합\"), x = variable, y = \"밀도\")\n  print(hist_plot)\n\n  qq_plot <- ggplot(data.frame(x = variable_data), aes(sample = x)) +\n    stat_qq(distribution = q_function, dparams = params, color = \"blue\") +\n    stat_qq_line(distribution = q_function, dparams = params, color = \"red\") +\n    labs(title = paste(variable, \"의 Q-Q 플롯 (\", distribution_type, \"분포)\"), x = \"이론적 분위수\", y = \"표본 분위수\")\n  print(qq_plot)\n\n  cdf_plot <- ggplot(data.frame(x = variable_data), aes(x = x)) +\n    stat_ecdf(geom = \"step\", color = \"blue\") +\n    stat_function(fun = p_function, args = params, color = \"red\") +\n    labs(title = paste(variable, \"의 경험적 및 이론적 CDF (\", distribution_type, \"분포)\"), x = variable, y = \"누적 확률\")\n  print(cdf_plot)\n}\n\n# 예시 사용법:\n# analyze_distribution(mtcars, \"mpg\", \"normal\")\nanalyze_distribution(penguins, \"bill_length_mm\", \"normal\")\n# analyze_distribution(penguins, \"bill_length_mm\", \"uniform\")\n# analyze_distribution(penguins, \"bill_length_mm\", \"exponential\")","id":1,"options":{"editor-max-height":"","label":"unnamed-chunk-1","read-only":"false","autorun":"false","results":"markup","message":"true","editor-font-scale":1,"out-height":"","fig-width":7,"out-width":"700px","fig-height":5,"warning":"true","comment":"","editor-quick-suggestions":"false","output":"true","context":"interactive","dpi":72,"classes":"","fig-cap":""}}];
 
 </script>
 <script type="module">
@@ -1153,10 +1153,51 @@ globalThis.qwebrExecuteCode = async function (
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">빛스탯</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../../01_data.html">
+ <span class="dropdown-text">01 데이터</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../02_eda.html">
+ <span class="dropdown-text">02 EDA</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../03_viz.html">
+ <span class="dropdown-text">03 시각화</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../04_testing.html">
+ <span class="dropdown-text">04 통계검정</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../05_infer.html">
+ <span class="dropdown-text">05 추론</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">소개</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../BitStat.html"> 
+<span class="menu-text">BitStat</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/bit2r/BitStat2"> <i class="bi bi-github" role="img">
@@ -1204,7 +1245,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-12</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

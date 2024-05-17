@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="이광춘">
-<meta name="dcterms.date" content="2024-05-15">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - x-점수 확률계산</title>
 <style>
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"out-height":"","context":"interactive","results":"markup","message":"true","fig-width":7,"classes":"","dpi":72,"editor-quick-suggestions":"false","output":"true","fig-height":5,"autorun":"false","comment":"","fig-cap":"","editor-font-scale":1,"read-only":"false","label":"unnamed-chunk-1","out-width":"700px","editor-max-height":"","warning":"true"},"code":"# Z-score에 대한 확률 계산 함수\ncalc_prob_z <- function(z) {\n  prob <- pnorm(z)\n  cat(\"P(X ≤\", z, \") =\", prob, \"\\n\")\n  \n  conf_level <- round((1 - 2 * (1 - pnorm(abs(z)))) * 100, 2)\n  cat(\"신뢰수준 (양측):\", conf_level, \"%\\n\")\n  \n  score_val <- round(qnorm(1 - (1 - conf_level/100) / 2), 2)\n  cat(\"대응하는 점수:\", score_val, \"\\n\")\n}\n\n# t-score에 대한 확률 계산 함수 \ncalc_prob_t <- function(t, df) {\n  prob <- pt(t, df)\n  cat(\"P(X ≤\", t, \") =\", prob, \"\\n\")\n  \n  conf_level <- round((1 - 2 * (1 - pt(abs(t), df))) * 100, 2)\n  cat(\"신뢰수준 (양측):\", conf_level, \"%\\n\")\n  \n  score_val <- round(qt(1 - (1 - conf_level/100) / 2, df), 2)\n  cat(\"대응하는 점수:\", score_val, \"\\n\")\n}\n\n# 카이제곱-점수에 대한 확률 계산 함수\ncalc_prob_chisq <- function(chisq, df) {\n  prob <- pchisq(chisq, df)\n  cat(\"P(X ≤\", chisq, \") =\", prob, \"\\n\")\n  \n  conf_level <- round(pchisq(chisq, df) * 100, 2)\n  cat(\"신뢰수준 (양측):\", conf_level, \"%\\n\")\n  \n  score_val <- round(qchisq(conf_level/100, df), 2)\n  cat(\"대응하는 점수:\", score_val, \"\\n\")\n}\n\n# Z-score 예시\ncalc_prob_z(1.96)\n# P(X ≤ 1.96 ) = 0.9750021 \n# 신뢰수준 (양측): 95 %\n# 대응하는 점수: 1.96\n\n# t-score 예시 \ncalc_prob_t(2.262, 10)\n# P(X ≤ 2.262 ) = 0.9750022 \n# 신뢰수준 (양측): 95 %\n# 대응하는 점수: 2.23\n\n# 카이제곱-점수 예시\ncalc_prob_chisq(3.84, 1) \n# P(X ≤ 3.84 ) = 0.9500042\n# 신뢰수준 (양측): 95 %\n# 대응하는 점수: 3.84"}];
+globalThis.qwebrCellDetails = [{"id":1,"code":"# Z-score에 대한 확률 계산 함수\ncalc_prob_z <- function(z) {\n  prob <- pnorm(z)\n  cat(\"P(X ≤\", z, \") =\", prob, \"\\n\")\n  \n  conf_level <- round((1 - 2 * (1 - pnorm(abs(z)))) * 100, 2)\n  cat(\"신뢰수준 (양측):\", conf_level, \"%\\n\")\n  \n  score_val <- round(qnorm(1 - (1 - conf_level/100) / 2), 2)\n  cat(\"대응하는 점수:\", score_val, \"\\n\")\n}\n\n# t-score에 대한 확률 계산 함수 \ncalc_prob_t <- function(t, df) {\n  prob <- pt(t, df)\n  cat(\"P(X ≤\", t, \") =\", prob, \"\\n\")\n  \n  conf_level <- round((1 - 2 * (1 - pt(abs(t), df))) * 100, 2)\n  cat(\"신뢰수준 (양측):\", conf_level, \"%\\n\")\n  \n  score_val <- round(qt(1 - (1 - conf_level/100) / 2, df), 2)\n  cat(\"대응하는 점수:\", score_val, \"\\n\")\n}\n\n# 카이제곱-점수에 대한 확률 계산 함수\ncalc_prob_chisq <- function(chisq, df) {\n  prob <- pchisq(chisq, df)\n  cat(\"P(X ≤\", chisq, \") =\", prob, \"\\n\")\n  \n  conf_level <- round(pchisq(chisq, df) * 100, 2)\n  cat(\"신뢰수준 (양측):\", conf_level, \"%\\n\")\n  \n  score_val <- round(qchisq(conf_level/100, df), 2)\n  cat(\"대응하는 점수:\", score_val, \"\\n\")\n}\n\n# Z-score 예시\ncalc_prob_z(1.96)\n# P(X ≤ 1.96 ) = 0.9750021 \n# 신뢰수준 (양측): 95 %\n# 대응하는 점수: 1.96\n\n# t-score 예시 \ncalc_prob_t(2.262, 10)\n# P(X ≤ 2.262 ) = 0.9750022 \n# 신뢰수준 (양측): 95 %\n# 대응하는 점수: 2.23\n\n# 카이제곱-점수 예시\ncalc_prob_chisq(3.84, 1) \n# P(X ≤ 3.84 ) = 0.9500042\n# 신뢰수준 (양측): 95 %\n# 대응하는 점수: 3.84","options":{"out-height":"","comment":"","fig-height":5,"editor-font-scale":1,"editor-max-height":"","read-only":"false","fig-cap":"","context":"interactive","autorun":"false","editor-quick-suggestions":"false","classes":"","results":"markup","output":"true","out-width":"700px","message":"true","dpi":72,"label":"unnamed-chunk-1","warning":"true","fig-width":7}}];
 
 </script>
 <script type="module">
@@ -1177,11 +1177,15 @@ globalThis.qwebrExecuteCode = async function (
   </li>  
         <li>
     <a class="dropdown-item" href="../../05_infer.html">
- <span class="dropdown-text">05 추론과 회귀모형</span></a>
+ <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../06_theory.html">
- <span class="dropdown-text">06 통계이론</span></a>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
   </li>
@@ -1244,7 +1248,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-15</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

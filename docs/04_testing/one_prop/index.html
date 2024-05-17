@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="이광춘">
-<meta name="dcterms.date" content="2024-05-13">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 단일 비율 가설 검정</title>
 <style>
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"read-only":"false","autorun":"false","editor-quick-suggestions":"false","fig-width":7,"message":"true","results":"markup","comment":"","context":"interactive","fig-cap":"","classes":"","out-height":"","editor-max-height":"","out-width":"700px","label":"unnamed-chunk-1","output":"true","editor-font-scale":1,"warning":"true","fig-height":5,"dpi":72},"code":"# 관찰된 결함 제품 수와 총 제품 수\nobserved_defects <- 12\ntotal_products <- 100\n\n# 모집단에서 기대되는 결함률 (모비율)\npopulation_rate <- 0.10\n\n# 단일 비율 z-검정 수행\ntest_result <- prop.test(observed_defects, total_products, p = population_rate,\n                         alternative = \"two.sided\", conf.level = 0.95, correct = TRUE)\n\n# 결과 출력\nprint(test_result)","id":1}];
+globalThis.qwebrCellDetails = [{"options":{"editor-font-scale":1,"autorun":"false","warning":"true","message":"true","dpi":72,"results":"markup","editor-max-height":"","context":"interactive","classes":"","out-width":"700px","fig-height":5,"editor-quick-suggestions":"false","comment":"","read-only":"false","out-height":"","fig-width":7,"label":"unnamed-chunk-1","output":"true","fig-cap":""},"code":"# 관찰된 결함 제품 수와 총 제품 수\nobserved_defects <- 12\ntotal_products <- 100\n\n# 모집단에서 기대되는 결함률 (모비율)\npopulation_rate <- 0.10\n\n# 단일 비율 z-검정 수행\ntest_result <- prop.test(observed_defects, total_products, p = population_rate,\n                         alternative = \"two.sided\", conf.level = 0.95, correct = TRUE)\n\n# 결과 출력\nprint(test_result)","id":1}];
 
 </script>
 <script type="module">
@@ -1177,11 +1177,15 @@ globalThis.qwebrExecuteCode = async function (
   </li>  
         <li>
     <a class="dropdown-item" href="../../05_infer.html">
- <span class="dropdown-text">05 추론과 회귀모형</span></a>
+ <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../06_theory.html">
- <span class="dropdown-text">06 통계이론</span></a>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
   </li>
@@ -1243,7 +1247,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-13</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

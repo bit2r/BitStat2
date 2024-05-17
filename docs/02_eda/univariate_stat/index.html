@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="이광춘">
-<meta name="dcterms.date" content="2024-05-13">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 단변량 기술통계</title>
 <style>
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"label":"desc-stat-univariate-webr","fig-height":5,"message":"true","fig-cap":"","comment":"","results":"markup","editor-font-scale":1,"fig-width":7,"autorun":"false","output":"true","dpi":72,"classes":"","context":"interactive","out-width":"700px","editor-quick-suggestions":"false","read-only":"false","editor-max-height":"","out-height":"","warning":"true"},"id":1,"code":"\nlibrary(ggplot2)\n\nunivariate_analysis <- function(data, variable) {\n  # 변수 유형 확인\n  if (is.numeric(data[[variable]])) {\n    cat(\"선택된 변수는 연속형 변수입니다.\\n\\n\")\n    \n    # 요약 통계 출력\n    summary_stats <- summary(data[[variable]])\n    names(summary_stats) <- c(\"최솟값\", \"1분위수\", \"중앙값\", \"평균\", \"3분위수\", \"최댓값\")\n    cat(\"요약 통계:\\n\")\n    print(summary_stats)\n    cat(\"\\n\")\n    cat(\"결측값 개수:\", sum(is.na(data[[variable]])), \"\\n\\n\")\n    \n    # 시각화 - Boxplot + Dot\n    plot1 <- ggplot(data, aes(x = factor(0), y = .data[[variable]])) +\n      geom_boxplot(fill = \"lightblue\", color = \"black\", outlier.shape = 16, outlier.size = 2) +\n      geom_point(position = position_jitter(width = 0.1), size = 2, alpha = 0.6) +\n      labs(title = \"Boxplot + Dot\", x = \"\", y = variable) +\n      theme_minimal()\n    \n    # 시각화 - Density Plot + Histogram\n    plot2 <- ggplot(data, aes(x = .data[[variable]])) +\n      geom_density(fill = \"lightblue\", alpha = 0.6) +\n      geom_histogram(aes(y = ..density..), color = \"black\", fill = \"white\", alpha = 0.6, bins = 30) +\n      labs(title = \"Density Plot + Histogram\", x = variable, y = \"Density\") +\n      theme_minimal()\n    \n    # 시각화 결과 반환\n    return(list(plot1 = plot1, plot2 = plot2))\n  } else {\n    cat(\"선택된 변수는 범주형 변수입니다.\\n\\n\")\n    \n    # 요약 통계 출력\n    freq_table <- table(data[[variable]])\n    prop_table <- prop.table(freq_table)\n    cat(\"범주별 빈도와 비율:\\n\")\n    print(cbind(freq_table, round(prop_table, 4)))\n    cat(\"\\n\")\n    cat(\"결측값 개수:\", sum(is.na(data[[variable]])), \"\\n\\n\")\n    \n    # 시각화 - 막대 그래프\n    plot1 <- ggplot(data, aes(x = .data[[variable]])) +\n      geom_bar(fill = \"lightblue\", color = \"black\") +\n      labs(title = \"Bar Plot\", x = variable, y = \"Count\") +\n      theme_minimal() +\n      theme(axis.text.x = element_text(angle = 45, hjust = 1))\n    \n    # 시각화 - 원 그래프\n    plot2 <- ggplot(data, aes(x = \"\", fill = .data[[variable]])) +\n      geom_bar(width = 1) +\n      coord_polar(\"y\", start = 0) +\n      labs(title = \"Pie Chart\", fill = variable) +\n      theme_void() +\n      theme(legend.position = \"bottom\")\n    \n    # 시각화 결과 반환\n    return(list(plot1 = plot1, plot2 = plot2))\n  }\n}\n\n# 연속형 변수 예제\ncat(\"연속형 변수 예제 - mpg\\n\\n\")\ncontinuous_example <- univariate_analysis(mtcars, \"mpg\")\nprint(continuous_example$plot1)\nprint(continuous_example$plot2)\n\ncat(\"\\n\\n\")\n\n# 범주형 변수 예제\ncat(\"범주형 변수 예제 - cyl\\n\\n\")\ncategorical_example <- univariate_analysis(ChickWeight, \"Diet\")\nprint(categorical_example$plot1)\nprint(categorical_example$plot2)"}];
+globalThis.qwebrCellDetails = [{"options":{"fig-width":7,"read-only":"false","fig-cap":"","comment":"","output":"true","out-height":"","warning":"true","editor-font-scale":1,"dpi":72,"fig-height":5,"label":"desc-stat-univariate-webr","context":"interactive","message":"true","classes":"","autorun":"false","results":"markup","out-width":"700px","editor-max-height":"","editor-quick-suggestions":"false"},"code":"\nlibrary(ggplot2)\n\nunivariate_analysis <- function(data, variable) {\n  # 변수 유형 확인\n  if (is.numeric(data[[variable]])) {\n    cat(\"선택된 변수는 연속형 변수입니다.\\n\\n\")\n    \n    # 요약 통계 출력\n    summary_stats <- summary(data[[variable]])\n    names(summary_stats) <- c(\"최솟값\", \"1분위수\", \"중앙값\", \"평균\", \"3분위수\", \"최댓값\")\n    cat(\"요약 통계:\\n\")\n    print(summary_stats)\n    cat(\"\\n\")\n    cat(\"결측값 개수:\", sum(is.na(data[[variable]])), \"\\n\\n\")\n    \n    # 시각화 - Boxplot + Dot\n    plot1 <- ggplot(data, aes(x = factor(0), y = .data[[variable]])) +\n      geom_boxplot(fill = \"lightblue\", color = \"black\", outlier.shape = 16, outlier.size = 2) +\n      geom_point(position = position_jitter(width = 0.1), size = 2, alpha = 0.6) +\n      labs(title = \"Boxplot + Dot\", x = \"\", y = variable) +\n      theme_minimal()\n    \n    # 시각화 - Density Plot + Histogram\n    plot2 <- ggplot(data, aes(x = .data[[variable]])) +\n      geom_density(fill = \"lightblue\", alpha = 0.6) +\n      geom_histogram(aes(y = ..density..), color = \"black\", fill = \"white\", alpha = 0.6, bins = 30) +\n      labs(title = \"Density Plot + Histogram\", x = variable, y = \"Density\") +\n      theme_minimal()\n    \n    # 시각화 결과 반환\n    return(list(plot1 = plot1, plot2 = plot2))\n  } else {\n    cat(\"선택된 변수는 범주형 변수입니다.\\n\\n\")\n    \n    # 요약 통계 출력\n    freq_table <- table(data[[variable]])\n    prop_table <- prop.table(freq_table)\n    cat(\"범주별 빈도와 비율:\\n\")\n    print(cbind(freq_table, round(prop_table, 4)))\n    cat(\"\\n\")\n    cat(\"결측값 개수:\", sum(is.na(data[[variable]])), \"\\n\\n\")\n    \n    # 시각화 - 막대 그래프\n    plot1 <- ggplot(data, aes(x = .data[[variable]])) +\n      geom_bar(fill = \"lightblue\", color = \"black\") +\n      labs(title = \"Bar Plot\", x = variable, y = \"Count\") +\n      theme_minimal() +\n      theme(axis.text.x = element_text(angle = 45, hjust = 1))\n    \n    # 시각화 - 원 그래프\n    plot2 <- ggplot(data, aes(x = \"\", fill = .data[[variable]])) +\n      geom_bar(width = 1) +\n      coord_polar(\"y\", start = 0) +\n      labs(title = \"Pie Chart\", fill = variable) +\n      theme_void() +\n      theme(legend.position = \"bottom\")\n    \n    # 시각화 결과 반환\n    return(list(plot1 = plot1, plot2 = plot2))\n  }\n}\n\n# 연속형 변수 예제\ncat(\"연속형 변수 예제 - mpg\\n\\n\")\ncontinuous_example <- univariate_analysis(mtcars, \"mpg\")\nprint(continuous_example$plot1)\nprint(continuous_example$plot2)\n\ncat(\"\\n\\n\")\n\n# 범주형 변수 예제\ncat(\"범주형 변수 예제 - cyl\\n\\n\")\ncategorical_example <- univariate_analysis(ChickWeight, \"Diet\")\nprint(categorical_example$plot1)\nprint(categorical_example$plot2)","id":1}];
 
 </script>
 <script type="module">
@@ -1177,11 +1177,15 @@ globalThis.qwebrExecuteCode = async function (
   </li>  
         <li>
     <a class="dropdown-item" href="../../05_infer.html">
- <span class="dropdown-text">05 추론과 회귀모형</span></a>
+ <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../06_theory.html">
- <span class="dropdown-text">06 통계이론</span></a>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
   </li>
@@ -1249,7 +1253,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-13</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

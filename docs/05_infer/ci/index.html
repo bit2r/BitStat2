@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="이광춘">
-<meta name="dcterms.date" content="2024-05-15">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 신뢰구간</title>
 <style>
@@ -293,7 +293,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(ggplot2)\n\n# 설정값 지정\nn_samples <- 100\nsample_size <- 50\nconf_level <- 0.95\n\n# 모집단 비율에 대한 신뢰구간 계산 및 시각화\npop_prop <- 0.4\nn_population <- 100000\npopulation <- rbernoulli(n_population, p = pop_prop)\ntrue_prop <- mean(population)\n\nsample_props <- vector('numeric', n_samples)\nupper_cis_prop <- vector('numeric', n_samples)\nlower_cis_prop <- vector('numeric', n_samples)\ncontains_true_prop <- vector('numeric', n_samples)\n\nfor (i in 1:n_samples) {\n  sample <- sample(population, sample_size, replace = FALSE)\n  sample_prop <- mean(sample)\n  sample_std <- sqrt(sample_prop * (1 - sample_prop) / sample_size)\n  z_value <- qnorm((1 - conf_level) / 2, lower.tail = FALSE)\n  margin_of_error <- z_value * sample_std\n  \n  sample_props[i] <- sample_prop\n  upper_cis_prop[i] <- sample_prop + margin_of_error\n  lower_cis_prop[i] <- sample_prop - margin_of_error\n  contains_true_prop[i] <- ifelse(true_prop >= lower_cis_prop[i] & true_prop <= upper_cis_prop[i], 1, 0)\n}\n\nprop_df <- data.frame(\n  sample_prop = sample_props,\n  upper_ci = upper_cis_prop,\n  lower_ci = lower_cis_prop,\n  contains_true_prop = contains_true_prop\n)\n\nprop_plot <- ggplot(prop_df, aes(x = 1:n_samples, y = sample_prop)) +\n  geom_point() +\n  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, color = factor(contains_true_prop))) +\n  geom_hline(yintercept = true_prop, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"모집단 비율에 대한 신뢰구간\",\n       x = \"표본 번호\",\n       y = \"표본 비율\") +\n  scale_color_manual(values = c(\"0\" = \"gray\", \"1\" = \"blue\"),\n                     labels = c(\"포함 안 함\", \"포함\"),\n                     name = \"참값 포함 여부\") +\n  theme_minimal()\n\nprint(prop_plot)\n\ncat(\"모집단 비율에 대한 신뢰구간 포함률:\", mean(contains_true_prop), \"\\n\")\n\n# 모집단 평균에 대한 신뢰구간 계산 및 시각화\npop_mean <- 10\npop_sd <- 2\nn_population <- 100000\npopulation <- rnorm(n_population, mean = pop_mean, sd = pop_sd)\ntrue_mean <- mean(population)\n\nsample_means <- vector('numeric', n_samples)\nupper_cis_mean <- vector('numeric', n_samples)\nlower_cis_mean <- vector('numeric', n_samples)\ncontains_true_mean <- vector('numeric', n_samples)\n\nfor (i in 1:n_samples) {\n  sample <- sample(population, sample_size, replace = FALSE)\n  sample_mean <- mean(sample)\n  sample_std <- sd(sample) / sqrt(sample_size)\n  t_value <- qt((1 - conf_level) / 2, df = sample_size - 1, lower.tail = FALSE)\n  margin_of_error <- t_value * sample_std\n  \n  sample_means[i] <- sample_mean\n  upper_cis_mean[i] <- sample_mean + margin_of_error\n  lower_cis_mean[i] <- sample_mean - margin_of_error\n  contains_true_mean[i] <- ifelse(true_mean >= lower_cis_mean[i] & true_mean <= upper_cis_mean[i], 1, 0)\n}\n\nmean_df <- data.frame(\n  sample_mean = sample_means,\n  upper_ci = upper_cis_mean,\n  lower_ci = lower_cis_mean,\n  contains_true_mean = contains_true_mean\n)\n\nmean_plot <- ggplot(mean_df, aes(x = 1:n_samples, y = sample_mean)) +\n  geom_point() +\n  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, color = factor(contains_true_mean))) +\n  geom_hline(yintercept = true_mean, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"모집단 평균에 대한 신뢰구간\",\n       x = \"표본 번호\",\n       y = \"표본 평균\") +\n  scale_color_manual(values = c(\"0\" = \"gray\", \"1\" = \"blue\"),\n                     labels = c(\"포함 안 함\", \"포함\"),\n                     name = \"참값 포함\") +\n  theme_minimal()\n\n\nprint(mean_plot)\n\ncat(\"모집단 평균에 대한 신뢰구간 포함률:\", mean(contains_true_mean), \"\\n\")","options":{"message":"true","dpi":72,"label":"unnamed-chunk-1","editor-quick-suggestions":"false","read-only":"false","warning":"true","fig-width":7,"out-width":"700px","autorun":"false","output":"true","context":"interactive","results":"markup","fig-cap":"","out-height":"","classes":"","fig-height":5,"comment":"","editor-font-scale":1,"editor-max-height":""},"id":1}];
+globalThis.qwebrCellDetails = [{"id":1,"options":{"autorun":"false","classes":"","fig-width":7,"output":"true","message":"true","context":"interactive","out-height":"","fig-cap":"","editor-font-scale":1,"out-width":"700px","comment":"","editor-quick-suggestions":"false","label":"unnamed-chunk-1","read-only":"false","warning":"true","results":"markup","dpi":72,"editor-max-height":"","fig-height":5},"code":"library(ggplot2)\n\n# 설정값 지정\nn_samples <- 100\nsample_size <- 50\nconf_level <- 0.95\n\n# 모집단 비율에 대한 신뢰구간 계산 및 시각화\npop_prop <- 0.4\nn_population <- 100000\npopulation <- rbernoulli(n_population, p = pop_prop)\ntrue_prop <- mean(population)\n\nsample_props <- vector('numeric', n_samples)\nupper_cis_prop <- vector('numeric', n_samples)\nlower_cis_prop <- vector('numeric', n_samples)\ncontains_true_prop <- vector('numeric', n_samples)\n\nfor (i in 1:n_samples) {\n  sample <- sample(population, sample_size, replace = FALSE)\n  sample_prop <- mean(sample)\n  sample_std <- sqrt(sample_prop * (1 - sample_prop) / sample_size)\n  z_value <- qnorm((1 - conf_level) / 2, lower.tail = FALSE)\n  margin_of_error <- z_value * sample_std\n  \n  sample_props[i] <- sample_prop\n  upper_cis_prop[i] <- sample_prop + margin_of_error\n  lower_cis_prop[i] <- sample_prop - margin_of_error\n  contains_true_prop[i] <- ifelse(true_prop >= lower_cis_prop[i] & true_prop <= upper_cis_prop[i], 1, 0)\n}\n\nprop_df <- data.frame(\n  sample_prop = sample_props,\n  upper_ci = upper_cis_prop,\n  lower_ci = lower_cis_prop,\n  contains_true_prop = contains_true_prop\n)\n\nprop_plot <- ggplot(prop_df, aes(x = 1:n_samples, y = sample_prop)) +\n  geom_point() +\n  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, color = factor(contains_true_prop))) +\n  geom_hline(yintercept = true_prop, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"모집단 비율에 대한 신뢰구간\",\n       x = \"표본 번호\",\n       y = \"표본 비율\") +\n  scale_color_manual(values = c(\"0\" = \"gray\", \"1\" = \"blue\"),\n                     labels = c(\"포함 안 함\", \"포함\"),\n                     name = \"참값 포함 여부\") +\n  theme_minimal()\n\nprint(prop_plot)\n\ncat(\"모집단 비율에 대한 신뢰구간 포함률:\", mean(contains_true_prop), \"\\n\")\n\n# 모집단 평균에 대한 신뢰구간 계산 및 시각화\npop_mean <- 10\npop_sd <- 2\nn_population <- 100000\npopulation <- rnorm(n_population, mean = pop_mean, sd = pop_sd)\ntrue_mean <- mean(population)\n\nsample_means <- vector('numeric', n_samples)\nupper_cis_mean <- vector('numeric', n_samples)\nlower_cis_mean <- vector('numeric', n_samples)\ncontains_true_mean <- vector('numeric', n_samples)\n\nfor (i in 1:n_samples) {\n  sample <- sample(population, sample_size, replace = FALSE)\n  sample_mean <- mean(sample)\n  sample_std <- sd(sample) / sqrt(sample_size)\n  t_value <- qt((1 - conf_level) / 2, df = sample_size - 1, lower.tail = FALSE)\n  margin_of_error <- t_value * sample_std\n  \n  sample_means[i] <- sample_mean\n  upper_cis_mean[i] <- sample_mean + margin_of_error\n  lower_cis_mean[i] <- sample_mean - margin_of_error\n  contains_true_mean[i] <- ifelse(true_mean >= lower_cis_mean[i] & true_mean <= upper_cis_mean[i], 1, 0)\n}\n\nmean_df <- data.frame(\n  sample_mean = sample_means,\n  upper_ci = upper_cis_mean,\n  lower_ci = lower_cis_mean,\n  contains_true_mean = contains_true_mean\n)\n\nmean_plot <- ggplot(mean_df, aes(x = 1:n_samples, y = sample_mean)) +\n  geom_point() +\n  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, color = factor(contains_true_mean))) +\n  geom_hline(yintercept = true_mean, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"모집단 평균에 대한 신뢰구간\",\n       x = \"표본 번호\",\n       y = \"표본 평균\") +\n  scale_color_manual(values = c(\"0\" = \"gray\", \"1\" = \"blue\"),\n                     labels = c(\"포함 안 함\", \"포함\"),\n                     name = \"참값 포함\") +\n  theme_minimal()\n\n\nprint(mean_plot)\n\ncat(\"모집단 평균에 대한 신뢰구간 포함률:\", mean(contains_true_mean), \"\\n\")"}];
 
 </script>
 <script type="module">
@@ -1177,11 +1177,15 @@ globalThis.qwebrExecuteCode = async function (
   </li>  
         <li>
     <a class="dropdown-item" href="../../05_infer.html">
- <span class="dropdown-text">05 추론과 회귀모형</span></a>
+ <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../06_theory.html">
- <span class="dropdown-text">06 통계이론</span></a>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
   </li>
@@ -1242,7 +1246,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-15</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

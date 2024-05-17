@@ -5,92 +5,72 @@
     <lastmod>2024-05-15T12:55:06.306Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/03_viz/ggplot/index.html</loc>
-    <lastmod>2024-05-11T03:18:59.268Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/about.html</loc>
+    <lastmod>2024-05-11T01:24:11.120Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/03_viz/esquisse/index.html</loc>
-    <lastmod>2024-05-11T04:09:42.199Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/07_theory/sample_size/index.html</loc>
+    <lastmod>2024-05-17T01:06:09.172Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/03_viz/viz/index.html</loc>
-    <lastmod>2024-05-11T04:10:07.763Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/01_data/dist_discrete/index.html</loc>
-    <lastmod>2024-05-12T03:02:46.694Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/01_data/dist_continuous/index.html</loc>
-    <lastmod>2024-05-12T06:10:20.382Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/01_data/dist_fitting/index.html</loc>
-    <lastmod>2024-05-12T01:52:14.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/06_theory/lln/index.html</loc>
+    <loc>https://r2bit.com/BitStat2/07_theory/lln/index.html</loc>
     <lastmod>2024-05-12T02:56:37.124Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/01_data/sampling_concept/index.html</loc>
-    <lastmod>2024-05-12T03:23:05.419Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/06_reg.html</loc>
+    <lastmod>2024-05-15T12:52:56.134Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/01_data.html</loc>
-    <lastmod>2024-05-12T06:14:57.342Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/06_reg/corr_reg/index.html</loc>
+    <lastmod>2024-05-16T00:01:59.786Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/06_theory.html</loc>
-    <lastmod>2024-05-12T06:19:17.479Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/05_infer.html</loc>
-    <lastmod>2024-05-15T05:44:19.013Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/03_viz.html</loc>
-    <lastmod>2024-05-12T06:16:32.830Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/02_eda.html</loc>
-    <lastmod>2024-05-12T06:19:36.127Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/05_infer/clt/index.html</loc>
+    <lastmod>2024-05-15T05:51:00.512Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/04_testing.html</loc>
     <lastmod>2024-05-12T06:17:17.662Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/BitStat.html</loc>
-    <lastmod>2024-05-12T06:31:51.230Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/about.html</loc>
-    <lastmod>2024-05-11T01:24:11.120Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/04_testing/z-test/index.html</loc>
-    <lastmod>2024-05-12T23:58:54.456Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/04_testing/means/index.html</loc>
-    <lastmod>2024-05-12T10:50:30.327Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/04_testing/one_mean/index.html</loc>
-    <lastmod>2024-05-13T00:26:22.476Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/04_testing/two_means/index.html</loc>
-    <lastmod>2024-05-13T01:45:51.567Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/04_testing/two_prop/index.html</loc>
+    <lastmod>2024-05-13T07:33:39.613Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/04_testing/one_prop/index.html</loc>
     <lastmod>2024-05-13T06:08:15.046Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/04_testing/two_prop/index.html</loc>
-    <lastmod>2024-05-13T07:33:39.613Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/03_viz.html</loc>
+    <lastmod>2024-05-12T06:16:32.830Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/03_viz/esquisse/index.html</loc>
+    <lastmod>2024-05-11T04:09:42.199Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/02_eda/wordcloud/index.html</loc>
+    <lastmod>2024-05-16T07:49:01.777Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/02_eda/multivariate_stat/index.html</loc>
+    <lastmod>2024-05-15T02:53:01.915Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/01_data.html</loc>
+    <lastmod>2024-05-12T06:14:57.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/01_data/dist_fitting/index.html</loc>
+    <lastmod>2024-05-12T01:52:14.144Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/01_data/dist_continuous/index.html</loc>
+    <lastmod>2024-05-12T06:10:20.382Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/01_data/dist_discrete/index.html</loc>
+    <lastmod>2024-05-12T03:02:46.694Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/01_data/sampling_method/index.html</loc>
@@ -105,63 +85,51 @@
     <lastmod>2024-05-13T13:38:36.026Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/02_eda/multivariate_stat/index.html</loc>
-    <lastmod>2024-05-15T02:53:01.915Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/02_eda.html</loc>
+    <lastmod>2024-05-12T06:19:36.127Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/05_infer/clt/index.html</loc>
-    <lastmod>2024-05-15T05:51:00.512Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/03_viz/viz/index.html</loc>
+    <lastmod>2024-05-11T04:10:07.763Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/05_infer/ci/index.html</loc>
-    <lastmod>2024-05-15T07:23:21.132Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/04_testing/one_mean/index.html</loc>
+    <lastmod>2024-05-13T00:26:22.476Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/BitStat2/04_testing/two_means/index.html</loc>
+    <lastmod>2024-05-13T01:45:51.567Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/04_testing/x_score/index.html</loc>
     <lastmod>2024-05-15T12:47:18.640Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/07_theory/lln/index.html</loc>
-    <lastmod>2024-05-12T02:56:37.124Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/05_infer/ci/index.html</loc>
+    <lastmod>2024-05-15T07:23:21.132Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/06_reg/lln/index.html</loc>
-    <lastmod>2024-05-12T02:56:37.124Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/06_reg.html</loc>
-    <lastmod>2024-05-15T12:52:56.134Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/07_theory.html</loc>
-    <lastmod>2024-05-12T06:19:17.479Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/06_reg/simple/index.html</loc>
-    <lastmod>2024-05-16T00:01:59.786Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/05_infer.html</loc>
+    <lastmod>2024-05-15T05:44:19.013Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/06_reg/reg/index.html</loc>
     <lastmod>2024-05-16T01:57:08.922Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/06_reg/corr_reg/index.html</loc>
-    <lastmod>2024-05-16T00:01:59.786Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/07_theory/clustering/index.html</loc>
+    <lastmod>2024-05-16T10:14:00.793Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/BitStat2/07_theory/mle/index.html</loc>
     <lastmod>2024-05-16T06:32:55.421Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/02_eda/wordcloud/index.html</loc>
-    <lastmod>2024-05-16T07:49:01.777Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/07_theory.html</loc>
+    <lastmod>2024-05-17T01:40:43.501Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/BitStat2/07_theory/clustering/index.html</loc>
-    <lastmod>2024-05-16T10:14:00.793Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/BitStat2/07_theory/sample_size/index.html</loc>
-    <lastmod>2024-05-17T01:06:09.172Z</lastmod>
+    <loc>https://r2bit.com/BitStat2/BitStat.html</loc>
+    <lastmod>2024-05-12T06:31:51.230Z</lastmod>
   </url>
 </urlset>

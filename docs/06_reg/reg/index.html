@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-05-16">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 회귀분석</title>
 <style>
@@ -292,7 +292,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"# 필요한 패키지 로드\nlibrary(broom)\nlibrary(palmerpenguins)\n\n# 회귀분석 수행하기\nperform_regression <- function(data, x_var, y_var) {\n  formula <- as.formula(paste(y_var, \"~\", x_var))\n  fit <- lm(formula, data = data)\n  return(fit)\n}\n\n# 회귀분석 결과 출력하기\ndisplay_results <- function(fit, x_var, y_var) {\n  cat(\"회귀 모형 요약:\\n\")\n  print(summary(fit))\n  \n  cat(\"\\n모형 요약:\\n\")\n  model_df <- broom::glance(fit) |>\n    mutate(across(where(is.numeric), ~ round(.x, digits = 3)))\n  print(model_df)\n  \n  cat(\"\\n회귀 계수:\\n\")\n  coef_df <- broom::tidy(fit, conf.int = TRUE) |>\n    mutate(across(where(is.numeric), ~ round(.x, digits = 3)))\n  names(coef_df) <- c(\"항\", \"추정치\", \"표준오차\", \"t 값\", \"P-값\", \"2.5% 신뢰구간\", \"97.5% 신뢰구간\")\n  print(coef_df)\n}\n\n\npenguins <- palmerpenguins::penguins |> \n  na.omit()\n\n# 회귀분석 수행하기\nfit <- perform_regression(penguins, \"body_mass_g\", \"bill_length_mm\")\n\n# 결과 출력하기\ndisplay_results(fit, \"body_mass_g\", \"bill_length_mm\")","options":{"comment":"","warning":"true","read-only":"false","editor-max-height":"","output":"true","out-height":"","editor-quick-suggestions":"false","label":"unnamed-chunk-1","context":"interactive","fig-height":5,"out-width":"700px","dpi":72,"fig-width":7,"autorun":"false","message":"true","results":"markup","fig-cap":"","classes":"","editor-font-scale":1},"id":1}];
+globalThis.qwebrCellDetails = [{"id":1,"options":{"context":"interactive","out-width":"700px","results":"markup","dpi":72,"classes":"","output":"true","out-height":"","message":"true","fig-width":7,"warning":"true","autorun":"false","comment":"","fig-height":5,"read-only":"false","editor-quick-suggestions":"false","editor-max-height":"","editor-font-scale":1,"fig-cap":"","label":"unnamed-chunk-1"},"code":"# 필요한 패키지 로드\nlibrary(broom)\nlibrary(palmerpenguins)\n\n# 회귀분석 수행하기\nperform_regression <- function(data, x_var, y_var) {\n  formula <- as.formula(paste(y_var, \"~\", x_var))\n  fit <- lm(formula, data = data)\n  return(fit)\n}\n\n# 회귀분석 결과 출력하기\ndisplay_results <- function(fit, x_var, y_var) {\n  cat(\"회귀 모형 요약:\\n\")\n  print(summary(fit))\n  \n  cat(\"\\n모형 요약:\\n\")\n  model_df <- broom::glance(fit) |>\n    mutate(across(where(is.numeric), ~ round(.x, digits = 3)))\n  print(model_df)\n  \n  cat(\"\\n회귀 계수:\\n\")\n  coef_df <- broom::tidy(fit, conf.int = TRUE) |>\n    mutate(across(where(is.numeric), ~ round(.x, digits = 3)))\n  names(coef_df) <- c(\"항\", \"추정치\", \"표준오차\", \"t 값\", \"P-값\", \"2.5% 신뢰구간\", \"97.5% 신뢰구간\")\n  print(coef_df)\n}\n\n\npenguins <- palmerpenguins::penguins |> \n  na.omit()\n\n# 회귀분석 수행하기\nfit <- perform_regression(penguins, \"body_mass_g\", \"bill_length_mm\")\n\n# 결과 출력하기\ndisplay_results(fit, \"body_mass_g\", \"bill_length_mm\")"}];
 
 </script>
 <script type="module">
@@ -1271,7 +1271,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-16</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

@@ -2,7 +2,7 @@
 title: "통계이론"
 subtitle: "통계이론의 기초"
 listing:
-  contents: 06_theory
+  contents: 07_theory
   sort: "date-modified desc"
   type: grid
   categories: true

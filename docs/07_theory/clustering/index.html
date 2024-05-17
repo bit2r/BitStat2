@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-05-16">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 군집분석</title>
 <style>
@@ -292,7 +292,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"code":"# 필요한 라이브러리 로드\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(RColorBrewer)\nlibrary(palmerpenguins)\n\npenguins <- palmerpenguins::penguins |> drop_na()\n\n# 숫자형 변수 선택\nnumeric_vars <- names(penguins)[sapply(penguins, is.numeric)]\n\n# 선택된 데이터 (예: 첫 번째와 두 번째 숫자형 변수 선택)\nselected_data <- penguins[, setdiff(numeric_vars, \"year\")]\n\n# PCA 수행\npca_result <- prcomp(selected_data, scale. = TRUE)\n\n# K-means 클러스터링 수행\nset.seed(567) # 재현성을 위해 설정\nk <- 3 # 클러스터 수 설정\nkmeans_result <- kmeans(pca_result$x[, 1:2], centers = k)\n\n# 클러스터 결과 추가\nclustered_data <- data.frame(pca_result$x[, 1:2])\nclustered_data$cluster <- factor(kmeans_result$cluster)\n\n# 클러스터 중심 가져오기\ncenters <- data.frame(kmeans_result$centers)\ncenters$cluster <- factor(1:k)\n\n# 클러스터링 결과 시각화\nggplot(clustered_data, aes(x = PC1, y = PC2, color = cluster)) +\n  geom_point(size = 3) +\n  scale_color_brewer(palette = \"Set2\") +\n  geom_text(data = centers, aes(x = PC1, y = PC2, label = \"X\"), size = 8, color = \"black\") +\n  labs(title = paste(\"K-means 클러스터링 (k =\", k, \")\"),\n       x = \"PC1\",\n       y = \"PC2\",\n       color = \"클러스터\") +\n  theme_bw()\n\n# 군집별 관측 수 출력\ncat(\"군집별 관측 수:\\n\")\nprint(table(kmeans_result$cluster))\n\n# 군집별 요약 통계 계산 및 출력\ncluster_summary <- penguins\ncluster_summary$cluster <- factor(kmeans_result$cluster)\nsummary_stats <- cluster_summary %>%\n  group_by(cluster) %>%\n  summarise(across(where(is.numeric), list(mean = ~mean(.), n = ~length(.))))\n\n# 요약 통계 출력\ncat(\"\\n군집별 요약 통계:\\n\")\nprint(summary_stats)","options":{"dpi":72,"comment":"","editor-quick-suggestions":"false","editor-font-scale":1,"read-only":"false","out-height":"","message":"true","classes":"","fig-height":5,"output":"true","out-width":"700px","label":"unnamed-chunk-1","warning":"true","fig-width":7,"results":"markup","autorun":"false","editor-max-height":"","context":"interactive","fig-cap":""}}];
+globalThis.qwebrCellDetails = [{"code":"# 필요한 라이브러리 로드\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(RColorBrewer)\nlibrary(palmerpenguins)\n\npenguins <- palmerpenguins::penguins |> drop_na()\n\n# 숫자형 변수 선택\nnumeric_vars <- names(penguins)[sapply(penguins, is.numeric)]\n\n# 선택된 데이터 (예: 첫 번째와 두 번째 숫자형 변수 선택)\nselected_data <- penguins[, setdiff(numeric_vars, \"year\")]\n\n# PCA 수행\npca_result <- prcomp(selected_data, scale. = TRUE)\n\n# K-means 클러스터링 수행\nset.seed(567) # 재현성을 위해 설정\nk <- 3 # 클러스터 수 설정\nkmeans_result <- kmeans(pca_result$x[, 1:2], centers = k)\n\n# 클러스터 결과 추가\nclustered_data <- data.frame(pca_result$x[, 1:2])\nclustered_data$cluster <- factor(kmeans_result$cluster)\n\n# 클러스터 중심 가져오기\ncenters <- data.frame(kmeans_result$centers)\ncenters$cluster <- factor(1:k)\n\n# 클러스터링 결과 시각화\nggplot(clustered_data, aes(x = PC1, y = PC2, color = cluster)) +\n  geom_point(size = 3) +\n  scale_color_brewer(palette = \"Set2\") +\n  geom_text(data = centers, aes(x = PC1, y = PC2, label = \"X\"), size = 8, color = \"black\") +\n  labs(title = paste(\"K-means 클러스터링 (k =\", k, \")\"),\n       x = \"PC1\",\n       y = \"PC2\",\n       color = \"클러스터\") +\n  theme_bw()\n\n# 군집별 관측 수 출력\ncat(\"군집별 관측 수:\\n\")\nprint(table(kmeans_result$cluster))\n\n# 군집별 요약 통계 계산 및 출력\ncluster_summary <- penguins\ncluster_summary$cluster <- factor(kmeans_result$cluster)\nsummary_stats <- cluster_summary %>%\n  group_by(cluster) %>%\n  summarise(across(where(is.numeric), list(mean = ~mean(.), n = ~length(.))))\n\n# 요약 통계 출력\ncat(\"\\n군집별 요약 통계:\\n\")\nprint(summary_stats)","id":1,"options":{"read-only":"false","fig-height":5,"label":"unnamed-chunk-1","comment":"","editor-font-scale":1,"classes":"","dpi":72,"fig-cap":"","context":"interactive","results":"markup","editor-quick-suggestions":"false","output":"true","out-height":"","message":"true","autorun":"false","out-width":"700px","warning":"true","fig-width":7,"editor-max-height":""}}];
 
 </script>
 <script type="module">
@@ -1242,7 +1242,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-16</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-05-15">
+<meta name="dcterms.date" content="2024-05-17">
 
 <title>빗스탯2 - 대수의 법칙</title>
 <style>
@@ -292,7 +292,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"code":"\n# 동전 던지기 시뮬레이션 함수 정의\ncoin_toss_simulation <- function(n_trials, n_coins) {\n  results <- matrix(nrow = n_trials, ncol = n_coins)\n  \n  for (i in 1:n_coins) {\n    # n_trials 회 동안 동전 던지기 시뮬레이션 (0은 뒷면, 1은 앞면)\n    tosses <- sample(c(0, 1), n_trials, replace = TRUE)\n    # 앞면이 나온 비율의 누적 계산\n    results[, i] <- cumsum(tosses) / (1:n_trials)\n  }\n  \n  return(results)\n}\n\n# 함수 사용 예시\n# 5개의 동전을 100회 던지기 시뮬레이션\nsimulation_results <- coin_toss_simulation(n_trials = 100, n_coins = 5)\n\n# 결과를 그래프로 표현\nif (interactive()) {\n  matplot(simulation_results, type = \"l\", lty = 1, col = rainbow(5),\n          xlab = \"시행 횟수\", ylab = \"앞면 비율\", main = \"동전 던지기 시뮬레이션\",\n          ylim = c(0, 1))\n  abline(h = 0.5, lty = 2, col = \"blue\")\n  legend(\"topright\", legend = c(\"이론적 확률 (0.5)\", paste0(\"동전 \", 1:5)),\n         lty = c(2, rep(1, 5)), col = c(\"red\", rainbow(5)))\n}","options":{"out-width":"700px","read-only":"false","output":"true","out-height":"","message":"true","fig-cap":"","fig-width":7,"context":"interactive","warning":"true","results":"markup","comment":"","autorun":"false","classes":"","label":"unnamed-chunk-1","editor-quick-suggestions":"false","dpi":72,"editor-max-height":"","editor-font-scale":1,"fig-height":5}}];
+globalThis.qwebrCellDetails = [{"options":{"out-height":"","editor-max-height":"","fig-height":5,"dpi":72,"warning":"true","out-width":"700px","fig-width":7,"editor-font-scale":1,"label":"unnamed-chunk-1","fig-cap":"","message":"true","context":"interactive","results":"markup","editor-quick-suggestions":"false","autorun":"false","read-only":"false","comment":"","classes":"","output":"true"},"id":1,"code":"\n# 동전 던지기 시뮬레이션 함수 정의\ncoin_toss_simulation <- function(n_trials, n_coins) {\n  results <- matrix(nrow = n_trials, ncol = n_coins)\n  \n  for (i in 1:n_coins) {\n    # n_trials 회 동안 동전 던지기 시뮬레이션 (0은 뒷면, 1은 앞면)\n    tosses <- sample(c(0, 1), n_trials, replace = TRUE)\n    # 앞면이 나온 비율의 누적 계산\n    results[, i] <- cumsum(tosses) / (1:n_trials)\n  }\n  \n  return(results)\n}\n\n# 함수 사용 예시\n# 5개의 동전을 100회 던지기 시뮬레이션\nsimulation_results <- coin_toss_simulation(n_trials = 100, n_coins = 5)\n\n# 결과를 그래프로 표현\nif (interactive()) {\n  matplot(simulation_results, type = \"l\", lty = 1, col = rainbow(5),\n          xlab = \"시행 횟수\", ylab = \"앞면 비율\", main = \"동전 던지기 시뮬레이션\",\n          ylim = c(0, 1))\n  abline(h = 0.5, lty = 2, col = \"blue\")\n  legend(\"topright\", legend = c(\"이론적 확률 (0.5)\", paste0(\"동전 \", 1:5)),\n         lty = c(2, rep(1, 5)), col = c(\"red\", rainbow(5)))\n}"}];
 
 </script>
 <script type="module">
@@ -1176,11 +1176,15 @@ globalThis.qwebrExecuteCode = async function (
   </li>  
         <li>
     <a class="dropdown-item" href="../../05_infer.html">
- <span class="dropdown-text">05 추론과 회귀모형</span></a>
+ <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../06_theory.qmd">
- <span class="dropdown-text">06 통계이론</span></a>
+    <a class="dropdown-item" href="../../06_reg.html">
+ <span class="dropdown-text">06 회귀분석</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../07_theory.html">
+ <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
   </li>
@@ -1236,7 +1240,7 @@ globalThis.qwebrExecuteCode = async function (
       <div>
       <div class="quarto-title-meta-heading">공개</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-05-15</p>
+        <p class="date">2024-05-17</p>
       </div>
     </div>
     
