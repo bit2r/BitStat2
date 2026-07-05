@@ -4,6 +4,25 @@
 
 ---
 
+## 2026-07-05 — 🔴 보안: polyfill.io 공급망 공격 스크립트 제거
+
+### 발견
+- 배포 HTML(`docs/`) 10개 파일 `<head>`에 악성 CDN 로드:
+  `<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>`
+- `polyfill.io`는 2024년 도메인 매각 후 악성코드를 주입하는 **공급망 공격 벡터**(10만+ 사이트 감염).
+- 삽입원: **소스엔 없음**. 3년 전 구버전 Quarto가 수식(MathJax) 페이지에 자동 삽입한 조각이 옛 `docs/` 빌드에 정적으로 박힌 것. 현재 Quarto 1.10은 삽입 안 함.
+
+### 조치
+- 10개 HTML(`index.html`, `0N_*.html` 7개, `one_mean`·`reg` 모듈)에서 polyfill.io `<script>` 라인 삭제. 잔존 0건 확인.
+- 오탐 보존: shinylive.js 내부 `POLYFILL_EVENT`, mermaid `replaceAll polyfill`(무관한 자체 코드).
+- 안전 CDN 유지: jsDelivr의 MathJax·monaco-editor(신뢰 CDN, 무관).
+- 기능 영향 없음(구형 브라우저 전용 폴리필, 현재 불필요).
+
+### 산출물
+- `tech_document/2026-07-05_polyfill_io_보안조치.md`(기술문서), `docs/` 10개 HTML 수정.
+
+---
+
 ## 2026-07-05 — 렌더 엔진/캐시 오류 해결 (전 페이지 렌더 복구)
 
 ### 증상
