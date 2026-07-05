@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700" font-family="'ET Book','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#555" stroke-width="1"/>
+    </marker>
+    <marker id="arrR" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#9c2a10" stroke-width="1"/>
+    </marker>
+    <style>
+      text{fill:#1a1a1a}
+      .t{font-size:25px}
+      .sub{font-size:13px;fill:#6b6b60;font-style:italic}
+      .lab{font-size:12.5px;fill:#8a8578;font-style:italic;letter-spacing:.1em}
+      .h{font-size:15px;fill:#141410}
+      .b{font-size:12px;fill:#35352c}
+      .s{font-size:11px;fill:#6b6b60}
+      .v{font-size:15px;fill:#8a1500;font-weight:bold}
+      .note{font-size:11.5px;fill:#9c2a10;font-style:italic}
+      .box{fill:#f5f3e6;stroke:#3a3a32;stroke-width:1}
+      .box2{fill:#ffffff;stroke:#3a3a32;stroke-width:1}
+      .ext{fill:#efece0;stroke:#8a8578;stroke-width:1}
+      .remote{fill:#fbecea;stroke:#9c2a10;stroke-width:1}
+      .flow{stroke:#555;stroke-width:1.2;fill:none}
+      .fetch{stroke:#9c2a10;stroke-width:1;fill:none;stroke-dasharray:3 3}
+      .rule{stroke:#d8d4c2;stroke-width:1}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1080" height="700" fill="#fffff8"/>
+  <text class="t" x="40" y="46">빛스탯2 webR 스택 — 현재</text>
+  <text class="sub" x="360" y="46">as-is · shinylive 0.2.3 · 2026-07-05</text>
+  <line class="rule" x1="40" y1="58" x2="1040" y2="58"/>
+
+  <!-- 왼쪽: 버전 스택 (4겹) -->
+  <text class="lab" x="40" y="86">버 전 스 택   (4겹이 맞물려야 함)</text>
+
+  <rect class="box" x="40" y="98" width="440" height="52" rx="2"/>
+  <text class="h" x="54" y="120">① Quarto 확장  quarto-ext/shinylive</text>
+  <text class="v" x="410" y="120">v0.1.0</text>
+  <text class="note" x="54" y="140">⚠ 오래됨 → webR 버전을 v0.3.3으로 고정한다</text>
+  <path class="flow" d="M260,150 L260,168" marker-end="url(#arr)"/>
+
+  <rect class="box2" x="40" y="170" width="440" height="46" rx="2"/>
+  <text class="h" x="54" y="192">② shinylive R 패키지 (로컬 설치)</text>
+  <text class="v" x="410" y="192">0.5.0</text>
+  <path class="flow" d="M260,216 L260,234" marker-end="url(#arr)"/>
+
+  <rect class="box2" x="40" y="236" width="440" height="46" rx="2"/>
+  <text class="h" x="54" y="258">③ 자산  shinylive-assets</text>
+  <text class="v" x="380" y="258">0.2.3</text>
+  <text class="s" x="54" y="274" font-style="italic">핀: _environment=0.2.3</text>
+  <path class="flow" d="M260,282 L260,300" marker-end="url(#arr)"/>
+
+  <rect class="box" x="40" y="302" width="440" height="52" rx="2"/>
+  <text class="h" x="54" y="324">④ webR 런타임</text>
+  <text class="v" x="330" y="324">v0.3.3 · R 4.3.3</text>
+  <text class="s" x="54" y="344" font-style="italic">모드: legacy — 번들 없음(런타임 다운로드)</text>
+
+  <!-- 오른쪽: 런타임 흐름 -->
+  <text class="lab" x="540" y="86">런 타 임 흐 름   (앱 로딩 시)</text>
+
+  <rect class="box2" x="540" y="98" width="240" height="46" rx="2"/>
+  <text class="h" x="554" y="126">사용자 브라우저</text>
+  <path class="flow" d="M660,144 L660,162" marker-end="url(#arr)"/>
+
+  <rect class="box" x="540" y="164" width="240" height="60" rx="2"/>
+  <text class="h" x="554" y="186">Shinylive iframe</text>
+  <text class="b" x="554" y="206">webR (R 4.3.3) 부팅</text>
+  <text class="s" x="554" y="220">통신: PostMessage (SAB·COI 없음)</text>
+  <path class="fetch" d="M660,224 L660,246" marker-end="url(#arrR)"/>
+  <text class="note" x="668" y="240">패키지 요청</text>
+
+  <rect class="remote" x="540" y="248" width="490" height="66" rx="2"/>
+  <text class="h" x="554" y="270" fill="#9c2a10">[원격] repo.r-wasm.org/…/contrib/4.3.3</text>
+  <text class="b" x="554" y="290">앱마다 패키지 40–80개를 매번 다운로드·설치</text>
+  <text class="s" x="554" y="306">ggplot2·dplyr·munsell·plotly·DT … (수십 MB)</text>
+
+  <!-- 측정 속도 -->
+  <text class="lab" x="540" y="356">측 정 속 도 (콜드 스타트, 실측)</text>
+  <rect class="box2" x="540" y="368" width="240" height="70" rx="2"/>
+  <text class="h" x="554" y="392">첫 방문(콜드)</text>
+  <text class="v" x="554" y="418" font-size="20">~50–60초</text>
+  <rect class="box2" x="790" y="368" width="240" height="70" rx="2"/>
+  <text class="h" x="804" y="392">재방문(브라우저 캐시)</text>
+  <text class="v" x="804" y="418" font-size="20">~5–10초</text>
+
+  <!-- 하단 요약 -->
+  <line class="rule" x1="40" y1="470" x2="1040" y2="470"/>
+  <text class="h" x="40" y="496">핵심: 4겹 버전이 모두 맞물려야 한다.</text>
+  <text class="b" x="40" y="518">현재는 확장(v0.1.0)이 webR을 v0.3.3(R 4.3.3)에 고정 → 앱은 그 R 버전 패키지를 <tspan fill="#9c2a10">원격에서 매번 다운로드</tspan>.</text>
+  <text class="b" x="40" y="540">번들(자기완결) 방식이 아니라 <tspan font-style="italic">legacy</tspan> 방식이므로 첫 로딩이 느리다. 통신도 PostMessage(빠른 SharedArrayBuffer 미사용).</text>
+
+  <text class="s" x="40" y="576">산출물 크기: docs/ ≈ 78 MB (자산·앱 HTML). 배포: GitHub Pages(정적, 헤더 제어 불가 → COI 없음).</text>
+  <text class="s" x="40" y="596">참고: shinylive R 패키지는 로컬에 0.5.0이 설치돼 있으나, 렌더 자산은 _environment 핀으로 0.2.3을 사용 중.</text>
+
+  <line class="rule" x1="40" y1="620" x2="1040" y2="620"/>
+  <text class="note" x="40" y="642">→ 속도를 높이려면 ①확장이 최신 webR을 지원하고 ③자산 번들과 ④런타임 R 버전이 일치해야 한다(다음 그림 참조).</text>
+</svg>

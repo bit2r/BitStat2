@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 740" font-family="'ET Book','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#555" stroke-width="1"/>
+    </marker>
+    <marker id="arrR" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#9c2a10" stroke-width="1"/>
+    </marker>
+    <marker id="arrG" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#3f6b3f" stroke-width="1"/>
+    </marker>
+    <style>
+      text{fill:#1a1a1a}
+      .t{font-size:25px}
+      .sub{font-size:13px;fill:#6b6b60;font-style:italic}
+      .lab{font-size:12.5px;fill:#8a8578;font-style:italic;letter-spacing:.1em}
+      .h{font-size:15px;fill:#141410}
+      .b{font-size:12.5px;fill:#35352c}
+      .s{font-size:11px;fill:#6b6b60}
+      .v{font-size:14px;fill:#8a1500;font-weight:bold}
+      .note{font-size:11.5px;fill:#9c2a10;font-style:italic}
+      .ok{font-size:11.5px;fill:#3f6b3f;font-style:italic}
+      .box{fill:#f5f3e6;stroke:#3a3a32;stroke-width:1}
+      .box2{fill:#ffffff;stroke:#3a3a32;stroke-width:1}
+      .good{fill:#eef3ea;stroke:#3f6b3f;stroke-width:1}
+      .bad{fill:#fbecea;stroke:#9c2a10;stroke-width:1.2}
+      .flow{stroke:#555;stroke-width:1.2;fill:none}
+      .fetch{stroke:#9c2a10;stroke-width:1;fill:none;stroke-dasharray:3 3}
+      .rule{stroke:#d8d4c2;stroke-width:1}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1080" height="740" fill="#fffff8"/>
+  <text class="t" x="40" y="46">webR 번들링 시도 — 왜 안 빨라졌나</text>
+  <text class="sub" x="470" y="46">shinylive 0.10.12 실험 · 되돌림</text>
+  <line class="rule" x1="40" y1="58" x2="1040" y2="58"/>
+
+  <!-- 시도한 변경 -->
+  <text class="lab" x="40" y="86">시 도 한 변 경</text>
+  <rect class="box2" x="40" y="98" width="315" height="54" rx="2"/>
+  <text class="h" x="54" y="120">자산 shinylive</text>
+  <text class="v" x="200" y="120">0.2.3 → 0.10.12</text>
+  <text class="s" x="54" y="140">번들링 지원(webR 0.6.0용)</text>
+
+  <rect class="box2" x="367" y="98" width="300" height="54" rx="2"/>
+  <text class="h" x="381" y="120">shinylive R 패키지</text>
+  <text class="v" x="560" y="120">0.5.0</text>
+  <text class="s" x="381" y="140">CRAN 안정판(webR 0.6.0)</text>
+
+  <rect class="box2" x="679" y="98" width="361" height="54" rx="2"/>
+  <text class="h" x="693" y="120">Quarto 확장</text>
+  <text class="v" x="840" y="120">0.1.0 → 0.2.0</text>
+  <text class="note" x="693" y="140">⚠ 최신도 webR v0.3.3에 고정(변화 없음)</text>
+
+  <!-- 기대 -->
+  <rect class="good" x="40" y="172" width="1000" height="40" rx="2"/>
+  <text class="ok" x="54" y="197">기대: 패키지를 빌드 시 앱에 번들 → 런타임 다운로드 0 → 콜드 스타트 3–4배(“1분 → 15초”)</text>
+
+  <!-- 핵심: 무엇이 어긋났나 -->
+  <text class="lab" x="40" y="244">무 엇 이 어 긋 났 나   (핵심)</text>
+  <rect class="bad" x="40" y="256" width="1000" height="176" rx="3"/>
+
+  <rect class="box" x="64" y="280" width="380" height="64" rx="2"/>
+  <text class="h" x="78" y="304">런타임 (확장이 강제)</text>
+  <text class="v" x="78" y="328" font-size="16">webR v0.3.3 · R 4.3.3</text>
+
+  <text x="470" y="318" font-size="30" fill="#9c2a10" text-anchor="middle">&#8800;</text>
+  <text class="note" x="470" y="342" text-anchor="middle">불일치</text>
+
+  <rect class="box" x="496" y="280" width="380" height="64" rx="2"/>
+  <text class="h" x="510" y="304">번들된 패키지 (자산 0.10.12)</text>
+  <text class="v" x="510" y="328" font-size="16">R 4.4 / 4.5  (ggplot2 4.0.3 …)</text>
+
+  <path class="fetch" d="M254,344 L254,372" marker-end="url(#arrR)"/>
+  <rect class="box2" x="64" y="374" width="912" height="44" rx="2"/>
+  <text class="b" x="78" y="401">→ 앱이 <tspan fill="#9c2a10">번들을 못 씀</tspan> → 여전히 <tspan font-style="italic">repo.r-wasm.org/…/contrib/4.3.3</tspan> 에서 원격 다운로드(+ 번들 .tgz도 받아 <tspan fill="#9c2a10">이중 낭비</tspan>)</text>
+
+  <!-- 결과 -->
+  <text class="lab" x="40" y="462">결 과   (실측)</text>
+  <rect class="box2" x="40" y="474" width="325" height="70" rx="2"/>
+  <text class="h" x="54" y="498">체감 속도</text>
+  <text class="v" x="54" y="524" font-size="17">0.2.3과 동일</text>
+  <text class="s" x="54" y="540">가벼운 앱 clt만 착시로 ~18초</text>
+
+  <rect class="box2" x="377" y="474" width="325" height="70" rx="2"/>
+  <text class="h" x="391" y="498">docs 용량</text>
+  <text class="v" x="391" y="524" font-size="17">77M → 173M</text>
+  <text class="s" x="391" y="540">이득 없이 비대화</text>
+
+  <rect class="bad" x="714" y="474" width="326" height="70" rx="2"/>
+  <text class="h" x="728" y="498" fill="#9c2a10">조치</text>
+  <text class="v" x="728" y="524" font-size="17">0.2.3으로 되돌림</text>
+  <text class="s" x="728" y="540">사이트 정상·경량 복원</text>
+
+  <!-- 진짜 해법 -->
+  <line class="rule" x1="40" y1="572" x2="1040" y2="572"/>
+  <text class="h" x="40" y="596">진짜 해법 — webR 버전이 정렬돼야 번들링이 작동한다:</text>
+  <text class="b" x="56" y="620">① Quarto shinylive 확장이 <tspan font-style="italic">webR 0.6.0을 지원</tspan>할 때까지 대기(생태계 업데이트)</text>
+  <text class="b" x="56" y="642">② <tspan font-style="italic">Quarto Live</tspan>(webR 0.6.0 기반)로 이전 — 더 큰 마이그레이션</text>
+  <text class="b" x="56" y="664">③ shinylive <tspan font-style="italic">export()</tspan>로 앱을 자기완결 번들로 내보내 iframe 임베드(확장 우회) — 앱별 작업</text>
+
+  <line class="rule" x1="40" y1="686" x2="1040" y2="686"/>
+  <text class="ok" x="40" y="708">확장에 독립적인 개선(지금 가능): 의존성 슬림화(plotly·DT 제거), coi-serviceworker(SharedArrayBuffer), webr.packages 정리.</text>
+</svg>
