@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 566" font-family="'ET Book','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif">
+  <defs>
+    <marker id="dn" markerWidth="10" markerHeight="10" refX="4" refY="7" orient="auto">
+      <path d="M1,1 L4,7 L7,1" fill="none" stroke="#8a8578" stroke-width="1.2"/></marker>
+    <style>
+      text{fill:#1a1a1a}
+      .t{font-size:24px}.sub{font-size:13px;fill:#6b6b60;font-style:italic}
+      .lab{font-size:11px;fill:#8a8578;font-style:italic;letter-spacing:.13em}
+      .h{font-size:15px;fill:#141410}.h2{font-size:14px;fill:#141410}
+      .b{font-size:12.5px;fill:#35352c}.s{font-size:11.5px;fill:#6b6b60}
+      .note{font-size:11.5px;fill:#9c2a10;font-style:italic}
+      .ok{font-size:11.5px;fill:#3f6b3f;font-style:italic}
+      .rule{stroke:#d8d4c2;stroke-width:1}
+      .box{fill:#f5f3e6;stroke:#3a3a32;stroke-width:1}
+      .box2{fill:#ffffff;stroke:#3a3a32;stroke-width:1}
+      .bad{fill:#fbecea;stroke:#9c2a10;stroke-width:1.2}
+      .good{fill:#eef3ea;stroke:#3f6b3f;stroke-width:1.3}
+      .runbad{fill:#f7dbd6;stroke:#9c2a10;stroke-width:1}
+      .rungood{fill:#dfe9d8;stroke:#3f6b3f;stroke-width:1}
+      .prim{font-size:15px;fill:#3f6b3f;font-weight:bold}
+      .rust{font-size:15px;fill:#8a1500;font-weight:bold}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1120" height="566" fill="#fffff8"/>
+
+  <text class="t" x="40" y="44">가장 적합한 UI 아키텍처 — 계층형 단일 런타임</text>
+  <text class="sub" x="620" y="44">shinylive + quarto-webr 검토 결과</text>
+  <line class="rule" x1="40" y1="56" x2="1080" y2="56"/>
+
+  <!-- 현재 -->
+  <text class="lab" x="40" y="80">현 재  ·  모든 페이지</text>
+  <rect class="bad" x="40" y="90" width="1040" height="78" rx="2"/>
+  <rect class="runbad" x="56" y="104" width="330" height="50" rx="2"/>
+  <text class="h2" x="70" y="124">① shinylive 앱</text>
+  <text class="s" x="70" y="144">webR 런타임 · 자산 0.10.12(로컬)</text>
+  <text class="rust" x="413" y="126" text-anchor="middle">✕</text>
+  <text class="note" x="413" y="146" text-anchor="middle">공유 불가</text>
+  <rect class="runbad" x="440" y="104" width="330" height="50" rx="2"/>
+  <text class="h2" x="454" y="124">② webr-r 코드셀</text>
+  <text class="s" x="454" y="144">webR 런타임 · 0.6.0(원격)</text>
+  <text class="note" x="800" y="122">→ WASM 2번 부팅 · 메모리 2배</text>
+  <text class="note" x="800" y="142">→ 버전 이원화 0.10.12 + 0.6.0</text>
+  <text class="s" x="800" y="160" fill="#9c2a10">23 / 23 모듈이 이중 런타임</text>
+
+  <!-- 원칙 화살표 -->
+  <line x1="560" y1="172" x2="560" y2="196" class="rule" stroke="#8a8578" marker-end="url(#dn)"/>
+  <text class="s" x="576" y="190" font-style="italic">상호작용 복잡도에 도구를 맞추되 — <tspan fill="#3f6b3f">페이지당 런타임은 1개</tspan></text>
+
+  <!-- 권고 -->
+  <text class="lab" x="40" y="222">권 고  ·  계층형 단일 런타임</text>
+
+  <!-- Tier ① Quarto Live -->
+  <rect class="good" x="40" y="232" width="510" height="180" rx="2"/>
+  <text class="prim" x="56" y="256">① Quarto Live — 단일 webR 0.6.0 · 기본</text>
+  <line x1="56" y1="266" x2="534" y2="266" class="rule"/>
+  <text class="b" x="56" y="288">· 슬라이더 → 플롯 : <tspan font-style="italic">OJS 반응성</tspan> (Shiny 불필요)</text>
+  <text class="b" x="56" y="310">· 편집형 코드셀 + <tspan font-style="italic">연습·힌트·채점</tspan> (학습성↑)</text>
+  <text class="b" x="56" y="332">· 코드 ↔ 결과 <tspan font-style="italic">변수 공유</tspan> (단일 런타임)</text>
+  <text class="ok" x="56" y="360">→ shinylive 앱 + 별도 코드셀을 하나로 통합</text>
+  <line x1="56" y1="372" x2="534" y2="372" class="rule"/>
+  <text class="s" x="56" y="392">A·B 유형 <tspan fill="#3f6b3f" font-weight="bold">~13개</tspan> : 분포·CLT·LLN·MLE·CI·</text>
+  <text class="s" x="56" y="406">x_score·sample_size·desc_stat·검정(평균·비율)</text>
+
+  <!-- Tier ② shinylive -->
+  <rect class="box" x="570" y="232" width="510" height="180" rx="2"/>
+  <text class="rust" x="586" y="256">② shinylive — 단일 런타임 · 앱형만</text>
+  <line x1="586" y1="266" x2="1064" y2="266" class="rule"/>
+  <text class="b" x="586" y="288">· 파일 업로드 · DataTable · 다중탭 · 다운로드</text>
+  <text class="b" x="586" y="310">· esquisse GUI 등 <tspan font-style="italic">서버 반응이 실제로 필요</tspan></text>
+  <text class="b" x="586" y="332">· 같은 페이지의 <tspan font-style="italic">중복 webr-r 코드셀 제거</tspan></text>
+  <text class="ok" x="586" y="360">→ shinylive 유지하되 이중 부팅 해소</text>
+  <line x1="586" y1="372" x2="1064" y2="372" class="rule"/>
+  <text class="s" x="586" y="392">C 유형 <tspan fill="#8a1500" font-weight="bold">~10개</tspan> : reg·corr_reg·viz·esquisse·</text>
+  <text class="s" x="586" y="406">dist_fitting·univariate·multivariate·wordcloud·clustering</text>
+
+  <!-- 원칙 배너 -->
+  <rect class="box2" x="40" y="430" width="1040" height="40" rx="2"/>
+  <text class="h" x="56" y="455">원칙 &#160;·&#160; <tspan fill="#3f6b3f">한 페이지에 webR 런타임은 하나</tspan> &#160;— 이중 런타임 금지</text>
+  <text class="ok" x="560" y="455">기대 : 콜드 스타트·메모리 ~½ · 편집형 학습 추가 · webR 0.6.0 단일화</text>
+
+  <!-- footer -->
+  <line class="rule" x1="40" y1="492" x2="1080" y2="492"/>
+  <text class="s" x="40" y="512" font-style="italic">가장 적합한 UI = 도구를 상호작용에 맞춘 <tspan fill="#3f6b3f">계층형</tspan> + 페이지당 <tspan fill="#3f6b3f">단일 런타임</tspan>. shinylive는 앱형에 옳고, 다수의 슬라이더→플롯은 Quarto Live가 더 가볍고 학습적.</text>
+  <text class="s" x="40" y="534" fill="#9a9488" font-style="italic">빛스탯2 · 2026-07-05 · UX 아키텍처 검토 (제안 — §7 함께 결정 후 clt 파일럿)</text>
+</svg>
