@@ -26,3 +26,6 @@ AGENTS.md
 
 # 브라우저 자동화 산출물
 .playwright-mcp/
+
+# 함정 기록(로컬 전용)
+/GOTCHA.md
