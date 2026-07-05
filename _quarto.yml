@@ -57,9 +57,10 @@ website:
         href: https://discord.gg/wJbu4WQz
 format:
   html:
-    theme: spacelab
+    theme:
+      - spacelab
+      - assets/styles.scss   # 커스텀 SCSS(변수+규칙) 오버레이
     linkcolor: "#0000A0"
-    css: assets/styles.css
     highlight-style: github
     date-format: iso
 

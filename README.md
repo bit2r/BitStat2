@@ -55,7 +55,7 @@ _quarto.yml           # 사이트 설정 (navbar, render, webr 패키지, 필터
 docs/                 # 빌드 산출물 (GitHub Pages, 직접 수정 금지)
 _freeze/              # freeze 캐시
 data/                 # 예제 데이터 (Galton, k_penguins 등)
-assets/               # 사이트 자산 (styles.css · 로고 · favicon · BitStat png)
+assets/               # 사이트 자산 (styles.scss · 로고 · favicon · BitStat png)
 images/               # 아키텍처 SVG 다이어그램(문서용)
 README.md · CLAUDE.md · LICENSE   # 루트 유지(관례)
 ```

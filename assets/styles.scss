@@ -1,0 +1,48 @@
+/*-- scss:defaults --*/
+// 빛스탯2 커스텀 테마 (spacelab 위에 오버레이)
+// Quarto/Bootstrap SCSS 변수는 여기(defaults)에서 오버라이드한다.
+
+$primary:      #0000A0 !default;   // 링크·강조색 (기존 linkcolor)
+$link-color:   $primary !default;
+
+// 리스팅 카드(.post-tile) 토큰 — 매직값 대신 변수로 관리
+$bit-tile-width:         300px !default;
+$bit-tile-radius:        0.5rem !default;
+$bit-tile-gap:           10px !default;
+$bit-tile-shadow:        0 4px 8px 0 rgba(0, 0, 0, 0.2) !default;
+$bit-tile-shadow-hover:  0 8px 16px 0 rgba(0, 0, 0, 0.3) !default;
+$bit-tile-transition:    0.3s ease !default;
+
+// 리스팅 제목 색 — 과거 `color: blue`(대비 미흡) 하드코딩을 대체
+$bit-listing-title-color: $primary !default;
+
+/*-- scss:rules --*/
+// 규칙에서는 SCSS 중첩·변수를 사용한다.
+
+.post-tile {
+  display: inline-block;
+  vertical-align: top;
+  width: $bit-tile-width;
+  margin: $bit-tile-gap;
+  border-radius: $bit-tile-radius;
+  box-shadow: $bit-tile-shadow;
+  transition: box-shadow $bit-tile-transition;
+
+  &:hover {
+    box-shadow: $bit-tile-shadow-hover;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    padding: 2px 16px;
+  }
+}
+
+.no-anchor.card-title.listing-title {
+  font-weight: 700;
+  color: $bit-listing-title-color;
+}
