@@ -1,0 +1,88 @@
+[
+  {
+    "listing": "/pages/07_theory.html",
+    "items": [
+      "/pages/07_theory/clustering/index.html",
+      "/pages/07_theory/lln/index.html",
+      "/pages/07_theory/mle/index.html",
+      "/pages/07_theory/sample_size/index.html"
+    ]
+  },
+  {
+    "listing": "/pages/05_infer.html",
+    "items": [
+      "/pages/05_infer/ci/index.html",
+      "/pages/05_infer/clt/index.html"
+    ]
+  },
+  {
+    "listing": "/pages/04_testing.html",
+    "items": [
+      "/pages/04_testing/one_mean/index.html",
+      "/pages/04_testing/one_prop/index.html",
+      "/pages/04_testing/two_means/index.html",
+      "/pages/04_testing/two_prop/index.html",
+      "/pages/04_testing/x_score/index.html"
+    ]
+  },
+  {
+    "listing": "/pages/02_eda.html",
+    "items": [
+      "/pages/02_eda/desc_stat/index.html",
+      "/pages/02_eda/multivariate_stat/index.html",
+      "/pages/02_eda/univariate_stat/index.html",
+      "/pages/02_eda/wordcloud/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/pages/01_data/dist_continuous/index.html",
+      "/pages/01_data/dist_discrete/index.html",
+      "/pages/01_data/dist_fitting/index.html",
+      "/pages/01_data/sampling_method/index.html",
+      "/pages/02_eda/desc_stat/index.html",
+      "/pages/02_eda/multivariate_stat/index.html",
+      "/pages/02_eda/univariate_stat/index.html",
+      "/pages/02_eda/wordcloud/index.html",
+      "/pages/03_viz/esquisse/index.html",
+      "/pages/03_viz/viz/index.html",
+      "/pages/04_testing/one_mean/index.html",
+      "/pages/04_testing/one_prop/index.html",
+      "/pages/04_testing/two_means/index.html",
+      "/pages/04_testing/two_prop/index.html",
+      "/pages/04_testing/x_score/index.html",
+      "/pages/05_infer/ci/index.html",
+      "/pages/05_infer/clt/index.html",
+      "/pages/06_reg/corr_reg/index.html",
+      "/pages/06_reg/reg/index.html",
+      "/pages/07_theory/clustering/index.html",
+      "/pages/07_theory/lln/index.html",
+      "/pages/07_theory/mle/index.html",
+      "/pages/07_theory/sample_size/index.html"
+    ]
+  },
+  {
+    "listing": "/pages/01_data.html",
+    "items": [
+      "/pages/01_data/dist_continuous/index.html",
+      "/pages/01_data/dist_discrete/index.html",
+      "/pages/01_data/dist_fitting/index.html",
+      "/pages/01_data/sampling_method/index.html"
+    ]
+  },
+  {
+    "listing": "/pages/03_viz.html",
+    "items": [
+      "/pages/03_viz/esquisse/index.html",
+      "/pages/03_viz/viz/index.html"
+    ]
+  },
+  {
+    "listing": "/pages/06_reg.html",
+    "items": [
+      "/pages/06_reg/corr_reg/index.html",
+      "/pages/06_reg/reg/index.html"
+    ]
+  }
+]
