@@ -1,0 +1,69 @@
+---
+title: "중심극한정리 — Quarto Live 파일럿"
+format: live-html
+engine: knitr
+live:
+  show-hints: true
+webr:
+  packages:
+    - ggplot2
+    - showtext
+    - sysfonts
+    - patchwork
+---
+
+모집단이 어떤 분포를 따르든, **표본평균은 표본 크기가 커질수록 정규분포에 가까워진다.**
+슬라이더를 움직여 확인해 보세요. *(단일 webR 런타임 · Shiny 없음)*
+
+```{ojs}
+//| echo: false
+viewof distribution = Inputs.select(
+  new Map([["정규 분포","norm"],["지수 분포","exp"],["균등 분포","unif"]]),
+  {label: "분포 선택"})
+viewof n = Inputs.range([10, 100], {value: 30, step: 5, label: "표본 크기 (n)"})
+viewof num_samples = Inputs.range([100, 10000], {value: 1000, step: 100, label: "표본 수"})
+```
+
+```{webr}
+#| autorun: true
+#| edit: false
+#| echo: false
+#| input:
+#|   - distribution
+#|   - n
+#|   - num_samples
+library(ggplot2); library(showtext); library(patchwork)
+tryCatch(sysfonts::font_add_google("Nanum Myeongjo", "kr"), error = function(e) NULL)
+showtext_auto()
+
+cream <- "#fffff8"; ink <- "#111111"; rust <- "#8a1500"; muted <- "#4a4a44"
+theme_bit <- theme_minimal(base_size = 13) + theme(
+  text = element_text(family = "kr", colour = ink),
+  plot.background = element_rect(fill = cream, colour = NA),
+  panel.background = element_rect(fill = cream, colour = NA),
+  panel.grid.minor = element_blank(), legend.position = "none")
+
+if (distribution == "norm") {
+  samples <- matrix(rnorm(n*num_samples), nrow=n); mu<-0; sigma<-1
+  xs<-seq(-3,3,length.out=100); ys<-dnorm(xs); ttl<-"정규 분포의 PDF"
+} else if (distribution == "exp") {
+  samples <- matrix(rexp(n*num_samples,1), nrow=n); mu<-1; sigma<-1
+  xs<-seq(0,5,length.out=100); ys<-dexp(xs,1); ttl<-"지수 분포의 PDF"
+} else {
+  samples <- matrix(runif(n*num_samples), nrow=n); mu<-0.5; sigma<-sqrt(1/12)
+  xs<-seq(-0.1,1.1,length.out=100); ys<-dunif(xs,0,1); ttl<-"균등 분포의 PDF"
+}
+means <- colMeans(samples)
+se <- sigma/sqrt(n)
+
+p1 <- ggplot() + geom_line(aes(xs, ys), colour=ink, linewidth=0.6) +
+  labs(title=ttl, x="x 값", y="밀도") + theme_bit
+xseq <- seq(min(means), max(means), length.out=100)
+p2 <- ggplot() +
+  geom_histogram(aes(means, after_stat(density)), bins=30, fill=muted, alpha=0.35) +
+  geom_line(aes(xseq, dnorm(xseq, mu, se)), colour=rust, linewidth=0.7) +
+  labs(title="표본평균의 분포", x="표본 평균", y="밀도") + theme_bit
+
+cat(sprintf("표본평균의 평균 = %.3f   ·   표준오차(σ/√n) = %.3f\n", mean(means), se))
+p1 | p2
+```

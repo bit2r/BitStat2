@@ -1,0 +1,18 @@
+---
+title: "webR 최소 부팅 테스트"
+format: live-html
+engine: knitr
+---
+
+## input 없는 autorun 셀
+
+```{webr}
+#| autorun: true
+hist(rnorm(200), col = "#4a4a44", border = "white", main = "webR 작동!")
+```
+
+## 편집형 셀(수동 실행 버튼)
+
+```{webr}
+1 + 1
+```
