@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-4fc543728d6529fe425aa02d41a55f8c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-41010f918d85b1f1068505217b534e0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <meta name="shinylive:serviceworker_dir" content="../../..">
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/load-shinylive-sw.js" type="module"></script>
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/run-python-blocks.js" type="module"></script>
@@ -1484,9 +1484,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 
+<div class="tufte-page page-columns page-full">
 <p>“z-점수”, “t-점수”, “카이제곱-점수”, 확률계산은 가설 검정과 신뢰구간 계산에서 유용합니다. 많은 통계적 가설 검정에서 z-점수를 사용하여 유의 확률(p-value)을 계산하며, 특정 z-점수에 해당하는 누적 확률을 빠르게 찾을 수 있습니다. 또한, 정규분포를 따르는 데이터의 신뢰구간 계산 시, z-점수를 사용하여 신뢰구간의 상한과 하한을 결정할 수 있습니다. t-점수는 주로 표본 크기가 작거나 모집단의 표준편차를 모를 때 사용되며, t-검정을 통해 평균 간의 차이를 검정하거나 신뢰구간을 계산하는 데 사용됩니다. 카이제곱-점수는 주로 범주형 데이터의 독립성 검정이나 적합도 검정에서 사용되며, 관측된 빈도와 기대 빈도 간의 차이를 평가하는 데 유용합니다.</p>
-<section id="shiny-앱" class="level1 page-columns page-full" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Shiny 앱</h1>
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">인터랙티브 앱</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R 코드</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-1-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="column-page">
 <pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-testing-score
 #| viewerWidth: 800
@@ -1698,14 +1701,16 @@ server &lt;- function(input, output) {
 shinyApp(ui = ui, server = server)
 </code></pre>
 </div>
-</section>
-<section id="코딩" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 코딩</h1>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+</div>
 
 
-</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">라이센스</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ko_kr">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

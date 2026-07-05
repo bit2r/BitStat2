@@ -9,6 +9,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 
 이산확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다.
 
@@ -17,7 +19,9 @@ editor_options:
 2. **코딩**: 분포의 PMF와 CMF를 계산하고 시각화하는 R 코드가 제공됩니다. 여기서 `discrete_dist_summary` 함수는 주어진 분포와 매개변수에 따라 PMF와 CMF를 계산하고, 이 결과를 테이블과 그래프로 출력합니다. 이 부분은 Shiny 앱보다는 코드 수준에서 분포를 다루고 싶은 사용자에게 유용합니다.
 
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -132,7 +136,7 @@ shinyApp(ui, server)
 
 :::
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 discrete_dist_summary <- function(dist, params, x_range) {
@@ -188,3 +192,7 @@ discrete_dist_summary("binomial", params = list(size = 10, prob = 0.4), x_range 
 # # 포아송 분포
 # discrete_dist_summary("poisson", params = list(lambda = 3), x_range = 15)
 ```
+
+:::
+
+:::

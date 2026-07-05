@@ -7,7 +7,11 @@ image: "thumbnail.png"
 categories: [ggplot, "그래프 문법", esquisse]
 ---
 
-# Shiny 앱
+::: {.tufte-page}
+
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 ::: callout-note
 ### 데이터셋
@@ -104,7 +108,7 @@ shinyApp(ui, server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 economics |> 
@@ -114,3 +118,7 @@ economics |>
   facet_wrap(~variable, scales = "free_y") +
   theme_minimal()
 ```
+
+:::
+
+:::

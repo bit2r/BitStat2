@@ -9,6 +9,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 연속확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다.
 
 1. **Shiny 앱**: 사용자가 주요 연속확률분포(균등, 정규, 지수, 감마, 베타 분포) 중 하나를 선택하고 해당 분포의 매개변수를 조정할 수 있는 웹 기반 인터페이스를 제공합니다. 사용자는 선택한 분포에 따라 확률밀도함수(PDF)와 누적밀도함수(CDF)를 그래프로 시각화할 수 있습니다.
@@ -16,7 +18,9 @@ editor_options:
 2. **코딩**: 분석 대상 데이터가 어떤 분포를 따르는지를 이해하고, 이를 그래픽으로 표현하여 데이터의 분포 형태와 경향을 확인할 수 있습니다. `continuous_dist_summary` 함수는 주어진 분포와 매개변수를 기반으로 요약통계량과 검정통계량, 히스토그램, 확률밀도함수(PDF)와 누적분포함수(CDF)를 계산하고 시각화합니다.
 
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -128,7 +132,7 @@ shinyApp(ui, server)
 
 :::
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 library(ggplot2)
@@ -194,3 +198,7 @@ continuous_dist_summary("normal", params = list(mean = 0, sd = 1), x_range = c(-
 # # 균등분포 (Uniform Distribution)
 # continuous_dist_summary("uniform", params = list(min = -1, max = 1), x_range = c(-2, 2))
 ```
+
+:::
+
+:::

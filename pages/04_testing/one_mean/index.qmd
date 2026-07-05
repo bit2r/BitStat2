@@ -9,9 +9,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 모평균($\mu$)에 대한 가설검정은 모집단 분산을 알고 있는 경우와 그렇지 않는 경우로 나눠진다. 만약, 모집단 분산을 알고 있는 경우에는 z-검정을 사용하고, 모집단 분산을 모르는 경우에는 t-검정을 사용한다. 단, 모집단 분산을 알지 못하더라도 표본크기($n$)가 30 이상이면 z-검정을 사용할 수 있다.
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -344,7 +348,7 @@ shinyApp(ui, server)
 
 :::
 
-# 코딩
+## R 코드
 
 ## 단일 표본 z-검정
 
@@ -366,5 +370,6 @@ BSDA::z.test(malt_sugar, mu = 3, sigma.x = 1, alternative = "two.sided")
 t.test(malt_sugar, mu = 3, alternative = "two.sided")
 ```
 
+:::
 
-
+:::

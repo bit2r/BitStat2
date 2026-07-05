@@ -9,13 +9,17 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 사용자가 선택한 데이터에 대해 연속확률분포의 적합도를 분석하고 시각화할 수 있는 도구입니다. 이 애플리케이션을 통해 통계학적 분석을 수행하고 결과를 실시간으로 탐색할 수 있습니다.
 
 1. **Shiny 앱**: 데이터가 어떤 이론적 분포를 따르는지 확인하기 위해 히스토그램과 이론적 확률밀도함수를 비교합니다. Q-Q 플롯을 통해 데이터의 분위수가 이론적 분위수와 얼마나 일치하는지 시각적으로 평가합니다. 또한, 데이터의 누적분포함수와 이론적 누적분포함수를 비교하여 데이터의 적합도를 평가합니다. 균일분포는 Kolmogorov-Smirnov 검정을 통해, 정규분포는 Shapiro-Wilk 검정을 통해, 지수분포는 Kolmogorov-Smirnov 검정을 통해 데이터의 적합도를 평가하고 검정 결과의 p-값 통해 분포의 적합성 여부를 결정합니다.
 
 2. **코딩**: 
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -194,7 +198,7 @@ shinyApp(ui, server)
 
 :::
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 library(palmerpenguins)
@@ -275,3 +279,7 @@ analyze_distribution(penguins, "bill_length_mm", "normal")
 # analyze_distribution(penguins, "bill_length_mm", "exponential")
 
 ```
+
+:::
+
+:::

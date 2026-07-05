@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-4fc543728d6529fe425aa02d41a55f8c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-41010f918d85b1f1068505217b534e0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <meta name="shinylive:serviceworker_dir" content="../../..">
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/load-shinylive-sw.js" type="module"></script>
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/run-python-blocks.js" type="module"></script>
@@ -1476,9 +1476,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 
+<div class="tufte-page page-columns page-full">
 <p>표본크기 계산은 통계적 분석에서 매우 중요한 역할을 합니다. 적절한 표본크기를 결정하는 것은 연구의 유효성과 신뢰성을 보장하는 데 필수적입니다. 표본크기가 너무 작으면 연구 결과의 통계적 유의성이 부족하여, 실제로 존재하는 효과를 감지하지 못할 수 있습니다. 반대로 표본크기가 너무 크면 시간과 자원이 낭비되며, 불필요한 비용이 발생할 수 있습니다. 표본크기 계산은 연구자가 설정한 유의수준과 검정력을 바탕으로 이루어지며, 이는 연구 결과의 신뢰성을 높이고, 과대 혹은 과소 평가된 결과를 방지하는 데 기여합니다. 다음 표본크기 계산기<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>를 사용해서 평균과 비율에 대한 표본크기를 계산할 수 있습니다.</p>
-<section id="shiny-앱" class="level1 page-columns page-full" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Shiny 앱</h1>
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">인터랙티브 앱</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R 코드</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-1-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="column-page">
 <pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-sample-size
 #| viewerWidth: 800
@@ -1678,14 +1681,16 @@ server &lt;- function(input, output, session) {
 shinyApp(ui = ui, server = server)
 </code></pre>
 </div>
-</section>
-<section id="코딩" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 코딩</h1>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+</div>
 
 
-</section>
 
 
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">각주</h2>

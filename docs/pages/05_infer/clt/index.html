@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-4fc543728d6529fe425aa02d41a55f8c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-ad30f7b7aff6f5d10d8a01fa19ddda16.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <meta name="shinylive:serviceworker_dir" content="../../..">
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/load-shinylive-sw.js" type="module"></script>
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/run-python-blocks.js" type="module"></script>
@@ -283,7 +283,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"# 필요한 라이브러리 로드\nlibrary(ggplot2)\nlibrary(purrr)\n\n# 모집단에서 표본 추출하여 표본 평균 계산하는 함수\nsample_mean <- function(dist, n, size) {\n  if (dist == \"norm\") {\n    replicate(n, mean(rnorm(size)))\n  } else if (dist == \"unif\") {\n    replicate(n, mean(runif(size)))\n  } else if (dist == \"exp\") {\n    replicate(n, mean(rexp(size)))\n  } else {\n    stop(\"지원되지 않는 분포입니다.\")\n  }\n}\n\n# 중심극한정리 시뮬레이션 함수\nclt_simulation <- function(dist, sizes, n) {\n  # 표본 크기별로 표본 평균 계산\n  means_list <- map(sizes, ~ sample_mean(dist, n, .x))\n  \n  # 결과 데이터프레임 생성\n  means_df <- data.frame(\n    sample_size = rep(sizes, each = n),\n    sample_mean = unlist(means_list)\n  )\n  \n  # 표본 평균 분포 시각화\n  ggplot(means_df, aes(x = sample_mean)) +\n    geom_histogram(aes(y = after_stat(density)), bins = 30, color = \"black\", fill = \"lightblue\") +\n    facet_wrap(~ sample_size, ncol = length(sizes)) +\n    stat_function(fun = dnorm, args = list(mean = mean(means_df$sample_mean), sd = sd(means_df$sample_mean)),\n                  color = \"red\", linewidth = 1) +\n    labs(title = \"표본 크기에 따른 표본 평균의 분포\",\n         x = \"표본 평균\",\n         y = \"밀도\") +\n    theme_minimal()\n}\n\n# 중심극한정리 시뮬레이션 실행\ndist <- \"unif\"  # 모집단 분포 선택 (\"norm\", \"unif\", \"exp\")\nsizes <- c(1, 10, 30, 50, 100)  # 표본 크기 설정\nn <- 1000  # 표본 개수 설정\n\nclt_simulation(dist, sizes, n)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":1,"editor-max-height":"","editor-quick-suggestions":"false","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"library(ggplot2)\nlibrary(purrr)\n\n# 모집단에서 표본 추출하여 표본 평균 계산\nsample_mean <- function(dist, n, size) {\n  if (dist == \"norm\") {\n    replicate(n, mean(rnorm(size)))\n  } else if (dist == \"unif\") {\n    replicate(n, mean(runif(size)))\n  } else if (dist == \"exp\") {\n    replicate(n, mean(rexp(size)))\n  } else {\n    stop(\"지원되지 않는 분포입니다.\")\n  }\n}\n\n# 중심극한정리 시뮬레이션\nclt_simulation <- function(dist, sizes, n) {\n  means_list <- map(sizes, ~ sample_mean(dist, n, .x))\n  means_df <- data.frame(\n    sample_size = rep(sizes, each = n),\n    sample_mean = unlist(means_list)\n  )\n  ggplot(means_df, aes(x = sample_mean)) +\n    geom_histogram(aes(y = after_stat(density)), bins = 30,\n                   colour = NA, fill = \"#4a4a44\", alpha = 0.35) +\n    facet_wrap(~ sample_size, ncol = length(sizes)) +\n    stat_function(fun = dnorm,\n                  args = list(mean = mean(means_df$sample_mean),\n                              sd = sd(means_df$sample_mean)),\n                  colour = \"#8a1500\", linewidth = 0.7) +\n    labs(title = \"표본 크기에 따른 표본 평균의 분포\",\n         x = \"표본 평균\", y = \"밀도\") +\n    theme_minimal(base_size = 12) +\n    theme(panel.grid.minor = element_blank())\n}\n\n# 실행: 모집단 분포와 표본 크기를 바꿔 보세요\ndist  <- \"unif\"                    # \"norm\", \"unif\", \"exp\"\nsizes <- c(1, 10, 30, 50, 100)     # 표본 크기\nn     <- 1000                      # 표본 개수\nclt_simulation(dist, sizes, n)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":1,"editor-max-height":"","editor-quick-suggestions":"false","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1120,10 +1120,39 @@ globalThis.qwebrExecuteCode = async function (
 
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -1216,6 +1245,7 @@ globalThis.qwebrExecuteCode = async function (
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">중심극한정리</h1>
+            <p class="subtitle lead">Central Limit Theorem</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">추론</div>
                 <div class="quarto-category">중심극한정리</div>
@@ -1250,7 +1280,9 @@ globalThis.qwebrExecuteCode = async function (
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
@@ -1485,135 +1517,157 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 
-<p>중심극한정리 (Central Limit Theorem, CLT)는 통계학에서 가장 중요한 정리 중 하나입니다. 중심극한정리는 모집단의 분포가 무엇이든 간에, 모집단에서 무작위로 추출한 표본의 평균은 표본 크기가 충분히 크다면 정규 분포를 따른다는 것을 보여줍니다. 대표적으로 정규분포, 지수분포, 균등분포에서 추출한 표본의 평균이 정규분포에 가까워지는 과정을 시각적으로 확인할 수 있다.</p>
-<section id="shiny-앱" class="level1 page-columns page-full" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Shiny 앱</h1>
+<div class="tufte-page page-columns page-full">
+<p>모집단이 어떤 분포를 따르든, <strong>표본평균은 표본 크기가 커질수록 정규분포에 가까워진다.</strong> 아래 앱에서 슬라이더를 움직이며 이 수렴을 직접 확인해 보세요.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>중심극한정리(CLT)</strong>는 통계학에서 가장 중요한 정리 중 하나입니다. 정규·지수·균등 등 서로 다른 모집단에서 뽑은 표본평균이 모두 정규분포 <span class="math inline">\(N(\mu,\ \sigma^2/n)\)</span> 로 수렴합니다. 표준오차는 <span class="math inline">\(\sigma/\sqrt{n}\)</span> 이므로 <span class="math inline">\(n\)</span> 이 커질수록 분포가 좁아집니다.</p>
+</div></div><div class="tabset-margin-container page-columns page-full"><div class="no-row-height column-margin column-container"><div class="tabset-margin-content tabset-1-2-tab-margin-content collapse">
+<p><code>sample_mean()</code> 은 표본평균을 <code>n</code> 번 반복 추출하고, <code>clt_simulation()</code> 은 표본 크기 목록마다 이를 계산해 하나의 데이터프레임으로 묶습니다. <strong>Run Code</strong> 를 눌러 실행해 보세요.</p>
+</div></div></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">인터랙티브 앱</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R 코드</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-1-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="column-page">
 <pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-infer-clt
-#| viewerWidth: 800
-#| viewerHeight: 600
+#| viewerWidth: 900
+#| viewerHeight: 650
 #| standalone: true
 
 library(shiny)
+library(bslib)
+library(bsicons)
 library(ggplot2)
 library(showtext)
-showtext_auto()    
+# 한글 세리프(가능하면). 실패 시 showtext 기본 폰트로 폴백(한글 렌더 유지).
+tryCatch(sysfonts::font_add_google("Nanum Myeongjo", "kr"), error = function(e) NULL)
+showtext_auto()
 
-# UI 정의
-ui &lt;- fluidPage(
-  titlePanel("중심극한정리"),
+# ── Tufte 팔레트 ────────────────────────────────────────────
+bit_cream &lt;- "#fffff8"; bit_ink &lt;- "#111111"; bit_rust &lt;- "#8a1500"
+bit_muted &lt;- "#4a4a44"; bit_grid &lt;- "#e8e6dc"; bit_axis &lt;- "#8a8578"
 
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("distribution",
-                  "분포 선택:",
-                  choices = c("정규 분포" = "norm",
-                              "지수 분포" = "exp",
-                              "균등 분포" = "unif")),
-      sliderInput("n",
-                  "표본 크기:",
-                  min = 10,
-                  max = 100,
-                  value = 30),
-      sliderInput("num_samples",
-                  "표본 수:",
-                  min = 100,
-                  max = 10000,
-                  value = 1000),
-      hr(),
-      h3("중심극한정리 확인방법"),
-      p("1. '분포 선택'에서 원하는 분포 유형(정규, 지수, 균등분포 중 하나)을 선택하세요. 선택된 분포에서 무작위 표본이 추출됩니다."),
-      p("2. '표본 크기'와 '표본 수'를 조정하여 실험할 표본 크기와 표본 수를 결정하세요."),
-      p("2-1. '표본 크기'는 각각의 표본에서 추출할 데이터 수를 결정합니다. 예를 들어, 100명의 학생 중 10명을 무작위로 선택하여 키를 측정한다면, 표본 크기는 10입니다."),
-      p("2-2. '표본 수'는 실험에 사용될 전체 표본의 수를 결정합니다. 예를 들어, 100명의 학생 중 10명을 무작위로 선택하는 과정을 30번 반복한다면, 표본 수는 30입니다."),
-      p("3. 왼쪽 그래프는 선택한 분포의 확률 밀도 함수(PDF)를 보여줍니다."),
-      p("4. 오른쪽 그래프는 추출된 표본의 평균이 어떻게 정규 분포에 접근하는지를 보여줍니다. 이는 중심극한정리를 시각적으로 나타냅니다."),
-      p("5. '표본 크기'와 '표본 수'를 변경하며 중심극한정리가 다양한 상황에서 어떻게 적용되는지 관찰하세요.")
-    ),
+# ── Tufte 미니멀 ggplot 테마 ────────────────────────────────
+theme_tufte_bit &lt;- function(base_size = 13) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      text             = element_text(family = "kr", colour = bit_ink),
+      plot.title       = element_text(family = "kr", size = base_size, hjust = 0),
+      plot.background  = element_rect(fill = bit_cream, colour = NA),
+      panel.background = element_rect(fill = bit_cream, colour = NA),
+      panel.grid.major = element_line(colour = bit_grid, linewidth = 0.3),
+      panel.grid.minor = element_blank(),
+      axis.line        = element_line(colour = bit_axis, linewidth = 0.3),
+      axis.ticks       = element_line(colour = bit_axis, linewidth = 0.3),
+      legend.position  = "none"
+    )
+}
 
-    mainPanel(
-      fluidRow(
-        column(6, plotOutput("distPlot")),
-        column(6, plotOutput("cltPlot"))
+# ── Tufte 앱 테마(크림 배경·세리프·뮤트) ────────────────────
+bit_theme &lt;- bs_theme(
+  version   = 5,
+  bg        = bit_cream,
+  fg        = bit_ink,
+  primary   = bit_rust,
+  base_font = font_collection("Palatino Linotype", "Palatino", "Georgia",
+                              "Times New Roman", "serif"),
+  "card-border-color" = "#dcd8c8",
+  "card-cap-bg"       = bit_cream,
+  "card-box-shadow"   = "none"
+)
+
+ui &lt;- page_sidebar(
+  title = "중심극한정리",
+  theme = bit_theme,
+  sidebar = sidebar(
+    width = 280,
+    selectInput("distribution", "분포 선택",
+                c("정규 분포" = "norm", "지수 분포" = "exp", "균등 분포" = "unif")),
+    sliderInput("n", "표본 크기 (n)", min = 10, max = 100, value = 30),
+    sliderInput("num_samples", "표본 수", min = 100, max = 10000, value = 1000),
+    hr(),
+    p(class = "text-muted", style = "font-size:.85rem; line-height:1.5;",
+      "슬라이더를 움직여 표본평균의 분포가 정규분포 ",
+      HTML("N(&amp;mu;, &amp;sigma;&amp;sup2;/n)"),
+      "에 가까워지는 과정을 관찰하세요.")
+  ),
+  card(
+    card_header(
+      "모집단 분포와 표본평균의 분포",
+      tooltip(
+        bs_icon("info-circle"),
+        "왼쪽은 표본을 추출하는 원래 분포(PDF), 오른쪽은 표본평균의 분포입니다. n이 커질수록 오른쪽이 종 모양(정규)에 가까워집니다."
       )
+    ),
+    div(class = "text-muted", style = "font-size:.9rem; padding:.25rem .25rem .5rem;",
+        textOutput("stats", inline = TRUE)),
+    layout_columns(
+      col_widths = c(6, 6),
+      plotOutput("distPlot", height = "320px"),
+      plotOutput("cltPlot",  height = "320px")
     )
   )
 )
 
-# 서버 로직
 server &lt;- function(input, output) {
-  output$cltPlot &lt;- renderPlot({
-    n &lt;- input$n
-    num_samples &lt;- input$num_samples
-    distribution &lt;- input$distribution
 
-    # 선택된 분포에 따라 무작위 표본 생성
+  sim &lt;- reactive({
+    n &lt;- input$n; num_samples &lt;- input$num_samples; distribution &lt;- input$distribution
     if (distribution == "norm") {
-      samples &lt;- matrix(rnorm(n * num_samples), nrow = n)
-      mu &lt;- 0
-      sigma &lt;- 1
+      samples &lt;- matrix(rnorm(n * num_samples), nrow = n); mu &lt;- 0;   sigma &lt;- 1
     } else if (distribution == "exp") {
-      samples &lt;- matrix(rexp(n * num_samples, rate = 1), nrow = n)
-      mu &lt;- 1
-      sigma &lt;- 1
-    } else if (distribution == "unif") {
-      samples &lt;- matrix(runif(n * num_samples), nrow = n)
-      mu &lt;- 0.5
-      sigma &lt;- sqrt(1/12)
+      samples &lt;- matrix(rexp(n * num_samples, rate = 1), nrow = n); mu &lt;- 1; sigma &lt;- 1
+    } else {
+      samples &lt;- matrix(runif(n * num_samples), nrow = n); mu &lt;- 0.5; sigma &lt;- sqrt(1/12)
     }
+    list(means = colMeans(samples), mu = mu, sigma = sigma, n = n)
+  })
 
-    # 각 표본의 평균 계산
-    sample_means &lt;- colMeans(samples)
-
-    # 이론적 정규 분포 계산
-    x_seq &lt;- seq(min(sample_means), max(sample_means), length.out = 100)
-    y_dnorm &lt;- dnorm(x_seq, mean = mu, sd = sigma / sqrt(n))
-
-    # ggplot을 사용한 시각화
-    ggplot() +
-      geom_histogram(aes(x = sample_means, y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
-      geom_line(aes(x = x_seq, y = y_dnorm), color = "red") +
-      ggtitle(paste(input$distribution, "표본 평균의 분포")) +
-      xlab("표본 평균") + ylab("밀도")
+  # 계산된 통계량을 절제된 한 줄로(Tufte — 큰 값상자 대신 인라인 수치)
+  output$stats &lt;- renderText({
+    s &lt;- sim()
+    sprintf("표본평균의 평균 = %.3f    ·    표준오차(σ/√n) = %.3f",
+            mean(s$means), s$sigma / sqrt(s$n))
   })
 
   output$distPlot &lt;- renderPlot({
-    distribution &lt;- input$distribution
+    d &lt;- input$distribution
+    if (d == "norm") { x &lt;- seq(-3, 3, length.out = 100); y &lt;- dnorm(x); ttl &lt;- "정규 분포의 PDF" }
+    else if (d == "exp") { x &lt;- seq(0, 5, length.out = 100); y &lt;- dexp(x, rate = 1); ttl &lt;- "지수 분포의 PDF" }
+    else { x &lt;- seq(-0.1, 1.1, length.out = 100); y &lt;- dunif(x, 0, 1); ttl &lt;- "균등 분포의 PDF" }
+    ggplot() +
+      geom_line(aes(x, y), colour = bit_ink, linewidth = 0.6) +
+      labs(title = ttl, x = "x 값", y = "밀도") +
+      theme_tufte_bit()
+  }, bg = bit_cream)
 
-    # 분포에 따라 PDF를 계산하고 x 범위를 설정
-    if (distribution == "norm") {
-      x &lt;- seq(-3, 3, length.out = 100)
-      y &lt;- dnorm(x)
-      main_title &lt;- "정규 분포의 PDF"
-    } else if (distribution == "exp") {
-      x &lt;- seq(0, 5, length.out = 100)
-      y &lt;- dexp(x, rate = 1)
-      main_title &lt;- "지수 분포의 PDF"
-    } else if (distribution == "unif") {
-      x &lt;- seq(-0.1, 1.1, length.out = 100)
-      y &lt;- dunif(x, min = 0, max = 1)
-      main_title &lt;- "균등 분포의 PDF"
-    }
-
-    # PDF를 그래프로 표시
-    ggplot() + geom_line(aes(x, y)) + ggtitle(main_title) +
-      xlab("x 값") + ylab("밀도")
-  })
+  output$cltPlot &lt;- renderPlot({
+    s &lt;- sim()
+    x_seq &lt;- seq(min(s$means), max(s$means), length.out = 100)
+    y &lt;- dnorm(x_seq, mean = s$mu, sd = s$sigma / sqrt(s$n))
+    ggplot() +
+      geom_histogram(aes(x = s$means, y = after_stat(density)),
+                     bins = 30, fill = bit_muted, alpha = 0.35, colour = NA) +
+      geom_line(aes(x = x_seq, y = y), colour = bit_rust, linewidth = 0.7) +
+      labs(title = "표본평균의 분포", x = "표본 평균", y = "밀도") +
+      theme_tufte_bit()
+  }, bg = bit_cream)
 }
 
-# Shiny 앱 실행
-shinyApp(ui = ui, server = server)
-
-</code></pre>
+shinyApp(ui = ui, server = server)</code></pre>
 </div>
-</section>
-<section id="코딩" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 코딩</h1>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>정규·균등·지수 세 모집단에서 표본을 반복 추출해 표본 크기별 표본평균 분포를 <code>facet_wrap</code> 으로 나란히 비교합니다.</p>
+
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+</div>
 
 
-</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">라이센스</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ko_kr">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -8,12 +8,16 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 표본크기 계산은 통계적 분석에서 매우 중요한 역할을 합니다. 적절한 표본크기를 결정하는 것은 연구의 유효성과 신뢰성을 보장하는 데 필수적입니다. 표본크기가 너무 작으면 연구 결과의 통계적 유의성이 부족하여, 실제로 존재하는 효과를 감지하지 못할 수 있습니다. 반대로 표본크기가 너무 크면 시간과 자원이 낭비되며, 불필요한 비용이 발생할 수 있습니다. 표본크기 계산은 연구자가 설정한 유의수준과 검정력을 바탕으로 이루어지며, 이는 연구 결과의 신뢰성을 높이고, 과대 혹은 과소 평가된 결과를 방지하는 데 기여합니다. 다음 표본크기 계산기[^sample-size]를 사용해서 평균과 비율에 대한 표본크기를 계산할 수 있습니다. 
 
 [^sample-size]: [R Shinyapp Sample size, Solis-Lemus Lab (2021)](https://github.com/solislemuslab/sample-size-shinyapp?tab=readme-ov-file)
 
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -220,7 +224,7 @@ shinyApp(ui = ui, server = server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 # 평균에 대한 표본 크기 계산 함수
@@ -267,3 +271,6 @@ print(paste("비율에 대한 그룹 2의 표본크기: ", ceiling(sample_size_p
 
 ```
 
+:::
+
+:::

@@ -8,9 +8,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 상관분석은 두 변수 간의 관계 강도와 방향을 측정하고, 단순 회귀분석은 한 변수(독립 변수)를 사용해 다른 변수(종속 변수)를 예측하는 모형으로 상관분석은 두 변수 간의 관계 강도와 방향을 측정하는 데 중점을 두고, 회귀분석은 한 변수를 사용해 다른 변수를 예측하는 데 중점을 둔다. 특히 상관계수의 제곱은 회귀 분석에서 결정계수로 해석된다.
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -106,7 +110,7 @@ shinyApp(ui, server)
 :::
 
 
-# 코드
+## R 코드
 
 ```{webr-r}
 library(palmerpenguins)
@@ -144,4 +148,6 @@ perform_regression(penguins, "body_mass_g", "bill_length_mm")
 
 ```
 
+:::
 
+:::

@@ -8,10 +8,14 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 최대우도추정법(Maximum Likelihood Estimation, MLE)은 주어진 데이터로부터 모수(parameter)를 추정하는 통계적 방법입니다. MLE는 모수를 추정하기 위해, 관측된 데이터가 가장 일어날 가능성이 높도록 만드는 모수 값을 찾습니다. 우도함수(likelihood function)를 정의하고, 이 함수를 최대화하는 모수 값을 추정합니다. MLE는 대수우도(log-likelihood)를 사용하여 최적화 문제를 풀기도 합니다. MLE 추정량은 큰 샘플 크기에서 일치성(consistency)과 효율성(efficiency)을 가지며, 이는 대수의 법칙과 중심극한정리에 의해 뒷받침됩니다. 예를 들어, 정규분포의 평균과 표준편차, 이항분포의 성공 확률, 포아송분포의 평균 발생률 등을 추정할 때 MLE를 사용할 수 있습니다.
 
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -179,7 +183,7 @@ shinyApp(ui, server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 # 정규분포의 로그 우도 함수
@@ -272,3 +276,6 @@ main <- function() {
 main()
 ```
 
+:::
+
+:::

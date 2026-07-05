@@ -9,6 +9,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 내장 데이터셋과 외부 CSV 파일에서 범주형, 숫자형을 인식하고 변수 유형에 맞춰 적절한 기술통계를 계산하고 시각화할 수 있다.
 
 1. 선택한 변수에 따른 시각화 기능
@@ -24,7 +26,9 @@ editor_options:
    - 범주형 변수 2개: 분할표와 카이제곱 검정 결과
    - 연속형 변수 2개 이상: 상관계수 행렬
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -278,7 +282,7 @@ shinyApp(ui, server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 #| label: desc-stat-multivariate-webr
@@ -403,3 +407,6 @@ visualize_data(data, categorical_vars, numeric_vars)
 summarize_data(data, categorical_vars, numeric_vars)
 ```
 
+:::
+
+:::

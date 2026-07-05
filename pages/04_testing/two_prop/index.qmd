@@ -9,9 +9,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 2-비율 가설 검정은 두 독립적인 표본 집단에서 관찰된 비율의 차이가 통계적으로 유의미한지를 검증하는 통계적 방법입니다. 
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -616,7 +620,7 @@ shinyApp(ui, server)
 
 :::
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 # 정당 A의 데이터: 500명 중 250명이 지지
@@ -636,4 +640,6 @@ test_result <- prop.test(x = c(supporters_A, supporters_B),
 print(test_result)
 ```
 
+:::
 
+:::

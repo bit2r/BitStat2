@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-4fc543728d6529fe425aa02d41a55f8c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-41010f918d85b1f1068505217b534e0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <meta name="shinylive:serviceworker_dir" content="../../..">
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/load-shinylive-sw.js" type="module"></script>
 <script src="../../../site_libs/quarto-contrib/shinylive-0.2.3/shinylive/run-python-blocks.js" type="module"></script>
@@ -1484,10 +1484,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 
+<div class="tufte-page page-columns page-full">
 <p>2표본 t-검정은 두 독립적인 그룹의 평균 차이가 통계적으로 유의미한지를 판단하기 위한 통계적 검정 방법이다. 이 검정은 두 집단이 정규분포를 따르고, 데이터가 독립적인 경우에 사용할 수 있다.</p>
 <p>검정을 수행할 때 두 그룹의 분산이 같은지 다른지에 따라 검정 방법이 달라진다. 분산이 같다고 가정할 경우 등분산을 가정하는 t-검정을 사용하고, 분산이 다르다고 가정할 경우 등분산이 아닌 t-검정을 사용한다. R에서는 <code>t.test()</code> 함수를 사용하여 이 두 경우를 쉽게 계산할 수 있다. <code>var.equal = TRUE</code> 옵션을 사용하면 등분산을 가정하는 t-검정을 수행하고, <code>var.equal = FALSE</code> 옵션을 사용하면 등분산이 아닌 t-검정을 수행한다.</p>
-<section id="shiny-앱" class="level1 page-columns page-full" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Shiny 앱</h1>
+<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">인터랙티브 앱</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R 코드</a></li></ul>
+<div class="tab-content page-columns page-full">
+<div id="tabset-1-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="column-page">
 <pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-prob-law
 #| viewerWidth: 800
@@ -1968,14 +1971,16 @@ server &lt;- function(input, output, session) {
 
 shinyApp(ui, server)</code></pre>
 </div>
-</section>
-<section id="코딩" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 코딩</h1>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+</div>
 
 
-</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">라이센스</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ko_kr">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

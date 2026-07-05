@@ -9,9 +9,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 1~100 사이 난수를 뽑아 기술통계를 구하고 시각화를 통해 개념을 확실히 이해할 수 있다.
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -99,7 +103,7 @@ shinyApp(ui, server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 #| label: desc-stat-concept-webr
@@ -149,3 +153,6 @@ print(result$plot)
 
 ```
 
+:::
+
+:::

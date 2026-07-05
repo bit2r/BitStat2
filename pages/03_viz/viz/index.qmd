@@ -7,7 +7,11 @@ image: "thumbnail.png"
 categories: [ggplot, "데이터 시각화"]
 ---
 
-# Shiny 앱
+::: {.tufte-page}
+
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 ::: callout-note
 ### 데이터셋
@@ -109,7 +113,7 @@ shinyApp(ui, server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 library(ggplot2)
@@ -123,3 +127,7 @@ penguins |>
   geom_point() +
   geom_smooth(method = "lm")
 ```
+
+:::
+
+:::

@@ -9,9 +9,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 모집단에서 표본을 추출하는 대표적인 단순임의추출, 층화추출, 군집추출, 다단계추출 4가지 방법에 대한 개념을 시각적으로 확인해보자.
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -260,7 +264,7 @@ shinyApp(ui, server)
 
 :::
 
-# 코딩
+## R 코드
 
 
 ```{webr-r}
@@ -300,5 +304,6 @@ sampling_frame %>%
   ungroup()
 ```
 
+:::
 
-
+:::

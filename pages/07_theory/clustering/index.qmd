@@ -8,9 +8,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 군집분석(Clustering Analysis)은 데이터를 유사한 그룹으로 나누는 비지도 학습 기법입니다. 데이터의 숨겨진 구조를 발견하고, 각 군집 내의 데이터 관측점들이 최대한 유사하도록 합니다. 대표적인 기법으로는 k-평균(K-means) 클러스터링이 있으며,  사전에 정해진 k개의 중심을 기준으로 데이터를 반복적으로 군집화합니다.
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -142,7 +146,7 @@ shinyApp(ui = ui, server = server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 # 필요한 라이브러리 로드
@@ -202,3 +206,6 @@ cat("\n군집별 요약 통계:\n")
 print(summary_stats)
 ```
 
+:::
+
+:::

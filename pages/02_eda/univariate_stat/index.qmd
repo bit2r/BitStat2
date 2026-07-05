@@ -9,9 +9,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 내장 데이터셋과 외부 CSV 파일에서 단변량 변수를 선택하면 범주형, 숫자형을 인식하고 변수에 따라 적절한  기술통계를 계산하고 시각화할 수 있다.
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -174,7 +178,7 @@ shinyApp(ui, server)
 :::
 
 
-# 코딩
+## R 코드
 
 ```{webr-r}
 #| label: desc-stat-univariate-webr
@@ -256,3 +260,6 @@ print(categorical_example$plot1)
 print(categorical_example$plot2)
 ```
 
+:::
+
+:::

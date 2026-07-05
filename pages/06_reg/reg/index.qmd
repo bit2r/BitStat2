@@ -8,10 +8,14 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: {.tufte-page}
+
 회귀분석은 독립 변수와 종속 변수 간의 관계를 모델링하는 통계 기법입니다. 기본적으로 선형 회귀분석에서는 독립 변수 $x$가 종속 변수 $y$에 미치는 영향을 설명하기 위해 직선 방정식을 사용합니다. 이 방정식은 $y = \beta_0 + \beta_1 x + \epsilon$의 형태를 가지며, $\beta_0$는 절편(intercept), $\beta_1$는 기울기(coefficient), $\epsilon$은 오차항(residual)입니다. 회귀분석을 통해 추정된 회귀계수 $\beta_0$와 $\beta_1$는 독립 변수가 한 단위 증가할 때 종속 변수의 변화량을 나타내며, 모형 적합도를 평가하기 위해 결정계수 $R^2$와 같은 지표를 사용합니다.
 
 
-# Shiny 앱
+::: {.panel-tabset}
+
+## 인터랙티브 앱
 
 :::{.column-page}
 
@@ -325,7 +329,7 @@ shinyApp(ui = ui, server = server)
 :::
 
 
-# 코드
+## R 코드
 
 ```{webr-r}
 # 필요한 패키지 로드
@@ -368,4 +372,6 @@ display_results(fit, "body_mass_g", "bill_length_mm")
 
 ```
 
+:::
 
+:::
