@@ -1,0 +1,60 @@
+---
+engine: knitr
+title: "중심극한정리 — 코드 실습"
+webr:
+  packages: [ggplot2]
+---
+
+모집단이 어떤 분포든 **표본평균은 표본 크기가 커질수록 정규분포에 가까워진다.**
+아래 코드에서 `n`, `dist`를 바꿔 직접 실행해 보세요. *(단일 webR 런타임 · showtext 없이 브라우저 웹폰트 사용)*
+
+## 1. 표본평균을 직접 뽑아 보기
+
+```{webr}
+#| autorun: false
+library(ggplot2)
+
+n <- 30            # ← 표본 크기: 5, 30, 100 으로 바꿔 실행
+num_samples <- 1000
+dist <- "exp"      # ← "norm" / "exp" / "unif"
+
+samples <- switch(dist,
+  norm = matrix(rnorm(n*num_samples), nrow=n),
+  exp  = matrix(rexp(n*num_samples), nrow=n),
+  unif = matrix(runif(n*num_samples), nrow=n))
+means <- colMeans(samples)
+
+# webR canvas 디바이스가 브라우저 웹폰트('NanumGothic')로 한글 렌더 — showtext 불필요
+p <- ggplot(data.frame(means), aes(means)) +
+  geom_histogram(aes(y=after_stat(density)), bins=30, fill="#4a4a44", alpha=.4) +
+  labs(title=paste0("표본평균의 분포 (dist=", dist, ", n=", n, ")"),
+       x="표본 평균", y="밀도") +
+  theme_minimal(base_size=13) +
+  theme(text=element_text(family="NanumGothic"))
+
+# PostScript 폰트DB 조회 경고는 무해(실제 렌더는 canvas 웹폰트) → 억제
+suppressWarnings(print(p))
+```
+
+## 2. 연습 — 표준오차 계산
+
+표준오차는 $\sigma/\sqrt{n}$ 입니다. 아래 빈칸을 채워 실행하세요.
+
+```{webr}
+#| exercise: ex_se
+sigma <- 1
+n <- 30
+se <- ______
+se
+```
+
+::: { .hint exercise="ex_se" }
+분모는 표본 크기의 제곱근입니다: `sqrt(n)`.
+:::
+
+::: { .solution exercise="ex_se" }
+```r
+se <- sigma / sqrt(n)
+se
+```
+:::

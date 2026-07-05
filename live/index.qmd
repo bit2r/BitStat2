@@ -1,0 +1,7 @@
+---
+engine: knitr
+title: "BitStat2 Live — 코드로 배우는 통계"
+---
+R 코드를 직접 편집·실행하며 통계 원리를 익히는 트랙입니다. 단일 webR 런타임.
+
+- [중심극한정리 코드 실습](pages/05_infer/clt/index.qmd)

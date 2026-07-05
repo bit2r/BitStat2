@@ -32,3 +32,7 @@ AGENTS.md
 
 # 빌드 산출물 — gh-pages 브랜치로 분리(main에선 추적 안 함)
 /docs/
+
+# BitStat2 Live 빌드 산출물
+/live/_site/
+/live/.quarto/

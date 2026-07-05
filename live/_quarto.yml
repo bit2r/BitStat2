@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: _site
+website:
+  title: "BitStat2 Live"
+  navbar:
+    left:
+      - href: index.qmd
+        text: 홈
+      - href: pages/05_infer/clt/index.qmd
+        text: 중심극한정리
+format:
+  live-html:
+    theme: cosmo
+    toc: true
+    include-in-header: _header.html
+engine: knitr
+resources:
+  - assets
