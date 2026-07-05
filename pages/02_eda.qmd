@@ -2,7 +2,7 @@
 title: "탐색적 데이터 분석"
 subtitle: "탐색적 데이터 분석(EDA)"
 listing:
-  contents: "../02_eda/*/index.qmd"
+  contents: "02_eda/*/index.qmd"
   sort: "date-modified desc"
   type: grid
   categories: true

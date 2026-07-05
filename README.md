@@ -41,14 +41,14 @@
 
 ```
 index.qmd             # 홈(랜딩 그리드)
-pages/                # 주제·소개 랜딩 페이지
-  NN_topic.qmd        #   주제별 리스팅 페이지 (01_data ~ 07_theory)
+pages/                # 랜딩 페이지 + 콘텐츠 모듈 (사이트 본문 전체)
+  NN_topic.qmd        #   주제별 리스팅 랜딩 (01_data ~ 07_theory)
+  NN_topic/           #   주제 폴더(콘텐츠)
+    _metadata.yml     #     freeze: true, title-block-banner
+    module/
+      index.qmd       #     ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
+      thumbnail.png   #     리스팅 그리드 썸네일
   about.qmd · BitStat.qmd
-NN_topic/             # 주제 폴더 (콘텐츠)
-  _metadata.yml       #   freeze: true, title-block-banner
-  module/             #   학습 모듈
-    index.qmd         #   ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
-    thumbnail.png     #   리스팅 그리드 썸네일
 documents/            # 프로젝트 문서 (사이트 렌더 제외)
   PLAN.md · PROGRESS.md · CONTRIBUTING.md
   LICENSE-content.md · DATA_LICENSES.md
@@ -68,7 +68,7 @@ README.md · CLAUDE.md · LICENSE   # 루트 유지(관례)
 ```bash
 quarto preview          # 로컬 미리보기 (http://localhost:7771)
 quarto render           # 전체 렌더 → docs/
-quarto render 04_testing/x_score/index.qmd   # 단일 파일 렌더
+quarto render pages/04_testing/x_score/index.qmd   # 단일 파일 렌더
 ```
 
 - `freeze: true`이므로 코드 변경이 없으면 재계산하지 않습니다. 강제 재계산은 해당 `_freeze/` 항목을 삭제한 뒤 렌더합니다.
@@ -83,7 +83,7 @@ quarto render 04_testing/x_score/index.qmd   # 단일 파일 렌더
    `shiny/app.R` 사본은 stale 상태여서 모두 삭제했습니다. 앱 수정 시 인라인 블록을 고치세요.
 2. **한글 폰트**: 한글 라벨을 그리는 앱/코드셀은 `library(showtext); showtext_auto()`를 포함합니다.
    `family = "Tahoma"` 등 WASM에 없는 Windows 전용 폰트는 사용하지 않습니다.
-3. **신규 모듈**: `NN_topic/module/index.qmd` 생성 + YAML 필수값(`title`/`author`/`date`/`image`/`categories`) + `thumbnail.png`.
+3. **신규 모듈**: `pages/NN_topic/module/index.qmd` 생성 + YAML 필수값(`title`/`author`/`date`/`image`/`categories`) + `thumbnail.png`.
 4. **재현성**: 정적 렌더 랜덤 예제에는 `set.seed()`, 외부 URL 데이터는 `data/` 스냅샷 참조.
 
 ## 라이선스

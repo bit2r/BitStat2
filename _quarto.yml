@@ -8,13 +8,6 @@ project:
   render:
     - index.qmd
     - pages/
-    - 01_data/
-    - 02_eda/
-    - 03_viz/
-    - 04_testing/
-    - 05_infer/
-    - 06_reg/
-    - 07_theory/
   resources:
     - "images/*.png"
     - "images/*.jp*g"

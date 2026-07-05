@@ -13,49 +13,49 @@ listing:
   - id: stat-data
     max-items: 3
     contents: 
-      - 01_data
+      - pages/01_data
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png
   - id: stat-eda
     max-items: 3
     contents: 
-      - 02_eda
+      - pages/02_eda
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png
   - id: stat-viz
     max-items: 3
     contents: 
-      - 03_viz
+      - pages/03_viz
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png    
   - id: stat-testing
     max-items: 3
     contents: 
-      - 04_testing
+      - pages/04_testing
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png    
   - id: stat-infer
     max-items: 3
     contents: 
-      - 05_infer
+      - pages/05_infer
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png
   - id: stat-reg
     max-items: 3
     contents: 
-      - 06_reg
+      - pages/06_reg
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png
   - id: stat-theory
     max-items: 3
     contents: 
-      - 07_theory
+      - pages/07_theory
     sort: "date-modified desc" 
     type: grid
     image-placeholder: images/BitStat.png    

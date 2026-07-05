@@ -2,7 +2,7 @@
 title: "추론"
 subtitle: "중심극한정리, 신뢰구간, 최대우도추정"
 listing:
-  contents: "../05_infer/*/index.qmd"
+  contents: "05_infer/*/index.qmd"
   sort: "date-modified desc"
   type: grid
   categories: true

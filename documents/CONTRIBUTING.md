@@ -39,7 +39,7 @@ showtext_auto()
 
 ## 3. 신규 모듈 추가
 
-1. `NN_topic/module_name/index.qmd` 생성.
+1. `pages/NN_topic/module_name/index.qmd` 생성.
 2. YAML front matter 필수값:
    ```yaml
    ---

@@ -13,17 +13,18 @@
 ## 디렉터리 구조
 
 ```
-index.qmd             # 홈(랜딩 그리드)
-pages/                # 랜딩 페이지 (URL: /pages/NN_topic.html)
-  NN_topic.qmd        #   주제별 리스팅 (01_data ~ 07_theory), listing contents는 ../NN_topic
+index.qmd             # 홈(랜딩 그리드), listing contents는 pages/NN_topic
+pages/                # 랜딩 페이지 + 콘텐츠 모듈 (사이트 본문 전체)
+  NN_topic.qmd        #   주제별 리스팅 랜딩, listing contents는 "NN_topic/*/index.qmd"
+  NN_topic/           #   주제 폴더(콘텐츠)
+    _metadata.yml     #     freeze: true, title-block-banner
+    module/index.qmd  #     ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
+    module/thumbnail.png
   about.qmd · BitStat.qmd
-NN_topic/             # 주제 폴더 (콘텐츠, URL: /NN_topic/module/)
-  _metadata.yml       #   freeze: true, title-block-banner
-  module/index.qmd    #   ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
 documents/            # 프로젝트 문서 — 사이트 렌더 제외(_quarto.yml render allowlist)
   PLAN.md · PROGRESS.md · CONTRIBUTING.md · LICENSE-content.md · DATA_LICENSES.md
   tech_document/      #   기술검토·보안 보고서
-_quarto.yml           # 사이트 설정 (navbar, render allowlist, webr 패키지, 필터)
+_quarto.yml           # 사이트 설정 (navbar, render allowlist=index+pages/, webr 패키지, 필터)
 docs/                 # 빌드 산출물 (git 커밋됨, 직접 수정 금지)
 _freeze/              # freeze 캐시 (git 커밋됨)
 data/                 # 예제 데이터 (Galton, k_penguins 등)
@@ -31,7 +32,7 @@ images/               # 로고·썸네일·아키텍처 SVG
 README.md · CLAUDE.md · LICENSE   # 루트 유지(관례)
 ```
 
-> 랜딩 페이지는 `pages/`로 이동됨(2026-07-05). 모듈 URL(`/NN_topic/module/`)은 불변, 랜딩 URL만 `/NN_topic.html`→`/pages/NN_topic.html`로 변경. 새 랜딩 추가 시 `_quarto.yml`의 navbar href와 `render:` 목록도 갱신할 것.
+> 2026-07-05: 랜딩 페이지와 **콘텐츠 폴더(`01_data`~`07_theory`)를 모두 `pages/` 아래로 이동**. 사이트 본문은 전부 `pages/`에 있고 `_quarto.yml`의 `render:`는 `index.qmd` + `pages/`만 나열. **URL 변경**: 랜딩 `/pages/NN_topic.html`, 모듈 `/pages/NN_topic/module/`(기존 `/NN_topic/module/`에서 변경). 신규 모듈은 `pages/NN_topic/` 아래에 추가.
 
 ## 핵심 컨벤션 (반드시 지킬 것)
 
@@ -51,7 +52,7 @@ README.md · CLAUDE.md · LICENSE   # 루트 유지(관례)
 - 폰트 관련 상세: 기술검토 §3.2
 
 ### 3. 신규 모듈 추가 시
-- `NN_topic/module_name/index.qmd` 생성, YAML에 `title`/`author`/`date: today`/`image: thumbnail.png`/`categories` 필수.
+- `pages/NN_topic/module_name/index.qmd` 생성, YAML에 `title`/`author`/`date: today`/`image: thumbnail.png`/`categories` 필수.
 - **YAML에 `engine: knitr` 필수** — shinylive-r/webr-r 셀만 있고 knitr `{r}` 셀이 없으면 quarto가 jupyter 엔진을 골라 렌더가 실패한다(§ 빌드 참조). 전역 `_quarto.yml`에도 `engine: knitr`가 있으나, 엔진 자동선택은 **문서 front matter**에서 확정해야 안전하다.
 - 인라인 `{shinylive-r}` 블록으로 앱 작성(위 폰트 스니펫 포함).
 - `thumbnail.png` 추가(리스팅 그리드용).
@@ -65,7 +66,7 @@ README.md · CLAUDE.md · LICENSE   # 루트 유지(관례)
 ```bash
 quarto preview          # 로컬 미리보기 (port 7771)
 quarto render           # 전체 렌더 → docs/
-quarto render 04_testing/x_score/index.qmd   # 단일 파일 렌더
+quarto render pages/04_testing/x_score/index.qmd   # 단일 파일 렌더
 ```
 
 - Quarto 1.10+, R 필요. 필터: `shinylive`, `webr`(`_extensions/`에 번들됨).

@@ -2,7 +2,7 @@
 title: "회귀분석"
 subtitle: "선형회귀모형"
 listing:
-  contents: "../06_reg/*/index.qmd"
+  contents: "06_reg/*/index.qmd"
   sort: "date-modified desc"
   type: grid
   categories: true

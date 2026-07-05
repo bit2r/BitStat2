@@ -2,7 +2,7 @@
 title: "시각화"
 subtitle: "탐색적 데이터 분석(EDA)"
 listing:
-  contents: "../03_viz/*/index.qmd"
+  contents: "03_viz/*/index.qmd"
   sort: "date-modified desc"
   type: grid
   categories: true

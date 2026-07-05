@@ -4,6 +4,24 @@
 
 ---
 
+## 2026-07-05 — 콘텐츠 폴더도 pages/ 아래로 통합
+
+### 한 일
+- **주제 콘텐츠 폴더 7개(`01_data`~`07_theory`)를 `pages/` 아래로 이동**(git rename, 이력 보존). 이제 사이트 본문 전체가 `pages/`에 있음(랜딩 qmd + 콘텐츠 모듈).
+- 랜딩 listing: `"../NN/*/index.qmd"` → **`"NN/*/index.qmd"`**(이제 하위폴더라 `../` 불필요).
+- 홈 `index.qmd` listing: `- 0N_X` → `- pages/0N_X`.
+- `_quarto.yml` `render:` allowlist를 `index.qmd` + `pages/`만으로 축소(주제폴더 개별 항목 제거 — pages/가 커버).
+- 문서 경로 참조 갱신: 구조 다이어그램, `quarto render pages/04_testing/x_score/…`, 신규 모듈 경로 `pages/NN_topic/…`.
+
+### 검증(전체 렌더, exit 0)
+- 모듈이 `docs/pages/NN_topic/module/`로 이동, 구 위치 소멸. 랜딩·홈 리스팅 카드 정상 링크(`../pages/01_data/dist_continuous/…`).
+- **URL 변경**: 이번엔 **모듈 URL도 변경** — `/NN_topic/module/` → `/pages/NN_topic/module/`(랜딩 URL은 앞서 `/pages/NN_topic.html`로 변경됨). 즉 사이트 전 경로가 `/pages/` 접두.
+
+### docs/ 처리
+- 앞과 동일: shinylive 0.9.1 이슈로 재렌더 시 앱이 깨져, 배포 `docs/`는 **정상 0.2.3 빌드 유지**. 새 구조는 shinylive 자산 고정 후 재렌더로 반영.
+
+---
+
 ## 2026-07-05 — 프로젝트 루트 정리(파일 체계화)
 
 ### 한 일
