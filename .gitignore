@@ -29,3 +29,6 @@ AGENTS.md
 
 # 함정 기록(로컬 전용)
 /GOTCHA.md
+
+# 빌드 산출물 — gh-pages 브랜치로 분리(main에선 추적 안 함)
+/docs/
