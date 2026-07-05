@@ -1,7 +1,7 @@
 # 기여 가이드 (CONTRIBUTING)
 
 빛스탯2에 기여해 주셔서 감사합니다. 이 문서는 콘텐츠·앱을 추가/수정할 때 지켜야 할
-규칙과 PR 체크리스트를 정리합니다. 저장소 전반의 작업 가이드는 [CLAUDE.md](CLAUDE.md),
+규칙과 PR 체크리스트를 정리합니다. 저장소 전반의 작업 가이드는 [CLAUDE.md](../CLAUDE.md),
 개선 로드맵은 [PLAN.md](PLAN.md)를 참고하세요.
 
 ## 0. 개발 환경
@@ -77,5 +77,5 @@ showtext_auto()
 
 기여하신 내용은 저장소 라이선스 정책에 따라 배포됩니다.
 
-- 코드: [GPL-3.0](LICENSE)
+- 코드: [GPL-3.0](../LICENSE)
 - 콘텐츠: [CC BY-NC-SA 4.0](LICENSE-content.md)

@@ -1,8 +1,8 @@
 ---
-title: "통계 검정"
-subtitle: "평균과 비율 검정"
+title: "데이터"
+subtitle: "데이터 생성과 분포"
 listing:
-  contents: 04_testing
+  contents: "../01_data/*/index.qmd"
   sort: "date-modified desc"
   type: grid
   categories: true

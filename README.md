@@ -40,18 +40,25 @@
 ## 디렉터리 구조
 
 ```
-NN_topic.qmd          # 주제별 랜딩(리스팅) 페이지
-NN_topic/             # 주제 폴더
-  _metadata.yml       # freeze: true, title-block-banner
-  module/             # 학습 모듈
-    index.qmd         # ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
-    thumbnail.png     # 리스팅 그리드 썸네일
-_quarto.yml           # 사이트 설정 (navbar, webr 패키지, 필터)
+index.qmd             # 홈(랜딩 그리드)
+pages/                # 주제·소개 랜딩 페이지
+  NN_topic.qmd        #   주제별 리스팅 페이지 (01_data ~ 07_theory)
+  about.qmd · BitStat.qmd
+NN_topic/             # 주제 폴더 (콘텐츠)
+  _metadata.yml       #   freeze: true, title-block-banner
+  module/             #   학습 모듈
+    index.qmd         #   ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
+    thumbnail.png     #   리스팅 그리드 썸네일
+documents/            # 프로젝트 문서 (사이트 렌더 제외)
+  PLAN.md · PROGRESS.md · CONTRIBUTING.md
+  LICENSE-content.md · DATA_LICENSES.md
+  tech_document/      #   기술검토·보안 보고서
+_quarto.yml           # 사이트 설정 (navbar, render, webr 패키지, 필터)
 docs/                 # 빌드 산출물 (GitHub Pages, 직접 수정 금지)
 _freeze/              # freeze 캐시
 data/                 # 예제 데이터 (Galton, k_penguins 등)
-tech_document/        # 기술검토 보고서
-PLAN.md / PROGRESS.md # 개선 실행 계획 / 작업 기록
+images/               # 로고·썸네일·아키텍처 SVG
+README.md · CLAUDE.md · LICENSE   # 루트 유지(관례)
 ```
 
 ## 로컬 개발
@@ -69,7 +76,7 @@ quarto render 04_testing/x_score/index.qmd   # 단일 파일 렌더
 
 ## 핵심 컨벤션
 
-기여 규칙과 PR 체크리스트는 [CONTRIBUTING.md](CONTRIBUTING.md)를, 저장소 작업 가이드는
+기여 규칙과 PR 체크리스트는 [CONTRIBUTING.md](documents/CONTRIBUTING.md)를, 저장소 작업 가이드는
 [CLAUDE.md](CLAUDE.md)를 참고하세요. 요약하면:
 
 1. **Shiny 앱의 정본은 `index.qmd`의 인라인 `{shinylive-r}` 블록입니다(유일 정본).** 과거의
@@ -84,8 +91,8 @@ quarto render 04_testing/x_score/index.qmd   # 단일 파일 렌더
 이 저장소는 대상별로 라이선스를 분리합니다.
 
 - **소스 코드**(R/Shiny/빌드 스크립트): [GPL-3.0](LICENSE)
-- **학습 콘텐츠**(문서·글·그림): [CC BY-NC-SA 4.0](LICENSE-content.md)
-- **예제 데이터**: 각 파일별 출처·라이선스는 [DATA_LICENSES.md](DATA_LICENSES.md) 참조
+- **학습 콘텐츠**(문서·글·그림): [CC BY-NC-SA 4.0](documents/LICENSE-content.md)
+- **예제 데이터**: 각 파일별 출처·라이선스는 [DATA_LICENSES.md](documents/DATA_LICENSES.md) 참조
 
 ## 관련 링크
 

@@ -61,40 +61,40 @@ listing:
     image-placeholder: images/BitStat.png    
 ---
 
-# [데이터](01_data.qmd)
+# [데이터](pages/01_data.qmd)
 
 ::: {#stat-data}
 :::
 
 
-# [EDA](02_eda.qmd)
+# [EDA](pages/02_eda.qmd)
 
 ::: {#stat-eda}
 :::
 
-# [시각화](03_viz.qmd)
+# [시각화](pages/03_viz.qmd)
 
 ::: {#stat-viz}
 :::
 
 
-# [통계검정](04_testing.qmd)
+# [통계검정](pages/04_testing.qmd)
 
 ::: {#stat-testing}
 :::
 
-# [추론](05_infer.qmd)
+# [추론](pages/05_infer.qmd)
 
 ::: {#stat-infer}
 :::
 
-# [회귀분석](06_reg.qmd)
+# [회귀분석](pages/06_reg.qmd)
 
 ::: {#stat-reg}
 :::
 
 
-# [이론](07_theory.qmd)
+# [이론](pages/07_theory.qmd)
 
 ::: {#stat-theory}
 :::

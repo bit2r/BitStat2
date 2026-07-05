@@ -2,7 +2,7 @@
 title: "통계이론"
 subtitle: "통계이론의 기초"
 listing:
-  contents: 07_theory
+  contents: "../07_theory/*/index.qmd"
   sort: "date-modified desc"
   type: grid
   categories: true

@@ -1,8 +1,8 @@
 ---
-title: "회귀분석"
-subtitle: "선형회귀모형"
+title: "통계 검정"
+subtitle: "평균과 비율 검정"
 listing:
-  contents: 06_reg
+  contents: "../04_testing/*/index.qmd"
   sort: "date-modified desc"
   type: grid
   categories: true

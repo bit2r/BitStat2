@@ -13,19 +13,25 @@
 ## 디렉터리 구조
 
 ```
-NN_topic.qmd          # 주제별 랜딩(리스팅) 페이지 (01_data ~ 07_theory)
-NN_topic/             # 주제 폴더
-  _metadata.yml       # freeze: true, title-block-banner
-  module/             # 학습 모듈
-    index.qmd         # ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
-    thumbnail.png
-_quarto.yml           # 사이트 설정 (navbar, webr 패키지, 필터)
+index.qmd             # 홈(랜딩 그리드)
+pages/                # 랜딩 페이지 (URL: /pages/NN_topic.html)
+  NN_topic.qmd        #   주제별 리스팅 (01_data ~ 07_theory), listing contents는 ../NN_topic
+  about.qmd · BitStat.qmd
+NN_topic/             # 주제 폴더 (콘텐츠, URL: /NN_topic/module/)
+  _metadata.yml       #   freeze: true, title-block-banner
+  module/index.qmd    #   ★ 콘텐츠 + 인라인 shinylive 앱 (유일 정본)
+documents/            # 프로젝트 문서 — 사이트 렌더 제외(_quarto.yml render allowlist)
+  PLAN.md · PROGRESS.md · CONTRIBUTING.md · LICENSE-content.md · DATA_LICENSES.md
+  tech_document/      #   기술검토·보안 보고서
+_quarto.yml           # 사이트 설정 (navbar, render allowlist, webr 패키지, 필터)
 docs/                 # 빌드 산출물 (git 커밋됨, 직접 수정 금지)
 _freeze/              # freeze 캐시 (git 커밋됨)
-data/                 # 예제 데이터 (Galton, penguins 등)
-tech_document/        # 기술검토 보고서
-PROGRESS.md / PLAN.md # 작업 기록 / 개선 실행 계획
+data/                 # 예제 데이터 (Galton, k_penguins 등)
+images/               # 로고·썸네일·아키텍처 SVG
+README.md · CLAUDE.md · LICENSE   # 루트 유지(관례)
 ```
+
+> 랜딩 페이지는 `pages/`로 이동됨(2026-07-05). 모듈 URL(`/NN_topic/module/`)은 불변, 랜딩 URL만 `/NN_topic.html`→`/pages/NN_topic.html`로 변경. 새 랜딩 추가 시 `_quarto.yml`의 navbar href와 `render:` 목록도 갱신할 것.
 
 ## 핵심 컨벤션 (반드시 지킬 것)
 
@@ -33,7 +39,7 @@ PROGRESS.md / PLAN.md # 작업 기록 / 개선 실행 계획
 - 실제 배포되는 것은 `index.qmd` 내 `{shinylive-r}` (`standalone: true`) 블록이다.
 - 과거 존재하던 `shiny/app.R` 개발용 사본은 인라인 블록과 어긋난 stale 상태(drift 8/23)여서 **2026-07-05에 전부 삭제**했다(§3.1 정본화 완료). 이제 각 모듈 앱의 소스는 `index.qmd` 인라인 블록 **하나뿐**이다.
 - **앱을 수정할 때는 `index.qmd`의 인라인 블록을 고칠 것.** `shiny/` 폴더는 더 이상 만들지 말 것.
-- 상세 근거: [tech_document/2026-07-05_기술검토.md](tech_document/2026-07-05_기술검토.md) §3.1
+- 상세 근거: [tech_document/2026-07-05_기술검토.md](documents/tech_document/2026-07-05_기술검토.md) §3.1
 
 ### 2. 한글 폰트 처리
 - shinylive/webr(WASM)에서 한글 라벨이 깨지지 않도록 각 인라인 앱은 표준 폰트 스니펫을 사용한다:
@@ -71,4 +77,4 @@ quarto render 04_testing/x_score/index.qmd   # 단일 파일 렌더
 
 - `docs/`는 빌드 산출물이다. 직접 편집하지 말고 소스(`*.qmd`)를 고친 뒤 렌더한다.
 - 이 저장소는 현재 iCloud Drive 경로에 있다(`.git` 손상·동기화 충돌 위험). 대량 작업 전 백업 권장.
-- 개선 작업은 [PLAN.md](PLAN.md)의 우선순위(P0→P3)를 따르고, 완료 시 [PROGRESS.md](PROGRESS.md)에 기록한다.
+- 개선 작업은 [PLAN.md](documents/PLAN.md)의 우선순위(P0→P3)를 따르고, 완료 시 [PROGRESS.md](documents/PROGRESS.md)에 기록한다.

@@ -4,6 +4,31 @@
 
 ---
 
+## 2026-07-05 — 프로젝트 루트 정리(파일 체계화)
+
+### 한 일
+- **랜딩 페이지 → `pages/`**: `01_data.qmd`~`07_theory.qmd`, `about.qmd`, `BitStat.qmd` 이동(git rename, 이력 보존). `index.qmd`(홈)는 루트 유지.
+- **프로젝트 문서 → `documents/`**: `PLAN.md`, `PROGRESS.md`, `CONTRIBUTING.md`, `DATA_LICENSES.md`, `LICENSE-content.md`, `tech_document/` 이동. `README.md`·`CLAUDE.md`·`LICENSE`는 관례상 루트 유지.
+- **잔여물 제거**: `PROGRESS_files/`(렌더 부산물) 삭제, `.gitignore`에 `/*_files/` 추가.
+
+### 참조·설정 갱신
+- `_quarto.yml`: navbar href `01_data.qmd`→`pages/01_data.qmd`(9개), **`render:` allowlist** 추가(index+pages+주제폴더만 렌더 → README/CLAUDE/documents는 사이트 제외).
+- 랜딩 listing: `contents: 01_data` → **`contents: "../01_data/*/index.qmd"`**(glob). 폴더형 `../01_data`는 상위-건너를 해소 못 해 빈 리스팅 → **명시적 glob으로 해결**(전체 렌더로 카드 정상 확인).
+- `index.qmd` 홈 링크 → `pages/…`, `about.qmd` 이미지 → `../images/…`.
+- 링크 갱신: README/CLAUDE(→`documents/…`), `documents/` 내부 파일의 루트참조(`LICENSE`/`CLAUDE.md`→`../`). 구조 다이어그램 갱신.
+
+### 검증(전체 렌더, exit 0)
+- 7개 랜딩 리스팅 카드 정상(01_data:4, 02_eda:4, 03_viz:2, 04_testing:5, 05_infer:2, 06_reg:2, 07_theory:4). navbar가 `pages/`로, `documents/`는 사이트 미포함 확인.
+- **URL 변화**: 모듈 URL(`/NN_topic/module/`)은 **불변**. 랜딩 URL만 `/NN_topic.html`→`/pages/NN_topic.html`.
+
+### docs/ 처리
+- 이번 재구성은 **재렌더가 필요**한데 현재 shinylive 0.9.1 문제로 앱이 깨짐 → 배포 `docs/`는 **정상 0.2.3 빌드로 유지**(소스만 재구성). 새 구조는 shinylive 자산 고정 후 재렌더 시 반영. (소스↔docs 구조 일시 불일치)
+
+### 소유자 참고
+- `_pages/`(밑줄)는 Quarto가 렌더에서 제외하므로 `pages/`(밑줄 없이) 사용. `documents/`는 요청대로 `doc/`에서 개명.
+
+---
+
 ## 2026-07-05 — 🔴 보안: polyfill.io 공급망 공격 스크립트 제거
 
 ### 발견
