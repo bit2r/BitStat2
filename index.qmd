@@ -16,49 +16,49 @@ listing:
       - pages/01_data
     sort: "date-modified desc" 
     type: grid
-    image-placeholder: images/BitStat.png
+    image-placeholder: assets/BitStat.png
   - id: stat-eda
     max-items: 3
     contents: 
       - pages/02_eda
     sort: "date-modified desc" 
     type: grid
-    image-placeholder: images/BitStat.png
+    image-placeholder: assets/BitStat.png
   - id: stat-viz
     max-items: 3
     contents: 
       - pages/03_viz
     sort: "date-modified desc" 
     type: grid
-    image-placeholder: images/BitStat.png    
+    image-placeholder: assets/BitStat.png    
   - id: stat-testing
     max-items: 3
     contents: 
       - pages/04_testing
     sort: "date-modified desc" 
     type: grid
-    image-placeholder: images/BitStat.png    
+    image-placeholder: assets/BitStat.png    
   - id: stat-infer
     max-items: 3
     contents: 
       - pages/05_infer
     sort: "date-modified desc" 
     type: grid
-    image-placeholder: images/BitStat.png
+    image-placeholder: assets/BitStat.png
   - id: stat-reg
     max-items: 3
     contents: 
       - pages/06_reg
     sort: "date-modified desc" 
     type: grid
-    image-placeholder: images/BitStat.png
+    image-placeholder: assets/BitStat.png
   - id: stat-theory
     max-items: 3
     contents: 
       - pages/07_theory
     sort: "date-modified desc" 
     type: grid
-    image-placeholder: images/BitStat.png    
+    image-placeholder: assets/BitStat.png    
 ---
 
 # [데이터](pages/01_data.qmd)

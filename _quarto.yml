@@ -9,8 +9,8 @@ project:
     - index.qmd
     - pages/**/*.qmd
   resources:
-    - "images/*.png"
-    - "images/*.jp*g"
+    - "assets/*.png"
+    - "assets/*.ico"
 
 lang: ko-KR
 
@@ -25,10 +25,10 @@ website:
   # GA4 속성 발급 후 아래를 "G-XXXXXXX" 측정 ID로 교체하고 주석 해제할 것.
   # google-analytics: "UA-229551680-1"
   description: "BitStat2: 오픈 통계 패키지"
-  favicon: images/favicon.ico
+  favicon: assets/favicon.ico
   search: true
   navbar:
-    logo: images/Korea_R_User_Group_kor.png
+    logo: assets/Korea_R_User_Group_kor.png
     left:
       - text: "빛스탯"
         menu:
@@ -59,7 +59,7 @@ format:
   html:
     theme: spacelab
     linkcolor: "#0000A0"
-    css: styles.css
+    css: assets/styles.css
     highlight-style: github
     date-format: iso
 

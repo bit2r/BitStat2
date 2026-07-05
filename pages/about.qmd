@@ -1,6 +1,6 @@
 ---
 title: "소개"
-image: ../images/BitStat.png
+image: ../assets/BitStat.png
 about:
   template: jolla
   links:
