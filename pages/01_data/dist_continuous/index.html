@@ -1499,7 +1499,6 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div id="tabset-1-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="column-page">
 <pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-discrete-distribution
-#| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 
@@ -1537,52 +1536,53 @@ bit_theme &lt;- bs_theme(
 
 ui &lt;- fluidPage(
   theme = bit_theme,
-  titlePanel("Continuous Distributions"),
+  titlePanel("연속형 분포"),
   sidebarLayout(
     sidebarPanel(
-      radioButtons("dist", "Select Distribution:",
-                   choices = c("Uniform", "Normal", "Exponential", "Gamma", "Beta"),
+      radioButtons("dist", "분포 선택:",
+                   choices = c("균등" = "Uniform", "정규" = "Normal",
+                               "지수" = "Exponential", "감마" = "Gamma", "베타" = "Beta"),
                    inline = TRUE),
       conditionalPanel(
         condition = "input.dist == 'Uniform'",
-        sliderInput("unif_min", "Minimum (a):", min = -10, max = 0, value = -1, step = 0.1),
-        sliderInput("unif_max", "Maximum (b):", min = 0, max = 10, value = 1, step = 0.1)
+        sliderInput("unif_min", "최솟값 (a):", min = -10, max = 0, value = -1, step = 0.1),
+        sliderInput("unif_max", "최댓값 (b):", min = 0, max = 10, value = 1, step = 0.1)
       ),
       conditionalPanel(
         condition = "input.dist == 'Normal'",
-        sliderInput("norm_mean", "Mean (μ):", min = -10, max = 10, value = 0, step = 0.1),
-        sliderInput("norm_sd", "Standard Deviation (σ):", min = 0.1, max = 5, value = 1, step = 0.1),
-        sliderInput("x_range_norm", "Range of x:", min = -10, max = 10, value = c(-5, 5), step = 0.1)
+        sliderInput("norm_mean", "평균 (μ):", min = -10, max = 10, value = 0, step = 0.1),
+        sliderInput("norm_sd", "표준편차 (σ):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_norm", "x 범위:", min = -10, max = 10, value = c(-5, 5), step = 0.1)
       ),
       conditionalPanel(
         condition = "input.dist == 'Exponential'",
-        sliderInput("exp_rate", "Rate (λ):", min = 0.1, max = 5, value = 1, step = 0.1),
-        sliderInput("x_range_exp", "Range of x:", min = 0, max = 10, value = c(0, 5), step = 0.1)
+        sliderInput("exp_rate", "비율 (λ):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_exp", "x 범위:", min = 0, max = 10, value = c(0, 5), step = 0.1)
       ),
       conditionalPanel(
         condition = "input.dist == 'Gamma'",
-        sliderInput("gamma_shape", "Shape (α):", min = 0.1, max = 5, value = 1, step = 0.1),
-        sliderInput("gamma_rate", "Rate (β):", min = 0.1, max = 5, value = 1, step = 0.1),
-        sliderInput("x_range_gamma", "Range of x:", min = 0, max = 10, value = c(0, 5), step = 0.1)
+        sliderInput("gamma_shape", "형상 (α):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("gamma_rate", "비율 (β):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_gamma", "x 범위:", min = 0, max = 10, value = c(0, 5), step = 0.1)
       ),
       conditionalPanel(
         condition = "input.dist == 'Beta'",
-        sliderInput("beta_shape1", "Shape 1 (α):", min = 0.1, max = 5, value = 1, step = 0.1),
-        sliderInput("beta_shape2", "Shape 2 (β):", min = 0.1, max = 5, value = 1, step = 0.1),
-        sliderInput("x_range_beta", "Range of x:", min = 0, max = 1, value = c(0, 1), step = 0.01)
+        sliderInput("beta_shape1", "형상1 (α):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("beta_shape2", "형상2 (β):", min = 0.1, max = 5, value = 1, step = 0.1),
+        sliderInput("x_range_beta", "x 범위:", min = 0, max = 1, value = c(0, 1), step = 0.01)
       )
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("PDF Plot", plotOutput("pdf_plot")),
-        tabPanel("CDF Plot", plotOutput("cdf_plot"))
+        tabPanel("PDF 그래프", plotOutput("pdf_plot")),
+        tabPanel("CDF 그래프", plotOutput("cdf_plot"))
       ),
-      h4("Usage Instructions:"),
+      h4("사용 방법:"),
       tags$ol(
-        tags$li("Select a distribution type using the radio buttons."),
-        tags$li("Adjust the parameters of the selected distribution using the sliders."),
-        tags$li("Use the 'Range of x' slider to control the range of the x-axis."),
-        tags$li("Explore the PDF and CDF plots in their respective tabs.")
+        tags$li("라디오 버튼으로 분포 종류를 선택합니다."),
+        tags$li("슬라이더로 선택한 분포의 모수를 조정합니다."),
+        tags$li("'x 범위' 슬라이더로 x축의 범위를 조절합니다."),
+        tags$li("각 탭에서 PDF와 CDF 그래프를 살펴봅니다.")
       )
     )
   )
@@ -1617,15 +1617,15 @@ server &lt;- function(input, output) {
   output$pdf_plot &lt;- renderPlot({
     ggplot(dist_data(), aes(x = x, y = pdf)) +
       geom_line(color = "#4a4a44") +
-      labs(title = paste(input$dist, "Distribution - PDF"),
-           x = "x", y = "Density")
+      labs(title = "확률밀도함수 (PDF)",
+           x = "x", y = "밀도")
   })
 
   output$cdf_plot &lt;- renderPlot({
     ggplot(dist_data(), aes(x = x, y = cdf)) +
       geom_line(color = "#4a4a44") +
-      labs(title = paste(input$dist, "Distribution - CDF"),
-           x = "x", y = "Cumulative Probability")
+      labs(title = "누적분포함수 (CDF)",
+           x = "x", y = "누적확률")
   })
 }
 

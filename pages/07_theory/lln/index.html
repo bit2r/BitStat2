@@ -1484,7 +1484,6 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div id="tabset-1-1" class="tab-pane active page-columns page-full" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="column-page">
 <pre class="shinylive-r" data-engine="r"><code>#| label: shinylive-lln-coin
-#| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 
@@ -1521,21 +1520,21 @@ bit_theme &lt;- bs_theme(
 
 ui &lt;- fluidPage(
   theme = bit_theme,
-  titlePanel("Law of Large Numbers - Coin Toss"),
+  titlePanel("대수의 법칙 — 동전 던지기"),
 
   sidebarLayout(
     sidebarPanel(
-      sliderInput("n_trials", "Number of Trials:", min = 1, max = 1000, value = 100),
-      sliderInput("n_coins", "Number of Coins:", min = 1, max = 100, value = 1),
-      actionButton("simulate", "Start Coin Toss")
+      sliderInput("n_trials", "시행 횟수:", min = 1, max = 1000, value = 100),
+      sliderInput("n_coins", "동전 개수:", min = 1, max = 100, value = 1),
+      actionButton("simulate", "동전 던지기 시작")
     ),
 
     mainPanel(
       plotOutput("coin_plot"),
       br(),
-      p("This app demonstrates the law of large numbers through a coin toss example."),
-      p("When repeatedly tossing coins, as the number of trials increases, the probability of getting heads approaches 0.5."),
-      p("Adjust the number of trials and coins and start the simulation!")
+      p("이 앱은 동전 던지기 예제로 대수의 법칙을 보여줍니다."),
+      p("동전을 반복해서 던질수록 시행 횟수가 늘어나면 앞면이 나올 확률은 0.5에 가까워집니다."),
+      p("시행 횟수와 동전 개수를 조정하고 시뮬레이션을 시작해 보세요!")
     )
   )
 )
@@ -1553,10 +1552,10 @@ server &lt;- function(input, output) {
   output$coin_plot &lt;- renderPlot({
     if (!is.null(coin_flips$data)) {
       matplot(coin_flips$data, type = "l", lty = 1, col = rainbow(input$n_coins),
-              xlab = "Number of Trials", ylab = "Proportion of Heads", main = "Coin Toss Simulation",
+              xlab = "시행 횟수", ylab = "앞면 비율", main = "동전 던지기 시뮬레이션",
               ylim = c(0, 1))
       abline(h = 0.5, lty = 2, col = "#4a4a44")
-      legend("topright", legend = c("Theoretical Probability (0.5)", paste0("Coin ", 1:input$n_coins)),
+      legend("topright", legend = c("이론적 확률 (0.5)", paste0("동전 ", 1:input$n_coins)),
              lty = c(2, rep(1, input$n_coins)), col = c("#8a1500", rainbow(input$n_coins)))
     }
   })
