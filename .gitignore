@@ -13,3 +13,16 @@ to_do.qmd
 # Quarto 렌더 부산물 (루트 문서 렌더 시 생성되는 지원 파일 폴더)
 /*_files/
 _svg_preview.html
+
+# AI 개발 관련 파일 — 외부(공개 저장소) 노출 방지. 로컬 개발용으로만 유지.
+/CLAUDE.md
+/documents/PLAN.md
+/documents/PROGRESS.md
+/documents/tech_document/
+/.claude/
+AGENTS.md
+.aider*
+.cursor/
+
+# 브라우저 자동화 산출물
+.playwright-mcp/
