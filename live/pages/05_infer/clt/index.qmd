@@ -10,37 +10,41 @@ webr:
 
 ## 1. 표본평균의 분포 (슬라이더 반응)
 
+R 함수를 정의해 OJS로 내보내고(`define`), 슬라이더가 그 함수를 호출합니다 — 문서 권장 반응형 패턴.
+
+```{webr}
+#| autorun: true
+#| edit: false
+#| output: false
+#| define:
+#|   - clt_plot
+library(ggplot2)
+
+# webR canvas가 브라우저 웹폰트('NanumGothic')로 한글 렌더 — showtext 불필요
+clt_plot <- function(n, num_samples, dist) {
+  samples <- switch(dist,
+    norm = matrix(rnorm(n*num_samples), nrow=n),
+    exp  = matrix(rexp(n*num_samples), nrow=n),
+    unif = matrix(runif(n*num_samples), nrow=n))
+  means <- colMeans(samples)
+  p <- ggplot(data.frame(means), aes(means)) +
+    geom_histogram(aes(y=after_stat(density)), bins=30, fill="#4a4a44", alpha=.4) +
+    labs(title=paste0("표본평균의 분포 (dist=", dist, ", n=", n, ")"),
+         x="표본 평균", y="밀도") +
+    theme_minimal(base_size=13) +
+    theme(text=element_text(family="NanumGothic"))
+  suppressWarnings(print(p))
+}
+```
+
 ```{ojs}
 //| echo: false
 viewof n = Inputs.range([5, 100], {value: 30, step: 5, label: "표본 크기 (n)"})
 viewof num_samples = Inputs.range([100, 5000], {value: 1000, step: 100, label: "표본 수"})
 viewof dist = Inputs.select(["norm", "exp", "unif"], {value: "exp", label: "분포 선택", format: x => ({norm: "정규 분포", exp: "지수 분포", unif: "균등 분포"})[x]})
-```
 
-```{webr}
-#| edit: false
-#| input:
-#|   - "n"
-#|   - "num_samples"
-#|   - "dist"
-library(ggplot2)
-
-samples <- switch(dist,
-  norm = matrix(rnorm(n*num_samples), nrow=n),
-  exp  = matrix(rexp(n*num_samples), nrow=n),
-  unif = matrix(runif(n*num_samples), nrow=n))
-means <- colMeans(samples)
-
-# webR canvas 디바이스가 브라우저 웹폰트('NanumGothic')로 한글 렌더 — showtext 불필요
-p <- ggplot(data.frame(means), aes(means)) +
-  geom_histogram(aes(y=after_stat(density)), bins=30, fill="#4a4a44", alpha=.4) +
-  labs(title=paste0("표본평균의 분포 (dist=", dist, ", n=", n, ")"),
-       x="표본 평균", y="밀도") +
-  theme_minimal(base_size=13) +
-  theme(text=element_text(family="NanumGothic"))
-
-# PostScript 폰트DB 조회 경고는 무해(실제 렌더는 canvas 웹폰트) → 억제
-suppressWarnings(print(p))
+// 슬라이더 값으로 R 함수 호출 → 값이 바뀌면 자동 재실행(반응형)
+clt_plot(n, num_samples, dist)
 ```
 
 ## 2. 연습 — 표준오차 계산
