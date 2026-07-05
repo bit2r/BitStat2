@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" font-family="'ET Book','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif">
+  <defs>
+    <style>
+      text{fill:#1a1a1a}
+      .t{font-size:25px}.sub{font-size:13px;fill:#6b6b60;font-style:italic}
+      .col{font-size:11px;fill:#8a8578;font-style:italic;letter-spacing:.12em}
+      .grp{font-size:11px;fill:#8a8578;font-style:italic;letter-spacing:.14em}
+      .p{font-size:14px;fill:#141410}
+      .ev{font-size:11px;fill:#9a9488;font-style:italic}
+      .num{font-size:11.5px;fill:#6b6b60}
+      .rule{stroke:#d8d4c2;stroke-width:1}.row{stroke:#ece9d8;stroke-width:1}
+      .barbg{fill:#ece9d8}
+      .badge0{fill:#9c2a10}.badge1{fill:#b5761f}.badge2{fill:#8a8578}
+      .bt{font-size:9.5px;fill:#fff;font-weight:bold}
+      .lg{font-size:11.5px;fill:#35352c}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1120" height="620" fill="#fffff8"/>
+
+  <text class="t" x="40" y="46">Shiny UI 문제점 감사 — 23개 인라인 앱</text>
+  <text class="sub" x="470" y="46">전수 grep + 3개 앱(reg·esquisse·clt) 브라우저 실측</text>
+  <line class="rule" x1="40" y1="58" x2="1080" y2="58"/>
+
+  <text class="col" x="40" y="80">문 제  (심각도순)</text>
+  <text class="col" x="500" y="80">영 향  범 위  (23모듈 중)</text>
+  <text class="col" x="900" y="80">수 정</text>
+  <line class="rule" x1="40" y1="88" x2="1080" y2="88"/>
+
+  <!-- group 높음 -->
+  <circle cx="45" cy="104" r="4" fill="#9c2a10"/><text class="grp" x="55" y="108">높 음</text>
+
+  <!-- 1 고정폭 -->
+  <circle cx="48" cy="128" r="5" fill="#9c2a10"/>
+  <text class="p" x="60" y="133">고정폭 viewerWidth:800 — 모바일 반응형 실패</text>
+  <rect class="barbg" x="500" y="121" width="330" height="13" rx="1"/>
+  <rect x="500" y="121" width="316" height="13" rx="1" fill="#9c2a10"/>
+  <text class="num" x="838" y="132">22/23</text>
+  <rect class="badge0" x="900" y="121" width="22" height="14" rx="1"/><text class="bt" x="911" y="132" text-anchor="middle">P0</text>
+  <text class="ev" x="928" y="132">폭 제거→반응형</text>
+
+  <!-- 2 언어혼용 -->
+  <line class="row" x1="40" y1="148" x2="1080" y2="148"/>
+  <circle cx="48" cy="168" r="5" fill="#9c2a10"/>
+  <text class="p" x="60" y="173">UI 언어 한/영 혼용 — 영어 제목·라벨</text>
+  <rect class="barbg" x="500" y="161" width="330" height="13" rx="1"/>
+  <rect x="500" y="161" width="130" height="13" rx="1" fill="#9c2a10"/>
+  <text class="num" x="838" y="172">~8/23</text>
+  <rect class="badge0" x="900" y="161" width="22" height="14" rx="1"/><text class="bt" x="911" y="172" text-anchor="middle">P0</text>
+  <text class="ev" x="928" y="172">한국어화</text>
+
+  <!-- 3 잘림 -->
+  <line class="row" x1="40" y1="188" x2="1080" y2="188"/>
+  <circle cx="48" cy="208" r="5" fill="#9c2a10"/>
+  <text class="p" x="60" y="213">고정 viewerHeight로 콘텐츠 잘림 — CC-BY 출처 clip</text>
+  <rect class="barbg" x="500" y="201" width="330" height="13" rx="1"/>
+  <rect x="500" y="201" width="55" height="13" rx="1" fill="#9c2a10"/>
+  <text class="num" x="838" y="212">3+ 확인</text>
+  <rect class="badge0" x="900" y="201" width="22" height="14" rx="1"/><text class="bt" x="911" y="212" text-anchor="middle">P0</text>
+  <text class="ev" x="928" y="212">높이·출처 이동</text>
+
+  <!-- group 중간 -->
+  <circle cx="45" cy="242" r="4" fill="#b5761f"/><text class="grp" x="55" y="246">중 간</text>
+
+  <!-- 4 제목중복 -->
+  <circle cx="48" cy="266" r="5" fill="#b5761f"/>
+  <text class="p" x="60" y="271">앱 제목이 페이지 H1과 중복 (+ 언어 불일치)</text>
+  <rect class="barbg" x="500" y="259" width="330" height="13" rx="1"/>
+  <rect x="500" y="259" width="301" height="13" rx="1" fill="#b5761f"/>
+  <text class="num" x="838" y="270">21/23</text>
+  <rect class="badge1" x="900" y="259" width="22" height="14" rx="1"/><text class="bt" x="911" y="270" text-anchor="middle">P1</text>
+  <text class="ev" x="928" y="270">titlePanel 제거</text>
+
+  <!-- 5 로딩안내 -->
+  <line class="row" x1="40" y1="286" x2="1080" y2="286"/>
+  <circle cx="48" cy="306" r="5" fill="#b5761f"/>
+  <text class="p" x="60" y="311">콜드 스타트 로딩 안내 부재 — ~30초 빈 화면</text>
+  <rect class="barbg" x="500" y="299" width="330" height="13" rx="1"/>
+  <rect x="500" y="299" width="316" height="13" rx="1" fill="#b5761f"/>
+  <text class="num" x="838" y="310">22/23</text>
+  <rect class="badge1" x="900" y="299" width="22" height="14" rx="1"/><text class="bt" x="911" y="310" text-anchor="middle">P1</text>
+  <text class="ev" x="928" y="310">안내 표준화</text>
+
+  <!-- 6 업로드검증 -->
+  <line class="row" x1="40" y1="326" x2="1080" y2="326"/>
+  <circle cx="48" cy="346" r="5" fill="#b5761f"/>
+  <text class="p" x="60" y="351">CSV 업로드 오류 피드백 부재 — 잘못된 파일 시 크래시</text>
+  <rect class="barbg" x="500" y="339" width="330" height="13" rx="1"/>
+  <rect x="500" y="339" width="115" height="13" rx="1" fill="#b5761f"/>
+  <text class="num" x="838" y="350">8/23</text>
+  <rect class="badge1" x="900" y="339" width="22" height="14" rx="1"/><text class="bt" x="911" y="350" text-anchor="middle">P1</text>
+  <text class="ev" x="928" y="350">validate·tryCatch</text>
+
+  <!-- 7 라벨불일치 -->
+  <line class="row" x1="40" y1="366" x2="1080" y2="366"/>
+  <circle cx="48" cy="386" r="5" fill="#b5761f"/>
+  <text class="p" x="60" y="391">라벨 표기 불일치 — 콜론 유무·전각/반각</text>
+  <rect class="barbg" x="500" y="379" width="330" height="13" rx="1"/>
+  <rect x="500" y="379" width="150" height="13" rx="1" fill="#b5761f"/>
+  <text class="num" x="838" y="390">~10/23</text>
+  <rect class="badge2" x="900" y="379" width="22" height="14" rx="1"/><text class="bt" x="911" y="390" text-anchor="middle">P2</text>
+  <text class="ev" x="928" y="390">표기 통일</text>
+
+  <!-- group 낮음 -->
+  <circle cx="45" cy="420" r="4" fill="#c9a94a"/><text class="grp" x="55" y="424">낮 음</text>
+
+  <!-- 8 접근성 -->
+  <circle cx="48" cy="444" r="5" fill="#c9a94a"/>
+  <text class="p" x="60" y="449">접근성 속성 전무 — alt/aria 전 모듈 합쳐 2건</text>
+  <rect class="barbg" x="500" y="437" width="330" height="13" rx="1"/>
+  <rect x="500" y="437" width="330" height="13" rx="1" fill="#c9a94a"/>
+  <text class="num" x="838" y="448">23/23</text>
+  <rect class="badge2" x="900" y="437" width="22" height="14" rx="1"/><text class="bt" x="911" y="448" text-anchor="middle">P2</text>
+  <text class="ev" x="928" y="448">alt·aria 부여</text>
+
+  <!-- 9 클래식룩 -->
+  <line class="row" x1="40" y1="464" x2="1080" y2="464"/>
+  <circle cx="48" cy="484" r="5" fill="#c9a94a"/>
+  <text class="p" x="60" y="489">클래식 Shiny 룩 (bslib 미사용)</text>
+  <rect class="barbg" x="500" y="477" width="330" height="13" rx="1"/>
+  <rect x="500" y="477" width="330" height="13" rx="1" fill="#c9a94a"/>
+  <text class="num" x="838" y="488">23/23</text>
+  <rect class="badge2" x="900" y="477" width="22" height="14" rx="1"/><text class="bt" x="911" y="488" text-anchor="middle">후속</text>
+  <text class="ev" x="928" y="488">bslib 이행(짝문서)</text>
+
+  <line class="rule" x1="40" y1="512" x2="1080" y2="512"/>
+
+  <!-- summary -->
+  <text x="40" y="536" font-size="13" fill="#141410"><tspan font-style="italic" fill="#8a1500">핵심 —</tspan> ①③④는 bslib page_sidebar 이행 시 대부분 자동 해소. 짝 문서의 clt 파일럿에 ②⑤⑥를 함께 반영하면</text>
+  <text x="40" y="556" font-size="13" fill="#141410">한 번의 작업으로 <tspan font-style="italic" fill="#3f6b3f">결함 수정 + UI 현대화</tspan>를 동시 처리.</text>
+
+  <!-- legend -->
+  <circle cx="48" cy="586" r="5" fill="#9c2a10"/><text class="lg" x="58" y="590">높음</text>
+  <circle cx="120" cy="586" r="5" fill="#b5761f"/><text class="lg" x="130" y="590">중간</text>
+  <circle cx="192" cy="586" r="5" fill="#c9a94a"/><text class="lg" x="202" y="590">낮음</text>
+  <text class="ev" x="300" y="590">막대 길이 = 영향받는 모듈 수 / 23</text>
+  <text class="ev" x="880" y="590">빛스탯2 · 2026-07-05 · UI 문제점 감사</text>
+</svg>

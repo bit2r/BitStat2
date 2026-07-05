@@ -23,7 +23,6 @@ editor_options:
 
 ```{shinylive-r}
 #| label: shinylive-sample-size
-#| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 

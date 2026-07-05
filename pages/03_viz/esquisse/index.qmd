@@ -24,7 +24,6 @@ categories: [ggplot, "그래프 문법", esquisse]
 
 ```{shinylive-r}
 #| label: shinylive-esquisse
-#| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 
@@ -63,15 +62,15 @@ bit_theme <- bs_theme(
 
 ui <- fluidPage(
   theme = bit_theme,
-  titlePanel("Graph with esquisse"),
+  titlePanel("esquisse로 그래프 만들기"),
   sidebarLayout(
     sidebarPanel(
-      fileInput("file", "Choose CSV File",
+      fileInput("file", "CSV 파일 선택",
                 accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv")),
       radioButtons(
         inputId = "data",
-        label = "Select data to use:",
-        choices = c("mpg", "diamonds", "economics", "Uploaded Data" = "uploaded_data")
+        label = "사용할 데이터 선택:",
+        choices = c("mpg", "diamonds", "economics", "업로드한 데이터" = "uploaded_data")
       )
     ),
     mainPanel(
@@ -84,12 +83,12 @@ ui <- fluidPage(
           )
         ),
         tabPanel(
-          title = "output",
-          tags$b("Code:"),
+          title = "출력",
+          tags$b("코드:"),
           verbatimTextOutput("code"),
-          tags$b("Filters:"),
+          tags$b("필터:"),
           verbatimTextOutput("filters"),
-          tags$b("Data:"),
+          tags$b("데이터:"),
           verbatimTextOutput("data")
         )
       )

@@ -21,7 +21,6 @@ editor_options:
 
 ```{shinylive-r}
 #| label: shinylive-two-prop-testing
-#| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 

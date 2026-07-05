@@ -24,7 +24,6 @@ editor_options:
 
 ```{shinylive-r}
 #| label: shinylive-prob-law
-#| viewerWidth: 800
 #| viewerHeight: 600
 #| standalone: true
 

@@ -25,7 +25,6 @@ editor_options:
 
 ```{shinylive-r}
 #| label: shinylive-continous-distribution-fitting
-#| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 
@@ -64,36 +63,36 @@ bit_theme <- bs_theme(
 
 ui <- fluidPage(
   theme = bit_theme,
-  titlePanel("Continuous Distribution Fitting"),
+  titlePanel("연속형 분포 적합"),
   sidebarLayout(
     sidebarPanel(
-      radioButtons("data_source", "Select Data Source",
-                   choices = c("Upload CSV", "penguins", "mtcars"),
+      radioButtons("data_source", "데이터 출처 선택",
+                   choices = c("CSV 업로드" = "Upload CSV", "penguins", "mtcars"),
                    inline = TRUE),
       conditionalPanel(
         condition = "input.data_source == 'Upload CSV'",
-        fileInput("file", "Choose CSV File",
+        fileInput("file", "CSV 파일 선택",
                   accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv"))
       ),
-      selectInput("variable", "Select Variable", choices = NULL),
-      radioButtons("distribution", "Select Distribution",
-                   choices = c("Uniform", "Normal", "Exponential"))
+      selectInput("variable", "변수 선택", choices = NULL),
+      radioButtons("distribution", "분포 선택",
+                   choices = c("균등" = "Uniform", "정규" = "Normal", "지수" = "Exponential"))
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Summary", verbatimTextOutput("summary")),
-        tabPanel("Histogram", plotOutput("histogram")),
-        tabPanel("Q-Q Plot", plotOutput("qqplot")),
-        tabPanel("CDF Plot", plotOutput("cdfplot"))
+        tabPanel("요약", verbatimTextOutput("summary")),
+        tabPanel("히스토그램", plotOutput("histogram")),
+        tabPanel("Q-Q 그래프", plotOutput("qqplot")),
+        tabPanel("CDF 그래프", plotOutput("cdfplot"))
       ),
-      h4("Usage Instructions:"),
+      h4("사용 방법:"),
       tags$ol(
-        tags$li("Select a data source (Upload CSV, penguins, or mtcars)."),
-        tags$li("If 'Upload CSV' is selected, choose a CSV file to upload."),
-        tags$li("Select a continuous variable from the dropdown menu."),
-        tags$li("Choose a distribution to fit (Uniform, Normal, or Exponential)."),
-        tags$li("The fitting results will be automatically updated based on your selection."),
-        tags$li("Explore the summary statistics, histogram, Q-Q plot, and CDF plot in the respective tabs.")
+        tags$li("데이터 출처를 선택합니다(CSV 업로드, penguins, mtcars)."),
+        tags$li("'CSV 업로드'를 선택하면 업로드할 CSV 파일을 고릅니다."),
+        tags$li("드롭다운에서 연속형 변수를 선택합니다."),
+        tags$li("적합할 분포를 고릅니다(균등, 정규, 지수)."),
+        tags$li("선택에 따라 적합 결과가 자동으로 갱신됩니다."),
+        tags$li("각 탭에서 요약통계·히스토그램·Q-Q 그래프·CDF 그래프를 살펴봅니다.")
       )
     )
   )
@@ -148,21 +147,21 @@ server <- function(input, output, session) {
 
   output$summary <- renderPrint({
     req(fit_result())
-    cat("Selected Distribution:", fit_result()$distribution, "\n\n")
-    cat("Descriptive Statistics:\n")
+    cat("선택한 분포:", fit_result()$distribution, "\n\n")
+    cat("기술통계:\n")
     print(summary(variable()))
-    cat("\nSkewness:", skewness(variable()), "\n")
-    cat("Kurtosis:", kurtosis(variable()), "\n\n")
+    cat("\n왜도:", skewness(variable()), "\n")
+    cat("첨도:", kurtosis(variable()), "\n\n")
 
     if (fit_result()$distribution == "uniform") {
-      cat("Kolmogorov-Smirnov Test for Uniform Distribution\n")
+      cat("균등분포에 대한 Kolmogorov-Smirnov 검정\n")
     } else if (fit_result()$distribution == "normal") {
-      cat("Shapiro-Wilk Normality Test\n")
+      cat("Shapiro-Wilk 정규성 검정\n")
     } else if (fit_result()$distribution == "exponential") {
-      cat("Kolmogorov-Smirnov Test for Exponential Distribution\n")
+      cat("지수분포에 대한 Kolmogorov-Smirnov 검정\n")
     }
 
-    cat("p-value:", fit_result()$test_result$p.value, "\n")
+    cat("p-값:", fit_result()$test_result$p.value, "\n")
   })
 
   output$histogram <- renderPlot({
@@ -177,8 +176,8 @@ server <- function(input, output, session) {
                                  "exponential" = dexp),
                     args = params,
                     color = "#8a1500", size = 1) +
-      labs(title = "Histogram with Fitted Distribution",
-           x = input$variable, y = "Density")
+      labs(title = "적합된 분포와 히스토그램",
+           x = input, y = "밀도")
   })
 
   output$qqplot <- renderPlot({
@@ -198,8 +197,8 @@ server <- function(input, output, session) {
                                          "exponential" = qexp),
                    dparams = unlist(params),
                    color = "#8a1500") +
-      labs(title = paste("Q-Q Plot for", distribution),
-           x = "Theoretical Quantiles", y = "Sample Quantiles")
+      labs(title = "Q-Q 그래프",
+           x = "이론적 분위수", y = "표본 분위수")
   })
 
   output$cdfplot <- renderPlot({
@@ -214,7 +213,7 @@ server <- function(input, output, session) {
                                  "exponential" = pexp),
                     args = unlist(params),
                     color = "#8a1500", size = 1) +
-      labs(title = paste("Empirical and Theoretical CDF for", distribution),
+      labs(title = "경험적·이론적 CDF",
            x = input$variable, y = "Cumulative Probability")
   })
 

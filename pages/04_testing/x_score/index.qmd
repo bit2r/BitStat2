@@ -22,7 +22,6 @@ editor_options:
 
 ```{shinylive-r}
 #| label: shinylive-testing-score
-#| viewerWidth: 800
 #| viewerHeight: 700
 #| standalone: true
 

@@ -22,7 +22,6 @@ editor_options:
 
 ```{shinylive-r}
 #| label: shinylive-infer-ci
-#| viewerWidth: 800
 #| viewerHeight: 600
 #| standalone: true
 
