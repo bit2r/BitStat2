@@ -71,6 +71,7 @@ quarto render pages/04_testing/x_score/index.qmd   # 단일 파일 렌더
 
 - Quarto 1.10+, R 필요. 필터: `shinylive`, `webr`(`_extensions/`에 번들됨).
 - `freeze: true`이므로 코드 변경이 없으면 재계산하지 않는다. 강제 재계산은 `_freeze/` 해당 항목 삭제 후 렌더.
+- **shinylive 자산 버전 고정(중요)**: 프로젝트 루트 `_environment` 파일에 `SHINYLIVE_ASSETS_VERSION=0.2.3`을 둔다. 이 없이 렌더하면 현재 R `shinylive` 패키지(0.3.0.9000)가 자산 **0.9.1**을 써서 앱이 `there is no package called 'munsell'`(ggplot2 로드 실패)로 **깨진다**. 0.2.3은 검증된 정상 버전(런타임 패키지 다운로드 방식). `_environment`는 quarto가 렌더 시 자동 적용(.Renviron은 확장 서브프로세스가 안 읽어 무효).
 - **엔진**: 모든 콘텐츠 문서는 `engine: knitr`를 지정한다. 없으면 quarto가 jupyter 엔진을 골라 `ModuleNotFoundError: No module named 'yaml'`로 "Quarto Render Error"가 난다.
 - **렌더 오류 시**: `.quarto` 중간 캐시가 손상되면(`utime: No such file`/`Directory not empty`, 특히 iCloud 경로) `rm -rf .quarto` 후 재렌더한다.
 

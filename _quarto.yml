@@ -7,7 +7,7 @@ project:
   # 사이트로 렌더할 콘텐츠만 명시(allowlist) — README/CLAUDE/doc/ 등 프로젝트 문서는 제외.
   render:
     - index.qmd
-    - pages/
+    - pages/**/*.qmd
   resources:
     - "images/*.png"
     - "images/*.jp*g"

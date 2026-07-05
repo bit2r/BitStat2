@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-07-05 — shinylive 자산 버전 고정 + 새 구조 재렌더 + 배포
+
+### 문제
+- 재렌더 시 R `shinylive` 0.3.0.9000이 자산 **0.9.1**을 써서 앱이 `there is no package called 'munsell'`(ggplot2 로드 실패)로 깨짐. 배포본은 3년 전 **0.2.3** 자산이라 정상 작동.
+
+### 해결 — 버전 고정
+- `assets_version()`가 `SHINYLIVE_ASSETS_VERSION` env var로 오버라이드됨을 확인.
+- `shinylive::assets_download("0.2.3")`로 정상 자산 캐시.
+- 프로젝트 루트 **`_environment`** 파일에 `SHINYLIVE_ASSETS_VERSION=0.2.3` → quarto 렌더 시 자동 적용(확장 서브프로세스까지 전파). `.Renviron`은 확장이 안 읽어 무효였음.
+- 검증: `05_infer/clt` 앱이 0.2.3에서 Shiny UI·한글 ggplot("정규 분포의 PDF") 정상 렌더(브라우저 확인).
+
+### 재렌더 + 검증
+- 전체 렌더(exit 0): docs 전체 자산 **0.2.3 일관**(0.9.1 0건), 새 구조(`docs/pages/NN/module/`), 홈·랜딩 리스팅 정상.
+- **polyfill.io 0건** — 신규 렌더(Quarto 1.10)는 자동으로 안 넣음(보안 유지).
+
+### 배포
+- 새 구조 + 정상 0.2.3 앱 + 보안(폴리필 제거)을 담은 `docs/`를 커밋 후 `git push` → GitHub Pages 반영.
+
+---
+
 ## 2026-07-05 — 콘텐츠 폴더도 pages/ 아래로 통합
 
 ### 한 일

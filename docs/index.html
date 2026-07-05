@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.10.11">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>빗스탯2 - 오픈 통계 패키지</title>
+<title>오픈 통계 패키지 – 빗스탯2</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -21,8 +24,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -67,15 +71,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./images/favicon.ico" rel="icon">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-e935c5c23e6e63d86e2e4e0cdc9cb352.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -301,21 +306,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   })
   </script>
 
-<script type="text/javascript">
-
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-229551680-1', 'auto');
-
-ga('send', {
-  hitType: 'pageview',
-  'anonymizeIp': true,
-});
-</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -328,7 +320,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -347,7 +339,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -355,49 +347,50 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/Korea_R_User_Group_kor.png" alt="" class="navbar-logo">
+    <img src="./images/Korea_R_User_Group_kor.png" alt="" class="navbar-logo light-content">
+    <img src="./images/Korea_R_User_Group_kor.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">빗스탯2</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="검색"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">빛스탯</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
         <li>
-    <a class="dropdown-item" href="./01_data.html">
+    <a class="dropdown-item" href="./pages/01_data.html">
  <span class="dropdown-text">01 데이터</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./02_eda.html">
+    <a class="dropdown-item" href="./pages/02_eda.html">
  <span class="dropdown-text">02 EDA</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./03_viz.html">
+    <a class="dropdown-item" href="./pages/03_viz.html">
  <span class="dropdown-text">03 시각화</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./04_testing.html">
+    <a class="dropdown-item" href="./pages/04_testing.html">
  <span class="dropdown-text">04 통계검정</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./05_infer.html">
+    <a class="dropdown-item" href="./pages/05_infer.html">
  <span class="dropdown-text">05 추론</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./06_reg.html">
+    <a class="dropdown-item" href="./pages/06_reg.html">
  <span class="dropdown-text">06 회귀분석</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./07_theory.html">
+    <a class="dropdown-item" href="./pages/07_theory.html">
  <span class="dropdown-text">07 통계이론</span></a>
   </li>  
     </ul>
@@ -405,11 +398,11 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="./pages/about.html"> 
 <span class="menu-text">소개</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./BitStat.html"> 
+    <a class="nav-link" href="./pages/BitStat.html"> 
 <span class="menu-text">BitStat</span></a>
   </li>  
   <li class="nav-item compact">
@@ -429,7 +422,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -463,20 +456,20 @@ window.Quarto = {
 
 
 <section id="데이터" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> <a href="./01_data.html">데이터</a></h1>
+<h1 data-number="1"><span class="header-section-number">1</span> <a href="./pages/01_data.html">데이터</a></h1>
 <div id="listing-stat-data" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="연속형 분포,확률분포,균등분포,정규분포,지수분포,감마분포,베타분포" data-listing-date-sort="1715007600000" data-listing-file-modified-sort="1715494220382" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1552">
-<a href="./01_data/dist_continuous/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="JUVDJTk3JUIwJUVDJTg2JThEJUVEJTk4JTk1JTIwJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVEJTk5JTk1JUVCJUE1JUEwJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVBJUI3JUEwJUVCJTkzJUIxJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVDJUEwJTk1JUVBJUI3JTlDJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVDJUE3JTgwJUVDJTg4JTk4JUVCJUI2JTg0JUVEJThGJUFDJTJDJUVBJUIwJTkwJUVCJUE3JTg4JUVCJUI2JTg0JUVEJThGJUFDJTJDJUVCJUIyJUEwJUVEJTgzJTgwJUVCJUI2JTg0JUVEJThGJUFD" data-listing-date-sort="1715007600000" data-listing-file-modified-sort="1783227868000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1552">
+<a href="./pages/01_data/dist_continuous/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./01_data/dist_continuous/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/01_data/dist_continuous/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="데이터">
 연속형 분포
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 연속확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -488,20 +481,19 @@ window.Quarto = {
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="확률분포,이산형 분포,베르누이 분포,이항 분포,포아송 분포" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715482966694" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1323">
-<a href="./01_data/dist_discrete/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="JUVEJTk5JTk1JUVCJUE1JUEwJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVDJTlEJUI0JUVDJTgyJUIwJUVEJTk4JTk1JTIwJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVCJUIyJUEwJUVCJUE1JUI0JUVCJTg4JTg0JUVDJTlEJUI0JTIwJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVDJTlEJUI0JUVEJTk1JUFEJTIwJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVEJThGJUFDJUVDJTk1JTg0JUVDJTg2JUExJTIwJUVCJUI2JTg0JUVEJThGJUFD" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1323">
+<a href="./pages/01_data/dist_discrete/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./01_data/dist_discrete/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/01_data/dist_discrete/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 이산형 분포
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 이산확률분포를 시각화하고 상호작용하는 Shiny 애플리케이션과 관련 코드를 설명합니다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -509,24 +501,23 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="news" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715478734144" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2189">
-<a href="./01_data/dist_fitting/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="2" data-categories="bmV3cw==" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2189">
+<a href="./pages/01_data/dist_fitting/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./01_data/dist_fitting/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/01_data/dist_fitting/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 연속형 분포 적합
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 사용자가 선택한 데이터에 대해 연속확률분포의 적합도를 분석하고 시각화할 수 있는 도구입니다. 이 애플리케이션을 통해 통계학적 분석을 수행하고 결과를 실시간으로 탐색할 수 있습니다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -534,34 +525,31 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
+<div class="listing-no-matching d-none">일치 없음</div>
 </div>
 </section>
 <section id="eda" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> <a href="./02_eda.html">EDA</a></h1>
+<h1 data-number="2"><span class="header-section-number">2</span> <a href="./pages/02_eda.html">EDA</a></h1>
 <div id="listing-stat-eda" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="난수,모의실험,기술통계,평균,표준편차,최소값,최대값" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715605485683" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="746">
-<a href="./02_eda/desc_stat/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="JUVCJTgyJTlDJUVDJTg4JTk4JTJDJUVCJUFBJUE4JUVDJTlEJTk4JUVDJThCJUE0JUVEJTk3JTk4JTJDJUVBJUI4JUIwJUVDJTg4JUEwJUVEJTg2JUI1JUVBJUIzJTg0JTJDJUVEJThGJTg5JUVBJUI3JUEwJTJDJUVEJTkxJTlDJUVDJUE0JTgwJUVEJThFJUI4JUVDJUIwJUE4JTJDJUVDJUI1JTlDJUVDJTg2JThDJUVBJUIwJTkyJTJDJUVDJUI1JTlDJUVCJThDJTgwJUVBJUIwJTky" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="746">
+<a href="./pages/02_eda/desc_stat/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./02_eda/desc_stat/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/02_eda/desc_stat/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="eda">
 기술통계 개념 이해
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 1~100 사이 난수를 뽑아 기술통계를 구하고 시각화를 통해 개념을 확실히 이해할 수 있다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -569,24 +557,23 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="다변량,기술통계,분위수,평균,표준편차,범주형,연속형,막대그래프,원그래프,히스토그램,상자그림,산점도,상관계수,그룹별 기술통계,시각화" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715741581915" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2840">
-<a href="./02_eda/multivariate_stat/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="JUVCJThCJUE0JUVCJUIzJTgwJUVCJTlGJTg5JTJDJUVBJUI4JUIwJUVDJTg4JUEwJUVEJTg2JUI1JUVBJUIzJTg0JTJDJUVCJUI2JTg0JUVDJTlDJTg0JUVDJTg4JTk4JTJDJUVEJThGJTg5JUVBJUI3JUEwJTJDJUVEJTkxJTlDJUVDJUE0JTgwJUVEJThFJUI4JUVDJUIwJUE4JTJDJUVCJUIyJTk0JUVDJUEzJUJDJUVEJTk4JTk1JTJDJUVDJTk3JUIwJUVDJTg2JThEJUVEJTk4JTk1JTJDJUVCJUE3JTg5JUVCJThDJTgwJUVBJUI3JUI4JUVCJTlFJTk4JUVEJTk0JTg0JTJDJUVDJTlCJTkwJUVBJUI3JUI4JUVCJTlFJTk4JUVEJTk0JTg0JTJDJUVEJTlFJTg4JUVDJThBJUE0JUVEJTg2JUEwJUVBJUI3JUI4JUVCJTlFJUE4JTJDJUVDJTgzJTgxJUVDJTlFJTkwJUVBJUI3JUI4JUVCJUE2JUJDJTJDJUVDJTgyJUIwJUVDJUEwJTkwJUVCJThGJTg0JTJDJUVDJTgzJTgxJUVBJUI0JTgwJUVBJUIzJTg0JUVDJTg4JTk4JTJDJUVBJUI3JUI4JUVCJUEzJUI5JUVCJUIzJTg0JTIwJUVBJUI4JUIwJUVDJTg4JUEwJUVEJTg2JUI1JUVBJUIzJTg0JTJDJUVDJThCJTlDJUVBJUIwJTgxJUVEJTk5JTk0" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2840">
+<a href="./pages/02_eda/multivariate_stat/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./02_eda/multivariate_stat/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/02_eda/multivariate_stat/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 다변량 기술통계
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 내장 데이터셋과 외부 CSV 파일에서 범주형, 숫자형을 인식하고 변수 유형에 맞춰 적절한 기술통계를 계산하고 시각화할 수 있다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -594,24 +581,23 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="단변량,기술통계,범주형,연속형,막대그래프,원그래프,히스토그램,상자그림,시각화" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715607516026" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1449">
-<a href="./02_eda/univariate_stat/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="2" data-categories="JUVCJThCJUE4JUVCJUIzJTgwJUVCJTlGJTg5JTJDJUVBJUI4JUIwJUVDJTg4JUEwJUVEJTg2JUI1JUVBJUIzJTg0JTJDJUVCJUIyJTk0JUVDJUEzJUJDJUVEJTk4JTk1JTJDJUVDJTk3JUIwJUVDJTg2JThEJUVEJTk4JTk1JTJDJUVCJUE3JTg5JUVCJThDJTgwJUVBJUI3JUI4JUVCJTlFJTk4JUVEJTk0JTg0JTJDJUVDJTlCJTkwJUVBJUI3JUI4JUVCJTlFJTk4JUVEJTk0JTg0JTJDJUVEJTlFJTg4JUVDJThBJUE0JUVEJTg2JUEwJUVBJUI3JUI4JUVCJTlFJUE4JTJDJUVDJTgzJTgxJUVDJTlFJTkwJUVBJUI3JUI4JUVCJUE2JUJDJTJDJUVDJThCJTlDJUVBJUIwJTgxJUVEJTk5JTk0" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1449">
+<a href="./pages/02_eda/univariate_stat/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./02_eda/univariate_stat/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/02_eda/univariate_stat/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 단변량 기술통계
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 내장 데이터셋과 외부 CSV 파일에서 단변량 변수를 선택하면 범주형, 숫자형을 인식하고 변수에 따라 적절한 기술통계를 계산하고 시각화할 수 있다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -619,34 +605,31 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
+<div class="listing-no-matching d-none">일치 없음</div>
 </div>
 </section>
 <section id="시각화" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> <a href="./03_viz.html">시각화</a></h1>
+<h1 data-number="3"><span class="header-section-number">3</span> <a href="./pages/03_viz.html">시각화</a></h1>
 <div id="listing-stat-viz" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="ggplot,그래프 문법,esquisse" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715400582199" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="461">
-<a href="./03_viz/esquisse/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="Z2dwbG90JTJDJUVBJUI3JUI4JUVCJTlFJTk4JUVEJTk0JTg0JTIwJUVCJUFDJUI4JUVCJUIyJTk1JTJDZXNxdWlzc2U=" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="461">
+<a href="./pages/03_viz/esquisse/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./03_viz/esquisse/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/03_viz/esquisse/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="시각화">
 그래프 문법
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 팔머펭귄 데이터셋 영문 csv 파일 혹은 한국 R 사용자회에서 한글로 번역한 csv 다운로드 받아 사용한다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -654,24 +637,23 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="ggplot,데이터 시각화" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715400607763" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="493">
-<a href="./03_viz/viz/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="Z2dwbG90JTJDJUVCJThEJUIwJUVDJTlEJUI0JUVEJTg0JUIwJTIwJUVDJThCJTlDJUVBJUIwJTgxJUVEJTk5JTk0" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="493">
+<a href="./pages/03_viz/viz/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./03_viz/viz/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/03_viz/viz/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 데이터 시각화
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 팔머펭귄 데이터셋 영문 csv 파일 혹은 한국 R 사용자회에서 한글로 번역한 csv 다운로드 받아 사용한다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -679,34 +661,31 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
+<div class="listing-no-matching d-none">일치 없음</div>
 </div>
 </section>
 <section id="통계검정" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> <a href="./04_testing.html">통계검정</a></h1>
+<h1 data-number="4"><span class="header-section-number">4</span> <a href="./pages/04_testing.html">통계검정</a></h1>
 <div id="listing-stat-testing" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="평균 검정,단일 평균 z-검정,단일 평균 t-검정" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715559982476" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4453">
-<a href="./04_testing/one_mean/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="JUVEJThGJTg5JUVBJUI3JUEwJTIwJUVBJUIyJTgwJUVDJUEwJTk1JTJDJUVCJThCJUE4JUVDJTlEJUJDJTIwJUVEJThGJTg5JUVBJUI3JUEwJTIwei0lRUElQjIlODAlRUMlQTAlOTUlMkMlRUIlOEIlQTglRUMlOUQlQkMlMjAlRUQlOEYlODklRUElQjclQTAlMjB0LSVFQSVCMiU4MCVFQyVBMCU5NQ==" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4453">
+<a href="./pages/04_testing/one_mean/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./04_testing/one_mean/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/04_testing/one_mean/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="통계검정">
 단일 평균 가설 검정
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 모평균(<span class="math inline">\(\mu\)</span>)에 대한 가설검정은 모집단 분산을 알고 있는 경우와 그렇지 않는 경우로 나눠진다. 만약, 모집단 분산을 알고 있는 경우에는 z-검정을 사용하고, 모집단 분산을 모르는 경우에는 t-검정을 사용한다. 단, 모집단 분산을 알지 못하더라도 표본크기(<span class="math inline">\(n\)</span>)가 30 이상이면 z-검정을 사용할…
 </div>
 <div class="card-attribution card-text-small justify">
@@ -714,24 +693,23 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="비율 검정,단일 비율 z-검정,단일 비율 t-검정" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715580495046" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4053">
-<a href="./04_testing/one_prop/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="JUVCJUI5JTg0JUVDJTlDJUE4JTIwJUVBJUIyJTgwJUVDJUEwJTk1JTJDJUVCJThCJUE4JUVDJTlEJUJDJTIwJUVCJUI5JTg0JUVDJTlDJUE4JTIwei0lRUElQjIlODAlRUMlQTAlOTUlMkMlRUIlOEIlQTglRUMlOUQlQkMlMjAlRUIlQjklODQlRUMlOUMlQTglMjB0LSVFQSVCMiU4MCVFQyVBMCU5NQ==" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4053">
+<a href="./pages/04_testing/one_prop/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./04_testing/one_prop/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/04_testing/one_prop/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 단일 비율 가설 검정
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 비율 검정(z-검정)은 모집단의 비율에 대한 가설을 검정하는 방법으로, 표본의 크기가 충분히 크고 (일반적으로 30 이상이 권장됩니다), 모집단의 비율이 0에 가깝지 않으며 1에 가깝지 않은 경우에 사용된다. 이 검정은 중심극한정리를 기반으로 하며, 표본 비율의 분포가 정규분포에 근사한다는 가정 하에 수행됩니다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -739,24 +717,23 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="평균 검정,단일 표본 t-검정,대응 표본 t-검정,독립 표본 t-검정" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715564751567" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6195">
-<a href="./04_testing/two_means/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="2" data-categories="JUVEJThGJTg5JUVBJUI3JUEwJTIwJUVBJUIyJTgwJUVDJUEwJTk1JTJDJUVCJThCJUE4JUVDJTlEJUJDJTIwJUVEJTkxJTlDJUVCJUIzJUI4JTIwdC0lRUElQjIlODAlRUMlQTAlOTUlMkMlRUIlOEMlODAlRUMlOUQlOTElMjAlRUQlOTElOUMlRUIlQjMlQjglMjB0LSVFQSVCMiU4MCVFQyVBMCU5NSUyQyVFQiU4RiU4NSVFQiVBNiVCRCUyMCVFRCU5MSU5QyVFQiVCMyVCOCUyMHQtJUVBJUIyJTgwJUVDJUEwJTk1" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6195">
+<a href="./pages/04_testing/two_means/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./04_testing/two_means/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/04_testing/two_means/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 이표본 평균차이 검정
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 2표본 t-검정은 두 독립적인 그룹의 평균 차이가 통계적으로 유의미한지를 판단하기 위한 통계적 검정 방법이다. 이 검정은 두 집단이 정규분포를 따르고, 데이터가 독립적인 경우에 사용할 수 있다.
 </div>
 <div class="card-attribution card-text-small justify">
@@ -764,34 +741,31 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
+<div class="listing-no-matching d-none">일치 없음</div>
 </div>
 </section>
 <section id="추론" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> <a href="./05_infer.html">추론</a></h1>
+<h1 data-number="5"><span class="header-section-number">5</span> <a href="./pages/05_infer.html">추론</a></h1>
 <div id="listing-stat-infer" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="추론,신뢰구간" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715757801132" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2808">
-<a href="./05_infer/ci/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="JUVDJUI2JTk0JUVCJUExJUEwJTJDJUVDJThCJUEwJUVCJUEyJUIwJUVBJUI1JUFDJUVBJUIwJTg0" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2808">
+<a href="./pages/05_infer/ci/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./05_infer/ci/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/05_infer/ci/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="추론">
 신뢰구간
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 신뢰구간은 통계학에서 모수 추정에 사용되는 중요한 개념입니다. 신뢰구간은 표본에서 계산된 추정량이 실제 모수를 포함할 확률을 나타내는 구간을 의미합니다. 신뢰구간은 모수 추정의 불확실성을 고려하여 모수 추정에 대한 더 정확한 정보를 제공합니다. 대표적으로 모집단 평균과 모집단 비율에 대한 신뢰구간을 계산하는…
 </div>
 <div class="card-attribution card-text-small justify">
@@ -799,24 +773,23 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="추론,중심극한정리,정규분포,지수분포,균등분포" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715752260512" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1283">
-<a href="./05_infer/clt/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="JUVDJUI2JTk0JUVCJUExJUEwJTJDJUVDJUE0JTkxJUVDJThCJUFDJUVBJUI3JUI5JUVEJTk1JTlDJUVDJUEwJTk1JUVCJUE2JUFDJTJDJUVDJUEwJTk1JUVBJUI3JTlDJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVDJUE3JTgwJUVDJTg4JTk4JUVCJUI2JTg0JUVEJThGJUFDJTJDJUVBJUI3JUEwJUVCJTkzJUIxJUVCJUI2JTg0JUVEJThGJUFD" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1283">
+<a href="./pages/05_infer/clt/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./05_infer/clt/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/05_infer/clt/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 중심극한정리
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 중심극한정리 (Central Limit Theorem, CLT)는 통계학에서 가장 중요한 정리 중 하나입니다. 중심극한정리는 모집단의 분포가 무엇이든 간에, 모집단에서 무작위로 추출한 표본의 평균은 표본 크기가 충분히 크다면 정규 분포를 따른다는 것을 보여줍니다. 대표적으로 정규분포, 지수분포, 균등분포에서…
 </div>
 <div class="card-attribution card-text-small justify">
@@ -824,34 +797,31 @@ window.Quarto = {
 이광춘
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
+<div class="listing-no-matching d-none">일치 없음</div>
 </div>
 </section>
 <section id="회귀분석" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> <a href="./06_reg.html">회귀분석</a></h1>
+<h1 data-number="6"><span class="header-section-number">6</span> <a href="./pages/06_reg.html">회귀분석</a></h1>
 <div id="listing-stat-reg" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="상관분석,단순 회귀분석,상관계수,결정계수" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715817719786" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="586">
-<a href="./06_reg/corr_reg/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="JUVDJTgzJTgxJUVBJUI0JTgwJUVCJUI2JTg0JUVDJTg0JTlEJTJDJUVCJThCJUE4JUVDJTg4JTlDJTIwJUVEJTlBJThDJUVBJUI3JTgwJUVCJUI2JTg0JUVDJTg0JTlEJTJDJUVDJTgzJTgxJUVBJUI0JTgwJUVBJUIzJTg0JUVDJTg4JTk4JTJDJUVBJUIyJUIwJUVDJUEwJTk1JUVBJUIzJTg0JUVDJTg4JTk4" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="586">
+<a href="./pages/06_reg/corr_reg/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./06_reg/corr_reg/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/06_reg/corr_reg/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="회귀분석">
 상관분석과 단순 회귀분석
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 상관분석은 두 변수 간의 관계 강도와 방향을 측정하고, 단순 회귀분석은 한 변수(독립 변수)를 사용해 다른 변수(종속 변수)를 예측하는 모형으로 상관분석은 두 변수 간의 관계 강도와 방향을 측정하는 데 중점을 두고, 회귀분석은 한 변수를 사용해 다른 변수를 예측하는 데 중점을 둔다. 특히 상관계수의 제곱은…
 </div>
 <div class="card-attribution card-text-small justify">
@@ -859,24 +829,23 @@ window.Quarto = {
 
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="회귀분석,결정계수,모형요약,회귀분석 가정,회귀 계수" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715824628922" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3184">
-<a href="./06_reg/reg/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="JUVEJTlBJThDJUVBJUI3JTgwJUVCJUI2JTg0JUVDJTg0JTlEJTJDJUVBJUIyJUIwJUVDJUEwJTk1JUVBJUIzJTg0JUVDJTg4JTk4JTJDJUVCJUFBJUE4JUVEJTk4JTk1JUVDJTlBJTk0JUVDJTk1JUJEJTJDJUVEJTlBJThDJUVBJUI3JTgwJUVCJUI2JTg0JUVDJTg0JTlEJTIwJUVBJUIwJTgwJUVDJUEwJTk1JTJDJUVEJTlBJThDJUVBJUI3JTgwJTIwJUVBJUIzJTg0JUVDJTg4JTk4" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3184">
+<a href="./pages/06_reg/reg/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./06_reg/reg/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/06_reg/reg/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 회귀분석
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 회귀분석은 독립 변수와 종속 변수 간의 관계를 모델링하는 통계 기법입니다. 기본적으로 선형 회귀분석에서는 독립 변수 <span class="math inline">\(x\)</span>가 종속 변수 <span class="math inline">\(y\)</span>에 미치는 영향을 설명하기 위해 직선 방정식을 사용합니다. 이 방정식은 <span class="math inline">\(y = \beta_0 + \beta_1 x + \epsilon\)</span>의 형태를 가지며, <span class="math inline">\(…</span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span>
 </div>
 <div class="card-attribution card-text-small justify">
@@ -884,34 +853,31 @@ window.Quarto = {
 
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
+<div class="listing-no-matching d-none">일치 없음</div>
 </div>
 </section>
 <section id="이론" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> <a href="./07_theory.html">이론</a></h1>
+<h1 data-number="7"><span class="header-section-number">7</span> <a href="./pages/07_theory.html">이론</a></h1>
 <div id="listing-stat-theory" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="다변량 분석,군집분석,Clustering,K-평균,PCA" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715854440793" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="946">
-<a href="./07_theory/clustering/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-categories="JUVCJThCJUE0JUVCJUIzJTgwJUVCJTlGJTg5JTIwJUVCJUI2JTg0JUVDJTg0JTlEJTJDJUVBJUI1JUIwJUVDJUE3JTkxJUVCJUI2JTg0JUVDJTg0JTlEJTJDQ2x1c3RlcmluZyUyQ0stJUVEJThGJTg5JUVBJUI3JUEwJTJDUENB" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="946">
+<a href="./pages/07_theory/clustering/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./07_theory/clustering/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/07_theory/clustering/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title" data-anchor-id="이론">
 군집분석
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 군집분석(Clustering Analysis)은 데이터를 유사한 그룹으로 나누는 비지도 학습 기법입니다. 데이터의 숨겨진 구조를 발견하고, 각 군집 내의 데이터 관측점들이 최대한 유사하도록 합니다. 대표적인 기법으로는 k-평균(K-means) 클러스터링이 있으며, 사전에 정해진 k개의 중심을 기준으로 데이터를…
 </div>
 <div class="card-attribution card-text-small justify">
@@ -919,24 +885,23 @@ window.Quarto = {
 
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="이론,대수의 법칙,동전 던지기" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715482597124" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="541">
-<a href="./07_theory/lln/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="JUVDJTlEJUI0JUVCJUExJUEwJTJDJUVCJThDJTgwJUVDJTg4JTk4JUVDJTlEJTk4JTIwJUVCJUIyJTk1JUVDJUI5JTk5JTJDJUVCJThGJTk5JUVDJUEwJTg0JTIwJUVCJThEJTk4JUVDJUE3JTgwJUVBJUI4JUIw" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="541">
+<a href="./pages/07_theory/lln/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./07_theory/lln/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/07_theory/lln/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 대수의 법칙
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 대수의 법칙을 이해하고 시각적으로 관찰할 수 있습니다. Shiny 앱으로 동전 던지기를 통한 대수의 법칙을 시각화하는 인터페이스를 제공하며, 사용자는 시행 횟수와 동전의 수를 조정하여 시뮬레이션을 시작할 수 있습니다. 또한, R 코드로 동전 던지기 시뮬레이션 함수를 정의하고 이를 통해 동전 던지기 결과의 누적…
 </div>
 <div class="card-attribution card-text-small justify">
@@ -944,24 +909,23 @@ window.Quarto = {
 
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="이론,최대우도추정,MLE,정규분포,포아송분포,이항분포" data-listing-date-sort="1715871600000" data-listing-file-modified-sort="1715841175421" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2045">
-<a href="./07_theory/mle/index.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="2" data-categories="JUVDJTlEJUI0JUVCJUExJUEwJTJDJUVDJUI1JTlDJUVCJThDJTgwJUVDJTlBJUIwJUVCJThGJTg0JUVDJUI2JTk0JUVDJUEwJTk1JTJDTUxFJTJDJUVDJUEwJTk1JUVBJUI3JTlDJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVEJThGJUFDJUVDJTk1JTg0JUVDJTg2JUExJUVCJUI2JTg0JUVEJThGJUFDJTJDJUVDJTlEJUI0JUVEJTk1JUFEJUVCJUI2JTg0JUVEJThGJUFD" data-listing-date-sort="1783177200000" data-listing-file-modified-sort="1783227994000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2045">
+<a href="./pages/07_theory/mle/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img src="./07_theory/mle/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="./pages/07_theory/mle/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 최대우도추정
 </h5>
-<div class="card-text listing-description">
+<div class="card-text listing-description delink">
 최대우도추정법(Maximum Likelihood Estimation, MLE)은 주어진 데이터로부터 모수(parameter)를 추정하는 통계적 방법입니다. MLE는 모수를 추정하기 위해, 관측된 데이터가 가장 일어날 가능성이 높도록 만드는 모수 값을 찾습니다. 우도함수(likelihood function)를…
 </div>
 <div class="card-attribution card-text-small justify">
@@ -969,17 +933,14 @@ window.Quarto = {
 
 </div>
 <div class="listing-date">
-2024-05-17
+2026-07-05
 </div>
 </div>
 </div>
+</div></a>
 </div>
-</a>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-일치 없음
-</div>
+<div class="listing-no-matching d-none">일치 없음</div>
 </div>
 
 
@@ -988,45 +949,60 @@ window.Quarto = {
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">라이센스</h2><div class="quarto-appendix-contents"><div>CC BY-SA-NC &amp; GPL-3</div></div></section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">라이센스</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ko_kr">CC BY-NC-SA 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -1034,235 +1010,235 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "복사완료!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "복사완료!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/r2bit\.com\/BitStat2\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
           } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
         }
-        return container.innerHTML
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/BitStat2\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1270,186 +1246,162 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">소스 코드</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">소스 코드</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "오픈 통계 패키지"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "BitStat2"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">fig-format:</span><span class="co"> svg</span></span>
@@ -1464,92 +1416,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">  - id: stat-data</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    max-items: 3</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    contents: </span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">      - 01_data</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">      - pages/01_data</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    sort: "date-modified desc" </span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    type: grid</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">    image-placeholder: images/BitStat.png</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">  - id: stat-eda</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">    max-items: 3</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">    contents: </span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">      - 02_eda</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">      - pages/02_eda</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">    sort: "date-modified desc" </span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">    type: grid</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">    image-placeholder: images/BitStat.png</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">  - id: stat-viz</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">    max-items: 3</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">    contents: </span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">      - 03_viz</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">      - pages/03_viz</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">    sort: "date-modified desc" </span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">    type: grid</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">    image-placeholder: images/BitStat.png    </span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">  - id: stat-testing</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">    max-items: 3</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">    contents: </span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">      - 04_testing</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">      - pages/04_testing</span></span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">    sort: "date-modified desc" </span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">    type: grid</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">    image-placeholder: images/BitStat.png    </span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">  - id: stat-infer</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">    max-items: 3</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">    contents: </span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">      - 05_infer</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">      - pages/05_infer</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co">    sort: "date-modified desc" </span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">    type: grid</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">    image-placeholder: images/BitStat.png</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">  - id: stat-reg</span></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">    max-items: 3</span></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co">    contents: </span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co">      - 06_reg</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co">      - pages/06_reg</span></span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co">    sort: "date-modified desc" </span></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">    type: grid</span></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">    image-placeholder: images/BitStat.png</span></span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">  - id: stat-theory</span></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">    max-items: 3</span></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">    contents: </span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">      - 07_theory</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">      - pages/07_theory</span></span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">    sort: "date-modified desc" </span></span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">    type: grid</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co">    image-placeholder: images/BitStat.png    </span></span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu"># [데이터](01_data.qmd)</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu"># [데이터](pages/01_data.qmd)</span></span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>::: {#stat-data}</span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu"># [EDA](02_eda.qmd)</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu"># [EDA](pages/02_eda.qmd)</span></span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>::: {#stat-eda}</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="fu"># [시각화](03_viz.qmd)</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="fu"># [시각화](pages/03_viz.qmd)</span></span>
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>::: {#stat-viz}</span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu"># [통계검정](04_testing.qmd)</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu"># [통계검정](pages/04_testing.qmd)</span></span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>::: {#stat-testing}</span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu"># [추론](05_infer.qmd)</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu"># [추론](pages/05_infer.qmd)</span></span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>::: {#stat-infer}</span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="fu"># [회귀분석](06_reg.qmd)</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="fu"># [회귀분석](pages/06_reg.qmd)</span></span>
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>::: {#stat-reg}</span>
 <span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="fu"># [이론](07_theory.qmd)</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="fu"># [이론](pages/07_theory.qmd)</span></span>
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>::: {#stat-theory}</span>
 <span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="클립보드 복사" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
