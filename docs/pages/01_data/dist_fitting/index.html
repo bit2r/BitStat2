@@ -1501,7 +1501,37 @@ library(ggplot2)
 library(moments)
 library(palmerpenguins)
 
+library(bslib)
+library(showtext)
+tryCatch(sysfonts::font_add_google("Nanum Myeongjo", "kr"), error = function(e) NULL)
+showtext_auto()
+
+# ── Tufte 팔레트 · 테마 (자동 주입) ──────────────────────────
+bit_cream &lt;- "#fffff8"; bit_ink &lt;- "#111111"; bit_rust &lt;- "#8a1500"
+bit_muted &lt;- "#4a4a44"; bit_grid &lt;- "#e8e6dc"; bit_axis &lt;- "#8a8578"
+theme_tufte_bit &lt;- function(base_size = 13) {
+  ggplot2::theme_minimal(base_size = base_size) +
+    ggplot2::theme(
+      text = ggplot2::element_text(family = "kr", colour = bit_ink),
+      plot.title = ggplot2::element_text(family = "kr", size = base_size, hjust = 0),
+      plot.background = ggplot2::element_rect(fill = bit_cream, colour = NA),
+      panel.background = ggplot2::element_rect(fill = bit_cream, colour = NA),
+      panel.grid.major = ggplot2::element_line(colour = bit_grid, linewidth = 0.3),
+      panel.grid.minor = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(colour = bit_axis, linewidth = 0.3),
+      axis.ticks = ggplot2::element_line(colour = bit_axis, linewidth = 0.3)
+    )
+}
+if (requireNamespace("ggplot2", quietly = TRUE)) ggplot2::theme_set(theme_tufte_bit())
+bit_theme &lt;- bs_theme(
+  version = 5, bg = bit_cream, fg = bit_ink, primary = bit_rust,
+  base_font = font_collection("Palatino Linotype", "Georgia", "Times New Roman", "serif"),
+  "card-box-shadow" = "none"
+)
+# ─────────────────────────────────────────────────────────────
+
 ui &lt;- fluidPage(
+  theme = bit_theme,
   titlePanel("Continuous Distribution Fitting"),
   sidebarLayout(
     sidebarPanel(
@@ -1608,13 +1638,13 @@ server &lt;- function(input, output, session) {
     distribution &lt;- fit_result()$distribution
     params &lt;- fit_result()$params
     ggplot(data.frame(x = variable()), aes(x)) +
-      geom_histogram(aes(y = ..density..), bins = 30, color = "black", fill = "lightblue") +
+      geom_histogram(aes(y = ..density..), bins = 30, color = "black", fill = "#c9c6b8") +
       stat_function(fun = switch(distribution,
                                  "uniform" = dunif,
                                  "normal" = dnorm,
                                  "exponential" = dexp),
                     args = params,
-                    color = "red", size = 1) +
+                    color = "#8a1500", size = 1) +
       labs(title = "Histogram with Fitted Distribution",
            x = input$variable, y = "Density")
   })
@@ -1629,13 +1659,13 @@ server &lt;- function(input, output, session) {
                                     "normal" = qnorm,
                                     "exponential" = qexp),
               dparams = unlist(params),
-              color = "blue") +
+              color = "#4a4a44") +
       stat_qq_line(distribution = switch(distribution,
                                          "uniform" = qunif,
                                          "normal" = qnorm,
                                          "exponential" = qexp),
                    dparams = unlist(params),
-                   color = "red") +
+                   color = "#8a1500") +
       labs(title = paste("Q-Q Plot for", distribution),
            x = "Theoretical Quantiles", y = "Sample Quantiles")
   })
@@ -1645,13 +1675,13 @@ server &lt;- function(input, output, session) {
     distribution &lt;- fit_result()$distribution
     params &lt;- fit_result()$params
     ggplot(data.frame(x = variable()), aes(x)) +
-      stat_ecdf(geom = "step", color = "blue", size = 1) +
+      stat_ecdf(geom = "step", color = "#4a4a44", size = 1) +
       stat_function(fun = switch(distribution,
                                  "uniform" = punif,
                                  "normal" = pnorm,
                                  "exponential" = pexp),
                     args = unlist(params),
-                    color = "red", size = 1) +
+                    color = "#8a1500", size = 1) +
       labs(title = paste("Empirical and Theoretical CDF for", distribution),
            x = input$variable, y = "Cumulative Probability")
   })

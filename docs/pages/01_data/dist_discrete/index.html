@@ -1504,7 +1504,37 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 library(shiny)
 library(ggplot2)
 
+library(bslib)
+library(showtext)
+tryCatch(sysfonts::font_add_google("Nanum Myeongjo", "kr"), error = function(e) NULL)
+showtext_auto()
+
+# ── Tufte 팔레트 · 테마 (자동 주입) ──────────────────────────
+bit_cream &lt;- "#fffff8"; bit_ink &lt;- "#111111"; bit_rust &lt;- "#8a1500"
+bit_muted &lt;- "#4a4a44"; bit_grid &lt;- "#e8e6dc"; bit_axis &lt;- "#8a8578"
+theme_tufte_bit &lt;- function(base_size = 13) {
+  ggplot2::theme_minimal(base_size = base_size) +
+    ggplot2::theme(
+      text = ggplot2::element_text(family = "kr", colour = bit_ink),
+      plot.title = ggplot2::element_text(family = "kr", size = base_size, hjust = 0),
+      plot.background = ggplot2::element_rect(fill = bit_cream, colour = NA),
+      panel.background = ggplot2::element_rect(fill = bit_cream, colour = NA),
+      panel.grid.major = ggplot2::element_line(colour = bit_grid, linewidth = 0.3),
+      panel.grid.minor = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(colour = bit_axis, linewidth = 0.3),
+      axis.ticks = ggplot2::element_line(colour = bit_axis, linewidth = 0.3)
+    )
+}
+if (requireNamespace("ggplot2", quietly = TRUE)) ggplot2::theme_set(theme_tufte_bit())
+bit_theme &lt;- bs_theme(
+  version = 5, bg = bit_cream, fg = bit_ink, primary = bit_rust,
+  base_font = font_collection("Palatino Linotype", "Georgia", "Times New Roman", "serif"),
+  "card-box-shadow" = "none"
+)
+# ─────────────────────────────────────────────────────────────
+
 ui &lt;- fluidPage(
+  theme = bit_theme,
   titlePanel("Discrete Distributions"),
   sidebarLayout(
     sidebarPanel(
@@ -1584,14 +1614,14 @@ server &lt;- function(input, output) {
 
   output$pmf_plot &lt;- renderPlot({
     ggplot(dist_data(), aes(x = x, y = pmf)) +
-      geom_bar(stat = "identity", fill = "steelblue") +
+      geom_bar(stat = "identity", fill = "#4a4a44") +
       labs(title = paste(input$dist, "Distribution - PMF"),
            x = "x", y = "Probability")
   })
 
   output$cmf_plot &lt;- renderPlot({
     ggplot(dist_data(), aes(x = x, y = cmf)) +
-      geom_step(color = "steelblue") +
+      geom_step(color = "#4a4a44") +
       labs(title = paste(input$dist, "Distribution - CMF"),
            x = "x", y = "Cumulative Probability")
   })

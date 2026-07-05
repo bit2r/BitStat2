@@ -276,7 +276,7 @@ two_proportion_UI <- function(id) {
     tags$div(
 
       fluidPage(
-        theme = shinythemes::shinytheme("flatly"),
+        theme = bit_theme,
 
         sidebarPanel,
         mainPanel
@@ -578,9 +578,9 @@ two_proportion_server <- function(id) {
         stat_function( fun = dnorm, fill="gray90", args = list(mean = 0, sd = 1)) +
         stat_function( fun = funcShaded, geom = "area", fill = "sky blue", alpha = 0.8) +
 
-        theme_minimal() +
-        geom_vline(xintercept = test$statistic, color = "steelblue") +
-        geom_text(aes(x = test$statistic, label = paste0("검정 통계량 = ", round(test$statistic, 3)), y = 0.2), colour = "steelblue", angle = 90, vjust = 1.3, text = element_text(size = 11)) +
+        theme_tufte_bit() +
+        geom_vline(xintercept = test$statistic, color = "#4a4a44") +
+        geom_text(aes(x = test$statistic, label = paste0("검정 통계량 = ", round(test$statistic, 3)), y = 0.2), colour = "#4a4a44", angle = 90, vjust = 1.3, text = element_text(size = 11)) +
         ggtitle(paste0("정규분포 N(0,1)")) +
         theme(plot.title = element_text(face = "bold", hjust = 0.5)) +
         ylab("밀도") +
@@ -604,7 +604,37 @@ two_proportion_server <- function(id) {
 }
 
 
+library(bslib)
+library(showtext)
+tryCatch(sysfonts::font_add_google("Nanum Myeongjo", "kr"), error = function(e) NULL)
+showtext_auto()
+
+# ── Tufte 팔레트 · 테마 (자동 주입) ──────────────────────────
+bit_cream <- "#fffff8"; bit_ink <- "#111111"; bit_rust <- "#8a1500"
+bit_muted <- "#4a4a44"; bit_grid <- "#e8e6dc"; bit_axis <- "#8a8578"
+theme_tufte_bit <- function(base_size = 13) {
+  ggplot2::theme_minimal(base_size = base_size) +
+    ggplot2::theme(
+      text = ggplot2::element_text(family = "kr", colour = bit_ink),
+      plot.title = ggplot2::element_text(family = "kr", size = base_size, hjust = 0),
+      plot.background = ggplot2::element_rect(fill = bit_cream, colour = NA),
+      panel.background = ggplot2::element_rect(fill = bit_cream, colour = NA),
+      panel.grid.major = ggplot2::element_line(colour = bit_grid, linewidth = 0.3),
+      panel.grid.minor = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(colour = bit_axis, linewidth = 0.3),
+      axis.ticks = ggplot2::element_line(colour = bit_axis, linewidth = 0.3)
+    )
+}
+if (requireNamespace("ggplot2", quietly = TRUE)) ggplot2::theme_set(theme_tufte_bit())
+bit_theme <- bs_theme(
+  version = 5, bg = bit_cream, fg = bit_ink, primary = bit_rust,
+  base_font = font_collection("Palatino Linotype", "Georgia", "Times New Roman", "serif"),
+  "card-box-shadow" = "none"
+)
+# ─────────────────────────────────────────────────────────────
+
 ui <- fluidPage(
+  theme = bit_theme,
   titlePanel("2-비율 가설 검정"),
   two_proportion_UI("two_prop")
 )
