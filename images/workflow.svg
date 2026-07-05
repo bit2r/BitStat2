@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 520" font-family="'ET Book','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#555" stroke-width="1"/>
+    </marker>
+    <marker id="arrB" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#8a8578" stroke-width="1"/>
+    </marker>
+    <style>
+      text{fill:#1a1a1a}
+      .t{font-size:25px}
+      .sub{font-size:13px;fill:#6b6b60;font-style:italic}
+      .h{font-size:14.5px;fill:#141410}
+      .s{font-size:11px;fill:#6b6b60}
+      .num{font-size:13px;fill:#9c2a10;font-style:italic}
+      .note{font-size:11px;fill:#9c2a10;font-style:italic}
+      .box{fill:#f5f3e6;stroke:#3a3a32;stroke-width:1}
+      .flow{stroke:#555;stroke-width:1.2;fill:none}
+      .loop{stroke:#8a8578;stroke-width:1;fill:none;stroke-dasharray:4 3}
+      .rule{stroke:#d8d4c2;stroke-width:1}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1080" height="520" fill="#fffff8"/>
+  <text class="t" x="40" y="46">빛스탯2 &#8212; 워크플로우</text>
+  <text class="sub" x="338" y="46">콘텐츠 저작 &#183; 배포 (Authoring &amp; Release)</text>
+  <line class="rule" x1="40" y1="58" x2="1040" y2="58"/>
+
+  <!-- feedback loop arc (drawn first, behind) -->
+  <path class="loop" d="M615,150 C615,96 115,96 115,148" marker-end="url(#arrB)"/>
+  <text class="s" x="300" y="90" font-style="italic" fill="#8a8578">검증 실패 &#183; 수정 필요 시 재편집</text>
+
+  <!-- step boxes -->
+  <!-- 1 -->
+  <rect class="box" x="40" y="150" width="150" height="86" rx="2"/>
+  <circle cx="58" cy="150" r="13" fill="#fffff8" stroke="#9c2a10" stroke-width="1"/>
+  <text class="num" x="54" y="154">1</text>
+  <text class="h" x="52" y="182">편집</text>
+  <text class="s" x="52" y="202">index.qmd 인라인</text>
+  <text class="s" x="52" y="218">{shinylive-r} 정본</text>
+  <path class="flow" d="M190,193 L208,193" marker-end="url(#arr)"/>
+
+  <!-- 2 -->
+  <rect class="box" x="210" y="150" width="150" height="86" rx="2"/>
+  <circle cx="228" cy="150" r="13" fill="#fffff8" stroke="#9c2a10" stroke-width="1"/>
+  <text class="num" x="224" y="154">2</text>
+  <text class="h" x="222" y="182">로컬 미리보기</text>
+  <text class="s" x="222" y="202">quarto preview</text>
+  <text class="s" x="222" y="218">:7771 (knitr)</text>
+  <path class="flow" d="M360,193 L378,193" marker-end="url(#arr)"/>
+
+  <!-- 3 -->
+  <rect class="box" x="380" y="150" width="150" height="86" rx="2"/>
+  <circle cx="398" cy="150" r="13" fill="#fffff8" stroke="#9c2a10" stroke-width="1"/>
+  <text class="num" x="394" y="154">3</text>
+  <text class="h" x="392" y="182">렌더</text>
+  <text class="s" x="392" y="202">quarto render</text>
+  <text class="s" x="392" y="218">freeze &#8594; docs/</text>
+  <path class="flow" d="M530,193 L548,193" marker-end="url(#arr)"/>
+
+  <!-- 4 -->
+  <rect class="box" x="550" y="150" width="150" height="86" rx="2"/>
+  <circle cx="568" cy="150" r="13" fill="#fffff8" stroke="#9c2a10" stroke-width="1"/>
+  <text class="num" x="564" y="154">4</text>
+  <text class="h" x="562" y="182">검증</text>
+  <text class="s" x="562" y="202">한글 라벨 렌더</text>
+  <text class="s" x="562" y="218">앱 로드 확인</text>
+  <path class="flow" d="M700,193 L718,193" marker-end="url(#arr)"/>
+
+  <!-- 5 -->
+  <rect class="box" x="720" y="150" width="150" height="86" rx="2"/>
+  <circle cx="738" cy="150" r="13" fill="#fffff8" stroke="#9c2a10" stroke-width="1"/>
+  <text class="num" x="734" y="154">5</text>
+  <text class="h" x="732" y="182">커밋</text>
+  <text class="s" x="732" y="202">git commit</text>
+  <text class="s" x="732" y="218">소스 + docs/</text>
+  <path class="flow" d="M870,193 L888,193" marker-end="url(#arr)"/>
+
+  <!-- 6 -->
+  <rect class="box" x="890" y="150" width="150" height="86" rx="2"/>
+  <circle cx="908" cy="150" r="13" fill="#fffff8" stroke="#9c2a10" stroke-width="1"/>
+  <text class="num" x="904" y="154">6</text>
+  <text class="h" x="902" y="182">배포</text>
+  <text class="s" x="902" y="202">git push &#8594; Pages</text>
+  <text class="s" x="902" y="218">r2bit.com</text>
+
+  <!-- annotations / pitfalls -->
+  <line class="rule" x1="40" y1="290" x2="1040" y2="290"/>
+  <text x="40" y="312" font-size="12.5px" fill="#8a8578" font-style="italic">주의 &#183; 함정 (Pitfalls)</text>
+
+  <text class="note" x="40" y="338">1 &#183; engine: knitr 필수 &#183; showtext_auto() &#183; YAML 필수값(title/date/image/categories).</text>
+  <text class="note" x="40" y="360">3 &#183; knitr 강제 안 하면 shinylive/webr 전용 문서가 jupyter 엔진으로 폴백 &#8594; "Quarto Render Error".</text>
+  <text class="note" x="40" y="382">3 &#183; .quarto 캐시 손상(iCloud) 시 &#8216;utime/Directory not empty&#8217; &#8594; rm -rf .quarto 후 재렌더.</text>
+  <text class="note" x="40" y="404">3&#8211;4 &#183; 재렌더가 shinylive 자산을 0.2.3&#8594;0.9.1로 바꾸면 앱이 깨짐(ggplot2/munsell) &#8594; 자산 버전 고정 필요.</text>
+  <text class="note" x="40" y="426">5 &#183; docs/ 도 함께 커밋(GitHub Pages 산출물). 6 &#183; push 후 Pages가 자동 반영.</text>
+
+  <line class="rule" x1="40" y1="452" x2="1040" y2="452"/>
+  <text class="sub" x="40" y="476">freeze: true &#8212; 코드 변경이 없으면 재계산을 생략한다. 강제 재계산은 해당 _freeze/ 항목 삭제 후 렌더.</text>
+  <text class="sub" x="40" y="496">CI 부재 &#8212; 현재는 수동 렌더·커밋. GitHub Actions 자동화는 후속 과제(§3.7).</text>
+</svg>

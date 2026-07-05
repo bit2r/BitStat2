@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 660" font-family="'ET Book','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#3a3a32" stroke-width="1"/>
+    </marker>
+    <marker id="arrO" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6" fill="none" stroke="#8a8578" stroke-width="1"/>
+    </marker>
+    <style>
+      text{fill:#1a1a1a}
+      .t{font-size:25px}
+      .sub{font-size:13px;fill:#6b6b60;font-style:italic}
+      .actor{font-size:13px;fill:#141410}
+      .msg{font-size:12px;fill:#35352c}
+      .num{font-size:11px;fill:#9c2a10;font-style:italic}
+      .note{font-size:11.5px;fill:#9c2a10;font-style:italic}
+      .life{stroke:#b9b4a2;stroke-width:1;stroke-dasharray:2 4}
+      .hbox{fill:#f5f3e6;stroke:#3a3a32;stroke-width:1}
+      .call{stroke:#3a3a32;stroke-width:1.2;fill:none}
+      .ret{stroke:#8a8578;stroke-width:1;fill:none;stroke-dasharray:5 3}
+      .rule{stroke:#d8d4c2;stroke-width:1}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1080" height="660" fill="#fffff8"/>
+  <text class="t" x="40" y="46">빛스탯2 &#8212; 프로세스 뷰</text>
+  <text class="sub" x="330" y="46">런타임 &#183; 모듈 페이지 로드 시퀀스 (Process View)</text>
+  <line class="rule" x1="40" y1="58" x2="1040" y2="58"/>
+
+  <!-- lifelines -->
+  <g>
+    <rect class="hbox" x="42" y="82" width="150" height="40" rx="2"/>
+    <text class="actor" x="117" y="107" text-anchor="middle">사용자 브라우저</text>
+    <line class="life" x1="117" y1="122" x2="117" y2="588"/>
+
+    <rect class="hbox" x="258" y="82" width="150" height="40" rx="2"/>
+    <text class="actor" x="333" y="107" text-anchor="middle">GitHub Pages</text>
+    <line class="life" x1="333" y1="122" x2="333" y2="588"/>
+
+    <rect class="hbox" x="478" y="82" width="168" height="40" rx="2"/>
+    <text class="actor" x="562" y="107" text-anchor="middle">webR (WASM 런타임)</text>
+    <line class="life" x1="562" y1="122" x2="562" y2="588"/>
+
+    <rect class="hbox" x="700" y="82" width="160" height="40" rx="2"/>
+    <text class="actor" x="780" y="107" text-anchor="middle">repo.r-wasm.org</text>
+    <line class="life" x1="780" y1="122" x2="780" y2="588"/>
+
+    <rect class="hbox" x="892" y="82" width="150" height="40" rx="2"/>
+    <text class="actor" x="967" y="107" text-anchor="middle">Shiny 앱 (iframe)</text>
+    <line class="life" x1="967" y1="122" x2="967" y2="588"/>
+  </g>
+
+  <!-- messages -->
+  <!-- 1 -->
+  <text class="num" x="120" y="158">1</text>
+  <text class="msg" x="132" y="158">GET /01_data/dist_discrete/</text>
+  <path class="call" d="M117,164 L331,164" marker-end="url(#arr)"/>
+  <!-- 2 return -->
+  <text class="msg" x="132" y="196" fill="#6b6b60">정적 HTML + site_libs (shinylive.js)</text>
+  <path class="ret" d="M333,202 L119,202" marker-end="url(#arrO)"/>
+
+  <!-- 3 -->
+  <text class="num" x="120" y="240">2</text>
+  <text class="msg" x="132" y="240">서비스워커 등록 · webR 부팅 (R 4.4.1)</text>
+  <path class="call" d="M117,246 L560,246" marker-end="url(#arr)"/>
+
+  <!-- 4 -->
+  <text class="num" x="565" y="288">3</text>
+  <text class="msg" x="577" y="288">패키지 요청: dplyr, ggplot2 …</text>
+  <path class="call" d="M562,294 L778,294" marker-end="url(#arr)"/>
+  <!-- 5 return -->
+  <text class="msg" x="577" y="326" fill="#6b6b60">WASM 바이너리 다운로드</text>
+  <path class="ret" d="M780,332 L564,332" marker-end="url(#arrO)"/>
+
+  <!-- 6 self -->
+  <text class="num" x="565" y="366">4</text>
+  <text class="msg" x="618" y="366">가상 파일시스템에 설치 · library()</text>
+  <path class="call" d="M562,372 L612,372 L612,392 L564,392" marker-end="url(#arr)"/>
+
+  <!-- 7 -->
+  <text class="num" x="565" y="428">5</text>
+  <text class="msg" x="577" y="428">Shiny 앱 시작 · UI 렌더</text>
+  <path class="call" d="M562,434 L965,434" marker-end="url(#arr)"/>
+
+  <!-- 8 -->
+  <text class="num" x="120" y="476">6</text>
+  <text class="msg" x="132" y="476">입력 변경 (슬라이더·선택 — 인터랙션)</text>
+  <path class="call" d="M117,482 L965,482" marker-end="url(#arr)"/>
+  <!-- 9 return -->
+  <text class="msg" x="132" y="514" fill="#6b6b60">플롯 재계산 · 표시 (클라이언트 계산)</text>
+  <path class="ret" d="M967,520 L119,520" marker-end="url(#arrO)"/>
+
+  <!-- webr cell note -->
+  <rect x="478" y="540" width="564" height="34" rx="2" fill="#faf8ee" stroke="#b9b4a2" stroke-width="1"/>
+  <text class="msg" x="492" y="561">{webr-r} 코드셀: 사용자가 "Run Code" 클릭 시 3&#8211;4 과정 반복 실행</text>
+
+  <!-- notes -->
+  <line class="rule" x1="40" y1="600" x2="1040" y2="600"/>
+  <text class="note" x="40" y="622">전 과정이 클라이언트에서 실행 &#8212; 애플리케이션 서버 왕복 없음. 네트워크 요청은 정적 자산·패키지 바이너리 fetch 뿐.</text>
+  <text class="note" x="40" y="642">초기 콜드스타트: webR 부팅 + 패키지 다운로드(수 초&#8211;수십 초). showtext_auto()로 한글 라벨 렌더(0.2.3 자산에서 정상).</text>
+</svg>

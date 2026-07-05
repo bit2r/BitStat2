@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 640" font-family="'ET Book','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#3a3a32" stroke-width="1"/>
+    </marker>
+    <marker id="arrR" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6" fill="none" stroke="#9c2a10" stroke-width="1"/>
+    </marker>
+    <style>
+      text{fill:#1a1a1a}
+      .t{font-size:25px}
+      .sub{font-size:13px;fill:#6b6b60;font-style:italic}
+      .node{font-size:15px;fill:#141410}
+      .b{font-size:12px;fill:#35352c}
+      .s{font-size:11px;fill:#6b6b60}
+      .lbl{font-size:11.5px;fill:#35352c;font-style:italic}
+      .lblR{font-size:11.5px;fill:#9c2a10;font-style:italic}
+      .note{font-size:11.5px;fill:#9c2a10;font-style:italic}
+      .box{fill:#f5f3e6;stroke:#3a3a32;stroke-width:1}
+      .node-b{fill:#fbfaf2;stroke:#3a3a32;stroke-width:1.3}
+      .ext{fill:#efece0;stroke:#8a8578;stroke-width:1}
+      .deploy{stroke:#3a3a32;stroke-width:1.3;fill:none}
+      .fetch{stroke:#9c2a10;stroke-width:1;fill:none;stroke-dasharray:3 3}
+      .rule{stroke:#d8d4c2;stroke-width:1}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1080" height="640" fill="#fffff8"/>
+  <text class="t" x="40" y="46">빛스탯2 &#8212; 배포 뷰</text>
+  <text class="sub" x="262" y="46">물리적 배포 토폴로지 (Deployment View)</text>
+  <line class="rule" x1="40" y1="58" x2="1040" y2="58"/>
+
+  <!-- Dev machine -->
+  <rect class="node-b" x="48" y="96" width="286" height="150" rx="3"/>
+  <text class="node" x="64" y="122">개발 머신 &#183; macOS</text>
+  <line x1="48" y1="132" x2="334" y2="132" stroke="#d8d4c2" stroke-width="1"/>
+  <text class="b" x="64" y="152">R 4.5 &#183; Quarto 1.10</text>
+  <text class="b" x="64" y="172">shinylive / webr 확장</text>
+  <text class="b" x="64" y="192">quarto render &#8594; docs/</text>
+  <text class="lblR" x="64" y="222">&#9888; iCloud Drive 경로</text>
+  <text class="s" x="64" y="238">(.git·freeze 손상 위험 &#183; §3.3)</text>
+
+  <!-- GitHub repo -->
+  <rect class="node-b" x="404" y="96" width="262" height="120" rx="3"/>
+  <text class="node" x="420" y="122">GitHub &#183; bit2r/BitStat2</text>
+  <line x1="404" y1="132" x2="666" y2="132" stroke="#d8d4c2" stroke-width="1"/>
+  <text class="b" x="420" y="152">소스 (*.qmd, _quarto.yml)</text>
+  <text class="b" x="420" y="172">docs/ (정적 산출물)</text>
+  <text class="b" x="420" y="192">_freeze/ (계산 캐시)</text>
+
+  <!-- GitHub Pages -->
+  <rect class="node-b" x="404" y="300" width="262" height="104" rx="3"/>
+  <text class="node" x="420" y="326">GitHub Pages &#183; 호스팅</text>
+  <line x1="404" y1="336" x2="666" y2="336" stroke="#d8d4c2" stroke-width="1"/>
+  <text class="b" x="420" y="356">docs/ 정적 서빙</text>
+  <text class="s" x="420" y="376">r2bit.com/BitStat2</text>
+  <text class="s" x="420" y="394">앱 서버 없음</text>
+
+  <!-- End-user browser -->
+  <rect class="node-b" x="48" y="430" width="340" height="170" rx="3"/>
+  <text class="node" x="64" y="456">엔드유저 브라우저</text>
+  <line x1="48" y1="466" x2="388" y2="466" stroke="#d8d4c2" stroke-width="1"/>
+  <text class="b" x="64" y="486">WebAssembly 런타임 (webR)</text>
+  <text class="b" x="64" y="506">Shinylive 앱 &#183; webr 코드셀</text>
+  <text class="lblR" x="64" y="532">앱 로직이 여기서 실행</text>
+  <text class="s" x="64" y="550">&#8212; 백엔드 서버 없음</text>
+  <text class="s" x="64" y="574">MathJax·Monaco &#183; 패키지</text>
+  <text class="s" x="64" y="590">바이너리를 런타임에 fetch</text>
+
+  <!-- External services -->
+  <text class="sub" x="720" y="90">외부 서비스 (런타임 fetch)</text>
+  <rect class="ext" x="720" y="300" width="300" height="60" rx="2"/>
+  <text class="node" x="734" y="324">webr.r-wasm.org</text>
+  <text class="s" x="734" y="346">webR 런타임 v0.3.3</text>
+
+  <rect class="ext" x="720" y="372" width="300" height="60" rx="2"/>
+  <text class="node" x="734" y="396">repo.r-wasm.org</text>
+  <text class="s" x="734" y="418">WASM 패키지 바이너리</text>
+
+  <rect class="ext" x="720" y="444" width="300" height="60" rx="2"/>
+  <text class="node" x="734" y="468">cdn.jsdelivr.net</text>
+  <text class="s" x="734" y="490">MathJax 3 · Monaco 0.47</text>
+
+  <rect x="720" y="516" width="300" height="60" rx="2" fill="#fbecea" stroke="#9c2a10" stroke-width="1"/>
+  <text x="734" y="540" font-size="14px" fill="#9c2a10" text-decoration="line-through">polyfill.io</text>
+  <text class="note" x="734" y="562">제거됨 &#8212; 공급망 공격(보안)</text>
+
+  <!-- deploy arrows -->
+  <path class="deploy" d="M334,158 L400,158" marker-end="url(#arr)"/>
+  <text class="lbl" x="338" y="150">git push</text>
+  <text class="s" x="338" y="176">소스 + docs/</text>
+
+  <path class="deploy" d="M535,216 L535,296" marker-end="url(#arr)"/>
+  <text class="lbl" x="544" y="262">Pages 빌드·게시</text>
+
+  <path class="deploy" d="M404,368 C300,392 300,404 300,426" marker-end="url(#arr)"/>
+  <text class="lbl" x="238" y="392">HTTPS GET</text>
+  <text class="s" x="238" y="408">(정적)</text>
+
+  <!-- runtime fetch arrows (browser -> external) -->
+  <path class="fetch" d="M388,500 C560,500 560,332 718,330" marker-end="url(#arrR)"/>
+  <path class="fetch" d="M388,512 C540,512 560,402 718,402" marker-end="url(#arrR)"/>
+  <path class="fetch" d="M388,548 C520,560 560,476 718,474" marker-end="url(#arrR)"/>
+  <text class="lblR" x="690" y="268">런타임 fetch</text>
+
+  <!-- legend / note -->
+  <line class="rule" x1="40" y1="612" x2="1040" y2="612"/>
+  <text class="sub" x="40" y="632">&#8212; 배포·게시(solid)   &#183;&#183;&#183; 런타임 fetch(dashed, 적색)   &#8212;   앱 서버 없이 정적 호스팅 + 클라이언트 WASM 으로 인터랙티브 통계 제공.</text>
+</svg>
