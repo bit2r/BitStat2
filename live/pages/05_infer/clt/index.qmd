@@ -6,17 +6,24 @@ webr:
 ---
 
 모집단이 어떤 분포든 **표본평균은 표본 크기가 커질수록 정규분포에 가까워진다.**
-아래 코드에서 `n`, `dist`를 바꿔 직접 실행해 보세요. *(단일 webR 런타임 · showtext 없이 브라우저 웹폰트 사용)*
+아래 슬라이더를 움직이면 표본평균의 분포가 실시간으로 바뀝니다. *(OJS 입력 → 단일 webR 런타임 · showtext 없이 브라우저 웹폰트)*
 
-## 1. 표본평균을 직접 뽑아 보기
+## 1. 표본평균의 분포 (슬라이더 반응)
+
+```{ojs}
+//| echo: false
+viewof n = Inputs.range([5, 100], {value: 30, step: 5, label: "표본 크기 (n)"})
+viewof num_samples = Inputs.range([100, 5000], {value: 1000, step: 100, label: "표본 수"})
+viewof dist = Inputs.select(["norm", "exp", "unif"], {value: "exp", label: "분포 선택", format: x => ({norm: "정규 분포", exp: "지수 분포", unif: "균등 분포"})[x]})
+```
 
 ```{webr}
-#| autorun: false
+#| edit: false
+#| input:
+#|   - "n"
+#|   - "num_samples"
+#|   - "dist"
 library(ggplot2)
-
-n <- 30            # ← 표본 크기: 5, 30, 100 으로 바꿔 실행
-num_samples <- 1000
-dist <- "exp"      # ← "norm" / "exp" / "unif"
 
 samples <- switch(dist,
   norm = matrix(rnorm(n*num_samples), nrow=n),
