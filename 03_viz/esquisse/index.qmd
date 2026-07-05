@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "그래프 문법"
 author: "이광춘"
 date: today

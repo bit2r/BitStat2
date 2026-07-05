@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "기술통계 개념 이해"
 author: "이광춘"
 date: today

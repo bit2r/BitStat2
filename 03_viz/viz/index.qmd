@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "데이터 시각화"
 author: "이광춘"
 date: today

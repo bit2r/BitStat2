@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "회귀분석"
 date: today
 categories: ["회귀분석", "결정계수", "모형요약", "회귀분석 가정", "회귀 계수"]

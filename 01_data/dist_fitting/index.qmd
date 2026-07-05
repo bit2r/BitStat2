@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "연속형 분포 적합"
 author: "이광춘"
 date: today

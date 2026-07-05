@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "이표본 평균차이 검정"
 author: "이광춘"
 date: today

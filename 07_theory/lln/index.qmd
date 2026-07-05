@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "대수의 법칙"
 date: today
 categories: [이론, "대수의 법칙", "동전 던지기"]

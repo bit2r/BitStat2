@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "군집분석"
 date: today
 categories: [다변량 분석, "군집분석", "Clustering", "K-평균", "PCA"]

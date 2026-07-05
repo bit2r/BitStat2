@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "대표적 표본추출 방법"
 author: "이광춘"
 date: today

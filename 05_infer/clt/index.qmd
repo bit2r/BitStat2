@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "중심극한정리"
 author: "이광춘"
 date: today

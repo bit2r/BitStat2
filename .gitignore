@@ -7,3 +7,5 @@
 .env
 
 to_do.qmd
+
+**/*.quarto_ipynb

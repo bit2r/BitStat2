@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "단일 평균 가설 검정"
 author: "이광춘"
 date: today

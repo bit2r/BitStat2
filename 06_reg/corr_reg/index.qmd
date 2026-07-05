@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "상관분석과 단순 회귀분석"
 date: today
 categories: [상관분석, "단순 회귀분석", "상관계수", "결정계수"]

@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "신뢰구간"
 author: "이광춘"
 date: today

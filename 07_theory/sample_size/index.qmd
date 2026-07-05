@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "표본 크기"
 date: today
 categories: ["평균", "비율", "표본크기"]

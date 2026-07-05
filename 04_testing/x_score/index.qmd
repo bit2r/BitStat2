@@ -1,4 +1,5 @@
 ---
+engine: knitr
 title: "x-점수 확률계산"
 author: "이광춘"
 date: today
@@ -137,8 +138,7 @@ server <- function(input, output) {
             panel.grid.minor = element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(size = 20, family = "Tahoma", face = "bold"),
-            text=element_text(family="Tahoma"),
+            plot.title = element_text(size = 20, face = "bold"),
             axis.text.x=element_text(colour="black", size = 11),
             axis.text.y=element_text(colour="black", size = 11))
 
@@ -193,8 +193,7 @@ server <- function(input, output) {
             panel.grid.minor = element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(size = 20, family = "Tahoma", face = "bold"),
-            text=element_text(family="Tahoma"),
+            plot.title = element_text(size = 20, face = "bold"),
             axis.text.x=element_text(colour="black", size = 11),
             axis.text.y=element_text(colour="black", size = 11))
 

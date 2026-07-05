@@ -10,10 +10,16 @@ project:
 
 lang: ko-KR
 
+# 이 사이트 문서는 shinylive-r/webr-r 셀만 있고 knitr {r} 셀이 없어,
+# 엔진 자동선택이 jupyter로 폴백해 렌더 실패할 수 있음 → 프로젝트 전역 knitr 강제.
+engine: knitr
+
 website:
   title: "빗스탯2"
   site-url: https://r2bit.com/BitStat2/
-  google-analytics: "UA-229551680-1"
+  # Universal Analytics(UA-)는 2023-07 종료로 더 이상 지표를 수집하지 못함.
+  # GA4 속성 발급 후 아래를 "G-XXXXXXX" 측정 ID로 교체하고 주석 해제할 것.
+  # google-analytics: "UA-229551680-1"
   description: "BitStat2: 오픈 통계 패키지"
   favicon: images/favicon.ico
   search: true
@@ -54,7 +60,9 @@ format:
     date-format: iso
 
 editor: source
-license: "CC BY-SA-NC & GPL-3"
+# 대상별 라이선스 분리: 콘텐츠=CC BY-NC-SA 4.0 / 코드=GPL-3.0
+# 상세: LICENSE(코드), LICENSE-content.md(콘텐츠), DATA_LICENSES.md(데이터)
+license: "콘텐츠 CC BY-NC-SA 4.0 · 코드 GPL-3.0"
 
 number-sections: true
 number-depth: 2
@@ -63,7 +71,6 @@ number-depth: 2
 filters:
   - shinylive
   - webr
-  # - pyodide
 
 # ---------------------------------- #
 webr:
