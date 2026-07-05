@@ -16,6 +16,14 @@ $bit-tile-transition:    0.3s ease !default;
 // 리스팅 제목 색 — 과거 `color: blue`(대비 미흡) 하드코딩을 대체
 $bit-listing-title-color: $primary !default;
 
+// ── Tufte 페이지 토큰 ────────────────────────────────────
+$bit-cream:  #fffff8 !default;   // Tufte 오프화이트 배경
+$bit-ink:    #1a1a1a !default;   // 본문 잉크
+$bit-rust:   #8a1500 !default;   // 뮤트 강조(적)
+$bit-faint:  #dcd8c8 !default;   // 얇은 경계선
+$bit-margin: #55534a !default;   // 사이드노트 톤
+$bit-serif:  "Palatino Linotype", Palatino, Georgia, "Nanum Myeongjo", "본명조", serif !default;
+
 /*-- scss:rules --*/
 // 규칙에서는 SCSS 중첩·변수를 사용한다.
 
@@ -46,3 +54,54 @@ $bit-listing-title-color: $primary !default;
   font-weight: 700;
   color: $bit-listing-title-color;
 }
+
+// ── Tufte 페이지 (.tufte-page 클래스를 가진 문서) ───────────
+// 크림 배경은 페이지 전체에, 세리프·톤은 본문 영역에 적용.
+body:has(.tufte-page) {
+  background-color: $bit-cream;
+}
+
+.tufte-page {
+  font-family: $bit-serif;
+  color: $bit-ink;
+  line-height: 1.6;
+
+  // 절제된 제목(세리프·얇은 자간)
+  h1, h2, h3, h4 {
+    font-family: $bit-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  // 사이드노트(마진) — 작고 조용하게
+  .column-margin {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: $bit-margin;
+  }
+
+  // 탭 — 밑줄형 미니멀(카드/박스 제거, 활성은 rust 밑줄)
+  .panel-tabset {
+    > .nav-tabs {
+      border-bottom: 1px solid $bit-faint;
+      gap: 0.25rem;
+
+      .nav-link {
+        border: none;
+        background: transparent;
+        color: $bit-margin;
+        padding: 0.4rem 0.75rem;
+
+        &.active {
+          color: $bit-rust;
+          background: transparent;
+          border-bottom: 2px solid $bit-rust;
+        }
+      }
+    }
+    > .tab-content {
+      padding-top: 1rem;
+    }
+  }
+}
+
