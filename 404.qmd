@@ -1,0 +1,32 @@
+---
+engine: knitr
+pagetitle: "빛스탯2 — 페이지 이동 안내"
+page-layout: full
+toc: false
+css: assets/portal.css
+---
+
+```{=html}
+<div class="bs-home">
+<section class="bs-hero">
+  <div class="bs-eyebrow">BITSTAT2</div>
+  <div class="bs-h1">페이지가 이사했습니다</div>
+  <p class="bs-lede">
+    빛스탯2가 포털과 두 트랙으로 개편되면서 콘텐츠 주소가 바뀌었습니다.
+    앱 모듈 주소로 오셨다면 잠시 후 새 주소로 자동 이동합니다.
+  </p>
+  <div class="bs-cta">
+    <a class="bs-btn bs-btn-primary" href="https://r2bit.com/bitstat2-shiny/">앱 트랙(BitStat2 앱) →</a>
+    <a class="bs-btn bs-btn-ghost" href="https://r2bit.com/BitStat2-quarto/">코드 트랙(BitStat2 Live) →</a>
+    <a class="bs-btn bs-btn-ghost" href="/BitStat2/">포털 홈</a>
+  </div>
+</section>
+</div>
+<script>
+// 구 앱 딥링크(/BitStat2/pages/...)를 새 앱 트랙 주소로 자동 이동
+(function () {
+  var m = location.pathname.match(/^\/BitStat2(\/pages\/.*)$/);
+  if (m) location.replace("https://r2bit.com/bitstat2-shiny" + m[1]);
+})();
+</script>
+```

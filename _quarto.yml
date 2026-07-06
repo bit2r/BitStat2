@@ -8,6 +8,7 @@ project:
   #   앱 트랙  → BitStat2-shiny  · 코드 트랙 → BitStat2-quarto
   render:
     - index.qmd
+    - 404.qmd
   resources:
     - "assets/*.png"
     - "assets/*.ico"

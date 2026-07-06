@@ -31,14 +31,14 @@ css: assets/portal.css
 
   <div class="bs-track">
     <div class="bs-track-kicker">앱 트랙 — BitStat2 앱</div>
-    <h3>만지며 직관을 만든다<span class="bs-status bs-status-soon">이전 준비 중</span></h3>
+    <h3>만지며 직관을 만든다<span class="bs-status bs-status-live">라이브</span></h3>
     <p>클릭과 슬라이더로 분포·검정·회귀를 체험하는 <b>인터랙티브 Shiny 앱</b> 23개 모듈.
        코드를 몰라도 통계 개념이 눈에 들어옵니다.</p>
     <div class="bs-track-meta">Shiny × shinylive × webR — 서버 없이 브라우저 실행</div>
     <div class="bs-track-cta">
-      <a class="bs-btn bs-btn-primary" href="https://r2bit.com/BitStat2-shiny/">앱으로 배우기 →</a>
+      <a class="bs-btn bs-btn-primary" href="https://r2bit.com/bitstat2-shiny/">앱으로 배우기 →</a>
     </div>
-    <div class="bs-track-note">저장소 분리 완료(BitStat2-shiny) · 배포 전환 전까지는 이 도메인의 기존 경로에서 서비스됩니다.</div>
+    <div class="bs-track-note">Shiny 앱 모듈 23개 · 서버 없이 브라우저 실행.</div>
   </div>
 
   <div class="bs-track">
