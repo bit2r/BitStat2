@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 780" font-family="Georgia, 'Apple SD Gothic Neo', 'Noto Serif KR', serif">
+  <!-- Tufte-style: 잉크 최소 · 헤어라인 · 단일 액센트(#2563EB) · 직접 라벨 -->
+  <!-- 2026-07-06: BitStat2 모노레포 → 포털 + 2 트랙 저장소 전환 -->
+  <rect width="1240" height="780" fill="#ffffff"/>
+
+  <!-- ===== 헤더 ===== -->
+  <text x="40" y="42" font-size="22" fill="#111827" font-weight="bold">빛스탯2 — 포털과 두 트랙</text>
+  <text x="40" y="64" font-size="12" fill="#6b7280">모노레포(BitStat2)를 포털로 전환하고 콘텐츠 정본을 트랙 저장소로 이관 · 2026-07-06</text>
+  <line x1="40" y1="76" x2="1200" y2="76" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- ===== 포털 (상단 중앙) ===== -->
+  <rect x="420" y="100" width="400" height="120" rx="10" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="620" y="128" font-size="10" fill="#2563eb" text-anchor="middle" letter-spacing="2" font-weight="bold">PORTAL · bit2r/BitStat2</text>
+  <text x="620" y="152" font-size="16" fill="#111827" text-anchor="middle" font-weight="bold">빛스탯2 포털 — r2bit.com/BitStat2</text>
+  <text x="620" y="174" font-size="10.5" fill="#6b7280" text-anchor="middle">단일 랜딩(index.qmd) · 트랙 안내 · 공통 커리큘럼 지도</text>
+  <text x="620" y="192" font-size="10.5" fill="#6b7280" text-anchor="middle">정본: 커리큘럼 설계 · 공통 문서(documents/) · 라이선스</text>
+  <text x="620" y="210" font-size="9" fill="#9ca3af" text-anchor="middle">렌더 대상 = index.qmd 하나 (콘텐츠 없음)</text>
+
+  <!-- 분기선 -->
+  <line x1="620" y1="220" x2="620" y2="248" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="320" y1="248" x2="920" y2="248" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="320" y1="248" x2="320" y2="276" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="920" y1="248" x2="920" y2="276" stroke="#d1d5db" stroke-width="1"/>
+
+  <!-- ===== 앱 트랙 (왼쪽) ===== -->
+  <rect x="90" y="276" width="460" height="180" rx="10" fill="none" stroke="#9ca3af" stroke-width="1"/>
+  <text x="110" y="304" font-size="10" fill="#2563eb" letter-spacing="1.5" font-weight="bold">앱 트랙 · statkclee/bitstat2-shiny</text>
+  <text x="110" y="330" font-size="15" fill="#111827" font-weight="bold">BitStat2 앱 — 만지며 직관</text>
+  <text x="110" y="352" font-size="10.5" fill="#6b7280">인터랙티브 Shiny 앱 모듈 23개 — 클릭·슬라이더 체험</text>
+  <text x="110" y="370" font-size="10.5" fill="#6b7280">스택: Shiny × shinylive × webR (서버리스)</text>
+  <text x="110" y="394" font-size="10.5" fill="#111827">예정 주소: r2bit.com/BitStat2-shiny</text>
+  <text x="110" y="412" font-size="9.5" fill="#92400e">상태: 배포 전환 준비 중 — 전환 전까지 기존 r2bit.com/BitStat2 경로에서 서비스</text>
+  <text x="110" y="438" font-size="9" fill="#9ca3af">이관: pages/(모듈 63파일) · _extensions(shinylive) · data/ · _freeze/</text>
+
+  <!-- ===== 코드 트랙 (오른쪽) ===== -->
+  <rect x="690" y="276" width="460" height="180" rx="10" fill="none" stroke="#9ca3af" stroke-width="1"/>
+  <text x="710" y="304" font-size="10" fill="#2563eb" letter-spacing="1.5" font-weight="bold">코드 트랙 · bit2r/BitStat2-quarto</text>
+  <text x="710" y="330" font-size="15" fill="#111827" font-weight="bold">BitStat2 Live — 코딩하며 원리</text>
+  <text x="710" y="352" font-size="10.5" fill="#6b7280">편집형 R 셀 · OJS 반응형(input:/define:) · 자동 채점 43문항</text>
+  <text x="710" y="370" font-size="10.5" fill="#6b7280">스택: Quarto Live × webR 0.6.0</text>
+  <text x="710" y="394" font-size="10.5" fill="#111827">주소: r2bit.com/BitStat2-quarto</text>
+  <text x="710" y="412" font-size="9.5" fill="#2563eb" font-weight="bold">상태: 라이브 — 23/23 토픽 전부 실습 가능</text>
+  <text x="710" y="438" font-size="9" fill="#9ca3af">이관: live/ 전체 (git filter-repo로 이력째 분리, 2026-07-06)</text>
+
+  <!-- ===== 공통 커리큘럼 (하단 밴드) ===== -->
+  <line x1="320" y1="456" x2="320" y2="484" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="920" y1="456" x2="920" y2="484" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="320" y1="484" x2="920" y2="484" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="620" y1="484" x2="620" y2="508" stroke="#d1d5db" stroke-width="1"/>
+
+  <rect x="150" y="508" width="940" height="120" rx="10" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="620" y="534" font-size="12" fill="#111827" text-anchor="middle" font-weight="bold">공통 커리큘럼 — 두 트랙이 같은 지도를 공유</text>
+  <g font-size="10" fill="#6b7280" text-anchor="middle">
+    <text x="240" y="566">01 데이터</text>
+    <text x="240" y="582" fill="#9ca3af">4 토픽</text>
+    <text x="367" y="566">02 EDA</text>
+    <text x="367" y="582" fill="#9ca3af">4 토픽</text>
+    <text x="494" y="566">03 시각화</text>
+    <text x="494" y="582" fill="#9ca3af">2 토픽</text>
+    <text x="620" y="566">04 통계 검정</text>
+    <text x="620" y="582" fill="#9ca3af">5 토픽</text>
+    <text x="747" y="566">05 추론</text>
+    <text x="747" y="582" fill="#9ca3af">2 토픽</text>
+    <text x="874" y="566">06 회귀분석</text>
+    <text x="874" y="582" fill="#9ca3af">2 토픽</text>
+    <text x="1000" y="566">07 통계이론</text>
+    <text x="1000" y="582" fill="#9ca3af">4 토픽</text>
+  </g>
+  <text x="620" y="612" font-size="9.5" fill="#9ca3af" text-anchor="middle">계 23개 토픽 — 앱(체험)과 코드(실습)가 1:1 대응</text>
+
+  <!-- ===== 주석 ===== -->
+  <g font-size="10" fill="#6b7280" font-style="italic">
+    <text x="40" y="130">중복 제거(2026-07-06) —</text>
+    <text x="40" y="143">포털 저장소에서 pages/ ·</text>
+    <text x="40" y="156">live/ · _extensions ·</text>
+    <text x="40" y="169">data/ · _freeze/ 제거.</text>
+    <text x="40" y="182">콘텐츠 정본은 각 트랙</text>
+    <text x="40" y="195">저장소 하나씩만 유지.</text>
+
+    <text x="960" y="130">배포 전환 순서 —</text>
+    <text x="960" y="143">① BitStat2-shiny 배포</text>
+    <text x="960" y="156">② 포털(portal 브랜치)을</text>
+    <text x="960" y="169">&#160;&#160;&#160;gh-pages로 전환</text>
+    <text x="960" y="182">③ 링크·리다이렉트 점검</text>
+    <text x="960" y="195">순서를 지켜야 무중단.</text>
+  </g>
+
+  <!-- ===== 푸터: 원칙 ===== -->
+  <line x1="40" y1="700" x2="1200" y2="700" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="40" y="724" font-size="10.5" fill="#6b7280">원칙 — 정본은 저장소당 하나(포털=조율·문서, 트랙=콘텐츠) · 포털은 콘텐츠를 갖지 않는다(렌더 1페이지) · 트랙 간 이동은 포털 경유가 아닌 직접 링크(짝 사이트 상호 링크)</text>
+  <text x="40" y="742" font-size="10.5" fill="#6b7280">구현 — index.qmd 원 HTML + assets/portal.css(.bs- 디자인 시스템, quarto 홈과 동일 계열) · 기술문서: documents/tech_document/2026-07-06_포털_전환.md(로컬) · 이 다이어그램: images/2026-07-06_포털_아키텍처.svg</text>
+</svg>
