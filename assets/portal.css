@@ -165,14 +165,3 @@
   border-radius: 4px; padding: .12em .5em; vertical-align: 2px; margin-left: .5em; }
 .bs-status-live { color: var(--bs-accent); background: var(--bs-accent-soft); }
 .bs-status-soon { color: #92400e; background: #fef3c7; }
-
-/* ---- 저장소 지도 ---- */
-.bs-repos { padding-top: 2.25rem; }
-.bs-repos table { width: 100%; font-size: .88rem; border-collapse: collapse; }
-.bs-repos th, .bs-repos td {
-  text-align: left; padding: .5rem .6rem;
-  border-top: 1px solid var(--bs-hairline);
-}
-.bs-repos th { font-weight: 600; color: var(--bs-faint); font-size: .8rem;
-  border-top: none; }
-.bs-repos code { font-size: .85em; }

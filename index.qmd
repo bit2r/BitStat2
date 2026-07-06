@@ -71,23 +71,6 @@ css: assets/portal.css
   </div>
 </section>
 
-<!-- ================= 저장소 지도 ================= -->
-<section class="bs-repos">
-  <div class="bs-map-head"><h2>프로젝트 구성</h2></div>
-  <table>
-    <tr><th>저장소</th><th>역할</th><th>정본</th></tr>
-    <tr><td><a href="https://github.com/bit2r/BitStat2"><code>BitStat2</code></a></td>
-        <td>포털(이 페이지) · 프로젝트 조율</td>
-        <td>커리큘럼 설계 · 공통 문서 · 라이선스</td></tr>
-    <tr><td><a href="https://github.com/statkclee/bitstat2-shiny"><code>BitStat2-shiny</code></a></td>
-        <td>앱 트랙 — shinylive 인터랙티브 앱</td>
-        <td>Shiny 앱 모듈 23개</td></tr>
-    <tr><td><a href="https://github.com/bit2r/BitStat2-quarto"><code>BitStat2-quarto</code></a></td>
-        <td>코드 트랙 — Quarto Live 코드학습</td>
-        <td>편집형 실습 페이지 23개 · 채점 연습문제</td></tr>
-  </table>
-</section>
-
 <!-- ================= 푸터 노트 ================= -->
 <p class="bs-note">
   콘텐츠 CC BY-NC-SA 4.0 · 코드 GPL-3.0 —
