@@ -4,88 +4,30 @@ project:
   preview:
     port: 7771
     browser: false
-  # 사이트로 렌더할 콘텐츠만 명시(allowlist) — README/CLAUDE/doc/ 등 프로젝트 문서는 제외.
+  # 포털은 단일 랜딩만 렌더한다. 콘텐츠 정본은 트랙 저장소에 있다:
+  #   앱 트랙  → BitStat2-shiny  · 코드 트랙 → BitStat2-quarto
   render:
     - index.qmd
-    - pages/**/*.qmd
+    - 404.qmd
   resources:
     - "assets/*.png"
     - "assets/*.ico"
 
 lang: ko-KR
-
-# 이 사이트 문서는 shinylive-r/webr-r 셀만 있고 knitr {r} 셀이 없어,
-# 엔진 자동선택이 jupyter로 폴백해 렌더 실패할 수 있음 → 프로젝트 전역 knitr 강제.
 engine: knitr
 
 website:
-  title: "빗스탯2"
+  title: "빛스탯2"
   site-url: https://r2bit.com/BitStat2/
-  # Universal Analytics(UA-)는 2023-07 종료로 더 이상 지표를 수집하지 못함.
-  # GA4 속성 발급 후 아래를 "G-XXXXXXX" 측정 ID로 교체하고 주석 해제할 것.
-  # google-analytics: "UA-229551680-1"
-  description: "BitStat2: 오픈 통계 패키지"
+  description: "빛스탯2 — 만지며, 코딩하며 배우는 오픈 통계 플랫폼"
   favicon: assets/favicon.ico
-  search: true
-  navbar:
-    logo: assets/Korea_R_User_Group_kor.png
-    left:
-      - text: "빛스탯"
-        menu:
-        - href: pages/01_data.qmd
-          text: "01 데이터"
-        - href: pages/02_eda.qmd
-          text: "02 EDA"
-        - href: pages/03_viz.qmd
-          text: "03 시각화"
-        - href: pages/04_testing.qmd
-          text: "04 통계검정"
-        - href: pages/05_infer.qmd
-          text: "05 추론"
-        - href: pages/06_reg.qmd
-          text: "06 회귀분석"
-        - href: pages/07_theory.qmd
-          text: "07 통계이론"
-    right:
-      - pages/about.qmd
-      - pages/BitStat.qmd
-      - icon: github
-        href: https://github.com/bit2r/BitStat2
-      - icon: facebook
-        href: https://www.facebook.com/groups/tidyverse
-      - icon: discord
-        href: https://discord.gg/wJbu4WQz
+
 format:
   html:
-    theme:
-      - spacelab
-      - assets/styles.scss   # 커스텀 SCSS(변수+규칙) 오버레이
-    linkcolor: "#0000A0"
-    highlight-style: github
-    date-format: iso
+    theme: cosmo
+    toc: false
+    linkcolor: "#1d4ed8"
 
 editor: source
 # 대상별 라이선스 분리: 콘텐츠=CC BY-NC-SA 4.0 / 코드=GPL-3.0
 # 상세: LICENSE(코드), documents/LICENSE-content.md(콘텐츠), documents/DATA_LICENSES.md(데이터)
-license: "콘텐츠 CC BY-NC-SA 4.0 · 코드 GPL-3.0"
-
-number-sections: true
-number-depth: 2
-
-# ---------------------------------- #
-filters:
-  - shinylive
-  - webr
-
-# ---------------------------------- #
-webr:
-  packages:
-  - "stringr"
-  - "dplyr"
-  - "ggplot2"
-  - "tidyr"
-  - "gt"
-  - "gtExtras"
-  - "tibble"
-  - "readr"
-  - "curl"

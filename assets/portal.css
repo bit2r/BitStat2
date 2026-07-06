@@ -1,0 +1,167 @@
+/* ============================================================
+   BitStat2 포털 UI — .bs- 접두사로 스코프 (다른 페이지 무영향)
+   설계: 2026-07-06 포털 전환
+   (기술문서: documents/tech_document/2026-07-06_포털_전환.md
+    다이어그램: images/2026-07-06_포털_아키텍처.svg)
+   ============================================================ */
+
+.bs-home {
+  --bs-ink: #111827;
+  --bs-muted: #6b7280;
+  --bs-faint: #9ca3af;
+  --bs-hairline: #e5e7eb;
+  --bs-accent: #2563eb;
+  --bs-accent-ink: #1d4ed8;
+  --bs-accent-soft: #eff6ff;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+  color: var(--bs-ink);
+  line-height: 1.6;
+}
+
+/* ---- 히어로 ---- */
+.bs-hero { padding: 3.5rem 0 2.5rem; }
+.bs-eyebrow {
+  font-size: .82rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--bs-accent);
+  margin-bottom: .75rem;
+}
+.bs-h1 {
+  font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.15;
+  margin: 0 0 1rem; border: none; padding: 0;
+}
+.bs-lede {
+  font-size: 1.15rem; color: var(--bs-muted);
+  max-width: 40em; margin-bottom: 1.5rem;
+}
+.bs-lede strong { color: var(--bs-ink); font-weight: 600; }
+.bs-hero-meta {
+  display: flex; flex-wrap: wrap; gap: .4rem 1.4rem;
+  font-size: .85rem; color: var(--bs-faint); margin-bottom: 1.75rem;
+}
+.bs-hero-meta span::before { content: "— "; color: var(--bs-hairline); }
+.bs-cta { display: flex; flex-wrap: wrap; gap: .75rem; }
+.bs-btn {
+  display: inline-block; padding: .6rem 1.15rem; border-radius: 8px;
+  font-size: .95rem; font-weight: 600; text-decoration: none;
+  transition: background-color .15s, border-color .15s;
+}
+.bs-btn-primary { background: var(--bs-accent); color: #fff !important; }
+.bs-btn-primary:hover { background: var(--bs-accent-ink); }
+.bs-btn-ghost {
+  border: 1px solid var(--bs-hairline); color: var(--bs-ink) !important;
+}
+.bs-btn-ghost:hover { border-color: var(--bs-faint); }
+
+/* ---- 진행 헤어라인 (Tufte: 잉크 최소의 진행 표시) ---- */
+.bs-progress { margin: 2.5rem 0 0; font-size: .85rem; color: var(--bs-muted); }
+.bs-progress-bar {
+  position: relative; height: 2px; background: var(--bs-hairline);
+  margin-top: .5rem;
+}
+.bs-progress-bar i {
+  position: absolute; left: 0; top: 0; height: 2px;
+  background: var(--bs-accent);
+}
+
+/* ---- 학습 방식 3요소 ---- */
+.bs-how {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem; padding: 2.25rem 0;
+  border-top: 1px solid var(--bs-hairline);
+  border-bottom: 1px solid var(--bs-hairline);
+}
+.bs-how h3 {
+  font-size: 1rem; font-weight: 700; margin: 0 0 .4rem;
+  border: none; padding: 0;
+}
+.bs-how h3 code {
+  font-size: .85em; color: var(--bs-accent); background: var(--bs-accent-soft);
+  padding: .1em .35em; border-radius: 4px;
+}
+.bs-how p { font-size: .92rem; color: var(--bs-muted); margin: 0; }
+
+/* ---- 커리큘럼 맵 ---- */
+.bs-map { padding-top: 2.75rem; }
+.bs-map-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; }
+.bs-map-head h2 {
+  font-size: 1.4rem; font-weight: 700; margin: 0;
+  border: none; padding: 0;
+}
+.bs-map-head .bs-legend { font-size: .82rem; color: var(--bs-faint); }
+.bs-legend b { color: var(--bs-accent); font-weight: 600; }
+.bs-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1rem;
+}
+.bs-ch {
+  border: 1px solid var(--bs-hairline); border-radius: 10px;
+  padding: 1.15rem 1.25rem 1rem; background: #fff;
+  transition: border-color .15s;
+}
+.bs-ch:hover { border-color: var(--bs-faint); }
+.bs-ch-no {
+  font-size: .78rem; font-weight: 600; color: var(--bs-faint);
+  letter-spacing: .08em;
+}
+.bs-ch h3 {
+  font-size: 1.08rem; font-weight: 700; margin: .15rem 0 .1rem;
+  border: none; padding: 0;
+}
+.bs-ch-sub { font-size: .82rem; color: var(--bs-faint); margin: 0 0 .75rem; }
+.bs-ch ul { list-style: none; margin: 0; padding: 0; }
+.bs-ch li {
+  font-size: .92rem; padding: .3rem 0;
+  border-top: 1px solid #f3f4f6;
+  color: var(--bs-muted);
+}
+.bs-ch li::before { content: "○ "; color: #d1d5db; }
+.bs-ch li.bs-live::before { content: "● "; color: var(--bs-accent); }
+.bs-ch li.bs-live a {
+  color: var(--bs-accent-ink); font-weight: 600; text-decoration: none;
+}
+.bs-ch li.bs-live a:hover { text-decoration: underline; }
+.bs-badge {
+  font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+  color: var(--bs-accent); background: var(--bs-accent-soft);
+  border-radius: 4px; padding: .1em .4em; margin-left: .4em;
+  vertical-align: 1px;
+}
+
+/* ---- 푸터 노트 ---- */
+.bs-note {
+  margin-top: 2.75rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--bs-hairline);
+  font-size: .85rem; color: var(--bs-faint); max-width: 46em;
+}
+.bs-note a { color: var(--bs-muted); }
+
+
+/* ---- 포털 전용: 트랙 카드 2단 ---- */
+.bs-tracks {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem; padding: 2.25rem 0 0;
+}
+.bs-track {
+  border: 1px solid var(--bs-hairline); border-radius: 12px;
+  padding: 1.6rem 1.7rem 1.5rem; background: #fff;
+  display: flex; flex-direction: column; gap: .6rem;
+  transition: border-color .15s;
+}
+.bs-track:hover { border-color: var(--bs-accent); }
+.bs-track-kicker {
+  font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+  color: var(--bs-accent); text-transform: uppercase;
+}
+.bs-track h3 { font-size: 1.35rem; font-weight: 700; margin: 0; border: none; padding: 0; }
+.bs-track .bs-track-tag { font-size: .95rem; color: var(--bs-ink); font-weight: 600; }
+.bs-track p { font-size: .93rem; color: var(--bs-muted); margin: 0; }
+.bs-track-meta { font-size: .8rem; color: var(--bs-faint); }
+.bs-track-cta { margin-top: auto; padding-top: .9rem; }
+.bs-track-note { font-size: .78rem; color: var(--bs-faint); margin-top: .5rem; }
+.bs-status { font-size: .74rem; font-weight: 700; letter-spacing: .05em;
+  border-radius: 4px; padding: .12em .5em; vertical-align: 2px; margin-left: .5em; }
+.bs-status-live { color: var(--bs-accent); background: var(--bs-accent-soft); }
+.bs-status-soon { color: #92400e; background: #fef3c7; }
