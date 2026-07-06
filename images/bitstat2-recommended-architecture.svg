@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="640" viewBox="0 0 1160 640" role="img"
+     aria-label="BitStat2 권고 아키텍처 — app(shinylive)과 live(Quarto Live) 2-사이트 스택, 2026-07-06 기준 버전">
+  <defs>
+    <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0.5 L7.5,4 L0,7.5" fill="none" stroke="#888" stroke-width="1"/>
+    </marker>
+  </defs>
+  <rect width="1160" height="640" fill="#fffff8"/>
+  <g font-family="'Nanum Myeongjo','AppleMyungjo','Noto Serif KR','Songti SC',Georgia,serif" fill="#1a1a1a">
+
+    <text x="150" y="44" font-size="21">빛스탯2 권고 아키텍처 — 2-사이트 안정 조합</text>
+    <text x="150" y="66" font-size="12" fill="#555">구성요소 버전·출시일은 2026-07-06 GitHub API 실측 · 설계 근거는 분리 아키텍처(2026-07-05)와 PoC 검증</text>
+
+    <!-- 두 기둥 헤더 + 교차링크 -->
+    <text x="350" y="114" font-size="13.5" text-anchor="middle">① app — shinylive 앱 사이트</text>
+    <text x="350" y="132" font-size="10" fill="#888" text-anchor="middle">만지며 직관 얻기 · 슬라이더·GUI (r2bit.com/BitStat2)</text>
+    <text x="815" y="114" font-size="13.5" text-anchor="middle">② live — Quarto Live 코드학습</text>
+    <text x="815" y="132" font-size="10" fill="#888" text-anchor="middle">코드 편집·실행 · 연습문제 (live/ 파일럿)</text>
+    <line x1="556" y1="110" x2="609" y2="110" stroke="#888" stroke-width="0.75"
+          marker-start="url(#arr)" marker-end="url(#arr)"/>
+    <text x="582" y="98" font-size="9" fill="#888" text-anchor="middle">교차 링크</text>
+
+    <!-- ── ① app 스택 ── -->
+    <rect x="150" y="150" width="400" height="74" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="350" y="176" font-size="13">Quarto 프로젝트 — type: website</text>
+      <text x="350" y="195" font-size="10" fill="#888">Quarto 1.10.x · 전 문서 front matter에 engine: knitr</text>
+      <text x="350" y="212" font-size="9" fill="#888">함정: knitr 누락 → jupyter 폴백으로 렌더 실패</text>
+    </g>
+    <line x1="350" y1="224" x2="350" y2="248" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <rect x="150" y="250" width="400" height="74" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="350" y="276" font-size="13">quarto-ext/shinylive 확장 + r-shinylive v0.5.0</text>
+      <text x="350" y="295" font-size="10" fill="#888">{shinylive-r} 인라인 셀 = 유일 정본 · 패키지 2026-06-08</text>
+      <text x="350" y="312" font-size="9" fill="#888">확장은 얇은 래퍼(마지막 커밋 2025-04) — 방치 아님</text>
+    </g>
+    <line x1="350" y1="324" x2="350" y2="348" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <rect x="150" y="350" width="400" height="74" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="350" y="376" font-size="13">shinylive 웹 자산 v0.10.12 (2026-06-01)</text>
+      <text x="350" y="395" font-size="10" fill="#888">webR·Shiny for R 번들 — 앱 구동 본체 · 한글은 showtext</text>
+      <text x="350" y="412" font-size="9" fill="#a4262c">핀: _environment 0.2.3 → 0.10.12 검증 후 재고정 권고</text>
+    </g>
+    <line x1="350" y1="424" x2="350" y2="458" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <!-- ── ② live 스택 ── -->
+    <rect x="615" y="150" width="400" height="74" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="815" y="176" font-size="13">Quarto 프로젝트 — format: live-html</text>
+      <text x="815" y="195" font-size="10" fill="#888">별도 프로젝트 필수(website와 혼용 불가) · engine: knitr</text>
+      <text x="815" y="212" font-size="9" fill="#888">함정: 한 프로젝트 안 혼용 시 렌더 충돌 (PoC 실측)</text>
+    </g>
+    <line x1="815" y1="224" x2="815" y2="248" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <rect x="615" y="250" width="400" height="74" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="815" y="276" font-size="13">Quarto Live 확장 v0.2.0 (2026-05-22)</text>
+      <text x="815" y="295" font-size="10" fill="#888">_extensions/r-wasm/live 커밋 번들 = 버전 핀</text>
+      <text x="815" y="312" font-size="9" fill="#888">반응형은 #| define + OJS 패턴 (input: 주입 금지)</text>
+    </g>
+    <line x1="815" y1="324" x2="815" y2="348" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <rect x="615" y="350" width="400" height="74" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="815" y="376" font-size="13">webR v0.6.0 (2026-05-19)</text>
+      <text x="815" y="395" font-size="10" fill="#888">편집형 셀 · 연습문제(hint / solution / grade)</text>
+      <text x="815" y="412" font-size="9" fill="#a4262c">한글: NanumGothic @font-face 웹폰트 — showtext 금지</text>
+    </g>
+    <line x1="815" y1="424" x2="815" y2="458" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <!-- ── 공통 기저 ── -->
+    <rect x="150" y="460" width="865" height="70" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="582" y="489" font-size="13">공통 기저 — WebAssembly (W3C 권고 2019-12) · GitHub Pages 정적 배포</text>
+      <text x="582" y="511" font-size="10.5" fill="#888">서버·설치 0 · 배포 타깃 분리: app = docs/(현행) · live = gh-pages-live(권고) · 공통 자산은 shared/</text>
+    </g>
+
+    <!-- 각주 -->
+    <g font-size="9.5" fill="#888">
+      <text x="150" y="566">배제 — quarto-webr v0.4.3(2025-06-24 이후 무릴리스, Quarto Live로 계승) · Pyodide(Python 트랙 없음) · showtext@live(webR 캔버스에서 텍스트 미표시)</text>
+      <text x="150" y="582">근거 — GitHub API 실측(2026-07-06) · 분리 PoC 검증(2026-07-05_분리_PoC_테스트결과.md) · 함정 목록 GOTCHA.md</text>
+      <text x="150" y="598">짝 문서 — documents/tech_document/2026-07-06_안정_아키텍처_권고.md · 관련 그림: webr-ecosystem-status.svg(버전·리듬) · webr-ecosystem-diagram.svg(관계)</text>
+    </g>
+  </g>
+</svg>

@@ -36,3 +36,6 @@ AGENTS.md
 # BitStat2 Live 빌드 산출물
 /live/_site/
 /live/.quarto/
+
+# webR 자가호스팅 자산(테스트, 대용량)
+/live/assets/webr/

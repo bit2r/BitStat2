@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="570" viewBox="0 0 1200 570" role="img"
+     aria-label="WebAssembly 데이터과학 스택 연표 2011–2026">
+  <rect width="1200" height="570" fill="#fffff8"/>
+  <g font-family="'Nanum Myeongjo','AppleMyungjo','Noto Serif KR','Songti SC',Georgia,serif" fill="#1a1a1a">
+
+    <!-- 제목 -->
+    <text x="100" y="44" font-size="21">브라우저에서 R까지 — WebAssembly 데이터과학 스택 연표</text>
+    <text x="100" y="66" font-size="12" fill="#555">WASM이 웹 표준이 되고(플랫폼), R·Python 런타임이 브라우저로 들어오고(런타임), 저작 도구가 서버를 벗어나기까지 · 2011–2026</text>
+
+    <!-- 연도 그리드(극히 옅게) -->
+    <g stroke="#eeeee0" stroke-width="1">
+      <line x1="100" y1="130" x2="100" y2="470"/><line x1="166" y1="130" x2="166" y2="470"/>
+      <line x1="232" y1="130" x2="232" y2="470"/><line x1="298" y1="130" x2="298" y2="470"/>
+      <line x1="364" y1="130" x2="364" y2="470"/><line x1="430" y1="130" x2="430" y2="470"/>
+      <line x1="496" y1="130" x2="496" y2="470"/><line x1="562" y1="130" x2="562" y2="470"/>
+      <line x1="628" y1="130" x2="628" y2="470"/><line x1="694" y1="130" x2="694" y2="470"/>
+      <line x1="760" y1="130" x2="760" y2="470"/><line x1="826" y1="130" x2="826" y2="470"/>
+      <line x1="892" y1="130" x2="892" y2="470"/><line x1="958" y1="130" x2="958" y2="470"/>
+      <line x1="1024" y1="130" x2="1024" y2="470"/><line x1="1090" y1="130" x2="1090" y2="470"/>
+    </g>
+
+    <!-- 레인 기준선 -->
+    <g stroke="#d8d8cc" stroke-width="0.75">
+      <line x1="100" y1="175" x2="1130" y2="175"/>
+      <line x1="100" y1="285" x2="1130" y2="285"/>
+      <line x1="100" y1="395" x2="1130" y2="395"/>
+    </g>
+
+    <!-- 레인 제목 -->
+    <g font-size="10" fill="#888" font-style="italic" text-anchor="end">
+      <text x="88" y="179">웹 플랫폼</text>
+      <text x="88" y="289">WASM 런타임</text>
+      <text x="88" y="399">저작 도구</text>
+    </g>
+
+    <!-- ① 웹 플랫폼 -->
+    <g font-size="11">
+      <circle cx="133" cy="175" r="3"/>
+      <text x="133" y="161" text-anchor="middle">2011 · Emscripten — C/C++→asm.js</text>
+      <circle cx="394" cy="175" r="3"/>
+      <text x="394" y="161" text-anchor="middle">2015-06-17 · WebAssembly 공동 발표</text>
+      <circle cx="507" cy="175" r="3"/>
+      <text x="507" y="197" text-anchor="middle">2017-03 · MVP, 4대 브라우저 출하</text>
+      <circle cx="689" cy="175" r="3"/>
+      <text x="689" y="161" text-anchor="middle">2019-12-05 · W3C 권고안 — 4번째 웹 언어</text>
+    </g>
+
+    <!-- ② WASM 런타임 -->
+    <g font-size="11">
+      <circle cx="647" cy="285" r="3"/>
+      <text x="647" y="271" text-anchor="middle">2019-04-16 · Pyodide 공개 (Mozilla)</text>
+      <circle cx="904" cy="285" r="3"/>
+      <text x="904" y="271" text-anchor="middle">2023-03-09 · webR 0.1.0 (Posit)</text>
+    </g>
+
+    <!-- ③ 저작 도구 -->
+    <g font-size="11">
+      <circle cx="223" cy="395" r="3"/>
+      <text x="223" y="381" text-anchor="middle">2012-11 · Shiny for R 공개 (RStudio)</text>
+
+      <circle cx="858" cy="395" r="3"/>
+      <text x="858" y="381" text-anchor="end">2022-07 · Quarto 1.0</text>
+
+      <circle cx="864" cy="395" r="3"/>
+      <text x="864" y="417" text-anchor="end">2022-07 · Shinylive(Py) 시연</text>
+
+      <circle cx="906" cy="395" r="3"/>
+      <line x1="906" y1="399" x2="906" y2="428" stroke="#ccc" stroke-width="0.5"/>
+      <text x="906" y="440" text-anchor="middle">2023-03 · quarto-webr 확장 (커뮤니티)</text>
+
+      <circle cx="952" cy="395" r="3"/>
+      <line x1="952" y1="391" x2="952" y2="370" stroke="#ccc" stroke-width="0.5"/>
+      <text x="952" y="363" text-anchor="middle">2023-11 · Shinylive for R — CRAN·Quarto 확장</text>
+
+      <circle cx="1010" cy="395" r="3" fill="#a4262c"/>
+      <text x="1010" y="381" text-anchor="middle" fill="#a4262c">2024-10-15 · Quarto Live 0.1.1 (r-wasm)</text>
+
+      <circle cx="1123" cy="395" r="3" fill="#fffff8" stroke="#a4262c" stroke-width="1.2"/>
+      <text x="1123" y="417" text-anchor="end" fill="#a4262c">2026-07 · 빛스탯2 Live 파일럿</text>
+    </g>
+
+    <!-- 연도 축 -->
+    <g stroke="#999" stroke-width="0.75">
+      <line x1="100" y1="470" x2="1130" y2="470"/>
+      <line x1="100" y1="470" x2="100" y2="474"/><line x1="166" y1="470" x2="166" y2="474"/>
+      <line x1="232" y1="470" x2="232" y2="474"/><line x1="298" y1="470" x2="298" y2="474"/>
+      <line x1="364" y1="470" x2="364" y2="474"/><line x1="430" y1="470" x2="430" y2="474"/>
+      <line x1="496" y1="470" x2="496" y2="474"/><line x1="562" y1="470" x2="562" y2="474"/>
+      <line x1="628" y1="470" x2="628" y2="474"/><line x1="694" y1="470" x2="694" y2="474"/>
+      <line x1="760" y1="470" x2="760" y2="474"/><line x1="826" y1="470" x2="826" y2="474"/>
+      <line x1="892" y1="470" x2="892" y2="474"/><line x1="958" y1="470" x2="958" y2="474"/>
+      <line x1="1024" y1="470" x2="1024" y2="474"/><line x1="1090" y1="470" x2="1090" y2="474"/>
+    </g>
+    <g font-size="9" fill="#999" text-anchor="middle">
+      <text x="100" y="488">2011</text><text x="166" y="488">2012</text><text x="232" y="488">2013</text>
+      <text x="298" y="488">2014</text><text x="364" y="488">2015</text><text x="430" y="488">2016</text>
+      <text x="496" y="488">2017</text><text x="562" y="488">2018</text><text x="628" y="488">2019</text>
+      <text x="694" y="488">2020</text><text x="760" y="488">2021</text><text x="826" y="488">2022</text>
+      <text x="892" y="488">2023</text><text x="958" y="488">2024</text><text x="1024" y="488">2025</text>
+      <text x="1090" y="488">2026</text>
+    </g>
+
+    <!-- 출처 각주 -->
+    <g font-size="9.5" fill="#888">
+      <text x="100" y="521">출처 — WebAssembly 발표·MVP: webassembly.org 로드맵 · W3C 권고안: w3.org 보도자료(2019-12-05) · Shiny: RStudio 블로그(2012-11) · Pyodide: Mozilla Hacks(2019-04-16)</text>
+      <text x="100" y="536">Quarto 1.0·Shinylive(Py): rstudio::conf(2022), posit.co(2022-07) · webR 0.1.0: tidyverse.org(2023-03-09) · quarto-webr: github.com/coatless/quarto-webr(2023-03)</text>
+      <text x="100" y="551">Shinylive for R: shiny.posit.co, Shiny 1.8.0 발표(2023-11-30) · Quarto Live 0.1.1: tidyverse.org(2024-10-15) · 빛스탯2 Live: 본 저장소 pilot 브랜치(2026-07)</text>
+    </g>
+  </g>
+</svg>
