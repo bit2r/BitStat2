@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 780" font-family="Georgia, 'Apple SD Gothic Neo', 'Noto Serif KR', serif">
+  <!-- Tufte-style: 잉크 최소 · 헤어라인 · 단일 액센트(#2563EB) · 직접 라벨 -->
+  <!-- v1 (2026-07-07): 4저장소·4사이트 배포 지형 실측 기록. 구 모노레포 deployment_view.svg(archive/)의 현행 대체본 -->
+  <rect width="1240" height="780" fill="#ffffff"/>
+
+  <!-- ===== 헤더 ===== -->
+  <text x="40" y="42" font-size="22" fill="#111827" font-weight="bold">빛스탯2 — 배포 지형도</text>
+  <text x="40" y="64" font-size="12" fill="#6b7280">bit2r 조직 4개 저장소 → GitHub Pages → r2bit.com · 2026-07-07 실측(4/4 라이브) · 구 deployment_view(모노레포)의 대체본</text>
+  <line x1="40" y1="76" x2="1200" y2="76" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- ===== 공통 파이프라인 ===== -->
+  <g font-size="10.5">
+    <text x="40" y="106" fill="#111827" font-weight="bold">공통 파이프라인</text>
+    <text x="180" y="106" fill="#6b7280">개발 머신(iCloud 소스 · ⚠ 렌더는 비-iCloud 경로에서)</text>
+    <text x="520" y="106" fill="#9ca3af">— quarto render →</text>
+    <text x="650" y="106" fill="#6b7280">산출물 브랜치 미러 푸시</text>
+    <text x="830" y="106" fill="#9ca3af">— GitHub Pages 빌드 →</text>
+    <text x="1000" y="106" fill="#6b7280">r2bit.com/* (브라우저 WASM)</text>
+    <text x="180" y="124" fill="#9ca3af" font-size="9">빌드가 "building"에 멈추면 POST /pages/builds로 강제 빌드 (shiny GOTCHA §8c) · 검증은 새 포트 + Range(206) 지원 서버</text>
+  </g>
+  <line x1="40" y1="140" x2="1200" y2="140" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- ===== 표 헤더 ===== -->
+  <g font-size="9.5" fill="#9ca3af" letter-spacing="1">
+    <text x="40" y="166">저장소 · 역할</text>
+    <text x="330" y="166">소스 → 산출물 (Pages 소스)</text>
+    <text x="640" y="166">사이트</text>
+    <text x="890" y="166">런타임 · 특기</text>
+  </g>
+  <line x1="40" y1="176" x2="1200" y2="176" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- ===== 행 1: 포털 ===== -->
+  <g>
+    <text x="40" y="204" font-size="13" fill="#111827" font-weight="bold">bit2r/BitStat2</text>
+    <text x="40" y="222" font-size="10" fill="#2563eb" font-weight="bold">포털 — 랜딩 · 조율 정본</text>
+    <text x="40" y="240" font-size="9.5" fill="#6b7280">index.qmd + 404.qmd만 렌더</text>
+    <text x="40" y="256" font-size="9.5" fill="#9ca3af">브랜치: main·gh-pages·old·portal</text>
+
+    <text x="330" y="204" font-size="10.5" fill="#6b7280">main (소스) → <tspan fill="#111827" font-weight="bold">gh-pages/</tspan></text>
+    <text x="330" y="222" font-size="9.5" fill="#9ca3af">2026-07-06 구 앱 사이트에서 포털로 전환 완료</text>
+    <text x="330" y="240" font-size="9.5" fill="#9ca3af">구 앱 딥링크 → 404.html이 트랙 새 주소로 리다이렉트</text>
+
+    <text x="640" y="204" font-size="10.5" fill="#111827">r2bit.com/BitStat2/</text>
+    <text x="640" y="222" font-size="9.5" fill="#2563eb" font-weight="bold">라이브 — "만지며, 코딩하며"</text>
+
+    <text x="890" y="204" font-size="10" fill="#6b7280">정적 랜딩 (WASM 없음)</text>
+    <text x="890" y="222" font-size="9.5" fill="#9ca3af">트랙 카드 3장 · 커리큘럼 2종 안내</text>
+  </g>
+  <line x1="40" y1="272" x2="1200" y2="272" stroke="#f3f4f6" stroke-width="1"/>
+
+  <!-- ===== 행 2: 앱 트랙 ===== -->
+  <g>
+    <text x="40" y="300" font-size="13" fill="#111827" font-weight="bold">bit2r/bitstat2-shiny</text>
+    <text x="40" y="318" font-size="10" fill="#2563eb" font-weight="bold">앱 트랙 — 만지며 직관</text>
+    <text x="40" y="336" font-size="9.5" fill="#6b7280">Shiny 앱 모듈 23개 (pages/)</text>
+    <text x="40" y="352" font-size="9.5" fill="#9ca3af">statkclee에서 생성 → bit2r 이관(07-06)</text>
+
+    <text x="330" y="300" font-size="10.5" fill="#6b7280">main (소스, docs 미추적) → <tspan fill="#111827" font-weight="bold">gh-pages/</tspan></text>
+    <text x="330" y="318" font-size="9.5" fill="#9ca3af">렌더본 ~150MB — shinylive 0.10.12 자산 + R 패키지 96개 번들</text>
+    <text x="330" y="336" font-size="9.5" fill="#9ca3af">⚠ R shinylive 패키지 0.5.0+ 필수 — 구버전이면 ABI 불일치로</text>
+    <text x="330" y="350" font-size="9.5" fill="#9ca3af">    "resolved is not a function" (GOTCHA §2b)</text>
+
+    <text x="640" y="300" font-size="10.5" fill="#111827">r2bit.com/bitstat2-shiny/</text>
+    <text x="640" y="318" font-size="9.5" fill="#2563eb" font-weight="bold">라이브 — 홈 전면 개편(07-06)</text>
+    <text x="640" y="336" font-size="9.5" fill="#9ca3af">navbar 없음 · 커리큘럼 맵 홈</text>
+
+    <text x="890" y="300" font-size="10" fill="#6b7280">shinylive × webR 0.6.0 (R 4.6)</text>
+    <text x="890" y="318" font-size="9.5" fill="#9ca3af">앱 콜드 부팅 1.5~3분 · 웜 50~90초</text>
+    <text x="890" y="336" font-size="9.5" fill="#9ca3af">(속도 기술검토 2026-07-06 실측)</text>
+  </g>
+  <line x1="40" y1="368" x2="1200" y2="368" stroke="#f3f4f6" stroke-width="1"/>
+
+  <!-- ===== 행 3: 코드 트랙 ===== -->
+  <g>
+    <text x="40" y="396" font-size="13" fill="#111827" font-weight="bold">bit2r/BitStat2-quarto</text>
+    <text x="40" y="414" font-size="10" fill="#2563eb" font-weight="bold">코드 트랙 — 코딩하며 원리</text>
+    <text x="40" y="432" font-size="9.5" fill="#6b7280">편집형 R 셀 · 자동 채점 (23토픽)</text>
+    <text x="40" y="448" font-size="9.5" fill="#9ca3af">구 모노레포 live/를 이력째 분리</text>
+
+    <text x="330" y="396" font-size="10.5" fill="#6b7280">main 단일 브랜치 → <tspan fill="#111827" font-weight="bold">main /docs</tspan> <tspan fill="#9ca3af">(타 저장소와 다른 패턴)</tspan></text>
+    <text x="330" y="414" font-size="9.5" fill="#9ca3af">docs/를 main에 커밋 — 별도 산출물 브랜치 없음</text>
+
+    <text x="640" y="396" font-size="10.5" fill="#111827">r2bit.com/BitStat2-quarto/</text>
+    <text x="640" y="414" font-size="9.5" fill="#2563eb" font-weight="bold">라이브 — 23/23 토픽</text>
+
+    <text x="890" y="396" font-size="10" fill="#6b7280">Quarto Live × webR 0.6.0 (R)</text>
+    <text x="890" y="414" font-size="9.5" fill="#9ca3af">한글 = 웹폰트(@font-face) · showtext 금지</text>
+    <text x="890" y="432" font-size="9.5" fill="#9ca3af">반응형: input: 직주입/define: 두 패턴</text>
+  </g>
+  <line x1="40" y1="464" x2="1200" y2="464" stroke="#f3f4f6" stroke-width="1"/>
+
+  <!-- ===== 행 4: 고교 트랙 ===== -->
+  <g>
+    <text x="40" y="492" font-size="13" fill="#111827" font-weight="bold">bit2r/BitStat2-HS</text>
+    <text x="40" y="510" font-size="10" fill="#2563eb" font-weight="bold">고교 트랙 — 교과서 순서로</text>
+    <text x="40" y="528" font-size="9.5" fill="#6b7280">2022 개정 「확률과 통계」 정렬</text>
+    <text x="40" y="544" font-size="9.5" fill="#9ca3af">5단원 · 25모듈 (07-06 신규 합류)</text>
+
+    <text x="330" y="492" font-size="10.5" fill="#6b7280">main (소스) → <tspan fill="#111827" font-weight="bold">gh-pages/</tspan></text>
+
+    <text x="640" y="492" font-size="10.5" fill="#111827">r2bit.com/BitStat2-HS/</text>
+    <text x="640" y="510" font-size="9.5" fill="#2563eb" font-weight="bold">라이브 — 25 모듈 (앱 24)</text>
+
+    <text x="890" y="492" font-size="10" fill="#6b7280">Shiny for Python × Pyodide</text>
+    <text x="890" y="510" font-size="9.5" fill="#9ca3af">파이썬 계열 — R 계열보다 부팅 빠름</text>
+    <text x="890" y="528" font-size="9.5" fill="#9ca3af">(R vs Py 실측: 콜드 10~20초 vs 분 단위)</text>
+  </g>
+  <line x1="40" y1="560" x2="1200" y2="560" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- ===== 마진 노트 ===== -->
+  <g font-size="10" fill="#6b7280" font-style="italic">
+    <text x="40" y="592">읽는 법 — 각 행이 저장소 하나이자 사이트 하나다. 정본은 저장소당 하나: 포털=조율·문서, 트랙=콘텐츠.</text>
+    <text x="40" y="610">산출물 브랜치(gh-pages)는 렌더본 미러일 뿐 소스가 아니다 — 직접 편집 금지. 코드 트랙만 main /docs 패턴을 쓴다.</text>
+    <text x="40" y="628">공통 함정 — iCloud 경로 렌더 손상(비-iCloud 빌드 디렉터리 사용) · 서비스워커 캐시(검증은 새 포트) · Pages 빌드 멈춤(강제 빌드).</text>
+  </g>
+
+  <!-- ===== 푸터 ===== -->
+  <line x1="40" y1="700" x2="1200" y2="700" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="40" y="724" font-size="10.5" fill="#6b7280">검증 — 2026-07-07 curl 실측: 4/4 사이트 200 · 포털 타이틀 "만지며, 코딩하며" · 앱 트랙 sitemap 33건 신주소 · Pages 소스는 GitHub API 조회값.</text>
+  <text x="40" y="742" font-size="10.5" fill="#6b7280">참고 — 상위 구조: images/2026-07-06_포털_아키텍처.svg (v3) · 구 모노레포 배포도: images/archive/deployment_view.svg · 속도 실측: BitStat2-shiny/documents/tech_document/2026-07-06_shinylive_R_vs_Python_속도_기술검토.md</text>
+</svg>

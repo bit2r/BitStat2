@@ -9,7 +9,7 @@
 
 | 트랙 | 저장소 | 배움의 방식 | 스택 |
 |------|--------|-------------|------|
-| **앱 트랙** — BitStat2 앱 | [BitStat2-shiny](https://github.com/statkclee/bitstat2-shiny) | 클릭·슬라이더로 **만지며 직관** | Shiny × shinylive × webR |
+| **앱 트랙** — BitStat2 앱 | [bit2r/bitstat2-shiny](https://github.com/bit2r/bitstat2-shiny) | 클릭·슬라이더로 **만지며 직관** | Shiny × shinylive × webR |
 | **코드 트랙** — BitStat2 Live | [bit2r/BitStat2-quarto](https://github.com/bit2r/BitStat2-quarto) | 편집형 R 셀·자동 채점으로 **코딩하며 원리** ([사이트](https://r2bit.com/BitStat2-quarto/)) | Quarto Live × webR |
 
 **이 저장소(BitStat2)는 포털**입니다 — 랜딩 페이지와 프로젝트 조율(커리큘럼 설계 · 공통 문서 · 라이선스)의

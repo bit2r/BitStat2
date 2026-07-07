@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="640" viewBox="0 0 1160 640" role="img"
+     aria-label="webR 생태계 관계도 — Quarto 확장(저작), WASM 런타임, 브라우저 플랫폼의 3층 구조">
+  <defs>
+    <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0.5 L7.5,4 L0,7.5" fill="none" stroke="#888" stroke-width="1"/>
+    </marker>
+  </defs>
+  <rect width="1160" height="640" fill="#fffff8"/>
+  <g font-family="'Nanum Myeongjo','AppleMyungjo','Noto Serif KR','Songti SC',Georgia,serif" fill="#1a1a1a">
+
+    <!-- 제목 -->
+    <text x="140" y="44" font-size="21">webR 생태계 — 네 기술의 관계</text>
+    <text x="140" y="66" font-size="12" fill="#555">무엇이 무엇을 실행하나 — Quarto 확장(저작) → WASM 런타임 → 브라우저 표준. 모두 서버 없이 정적 호스팅만으로 동작한다.</text>
+
+    <!-- 층 이름 -->
+    <g font-size="10" fill="#888" font-style="italic" text-anchor="end">
+      <text x="126" y="192">저작 · Quarto 확장</text>
+      <text x="126" y="388">런타임</text>
+      <text x="126" y="510">플랫폼</text>
+    </g>
+
+    <!-- ── 저작 층 ── -->
+    <!-- quarto-webr (커뮤니티) -->
+    <rect x="140" y="130" width="270" height="115" fill="none" stroke="#999" stroke-width="0.75" stroke-dasharray="4 3"/>
+    <g text-anchor="middle">
+      <text x="275" y="158" font-size="14">quarto-webr</text>
+      <text x="275" y="176" font-size="10" fill="#888">커뮤니티(J. Balamuta) · 2023-03</text>
+      <text x="275" y="198" font-size="11">문서에 webR 코드 셀 삽입</text>
+      <text x="275" y="216" font-size="11">{webr-r} 셀 · HTML·RevealJS·북</text>
+    </g>
+
+    <!-- Quarto Live (공식) -->
+    <rect x="450" y="130" width="290" height="115" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="595" y="158" font-size="14">Quarto Live</text>
+      <text x="595" y="176" font-size="10" fill="#888">r-wasm(webR 개발팀) 공식 · 2024-10</text>
+      <text x="595" y="198" font-size="11">코드 셀 + 연습문제·자동 채점</text>
+      <text x="595" y="215" font-size="11">OJS 반응형 연동 · R/Python</text>
+      <text x="595" y="234" font-size="10.5" fill="#a4262c">★ 빛스탯2 live/ 사이트 (단일 런타임)</text>
+    </g>
+
+    <!-- Shinylive -->
+    <rect x="780" y="130" width="280" height="115" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="920" y="158" font-size="14">Shinylive</text>
+      <text x="920" y="176" font-size="10" fill="#888">posit-dev · Py 2022-07 · R 2023-11</text>
+      <text x="920" y="198" font-size="11">Shiny 앱 전체를 브라우저에서 실행</text>
+      <text x="920" y="215" font-size="11">{shinylive-r} 셀 · 앱 단위 런타임</text>
+      <text x="920" y="234" font-size="10.5" fill="#a4262c">★ 빛스탯2 app 사이트 (pages/)</text>
+    </g>
+
+    <!-- 계승 곡선: quarto-webr → Quarto Live -->
+    <path d="M 350 245 C 380 274, 480 274, 508 247" fill="none" stroke="#888" stroke-width="0.75"
+          stroke-dasharray="3 3" marker-end="url(#arr)"/>
+    <text x="472" y="288" font-size="9.5" fill="#888" text-anchor="middle">역할 계승 → 공식 확장</text>
+
+    <!-- ── 저작 → 런타임 화살표 ── -->
+    <g stroke="#888" stroke-width="0.75" fill="none">
+      <line x1="275" y1="245" x2="488" y2="338" marker-end="url(#arr)"/>
+      <line x1="595" y1="245" x2="595" y2="338" marker-end="url(#arr)"/>
+      <line x1="880" y1="245" x2="722" y2="338" marker-end="url(#arr)"/>
+      <line x1="680" y1="245" x2="838" y2="348" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+      <line x1="950" y1="245" x2="950" y2="348" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+    </g>
+    <text x="605" y="302" font-size="9.5" fill="#888" text-anchor="start">R 셀 평가 · OJS 연동</text>
+    <text x="812" y="280" font-size="9.5" fill="#888" text-anchor="middle">Shiny for R 앱 구동</text>
+
+    <!-- ── 런타임 층 ── -->
+    <!-- webR -->
+    <rect x="450" y="340" width="300" height="85" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="600" y="368" font-size="15">webR</text>
+      <text x="600" y="386" font-size="10" fill="#888">George Stagg · Posit · 0.1.0 = 2023-03-09</text>
+      <text x="600" y="408" font-size="10.5">R 인터프리터를 WASM으로 컴파일 · 가상 FS · canvas 그래픽</text>
+    </g>
+    <!-- Pyodide (참고) -->
+    <rect x="810" y="350" width="220" height="65" fill="none" stroke="#999" stroke-width="0.75" stroke-dasharray="4 3"/>
+    <g text-anchor="middle" fill="#666">
+      <text x="920" y="373" font-size="12">Pyodide</text>
+      <text x="920" y="390" font-size="9.5">Python 런타임 (Mozilla, 2019)</text>
+      <text x="920" y="405" font-size="9.5">Shinylive(Py)·Quarto Live의 Python 경로</text>
+    </g>
+
+    <!-- ── 런타임 → 플랫폼 화살표 ── -->
+    <g stroke="#888" stroke-width="0.75" fill="none">
+      <line x1="600" y1="425" x2="600" y2="468" marker-end="url(#arr)"/>
+      <line x1="920" y1="415" x2="920" y2="468" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+    </g>
+
+    <!-- ── 플랫폼 층 ── -->
+    <rect x="140" y="470" width="920" height="70" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <g text-anchor="middle">
+      <text x="600" y="500" font-size="13">WebAssembly — 브라우저 표준 실행 환경 (W3C 권고, 2019-12-05)</text>
+      <text x="600" y="522" font-size="10.5" fill="#888">서버 없음 · 설치 없음 — GitHub Pages 같은 정적 호스팅만으로 R이 사용자 브라우저 안에서 실행된다</text>
+    </g>
+
+    <!-- 각주 -->
+    <g font-size="9.5" fill="#888">
+      <text x="140" y="580">저장소 — github.com/r-wasm/webr · r-wasm/quarto-live · posit-dev/shinylive(+posit-dev/r-shinylive) · coatless/quarto-webr</text>
+      <text x="140" y="596">빛스탯2 2-사이트 구성: app(pages/, Shinylive 앱 임베드) + live(live/, Quarto Live 코드학습) — documents/tech_document/2026-07-05_BitStat2_분리_아키텍처.md</text>
+      <text x="140" y="612">실선 상자 = 현재 채택 경로 · 점선 상자 = 참고(커뮤니티·Python) · 점선 화살표 = 선택 경로</text>
+    </g>
+  </g>
+</svg>

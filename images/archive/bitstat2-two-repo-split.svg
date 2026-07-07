@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="660" viewBox="0 0 1160 660" role="img"
+     aria-label="BitStat2 2-저장소 분리 — BitStat2-shiny와 BitStat2-quarto로 나누는 방안">
+  <defs>
+    <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0.5 L7.5,4 L0,7.5" fill="none" stroke="#888" stroke-width="1"/>
+    </marker>
+  </defs>
+  <rect width="1160" height="660" fill="#fffff8"/>
+  <g font-family="'Nanum Myeongjo','AppleMyungjo','Noto Serif KR','Songti SC',Georgia,serif" fill="#1a1a1a">
+
+    <text x="140" y="44" font-size="21">빛스탯2 저장소 분리 — BitStat2-shiny · BitStat2-quarto</text>
+    <text x="140" y="66" font-size="12" fill="#555">관리 편의성 우선: 저장소당 스택 하나·Pages 하나·규약 하나 · 2-사이트 아키텍처(2026-07-06 권고)는 그대로, 저장소 경계만 바뀐다</text>
+
+    <!-- 현재 상태 -->
+    <rect x="330" y="96" width="500" height="106" fill="none" stroke="#999" stroke-width="0.75" stroke-dasharray="4 3"/>
+    <g text-anchor="middle">
+      <text x="580" y="122" font-size="13">현재 — BitStat2 단일 저장소 (iCloud 경로)</text>
+      <text x="580" y="142" font-size="10" fill="#888">루트 = 앱 사이트(website + shinylive) · live/ = Quarto Live 파일럿</text>
+      <text x="580" y="159" font-size="10" fill="#888">docs/·_freeze/ 두 프로젝트 혼재 · CLAUDE.md에 상충 규칙 병기</text>
+      <text x="580" y="178" font-size="9" fill="#a4262c">iCloud .git 손상 위험 — 이관하며 비-iCloud 경로로 탈출</text>
+    </g>
+
+    <!-- 분기 화살표 -->
+    <line x1="470" y1="202" x2="352" y2="266" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+    <line x1="690" y1="202" x2="808" y2="266" stroke="#888" stroke-width="0.75" marker-end="url(#arr)"/>
+    <text x="380" y="228" font-size="9" fill="#888" text-anchor="end">클론 후 live/ 제거</text>
+    <text x="782" y="228" font-size="9" fill="#888">git filter-repo로 live/ 이력째 승격</text>
+
+    <!-- BitStat2-shiny -->
+    <rect x="140" y="270" width="410" height="192" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <text x="345" y="296" font-size="14" text-anchor="middle">BitStat2-shiny — 앱 사이트</text>
+    <text x="345" y="314" font-size="10" fill="#888" text-anchor="middle">Quarto website + shinylive 자산 · 23개 모듈 · 정본 저장소</text>
+    <g font-size="9.5">
+      <text x="168" y="336">_quarto.yml (type: website) · _environment (자산 핀)</text>
+      <text x="168" y="352">index.qmd · pages/NN_topic/module/ ({shinylive-r} 정본)</text>
+      <text x="168" y="368">assets/ · data/ — 공통 자산 [정본]</text>
+      <text x="168" y="384">documents/ · images/ — 기술문서·SVG [정본]</text>
+      <text x="168" y="400">docs/ → GitHub Pages · CLAUDE.md (앱 스택 규약만)</text>
+    </g>
+    <text x="168" y="424" font-size="9.5" fill="#a4262c">Pages: r2bit.com/BitStat2-shiny/ — 개명 시 구 URL 단절, 스텁 권고</text>
+    <text x="168" y="444" font-size="9" fill="#888">한글 showtext · 핀 0.2.3 → 0.10.12 검증 후 상향(P1)</text>
+
+    <!-- BitStat2-quarto -->
+    <rect x="610" y="270" width="410" height="192" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <text x="815" y="296" font-size="14" text-anchor="middle">BitStat2-quarto — 코드학습 사이트</text>
+    <text x="815" y="314" font-size="10" fill="#888" text-anchor="middle">Quarto Live(live-html) + webR v0.6.0 · 편집형 셀·연습문제</text>
+    <g font-size="9.5">
+      <text x="638" y="336">_quarto.yml (format: live-html) · engine: knitr</text>
+      <text x="638" y="352">_extensions/r-wasm/live (v0.2.0 커밋 번들 = 핀)</text>
+      <text x="638" y="368">_header.html (@font-face 나눔고딕) · assets/*.ttf</text>
+      <text x="638" y="384">assets/ · data/ — [복제본, 정본은 shiny]</text>
+      <text x="638" y="400">pages/ (코드 트랙) · docs/ → GitHub Pages</text>
+    </g>
+    <text x="638" y="424" font-size="9.5" fill="#a4262c">Pages: r2bit.com/BitStat2-quarto/ — 신규 URL</text>
+    <text x="638" y="444" font-size="9" fill="#888">showtext 금지(캔버스 웹폰트) · 반응형은 #| define + OJS</text>
+
+    <!-- 두 저장소 사이 관계 -->
+    <line x1="553" y1="330" x2="607" y2="330" stroke="#888" stroke-width="0.75"
+          marker-start="url(#arr)" marker-end="url(#arr)"/>
+    <text x="580" y="320" font-size="8.5" fill="#888" text-anchor="middle">교차 링크</text>
+    <text x="580" y="342" font-size="8.5" fill="#888" text-anchor="middle">(절대 URL)</text>
+    <line x1="553" y1="386" x2="607" y2="386" stroke="#888" stroke-width="0.75" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+    <text x="580" y="376" font-size="8.5" fill="#888" text-anchor="middle">자산 복제</text>
+    <text x="580" y="398" font-size="8.5" fill="#888" text-anchor="middle">(드리프트 주의)</text>
+
+    <!-- 이관 절차 -->
+    <text x="140" y="502" font-size="10" fill="#888" font-style="italic">이관 절차 (이력 보존)</text>
+    <g font-size="10">
+      <text x="140" y="524">① 비-iCloud 경로(~/Projects/)에 두 클론 준비 — 현행 저장소는 검증 완료까지 롤백 지점으로 보존</text>
+      <text x="140" y="542">② quarto: git filter-repo --subdirectory-filter live (live/ 이력째 루트 승격) · shiny: git rm -r live</text>
+      <text x="140" y="560">③ 공통 자산 복제 + CLAUDE.md·GOTCHA.md 스택별 재편 → 양쪽 렌더 → Pages 활성화 → 교차링크 왕복 확인</text>
+      <text x="140" y="578">④ (개명안) BitStat2 → BitStat2-shiny 개명 + 구 URL 리다이렉트 스텁 → 검증 후 구 저장소 archive</text>
+    </g>
+
+    <!-- 각주 -->
+    <g font-size="9.5" fill="#888">
+      <text x="140" y="614">쟁점 — GitHub Pages는 저장소 개명 시 리다이렉트되지 않음: 기존 r2bit.com/BitStat2/ 유입은 스텁으로 받거나(권고) 단절 감수</text>
+      <text x="140" y="630">짝 문서 — documents/tech_document/2026-07-06_2저장소_분리방안.md · 스택·핀·함정 규칙: 2026-07-06_안정_아키텍처_권고.md</text>
+    </g>
+  </g>
+</svg>

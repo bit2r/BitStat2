@@ -1,11 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 800" font-family="Georgia, 'Apple SD Gothic Neo', 'Noto Serif KR', serif">
   <!-- Tufte-style: 잉크 최소 · 헤어라인 · 단일 액센트(#2563EB) · 직접 라벨 -->
+  <!-- v3 (2026-07-07): 포털 gh-pages 전환 완료 반영 · 4사이트 라이브 실측 확인 -->
   <!-- v2 (2026-07-06 밤): 고교 트랙(BitStat2-HS) 합류 — 포털 + 3 트랙 체제 -->
   <rect width="1240" height="800" fill="#ffffff"/>
 
   <!-- ===== 헤더 ===== -->
   <text x="40" y="42" font-size="22" fill="#111827" font-weight="bold">빛스탯2 — 포털과 세 트랙</text>
-  <text x="40" y="64" font-size="12" fill="#6b7280">포털(BitStat2) 아래 앱·코드·고교 트랙이 독립 저장소로 배포 · 2026-07-06 (v2: HS 합류)</text>
+  <text x="40" y="64" font-size="12" fill="#6b7280">포털(BitStat2) 아래 앱·코드·고교 트랙이 독립 저장소로 배포 · 2026-07-07 (v3: 전 사이트 라이브)</text>
   <line x1="40" y1="76" x2="1200" y2="76" stroke="#e5e7eb" stroke-width="1"/>
 
   <!-- ===== 포털 (상단 중앙) ===== -->
@@ -14,7 +15,7 @@
   <text x="620" y="146" font-size="16" fill="#111827" text-anchor="middle" font-weight="bold">빛스탯2 포털 — r2bit.com/BitStat2</text>
   <text x="620" y="166" font-size="10.5" fill="#6b7280" text-anchor="middle">단일 랜딩(index.qmd) · 트랙 카드 3장 · 커리큘럼 안내</text>
   <text x="620" y="184" font-size="10.5" fill="#6b7280" text-anchor="middle">정본: 커리큘럼 설계 · 공통 문서 · 라이선스 (콘텐츠 없음)</text>
-  <text x="620" y="200" font-size="9" fill="#9ca3af" text-anchor="middle">구 앱 딥링크는 404.html이 새 주소로 자동 이동</text>
+  <text x="620" y="200" font-size="9" fill="#9ca3af" text-anchor="middle">라이브 — gh-pages 포털 전환 완료 · 구 앱 딥링크는 404.html이 새 주소로 자동 이동</text>
 
   <!-- 분기선: 포털 → 3 트랙 -->
   <line x1="620" y1="208" x2="620" y2="236" stroke="#d1d5db" stroke-width="1"/>
@@ -53,7 +54,7 @@
   <text x="863" y="352" font-size="10" fill="#6b7280">슬라이더 앱 + 파이썬 코드 탭</text>
   <text x="863" y="374" font-size="10" fill="#6b7280">스택: Shiny for Python × shinylive × Pyodide</text>
   <text x="863" y="398" font-size="10" fill="#111827">r2bit.com/BitStat2-HS</text>
-  <text x="863" y="416" font-size="9.5" fill="#2563eb" font-weight="bold">라이브 — 18/18 모듈 · 고등학생</text>
+  <text x="863" y="416" font-size="9.5" fill="#2563eb" font-weight="bold">라이브 — 25 모듈(앱 24) · 고등학생</text>
   <text x="863" y="438" font-size="8.5" fill="#9ca3af">신규 합류 (파이썬 계열, 2026-07-06)</text>
 
   <!-- ===== 커리큘럼 밴드 ===== -->
@@ -80,13 +81,13 @@
   <rect x="810" y="506" width="385" height="128" rx="10" fill="none" stroke="#e5e7eb" stroke-width="1"/>
   <text x="1002" y="532" font-size="12" fill="#111827" text-anchor="middle" font-weight="bold">고교 커리큘럼 — 교육과정 정렬 별도 지도</text>
   <g font-size="9.5" fill="#6b7280" text-anchor="middle">
-    <text x="880" y="564">01 자료·그래프</text><text x="880" y="580" fill="#9ca3af">4</text>
-    <text x="965" y="564">02 확률</text><text x="965" y="580" fill="#9ca3af">3</text>
-    <text x="1035" y="564">03 확률분포</text><text x="1035" y="580" fill="#9ca3af">3</text>
+    <text x="880" y="564">01 자료·그래프</text><text x="880" y="580" fill="#9ca3af">6</text>
+    <text x="965" y="564">02 확률</text><text x="965" y="580" fill="#9ca3af">7</text>
+    <text x="1035" y="564">03 확률분포</text><text x="1035" y="580" fill="#9ca3af">4</text>
     <text x="1110" y="564">04 추정</text><text x="1110" y="580" fill="#9ca3af">4</text>
     <text x="1170" y="564">05 사회</text><text x="1170" y="580" fill="#9ca3af">4</text>
   </g>
-  <text x="1002" y="614" font-size="9.5" fill="#9ca3af" text-anchor="middle">5단원 · 18모듈 — 파이썬 계열(Pyodide)</text>
+  <text x="1002" y="614" font-size="9.5" fill="#9ca3af" text-anchor="middle">5단원 · 25모듈(앱 24) — 파이썬 계열(Pyodide)</text>
 
   <!-- ===== 주석 ===== -->
   <g font-size="10" fill="#6b7280" font-style="italic">
@@ -96,9 +97,9 @@
     <text x="40" y="157">콘텐츠를 갖지 않는다</text>
     <text x="40" y="170">(렌더 = 랜딩+404 두 장).</text>
 
-    <text x="1035" y="118">전환 이력(2026-07-06) —</text>
-    <text x="1035" y="131">모노레포 분리 → 포털 전환</text>
-    <text x="1035" y="144">→ 앱·코드 배포 → HS 합류.</text>
+    <text x="1035" y="118">전환 이력(07-06→07) —</text>
+    <text x="1035" y="131">모노레포 분리 → 앱·코드 배포</text>
+    <text x="1035" y="144">→ HS 합류 → 포털 전환 완료.</text>
     <text x="1035" y="157">R 계열(일반)과 파이썬 계열</text>
     <text x="1035" y="170">(고교)이 한 포털 아래 공존.</text>
   </g>
@@ -106,5 +107,5 @@
   <!-- ===== 푸터: 원칙 ===== -->
   <line x1="40" y1="700" x2="1200" y2="700" stroke="#e5e7eb" stroke-width="1"/>
   <text x="40" y="724" font-size="10.5" fill="#6b7280">원칙 — 정본은 저장소당 하나(포털=조율·문서, 트랙=콘텐츠) · 전 트랙 서버리스(WASM: webR/Pyodide, 설치·계정 불필요) · 트랙 홈은 공통 .bs- 디자인 시스템(단일 액센트 #2563EB · 헤어라인 · navbar 없음)</text>
-  <text x="40" y="742" font-size="10.5" fill="#6b7280">구현 — 포털 index.qmd 트랙 카드 3장 · 이 다이어그램: images/2026-07-06_포털_아키텍처.svg (v2) · HS 상세 설계: BitStat2-HS/images/ SVG 4종 · 기술문서: documents/tech_document/2026-07-06_포털_전환.md(로컬)</text>
+  <text x="40" y="742" font-size="10.5" fill="#6b7280">구현 — 이 다이어그램 v3 (2026-07-07) · 배포 상세: images/2026-07-07_배포_지형도.svg · HS 상세: BitStat2-HS/images/ · 기술문서: documents/tech_document/2026-07-06_포털_전환.md(로컬)</text>
 </svg>
